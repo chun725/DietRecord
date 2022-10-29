@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ProfileVC.swift
 //  DietRecord
 //
 //  Created by chun on 2022/10/29.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ProfileVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,4 +16,3 @@ class ViewController: UIViewController {
 
 
 }
-

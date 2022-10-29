@@ -13,9 +13,13 @@
 		34642939290CF79A0070B425 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34642937290CF79A0070B425 /* Main.storyboard */; };
 		3464293B290CF79A0070B425 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464293A290CF79A0070B425 /* Assets.xcassets */; };
 		3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3464293C290CF79A0070B425 /* LaunchScreen.storyboard */; };
+		34642946290D01990070B425 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 34642945290D01990070B425 /* GoogleService-Info.plist */; };
+		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F70E0A7FBB5357DB1F3479B /* Pods-DietRecord.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietRecord.debug.xcconfig"; path = "Target Support Files/Pods-DietRecord/Pods-DietRecord.debug.xcconfig"; sourceTree = "<group>"; };
+		1AFFCECFF9E58FBA689E2C5A /* Pods-DietRecord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietRecord.release.xcconfig"; path = "Target Support Files/Pods-DietRecord/Pods-DietRecord.release.xcconfig"; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		3464293A290CF79A0070B425 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3464293D290CF79A0070B425 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3464293F290CF79A0070B425 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		34642945290D01990070B425 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +37,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +49,8 @@
 			children = (
 				34642930290CF79A0070B425 /* DietRecord */,
 				3464292F290CF79A0070B425 /* Products */,
+				D68BFFBBA7D721B67E087B17 /* Pods */,
+				CC8EFD0C720311DCA1A8582C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +65,7 @@
 		34642930290CF79A0070B425 /* DietRecord */ = {
 			isa = PBXGroup;
 			children = (
+				34642945290D01990070B425 /* GoogleService-Info.plist */,
 				34642931290CF79A0070B425 /* AppDelegate.swift */,
 				34642933290CF79A0070B425 /* SceneDelegate.swift */,
 				34642935290CF79A0070B425 /* ViewController.swift */,
@@ -67,6 +77,23 @@
 			path = DietRecord;
 			sourceTree = "<group>";
 		};
+		CC8EFD0C720311DCA1A8582C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D68BFFBBA7D721B67E087B17 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0F70E0A7FBB5357DB1F3479B /* Pods-DietRecord.debug.xcconfig */,
+				1AFFCECFF9E58FBA689E2C5A /* Pods-DietRecord.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +101,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34642942290CF79A0070B425 /* Build configuration list for PBXNativeTarget "DietRecord" */;
 			buildPhases = (
+				6D3F1F307E618FE8EA7156E3 /* [CP] Check Pods Manifest.lock */,
 				3464292A290CF79A0070B425 /* Sources */,
 				3464292B290CF79A0070B425 /* Frameworks */,
 				3464292C290CF79A0070B425 /* Resources */,
+				0C50704D3DF0A17A3ED5D99A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,12 +155,55 @@
 			buildActionMask = 2147483647;
 			files = (
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
+				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
 				3464293B290CF79A0070B425 /* Assets.xcassets in Resources */,
 				34642939290CF79A0070B425 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0C50704D3DF0A17A3ED5D99A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DietRecord/Pods-DietRecord-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-DietRecord/Pods-DietRecord-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DietRecord/Pods-DietRecord-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D3F1F307E618FE8EA7156E3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DietRecord-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3464292A290CF79A0070B425 /* Sources */ = {
@@ -282,6 +354,7 @@
 		};
 		34642943290CF79A0070B425 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0F70E0A7FBB5357DB1F3479B /* Pods-DietRecord.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -311,6 +384,7 @@
 		};
 		34642944290CF79A0070B425 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1AFFCECFF9E58FBA689E2C5A /* Pods-DietRecord.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

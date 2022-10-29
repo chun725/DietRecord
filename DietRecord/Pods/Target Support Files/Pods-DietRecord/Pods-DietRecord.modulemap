@@ -1,0 +1,6 @@
+framework module Pods_DietRecord {
+  umbrella header "Pods-DietRecord-umbrella.h"
+
+  export *
+  module * { export * }
+}

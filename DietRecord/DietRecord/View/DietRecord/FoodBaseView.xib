@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FoodBaseView" customModule="DietRecord" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="tXg-LV-V4z"/>
+                <outlet property="foodCaloriesLabel" destination="14c-ta-slL" id="lVN-q7-k0V"/>
+                <outlet property="foodNameLabel" destination="7aK-7T-EDI" id="lRO-B0-95Z"/>
+                <outlet property="foodqtyLabel" destination="ZVZ-F7-S5X" id="emG-Yz-NSe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="40"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="食物" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aK-7T-EDI">
+                    <rect key="frame" x="16" y="0.0" width="32" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="1Q1-Sb-gKO"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1份" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVZ-F7-S5X">
+                    <rect key="frame" x="295" y="0.0" width="22.5" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="EyP-cU-Glu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="565 kcal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14c-ta-slL">
+                    <rect key="frame" x="333.5" y="0.0" width="64.5" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="MBH-rh-yEI"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="7aK-7T-EDI" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="CRh-qA-gsC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="14c-ta-slL" secondAttribute="bottom" id="IbG-zd-qJm"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="7aK-7T-EDI" secondAttribute="bottom" id="Ioh-v4-NDh"/>
+                <constraint firstItem="7aK-7T-EDI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="P93-xr-HSr"/>
+                <constraint firstAttribute="trailing" secondItem="14c-ta-slL" secondAttribute="trailing" constant="16" id="RDN-4E-hdL"/>
+                <constraint firstItem="14c-ta-slL" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="UYw-i3-u81"/>
+                <constraint firstItem="ZVZ-F7-S5X" firstAttribute="baseline" secondItem="14c-ta-slL" secondAttribute="baseline" id="VSA-m4-0g0"/>
+                <constraint firstItem="14c-ta-slL" firstAttribute="leading" secondItem="ZVZ-F7-S5X" secondAttribute="trailing" constant="16" id="mUT-9G-KGB"/>
+                <constraint firstItem="ZVZ-F7-S5X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7aK-7T-EDI" secondAttribute="trailing" constant="8" id="xNW-A1-EgZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="137.68115942028987" y="79.6875"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -36,6 +36,8 @@ class PieChart: PieChartView {
     
     func setCaloriesPieChart(breakfast: Double, lunch: Double, dinner: Double, others: Double, goal: Double ) {
         
+        self.setExtraOffsets(left: 5, top: 5, right: 5, bottom: 5) // 讓圓餅圖周圍有邊界
+        
         let gap = goal - (breakfast + lunch + dinner + others)
         
         let pieChartDataEntries: [PieChartDataEntry] = [

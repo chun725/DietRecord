@@ -20,6 +20,8 @@
 		34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E77290D578800D5AFFD /* HealthKitManager.swift */; };
 		34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */; };
 		34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */; };
+		34270E7F290EAD0600D5AFFD /* DietRecoedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E7E290EAD0600D5AFFD /* DietRecoedCell.swift */; };
+		34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34270E80290EAD1400D5AFFD /* DietRecordCell.xib */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
 		34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642935290CF79A0070B425 /* DietRecordVC.swift */; };
@@ -53,6 +55,8 @@
 		34270E77290D578800D5AFFD /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesPieChartCell.swift; sourceTree = "<group>"; };
 		34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaloriesPieChartCell.xib; sourceTree = "<group>"; };
+		34270E7E290EAD0600D5AFFD /* DietRecoedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecoedCell.swift; sourceTree = "<group>"; };
+		34270E80290EAD1400D5AFFD /* DietRecordCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DietRecordCell.xib; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +101,8 @@
 			children = (
 				34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */,
 				34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */,
+				34270E7E290EAD0600D5AFFD /* DietRecoedCell.swift */,
+				34270E80290EAD1400D5AFFD /* DietRecordCell.xib */,
 			);
 			path = DietRecord;
 			sourceTree = "<group>";
@@ -285,6 +291,7 @@
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
 				34270E67290D529100D5AFFD /* Report.storyboard in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
+				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
 				34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */,
 				3464293B290CF79A0070B425 /* Assets.xcassets in Resources */,
 				34642939290CF79A0070B425 /* Main.storyboard in Resources */,
@@ -347,6 +354,7 @@
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34642949290D07B80070B425 /* PieChart.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
+				34270E7F290EAD0600D5AFFD /* DietRecoedCell.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,

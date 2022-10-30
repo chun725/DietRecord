@@ -14,6 +14,7 @@ private enum DRColor: String {
     case Orange
     case Blue
     case DarkBlue
+    case LightGray
     case Gray
     case DarkGray
 }
@@ -25,6 +26,7 @@ extension UIColor {
     static let Orange = DRColor(.Orange)
     static let Blue = DRColor(.Blue)
     static let DarkBlue = DRColor(.DarkBlue)
+    static let LightGray = DRColor(.LightGray)
     static let Gray = DRColor(.Gray)
     static let DarkGray = DRColor(.DarkGray)
     

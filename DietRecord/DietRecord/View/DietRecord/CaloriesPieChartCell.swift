@@ -23,6 +23,7 @@ class CaloriesPieChartCell: UITableViewCell {
         proteinLabel.text = protein
         fatLabel.text = fat
         self.selectionStyle = .none
+        self.backgroundColor = .clear
     }
     
     func setPieChart(breakfast: Double, lunch: Double, dinner: Double, others: Double, goal: Double) {

@@ -18,6 +18,8 @@
 		34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34270E70290D54B700D5AFFD /* Profile.storyboard */; };
 		34270E75290D566D00D5AFFD /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 34270E74290D566D00D5AFFD /* HealthKit.framework */; };
 		34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E77290D578800D5AFFD /* HealthKitManager.swift */; };
+		34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */; };
+		34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
 		34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642935290CF79A0070B425 /* DietRecordVC.swift */; };
@@ -29,7 +31,7 @@
 		3464294D290D16E00070B425 /* Double+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464294C290D16E00070B425 /* Double+Extension.swift */; };
 		34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464294F290D1EA20070B425 /* UIColor+Extension.swift */; };
 		34642955290D2A290070B425 /* LineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642954290D2A290070B425 /* LineChart.swift */; };
-		34642957290D2B2D0070B425 /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642956290D2B2D0070B425 /* Date+Extension.swift */; };
+		34642957290D2B2D0070B425 /* DRConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642956290D2B2D0070B425 /* DRConstant.swift */; };
 		3464295C290D48650070B425 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464295B290D48650070B425 /* BalloonMarker.swift */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
@@ -49,6 +51,8 @@
 		34270E73290D566D00D5AFFD /* DietRecord.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DietRecord.entitlements; sourceTree = "<group>"; };
 		34270E74290D566D00D5AFFD /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		34270E77290D578800D5AFFD /* HealthKitManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
+		34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaloriesPieChartCell.swift; sourceTree = "<group>"; };
+		34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaloriesPieChartCell.xib; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +66,7 @@
 		3464294C290D16E00070B425 /* Double+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Extension.swift"; sourceTree = "<group>"; };
 		3464294F290D1EA20070B425 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		34642954290D2A290070B425 /* LineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineChart.swift; sourceTree = "<group>"; };
-		34642956290D2B2D0070B425 /* Date+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extension.swift"; sourceTree = "<group>"; };
+		34642956290D2B2D0070B425 /* DRConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRConstant.swift; sourceTree = "<group>"; };
 		3464295B290D48650070B425 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -86,6 +90,15 @@
 				34270E77290D578800D5AFFD /* HealthKitManager.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		34270E79290E977E00D5AFFD /* DietRecord */ = {
+			isa = PBXGroup;
+			children = (
+				34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */,
+				34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */,
+			);
+			path = DietRecord;
 			sourceTree = "<group>";
 		};
 		34642925290CF79A0070B425 = {
@@ -135,7 +148,6 @@
 		3464294E290D1E8E0070B425 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
-				34642956290D2B2D0070B425 /* Date+Extension.swift */,
 				3464294C290D16E00070B425 /* Double+Extension.swift */,
 				3464294F290D1EA20070B425 /* UIColor+Extension.swift */,
 			);
@@ -145,6 +157,7 @@
 		34642951290D23030070B425 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				34642956290D2B2D0070B425 /* DRConstant.swift */,
 				3464293A290CF79A0070B425 /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -153,6 +166,7 @@
 		34642952290D28340070B425 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				34270E79290E977E00D5AFFD /* DietRecord */,
 				34642947290D077E0070B425 /* Charts */,
 				34270E70290D54B700D5AFFD /* Profile.storyboard */,
 				34270E65290D529100D5AFFD /* Report.storyboard */,
@@ -265,6 +279,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34270E64290D526500D5AFFD /* DietRecord.storyboard in Resources */,
+				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
 				34270E61290D51F300D5AFFD /* Weight.storyboard in Resources */,
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
@@ -326,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34270E6D290D532900D5AFFD /* ProfileVC.swift in Sources */,
+				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
@@ -335,7 +351,7 @@
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,
 				34270E69290D530700D5AFFD /* WeightVC.swift in Sources */,
-				34642957290D2B2D0070B425 /* Date+Extension.swift in Sources */,
+				34642957290D2B2D0070B425 /* DRConstant.swift in Sources */,
 				34642932290CF79A0070B425 /* AppDelegate.swift in Sources */,
 				34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */,
 				34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */,

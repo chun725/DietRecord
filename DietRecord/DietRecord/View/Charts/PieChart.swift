@@ -21,6 +21,7 @@ class PieChart: PieChartView {
     
     private func initView(superview: UIView) {
         superview.addSubview(self)
+        self.rotationEnabled = false
         self.translatesAutoresizingMaskIntoConstraints = false
         configureConstraint(superview: superview)
     }
@@ -87,6 +88,8 @@ class PieChart: PieChartView {
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
+        legend.textColor = UIColor.DarkGray
+        legend.font = UIFont(name: fontName, size: 8)!
     }
     
 }

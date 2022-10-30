@@ -6,5 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 let dateFormatter = DateFormatter()
+let fontName = "PingFang TC"

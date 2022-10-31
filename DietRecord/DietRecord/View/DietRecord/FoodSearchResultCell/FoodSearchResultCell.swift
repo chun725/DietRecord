@@ -14,7 +14,9 @@ class FoodSearchResultCell: UITableViewCell {
     @IBOutlet weak var qtyLabel: UILabel!
     @IBOutlet weak var foodNameLabel: UILabel!
     
-    func layoutCell(food: String) {
-        foodNameLabel.text = food
+    func layoutCell(food: FoodIngredient) {
+        foodNameLabel.text = food.name
+        qtyLabel.text = "1份, \(food.weightPerUnit)克"
+        caloriesLabel.text = "\(food.nutrientContent.calories.transformToDouble().format(f: ".1")) kcal / 100 克"
     }
 }

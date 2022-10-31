@@ -32,8 +32,8 @@
                     <color key="textColor" name="drDarkGray"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1份" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVZ-F7-S5X">
-                    <rect key="frame" x="259.5" y="0.0" width="22.5" height="40"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100克" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVZ-F7-S5X">
+                    <rect key="frame" x="240" y="0.0" width="42" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="EyP-cU-Glu"/>
                     </constraints>

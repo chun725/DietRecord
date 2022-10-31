@@ -102,8 +102,8 @@
                                     <constraint firstAttribute="height" constant="1" id="eUQ-Kk-jO0"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="份數" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zev-O1-W5r">
-                                <rect key="frame" x="202" y="0.0" width="32" height="40"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="克" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zev-O1-W5r">
+                                <rect key="frame" x="218" y="0.0" width="16" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="tLh-hf-62l"/>
                                 </constraints>

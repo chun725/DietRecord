@@ -168,10 +168,183 @@
             </objects>
             <point key="canvasLocation" x="-136.23188405797103" y="995.75892857142856"/>
         </scene>
+        <!--Food SearchVC-->
+        <scene sceneID="C9G-DA-6tL">
+            <objects>
+                <viewController storyboardIdentifier="FoodSearchVC" id="4MA-M6-uYN" customClass="FoodSearchVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zYv-a4-vId">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Search" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O97-zA-OXQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="uId-08-ppZ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
+                                <color key="textColor" name="drDarkGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HXV-ey-tGu">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pSI-nf-ipg">
+                                <rect key="frame" x="16" y="49.5" width="30" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Byg-9p-oX7"/>
+                                    <constraint firstAttribute="width" secondItem="pSI-nf-ipg" secondAttribute="height" id="spE-EF-fj0"/>
+                                </constraints>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="chevron.backward.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="goBackToDietInputPage:" destination="4MA-M6-uYN" eventType="touchUpInside" id="TLa-pv-Sgu"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Cu9-QI-7Y8">
+                                <rect key="frame" x="0.0" y="172" width="414" height="690"/>
+                                <color key="backgroundColor" name="drLightGray"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FoodSearchResultCell" rowHeight="99" id="RIE-dc-KlA" customClass="FoodSearchResultCell" customModule="DietRecord" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="99"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RIE-dc-KlA" id="jZa-Gn-CVU">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FoodName" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eeP-yS-9za">
+                                                    <rect key="frame" x="24" y="16" width="336" height="35"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="28" id="EMe-yO-dx7"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
+                                                    <color key="textColor" name="drDarkGray"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1份(395克)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iQG-tg-M2J">
+                                                    <rect key="frame" x="24" y="59" width="78.5" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="eXo-2R-tTO"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                                    <color key="textColor" name="drDarkGray"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="565 kcal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s9N-py-u82">
+                                                    <rect key="frame" x="278.5" y="59" width="65.5" height="24"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="b6e-E2-iTP"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                                    <color key="textColor" name="drDarkGray"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBL-E3-PpG">
+                                                    <rect key="frame" x="360" y="35" width="30" height="29"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="RBL-E3-PpG" secondAttribute="height" id="ChD-mQ-bum"/>
+                                                        <constraint firstAttribute="height" constant="30" id="H6G-mQ-6Wz"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="drDarkGray"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" backgroundImage="chevron.right.circle" catalog="system"/>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="iQG-tg-M2J" firstAttribute="leading" secondItem="jZa-Gn-CVU" secondAttribute="leading" constant="24" id="4dH-Lz-G3p"/>
+                                                <constraint firstItem="RBL-E3-PpG" firstAttribute="leading" secondItem="s9N-py-u82" secondAttribute="trailing" constant="16" id="96K-47-OSa"/>
+                                                <constraint firstItem="eeP-yS-9za" firstAttribute="leading" secondItem="jZa-Gn-CVU" secondAttribute="leading" constant="24" id="Gox-h2-MYC"/>
+                                                <constraint firstItem="s9N-py-u82" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iQG-tg-M2J" secondAttribute="trailing" constant="8" id="H4c-Au-JqU"/>
+                                                <constraint firstItem="eeP-yS-9za" firstAttribute="top" secondItem="jZa-Gn-CVU" secondAttribute="top" constant="16" id="Ily-jB-zma"/>
+                                                <constraint firstItem="RBL-E3-PpG" firstAttribute="width" secondItem="RBL-E3-PpG" secondAttribute="height" id="KVj-nk-pvH"/>
+                                                <constraint firstItem="s9N-py-u82" firstAttribute="centerY" secondItem="iQG-tg-M2J" secondAttribute="centerY" id="MiH-Ve-BCf"/>
+                                                <constraint firstItem="RBL-E3-PpG" firstAttribute="leading" secondItem="eeP-yS-9za" secondAttribute="trailing" id="OpM-Dd-wVE"/>
+                                                <constraint firstItem="RBL-E3-PpG" firstAttribute="centerY" secondItem="jZa-Gn-CVU" secondAttribute="centerY" id="PFi-gM-K9F"/>
+                                                <constraint firstItem="iQG-tg-M2J" firstAttribute="top" secondItem="eeP-yS-9za" secondAttribute="bottom" constant="8" id="aZP-0E-TdS"/>
+                                                <constraint firstAttribute="bottom" secondItem="iQG-tg-M2J" secondAttribute="bottom" constant="16" id="evz-Dp-lwL"/>
+                                                <constraint firstAttribute="trailing" secondItem="RBL-E3-PpG" secondAttribute="trailing" constant="24" id="rl1-0J-6Y8"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="caloriesLabel" destination="s9N-py-u82" id="1Mu-fM-gnO"/>
+                                            <outlet property="detailButton" destination="RBL-E3-PpG" id="lk0-xb-Hbo"/>
+                                            <outlet property="foodNameLabel" destination="eeP-yS-9za" id="SfU-nh-1jy"/>
+                                            <outlet property="qtyLabel" destination="iQG-tg-M2J" id="f4I-hw-sQ5"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOU-hG-LZb">
+                                <rect key="frame" x="36" y="108" width="342" height="40"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="在這裡輸入食物" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PJM-Sq-EBV">
+                                        <rect key="frame" x="40" y="0.0" width="302" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="xuB-oD-d8e"/>
+                                        </constraints>
+                                        <color key="textColor" name="drDarkGray"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="magnifyingglass" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Erb-pS-Flw">
+                                        <rect key="frame" x="8" y="8.5" width="24" height="22.5"/>
+                                        <color key="tintColor" name="drDarkGray"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="24" id="jHw-Pa-1dN"/>
+                                            <constraint firstAttribute="width" secondItem="Erb-pS-Flw" secondAttribute="height" id="xJe-sH-w3q"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.86274509803921573" green="0.85098039215686272" blue="0.82745098039215681" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="PJM-Sq-EBV" secondAttribute="trailing" id="3oi-9Y-7eR"/>
+                                    <constraint firstItem="Erb-pS-Flw" firstAttribute="centerY" secondItem="mOU-hG-LZb" secondAttribute="centerY" id="Vci-bm-Zp8"/>
+                                    <constraint firstItem="PJM-Sq-EBV" firstAttribute="centerY" secondItem="mOU-hG-LZb" secondAttribute="centerY" id="cUr-lX-CeM"/>
+                                    <constraint firstAttribute="height" constant="40" id="uqf-pc-Z9u"/>
+                                    <constraint firstItem="PJM-Sq-EBV" firstAttribute="leading" secondItem="Erb-pS-Flw" secondAttribute="trailing" constant="8" id="vcj-tF-zZZ"/>
+                                    <constraint firstItem="Erb-pS-Flw" firstAttribute="leading" secondItem="mOU-hG-LZb" secondAttribute="leading" constant="8" id="wHe-ya-zN9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="sDl-nU-zpY"/>
+                        <color key="backgroundColor" name="drLightGray"/>
+                        <constraints>
+                            <constraint firstItem="O97-zA-OXQ" firstAttribute="top" secondItem="sDl-nU-zpY" secondAttribute="top" id="AKc-hD-fbq"/>
+                            <constraint firstItem="sDl-nU-zpY" firstAttribute="bottom" secondItem="Cu9-QI-7Y8" secondAttribute="bottom" id="CWY-h8-aOc"/>
+                            <constraint firstItem="HXV-ey-tGu" firstAttribute="centerX" secondItem="zYv-a4-vId" secondAttribute="centerX" id="NfW-oJ-NEd"/>
+                            <constraint firstItem="sDl-nU-zpY" firstAttribute="top" secondItem="HXV-ey-tGu" secondAttribute="bottom" id="O6d-qZ-oXw"/>
+                            <constraint firstItem="HXV-ey-tGu" firstAttribute="trailing" secondItem="sDl-nU-zpY" secondAttribute="trailing" id="Okf-pq-JeO"/>
+                            <constraint firstAttribute="trailing" secondItem="mOU-hG-LZb" secondAttribute="trailing" constant="36" id="Oun-da-H5I"/>
+                            <constraint firstAttribute="trailing" secondItem="O97-zA-OXQ" secondAttribute="trailing" id="OvD-VZ-ZEe"/>
+                            <constraint firstItem="pSI-nf-ipg" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" constant="16" id="RxP-E1-APy"/>
+                            <constraint firstItem="Cu9-QI-7Y8" firstAttribute="top" secondItem="mOU-hG-LZb" secondAttribute="bottom" constant="24" id="XBa-z3-EFL"/>
+                            <constraint firstItem="HXV-ey-tGu" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="ZiH-6Z-Q7S"/>
+                            <constraint firstItem="HXV-ey-tGu" firstAttribute="top" secondItem="zYv-a4-vId" secondAttribute="top" id="aWE-0e-bMS"/>
+                            <constraint firstItem="mOU-hG-LZb" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" constant="36" id="cTj-qJ-yhp"/>
+                            <constraint firstItem="pSI-nf-ipg" firstAttribute="centerY" secondItem="O97-zA-OXQ" secondAttribute="centerY" id="k9n-Lp-wm1"/>
+                            <constraint firstItem="Cu9-QI-7Y8" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="mI9-hG-vtg"/>
+                            <constraint firstItem="sDl-nU-zpY" firstAttribute="trailing" secondItem="Cu9-QI-7Y8" secondAttribute="trailing" id="pvh-dA-pnJ"/>
+                            <constraint firstItem="mOU-hG-LZb" firstAttribute="top" secondItem="O97-zA-OXQ" secondAttribute="bottom" constant="24" id="sWP-K9-BhN"/>
+                            <constraint firstItem="O97-zA-OXQ" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" id="xdl-J6-9hp"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodInputTextField" destination="PJM-Sq-EBV" id="suk-l7-C1i"/>
+                        <outlet property="searchResultTableView" destination="Cu9-QI-7Y8" id="a41-2H-DWv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WQE-4g-Dkf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2111.594202898551" y="995.75892857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
+        <image name="chevron.right.circle" catalog="system" width="128" height="121"/>
+        <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -18,6 +18,24 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             forCellReuseIdentifier: FoodDairyCell.reuseIdentifier)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
+    @objc func goToFoodSearchPage(sender: UIButton) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
+            as? FoodSearchVC {
+            self.navigationController?.pushViewController(foodSearchPage, animated: false)
+        }
+    }
+    
     @IBAction func goBackToDietRecordPage(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
@@ -32,6 +50,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             for: indexPath) as? FoodDairyCell
         else { fatalError("Could not create food dairy cell.") }
         cell.layoutCell(foods: ["jsdc", "sanjkk", "djikx"])
+        cell.editFoodButton.addTarget(self, action: #selector(goToFoodSearchPage), for: .touchUpInside)
         return cell
     }
 }

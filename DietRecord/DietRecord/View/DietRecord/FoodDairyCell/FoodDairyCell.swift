@@ -15,8 +15,7 @@ class FoodDairyCell: UITableViewCell {
     @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var foodStackView: UIStackView!
     @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
-    @IBAction func goToSearchPage(_ sender: UIButton) {
-    }
+    @IBOutlet weak var editFoodButton: UIButton!
     
     func layoutCell(foods: [String]) {
         //            guard let calories = Int(food.foodIngredient.nutrientContent.calories)

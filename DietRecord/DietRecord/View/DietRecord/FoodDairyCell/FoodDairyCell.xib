@@ -91,9 +91,6 @@
                         <color key="tintColor" name="drDarkGray"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
-                        <connections>
-                            <action selector="goToSearchPage:" destination="FtX-TS-geu" eventType="touchUpInside" id="73u-pz-GI2"/>
-                        </connections>
                     </button>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSz-Dd-KPS">
                         <rect key="frame" x="24" y="216" width="366" height="40"/>
@@ -198,6 +195,7 @@
             <connections>
                 <outlet property="commentTextView" destination="3Le-mW-1oB" id="0Zf-ge-vUi"/>
                 <outlet property="dateTextField" destination="o8y-Yv-adZ" id="0Ne-VW-4OK"/>
+                <outlet property="editFoodButton" destination="Cin-r1-SW3" id="Eqy-ee-WwO"/>
                 <outlet property="foodStackView" destination="X6W-62-wR2" id="bab-da-pZk"/>
                 <outlet property="foodStackViewHeightConstraint" destination="7yc-nL-6eI" id="Jh9-bO-7Bc"/>
                 <outlet property="mealImageView" destination="FKS-20-zOe" id="tjK-dw-CsQ"/>

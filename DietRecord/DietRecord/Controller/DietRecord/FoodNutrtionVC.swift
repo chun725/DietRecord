@@ -23,19 +23,29 @@ class FoodNutritionVC: UIViewController {
     @IBOutlet weak var sodiumLabel: UILabel!
     @IBOutlet weak var potassiumLabel: UILabel!
     @IBOutlet weak var qtyTextField: UITextField!
+    @IBOutlet weak var addOrSaveButton: UIButton!
     
     var food: FoodIngredient?
+    var chooseFood: Food?
+    var closure: ((Food) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureNutritionInformation()
+        if chooseFood != nil {
+            addOrSaveButton.setTitle("Save", for: .normal)
+            guard let chooseFood = chooseFood else { return }
+            qtyTextField.text = chooseFood.qty
+            configureNutritionInformation(food: chooseFood.foodIngredient)
+        } else {
+            guard let food = food else { return }
+            configureNutritionInformation(food: food)
+        }
     }
     
-    func configureNutritionInformation() {
-        foodNameLabel.text = food?.name
-        guard let servingSize = food?.weightPerUnit,
-            let nutrition = food?.nutrientContent else { return }
-        servingSizeLabel.text = "\(servingSize)克"
+    func configureNutritionInformation(food: FoodIngredient) {
+        foodNameLabel.text = food.name
+        let nutrition = food.nutrientContent
+        servingSizeLabel.text = "\(food.weightPerUnit)克"
         caloriesLabel.text = nutrition.calories.transform(unit: kcalUnit)
         carbsLabel.text = nutrition.carbohydrate.transform(unit: gUnit)
         fiberLabel.text = nutrition.dietaryFiber.transform(unit: gUnit)
@@ -64,6 +74,19 @@ class FoodNutritionVC: UIViewController {
         self.navigationController?.popViewController(animated: false)
     }
     
-    @IBAction func addFood(_ sender: Any) {
+    @IBAction func addOrSaveFood(sender: Any) {
+        guard let food = food,
+            let qty = qtyTextField.text
+        else {
+            if let chooseFood = chooseFood, let qty = qtyTextField.text {
+                let newFood = Food(qty: qty, foodIngredient: chooseFood.foodIngredient)
+                self.closure?(newFood)
+                self.navigationController?.popViewController(animated: false)
+            }
+            return
+        }
+        let chooseFood = Food(qty: qty, foodIngredient: food)
+        self.closure?(chooseFood)
+        self.navigationController?.popViewController(animated: false)
     }
 }

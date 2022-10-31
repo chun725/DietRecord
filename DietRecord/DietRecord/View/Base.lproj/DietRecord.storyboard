@@ -204,7 +204,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Cu9-QI-7Y8">
-                                <rect key="frame" x="0.0" y="172" width="414" height="690"/>
+                                <rect key="frame" x="0.0" y="148" width="414" height="642"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="FoodSearchResultCell" rowHeight="99" id="RIE-dc-KlA" customClass="FoodSearchResultCell" customModule="DietRecord" customModuleProvider="target">
@@ -307,19 +307,35 @@
                                     <constraint firstItem="Erb-pS-Flw" firstAttribute="leading" secondItem="mOU-hG-LZb" secondAttribute="leading" constant="8" id="wHe-ya-zN9"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zVX-Ap-PUp">
+                                <rect key="frame" x="16" y="806" width="382" height="40"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="loN-yu-8GG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="24"/>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveFoods:" destination="4MA-M6-uYN" eventType="touchUpInside" id="FYH-bA-gQl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sDl-nU-zpY"/>
                         <color key="backgroundColor" name="drLightGray"/>
                         <constraints>
                             <constraint firstItem="O97-zA-OXQ" firstAttribute="top" secondItem="sDl-nU-zpY" secondAttribute="top" id="AKc-hD-fbq"/>
-                            <constraint firstItem="sDl-nU-zpY" firstAttribute="bottom" secondItem="Cu9-QI-7Y8" secondAttribute="bottom" id="CWY-h8-aOc"/>
+                            <constraint firstItem="sDl-nU-zpY" firstAttribute="bottom" secondItem="zVX-Ap-PUp" secondAttribute="bottom" constant="16" id="DJ5-h8-daS"/>
+                            <constraint firstAttribute="trailing" secondItem="zVX-Ap-PUp" secondAttribute="trailing" constant="16" id="GBX-3E-Jwv"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="centerX" secondItem="zYv-a4-vId" secondAttribute="centerX" id="NfW-oJ-NEd"/>
                             <constraint firstItem="sDl-nU-zpY" firstAttribute="top" secondItem="HXV-ey-tGu" secondAttribute="bottom" id="O6d-qZ-oXw"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="trailing" secondItem="sDl-nU-zpY" secondAttribute="trailing" id="Okf-pq-JeO"/>
                             <constraint firstAttribute="trailing" secondItem="mOU-hG-LZb" secondAttribute="trailing" constant="36" id="Oun-da-H5I"/>
                             <constraint firstAttribute="trailing" secondItem="O97-zA-OXQ" secondAttribute="trailing" id="OvD-VZ-ZEe"/>
                             <constraint firstItem="pSI-nf-ipg" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" constant="16" id="RxP-E1-APy"/>
-                            <constraint firstItem="Cu9-QI-7Y8" firstAttribute="top" secondItem="mOU-hG-LZb" secondAttribute="bottom" constant="24" id="XBa-z3-EFL"/>
+                            <constraint firstItem="zVX-Ap-PUp" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" constant="16" id="TKn-fj-12n"/>
+                            <constraint firstItem="Cu9-QI-7Y8" firstAttribute="top" secondItem="mOU-hG-LZb" secondAttribute="bottom" id="XBa-z3-EFL"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="ZiH-6Z-Q7S"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="top" secondItem="zYv-a4-vId" secondAttribute="top" id="aWE-0e-bMS"/>
                             <constraint firstItem="mOU-hG-LZb" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" constant="36" id="cTj-qJ-yhp"/>
@@ -327,6 +343,7 @@
                             <constraint firstItem="Cu9-QI-7Y8" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="mI9-hG-vtg"/>
                             <constraint firstItem="sDl-nU-zpY" firstAttribute="trailing" secondItem="Cu9-QI-7Y8" secondAttribute="trailing" id="pvh-dA-pnJ"/>
                             <constraint firstItem="mOU-hG-LZb" firstAttribute="top" secondItem="O97-zA-OXQ" secondAttribute="bottom" constant="24" id="sWP-K9-BhN"/>
+                            <constraint firstItem="zVX-Ap-PUp" firstAttribute="top" secondItem="Cu9-QI-7Y8" secondAttribute="bottom" constant="16" id="wyA-Mh-npY"/>
                             <constraint firstItem="O97-zA-OXQ" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" id="xdl-J6-9hp"/>
                         </constraints>
                     </view>
@@ -776,7 +793,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Add food"/>
                                 <connections>
-                                    <action selector="addFood:" destination="4z9-fO-k8B" eventType="touchUpInside" id="jQR-Xe-Jtx"/>
+                                    <action selector="addOrSaveFoodWithSender:" destination="4z9-fO-k8B" eventType="touchUpInside" id="IlH-Ds-rqb"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -805,6 +822,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addOrSaveButton" destination="aL9-sb-RPY" id="FLL-mV-5I0"/>
                         <outlet property="caloriesLabel" destination="njA-KK-Z4g" id="vx8-KD-8Tu"/>
                         <outlet property="carbsLabel" destination="Fma-2w-L0H" id="g5o-BW-SGB"/>
                         <outlet property="cholesterolLabel" destination="Qqu-qY-zIt" id="SyK-O3-pu8"/>

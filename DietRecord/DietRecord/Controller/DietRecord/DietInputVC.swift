@@ -10,6 +10,12 @@ import UIKit
 class DietInputVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodDairyTableView: UITableView!
     
+    var foods: [Food] = [] {
+        didSet {
+            foodDairyTableView.reloadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         foodDairyTableView.dataSource = self
@@ -32,6 +38,9 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
             as? FoodSearchVC {
+            foodSearchPage.closure = { [weak self] foods in
+                self?.foods = foods
+            }
             self.navigationController?.pushViewController(foodSearchPage, animated: false)
         }
     }
@@ -49,7 +58,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             withIdentifier: FoodDairyCell.reuseIdentifier,
             for: indexPath) as? FoodDairyCell
         else { fatalError("Could not create food dairy cell.") }
-        cell.layoutCell(foods: ["jsdc", "sanjkk", "djikx"])
+        cell.layoutCell(foods: foods)
         cell.editFoodButton.addTarget(self, action: #selector(goToFoodSearchPage), for: .touchUpInside)
         return cell
     }

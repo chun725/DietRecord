@@ -7,11 +7,13 @@
 
 import UIKit
 
-class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate {
+class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate, UITableViewDelegate {
     @IBOutlet weak var foodInputTextField: UITextField!
     @IBOutlet weak var searchResultTableView: UITableView!
     
     let foodListProvider = FoodListProvider()
+    
+    var closure: (([Food]) -> Void)?
     
     var foodSearchResults: [FoodIngredient] = [] {
         didSet {
@@ -28,6 +30,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         searchResultTableView.dataSource = self
+        searchResultTableView.delegate = self
         foodInputTextField.delegate = self
     }
     
@@ -41,8 +44,9 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        foodInputTextField.resignFirstResponder()
+    @IBAction func saveFoods(_ sender: Any) {
+        self.closure?(chooseFoods)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @objc func goToFoodNutritionPage(sender: UIButton) {
@@ -50,6 +54,21 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             foodNutritionPage.food = foodSearchResults[sender.tag]
+            foodNutritionPage.closure = { [weak self] (food: Food) in
+                self?.chooseFoods.append(food)
+            }
+            self.navigationController?.pushViewController(foodNutritionPage, animated: false)
+        }
+    }
+    
+    @objc func modifyQtyOfFood(sender: UIButton) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
+            as? FoodNutritionVC {
+            foodNutritionPage.chooseFood = chooseFoods[sender.tag]
+            foodNutritionPage.closure = { [weak self] (food: Food) in
+                self?.chooseFoods[sender.tag] = food
+            }
             self.navigationController?.pushViewController(foodNutritionPage, animated: false)
         }
     }
@@ -70,6 +89,10 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         section == 0 ? foodSearchResults.count : chooseFoods.count
     }
@@ -79,11 +102,29 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
             withIdentifier: FoodSearchResultCell.reuseidentifier,
             for: indexPath) as? FoodSearchResultCell
         else { fatalError("Could not create food search result cell.") }
-        let food = foodSearchResults[indexPath.row]
-        cell.layoutCell(food: food)
-        cell.detailButton.addTarget(self, action: #selector(goToFoodNutritionPage), for: .touchUpInside)
-        cell.detailButton.tag = indexPath.row
         cell.backgroundColor = .clear
+        cell.detailButton.tag = indexPath.row
+        cell.detailButton.removeTarget(nil, action: nil, for: .touchUpInside)
+        switch indexPath.section {
+        case 0:
+            let food = foodSearchResults[indexPath.row]
+            cell.layoutResultCell(food: food)
+            cell.detailButton.addTarget(self, action: #selector(goToFoodNutritionPage), for: .touchUpInside)
+        case 1:
+            let chooseFood = chooseFoods[indexPath.row]
+            cell.layoutChooseCell(food: chooseFood)
+            cell.detailButton.addTarget(self, action: #selector(modifyQtyOfFood), for: .touchUpInside)
+        default:
+            break
+        }
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        section == 0 ? "搜尋結果" : "已選擇的食物"
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        40
     }
 }

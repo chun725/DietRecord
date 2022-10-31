@@ -27,4 +27,11 @@ class FoodBaseView: UIView {
         Bundle.main.loadNibNamed(foodBaseView, owner: self)
         stickSubview(contentView)
     }
+    
+    func layoutView(name: String, qty: String, calories: String) {
+        foodqtyLabel.text = qty.transform(unit: gUnit)
+        foodNameLabel.text = name
+        let calories = qty.transformToDouble() / 100 * calories.transformToDouble()
+        foodCaloriesLabel.text = calories.format(f: ".1").transform(unit: kcalUnit)
+    }
 }

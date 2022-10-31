@@ -17,17 +17,15 @@ class FoodDairyCell: UITableViewCell {
     @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var editFoodButton: UIButton!
     
-    func layoutCell(foods: [String]) {
-        //            guard let calories = Int(food.foodIngredient.nutrientContent.calories)
-        //            else { return }
-        //            foodView.foodqtyLabel.text = "\(food.qty)份"
-        //            foodView.foodNameLabel.text = food.foodIngredient.name
-        //            foodView.foodCaloriesLabel.text = "\(food.qty * calories) kcal"
+    func layoutCell(foods: [Food]) {
         for food in foods {
             let foodView = FoodBaseView(frame: .zero)
             foodStackView.addArrangedSubview(foodView)
             foodView.translatesAutoresizingMaskIntoConstraints = false
-            foodView.foodNameLabel.text = food
+            foodView.layoutView(
+                name: food.foodIngredient.name,
+                qty: food.qty,
+                calories: food.foodIngredient.nutrientContent.calories)
         }
         foodStackViewHeightConstraint.isActive = false
         foodStackViewHeightConstraint = foodStackView.heightAnchor.constraint(

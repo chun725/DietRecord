@@ -8,7 +8,7 @@
 import Foundation
 
 struct Food: Codable {
-    let qty: Int
+    let qty: String
     let foodIngredient: FoodIngredient
 }
 

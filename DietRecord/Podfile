@@ -13,6 +13,7 @@ pod 'FirebaseFirestoreSwift'
 pod 'Charts'
 pod 'SwiftLint'
 pod 'Kingfisher'
+pod 'IQKeyboardManagerSwift'
 
 end
 

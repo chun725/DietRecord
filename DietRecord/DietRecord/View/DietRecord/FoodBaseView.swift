@@ -8,7 +8,6 @@
 import UIKit
 
 class FoodBaseView: UIView {
-
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var foodqtyLabel: UILabel!
     @IBOutlet weak var foodCaloriesLabel: UILabel!
@@ -24,7 +23,6 @@ class FoodBaseView: UIView {
         contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
         contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
     }
     
     required init?(coder: NSCoder) {

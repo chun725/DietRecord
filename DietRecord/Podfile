@@ -11,6 +11,8 @@ pod 'Firebase/Firestore'
 pod 'Firebase/Core'
 pod 'FirebaseFirestoreSwift'
 pod 'Charts'
+pod 'SwiftLint'
+pod 'Kingfisher'
 
 end
 

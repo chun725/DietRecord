@@ -245,6 +245,7 @@
 				3464292B290CF79A0070B425 /* Frameworks */,
 				3464292C290CF79A0070B425 /* Resources */,
 				0C50704D3DF0A17A3ED5D99A /* [CP] Embed Pods Frameworks */,
+				34270E88290F5D2800D5AFFD /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -327,6 +328,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DietRecord/Pods-DietRecord-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		34270E88290F5D2800D5AFFD /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
 		6D3F1F307E618FE8EA7156E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

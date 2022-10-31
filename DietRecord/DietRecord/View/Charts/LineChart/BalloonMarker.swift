@@ -15,10 +15,10 @@ open class BalloonMarker: MarkerImage {
     open var insets: UIEdgeInsets
     open var minimumSize = CGSize()
     
-    fileprivate var label: String?
-    fileprivate var labelSize: CGSize = CGSize()
-    fileprivate var paragraphStyle: NSMutableParagraphStyle?
-    fileprivate var drawAttributes = [NSAttributedString.Key : AnyObject]()
+    private var label: String?
+    private var labelSize = CGSize()
+    private var paragraphStyle: NSMutableParagraphStyle?
+    private var drawAttributes: [NSAttributedString.Key: AnyObject] = [:]
     
     public init(color: UIColor, font: UIFont, textColor: UIColor, insets: UIEdgeInsets) {
         self.color = color
@@ -35,13 +35,13 @@ open class BalloonMarker: MarkerImage {
     open override func offsetForDrawing(atPoint point: CGPoint) -> CGPoint {
         var offset = self.offset
         var size = self.size
-        
-        if size.width == 0.0 && image != nil {
-            size.width = image!.size.width
+        guard let image = image else { return CGPoint(x: 0, y: 0)}
+        if size.width == 0.0 {
+            size.width = image.size.width
         }
         
-        if size.height == 0.0 && image != nil {
-            size.height = image!.size.height
+        if size.height == 0.0 {
+            size.height = image.size.height
         }
         
         let width = size.width
@@ -55,14 +55,14 @@ open class BalloonMarker: MarkerImage {
         if origin.x + offset.x < 0.0 {
             offset.x = -origin.x + padding
         } else if let chart = chartView,
-                  origin.x + width + offset.x > chart.bounds.size.width {
+            origin.x + width + offset.x > chart.bounds.size.width {
             offset.x = chart.bounds.size.width - origin.x - width - padding
         }
         
         if origin.y + offset.y < 0 {
             offset.y = height + padding
         } else if let chart = chartView,
-                  origin.y + height + offset.y > chart.bounds.size.height {
+            origin.y + height + offset.y > chart.bounds.size.height {
             offset.y = chart.bounds.size.height - origin.y - height - padding
         }
         
@@ -95,7 +95,7 @@ open class BalloonMarker: MarkerImage {
             context.addLine(to: CGPoint(
                 x: rect.origin.x + (rect.size.width - arrowSize.width) / 2.0,
                 y: rect.origin.y + arrowSize.height))
-            //arrow vertex
+            // arrow vertex
             context.addLine(to: CGPoint(
                 x: point.x,
                 y: point.y))
@@ -129,7 +129,7 @@ open class BalloonMarker: MarkerImage {
             context.addLine(to: CGPoint(
                 x: rect.origin.x + (rect.size.width + arrowSize.width) / 2.0,
                 y: rect.origin.y + rect.size.height - arrowSize.height))
-            //arrow vertex
+            // arrow vertex
             context.addLine(to: CGPoint(
                 x: point.x,
                 y: point.y))

@@ -9,7 +9,6 @@ import Foundation
 import Charts
 
 class PieChart: PieChartView {
-    
     init(frame: CGRect, superview: UIView) {
         super.init(frame: frame)
         initView(superview: superview)
@@ -31,11 +30,11 @@ class PieChart: PieChartView {
             self.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             self.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
             self.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 1),
-            self.heightAnchor.constraint(equalToConstant: 200)])
+            self.heightAnchor.constraint(equalToConstant: 200)
+        ])
     }
     
     func setCaloriesPieChart(breakfast: Double, lunch: Double, dinner: Double, others: Double, goal: Double ) {
-        
         self.setExtraOffsets(left: 5, top: 5, right: 5, bottom: 5) // 讓圓餅圖周圍有邊界
         
         let gap = goal - (breakfast + lunch + dinner + others)
@@ -49,15 +48,13 @@ class PieChart: PieChartView {
         ]
         
         let set = PieChartDataSet(entries: pieChartDataEntries, label: "")
-        set.colors = [UIColor.Yellow, UIColor.Green, UIColor.Orange, UIColor.DarkBlue, UIColor.Gray]
+        set.colors = [UIColor.drYellow, UIColor.drGreen, UIColor.drOrange, UIColor.drDarkBlue, UIColor.drGray]
         
         let consumed = (goal - gap) / goal * 100
         configurePieChart(set: set, consumed: consumed)
-        
     }
     
     func setWaterPieChart(water: Double, goal: Double) {
-        
         let gap = goal - water
         
         let pieChartDataEntries: [PieChartDataEntry] = [
@@ -66,14 +63,13 @@ class PieChart: PieChartView {
         ]
         
         let set = PieChartDataSet(entries: pieChartDataEntries, label: "")
-        set.colors = [UIColor.Blue, UIColor.Gray]
+        set.colors = [UIColor.drBlue, UIColor.drGray]
         
         let consumed = water / goal * 100
         configurePieChart(set: set, consumed: consumed)
     }
     
     private func configurePieChart(set: PieChartDataSet, consumed: Double) {
-        
         set.selectionShift = 0
         set.sliceSpace = 3
         set.drawValuesEnabled = false // 在圓餅圖上不顯示數值
@@ -91,8 +87,7 @@ class PieChart: PieChartView {
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
-        legend.textColor = UIColor.DarkGray
-        legend.font = UIFont(name: fontName, size: 8)!
+        legend.textColor = UIColor.drDarkGray
+//        legend.font = UIFont(name: fontName, size: 8)!
     }
-    
 }

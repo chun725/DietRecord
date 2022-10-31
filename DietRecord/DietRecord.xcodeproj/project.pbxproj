@@ -31,6 +31,7 @@
 		34270E95290F965800D5AFFD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E94290F965800D5AFFD /* UIView+Extension.swift */; };
 		34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */; };
 		34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E99290FA7D200D5AFFD /* FoodSearchResultCell.swift */; };
+		34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
 		34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642935290CF79A0070B425 /* DietRecordVC.swift */; };
@@ -75,6 +76,7 @@
 		34270E94290F965800D5AFFD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchVC.swift; sourceTree = "<group>"; };
 		34270E99290FA7D200D5AFFD /* FoodSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchResultCell.swift; sourceTree = "<group>"; };
+		34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutrtionVC.swift; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -133,6 +135,7 @@
 				34642935290CF79A0070B425 /* DietRecordVC.swift */,
 				34270E8A290F7A5700D5AFFD /* DietInputVC.swift */,
 				34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */,
+				34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */,
 			);
 			path = DietRecord;
 			sourceTree = "<group>";
@@ -453,6 +456,7 @@
 				34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */,
 				34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
+				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,

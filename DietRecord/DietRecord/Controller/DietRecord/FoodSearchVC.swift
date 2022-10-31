@@ -26,6 +26,14 @@ class FoodSearchVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    @objc func goToFoodNutritionPage(sender: UIButton) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
+            as? FoodNutritionVC {
+            self.navigationController?.pushViewController(foodNutritionPage, animated: false)
+        }
+    }
+    
     @IBAction func goBackToDietInputPage(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
@@ -40,6 +48,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource {
             for: indexPath) as? FoodSearchResultCell
         else { fatalError("Could not create food search result cell.") }
         cell.layoutCell(food: "edcwj")
+        cell.detailButton.addTarget(self, action: #selector(goToFoodNutritionPage), for: .touchUpInside)
         cell.backgroundColor = .clear
         return cell
     }

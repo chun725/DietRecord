@@ -10,3 +10,5 @@ import UIKit
 
 let dateFormatter = DateFormatter()
 let fontName = "PingFang TC"
+let foodBaseView = "FoodBaseView"
+let dietRecord = "DietRecord"

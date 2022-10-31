@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,25 +29,26 @@
                         <constraint firstAttribute="height" constant="40" id="1Q1-Sb-gKO"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" name="drDarkGray"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1份" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVZ-F7-S5X">
-                    <rect key="frame" x="295" y="0.0" width="22.5" height="40"/>
+                    <rect key="frame" x="259.5" y="0.0" width="22.5" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="EyP-cU-Glu"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" name="drDarkGray"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="565 kcal" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="14c-ta-slL">
-                    <rect key="frame" x="333.5" y="0.0" width="64.5" height="40"/>
+                    <rect key="frame" x="298" y="0.0" width="100" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="MBH-rh-yEI"/>
+                        <constraint firstAttribute="width" constant="100" id="Mja-wn-SZu"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
-                    <color key="textColor" red="0.2470588235" green="0.2470588235" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" name="drDarkGray"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
@@ -64,10 +66,13 @@
                 <constraint firstItem="ZVZ-F7-S5X" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="7aK-7T-EDI" secondAttribute="trailing" constant="8" id="xNW-A1-EgZ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="137.68115942028987" y="79.6875"/>
+            <point key="canvasLocation" x="191" y="92"/>
         </view>
     </objects>
     <resources>
+        <namedColor name="drDarkGray">
+            <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

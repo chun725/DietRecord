@@ -20,16 +20,16 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8fh-M8-AWa">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
-                                <color key="backgroundColor" name="Yellow"/>
+                                <color key="backgroundColor" name="drYellow"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022/10/30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGN-nq-h8Z">
-                                <rect key="frame" x="0.0" y="44" width="414" height="36"/>
-                                <color key="backgroundColor" name="Yellow"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <color key="backgroundColor" name="drYellow"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="36" id="yOO-3w-bX3"/>
+                                    <constraint firstAttribute="height" constant="40" id="yOO-3w-bX3"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2g9-ys-o2S">
@@ -40,8 +40,8 @@
                                 <state key="normal" image="calendar" catalog="system"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BBL-ml-AV7">
-                                <rect key="frame" x="0.0" y="80" width="414" height="782"/>
-                                <color key="backgroundColor" name="LightGray"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="778"/>
+                                <color key="backgroundColor" name="drLightGray"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sn1-xz-SBu"/>
@@ -69,6 +69,87 @@
             </objects>
             <point key="canvasLocation" x="623" y="996"/>
         </scene>
+        <!--Diet InputVC-->
+        <scene sceneID="fIM-da-0DX">
+            <objects>
+                <viewController storyboardIdentifier="DietInputVC" id="a2S-df-Uac" customClass="DietInputVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8J5-Hp-YcY">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每日飲食" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jmY-LH-jUr">
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="vGj-DI-cPd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
+                                <color key="textColor" name="drDarkGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="03f-Uh-L7X">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bUx-gh-2qQ">
+                                <rect key="frame" x="16" y="49.5" width="30" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="JU9-LP-aFF"/>
+                                    <constraint firstAttribute="width" secondItem="bUx-gh-2qQ" secondAttribute="height" id="ia3-yf-q8z"/>
+                                </constraints>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="chevron.backward.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="goBackToDietRecordPage:" destination="a2S-df-Uac" eventType="touchUpInside" id="wkK-bW-CXo"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OoJ-ZE-kWG">
+                                <rect key="frame" x="16" y="806" width="382" height="40"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Cp9-oC-qYl"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="24"/>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Save"/>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lmk-3m-ssF">
+                                <rect key="frame" x="0.0" y="84" width="414" height="706"/>
+                                <color key="backgroundColor" name="drLightGray"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="jPM-Yk-QVg"/>
+                        <color key="backgroundColor" name="drLightGray"/>
+                        <constraints>
+                            <constraint firstItem="bUx-gh-2qQ" firstAttribute="centerY" secondItem="jmY-LH-jUr" secondAttribute="centerY" id="02o-Pa-nEq"/>
+                            <constraint firstItem="03f-Uh-L7X" firstAttribute="centerX" secondItem="8J5-Hp-YcY" secondAttribute="centerX" id="9dg-bK-S8o"/>
+                            <constraint firstAttribute="trailing" secondItem="jmY-LH-jUr" secondAttribute="trailing" id="AcG-mB-set"/>
+                            <constraint firstItem="03f-Uh-L7X" firstAttribute="trailing" secondItem="jPM-Yk-QVg" secondAttribute="trailing" id="IoH-uD-lyL"/>
+                            <constraint firstItem="Lmk-3m-ssF" firstAttribute="top" secondItem="jmY-LH-jUr" secondAttribute="bottom" id="UDH-x3-vEj"/>
+                            <constraint firstItem="03f-Uh-L7X" firstAttribute="top" secondItem="8J5-Hp-YcY" secondAttribute="top" id="WE7-9U-YyT"/>
+                            <constraint firstItem="jPM-Yk-QVg" firstAttribute="trailing" secondItem="Lmk-3m-ssF" secondAttribute="trailing" id="Y5H-XV-KRX"/>
+                            <constraint firstItem="jmY-LH-jUr" firstAttribute="top" secondItem="jPM-Yk-QVg" secondAttribute="top" id="adc-kI-ZH4"/>
+                            <constraint firstItem="OoJ-ZE-kWG" firstAttribute="leading" secondItem="jPM-Yk-QVg" secondAttribute="leading" constant="16" id="gXC-aT-6uS"/>
+                            <constraint firstItem="jPM-Yk-QVg" firstAttribute="bottom" secondItem="OoJ-ZE-kWG" secondAttribute="bottom" constant="16" id="hSt-NH-aTK"/>
+                            <constraint firstItem="jPM-Yk-QVg" firstAttribute="trailing" secondItem="OoJ-ZE-kWG" secondAttribute="trailing" constant="16" id="ieS-ku-RA4"/>
+                            <constraint firstItem="OoJ-ZE-kWG" firstAttribute="top" secondItem="Lmk-3m-ssF" secondAttribute="bottom" constant="16" id="kH1-UU-2Zh"/>
+                            <constraint firstItem="jPM-Yk-QVg" firstAttribute="top" secondItem="03f-Uh-L7X" secondAttribute="bottom" id="kQQ-BX-aD7"/>
+                            <constraint firstItem="jmY-LH-jUr" firstAttribute="leading" secondItem="8J5-Hp-YcY" secondAttribute="leading" id="llj-ZC-Iut"/>
+                            <constraint firstItem="Lmk-3m-ssF" firstAttribute="leading" secondItem="jPM-Yk-QVg" secondAttribute="leading" id="sRD-Be-Pcf"/>
+                            <constraint firstItem="bUx-gh-2qQ" firstAttribute="leading" secondItem="jPM-Yk-QVg" secondAttribute="leading" constant="16" id="swE-ZH-b3J"/>
+                            <constraint firstItem="03f-Uh-L7X" firstAttribute="leading" secondItem="jPM-Yk-QVg" secondAttribute="leading" id="z6g-9e-f81"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="foodDairyTableView" destination="Lmk-3m-ssF" id="JrF-bK-PB9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zU1-aM-cdx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1385.5072463768117" y="995.75892857142856"/>
+        </scene>
         <!--DietRecord-->
         <scene sceneID="kwt-m7-qWJ">
             <objects>
@@ -90,10 +171,14 @@
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="106"/>
-        <namedColor name="LightGray">
+        <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="drDarkGray">
+            <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="drLightGray">
             <color red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="Yellow">
+        <namedColor name="drYellow">
             <color red="1" green="0.82352941176470584" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">

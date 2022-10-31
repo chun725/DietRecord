@@ -1,22 +1,24 @@
 //
-//  DietRecoedCell.swift
+//  FoodDairyCell.swift
 //  DietRecord
 //
-//  Created by chun on 2022/10/30.
+//  Created by chun on 2022/10/31.
 //
 
 import UIKit
 
-class DietRecordCell: UITableViewCell {
-    static let reuseIdentifier = "\(DietRecordCell.self)"
-    @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mealLabel: UILabel!
-    @IBOutlet weak var caloriesLabel: UILabel!
-    @IBOutlet weak var mealImage: UIImageView!
-    @IBOutlet weak var commentLabel: UILabel!
+class FoodDairyCell: UITableViewCell {
+    static let reuseIdentifier = "\(FoodDairyCell.self)"
+    @IBOutlet weak var mealImageView: UIImageView!
+    @IBOutlet weak var mealTextField: UITextField!
+    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var foodStackView: UIStackView!
+    @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
+    @IBAction func goToSearchPage(_ sender: UIButton) {
+    }
     
-    func layoutCell(foods: [String], photo: String, comment: String) {
+    func layoutCell(foods: [String]) {
         //            guard let calories = Int(food.foodIngredient.nutrientContent.calories)
         //            else { return }
         //            foodView.foodqtyLabel.text = "\(food.qty)份"
@@ -33,8 +35,5 @@ class DietRecordCell: UITableViewCell {
             equalToConstant: CGFloat(40 * foods.count)
         )
         foodStackViewHeightConstraint.isActive = true
-        mealLabel.clipsToBounds = true
-        mealLabel.layer.cornerRadius = 10
-        commentLabel.text = comment
     }
 }

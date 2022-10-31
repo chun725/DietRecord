@@ -81,13 +81,14 @@ class PieChart: PieChartView {
         self.holeColor = .clear // 空心位置的背景顏色
         self.backgroundColor = .clear // 背景為透明
         self.centerText = consumed.format(f: ".1") + "%" // 設定空心位置的文字
-        
+
         let legend = self.legend
         legend.form = .circle
         legend.horizontalAlignment = .center
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
         legend.textColor = UIColor.drDarkGray
-//        legend.font = UIFont(name: fontName, size: 8)!
+        guard let font = UIFont(name: fontName, size: 8) else { return }
+        legend.font = font
     }
 }

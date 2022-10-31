@@ -25,6 +25,10 @@
 		34270E83290EB44900D5AFFD /* FoodBaseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34270E82290EB44900D5AFFD /* FoodBaseView.xib */; };
 		34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E84290EB97600D5AFFD /* FoodBaseView.swift */; };
 		34270E87290ED41000D5AFFD /* DietRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E86290ED41000D5AFFD /* DietRecord.swift */; };
+		34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E8A290F7A5700D5AFFD /* DietInputVC.swift */; };
+		34270E91290F810100D5AFFD /* FoodDairyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E90290F810100D5AFFD /* FoodDairyCell.swift */; };
+		34270E93290F810D00D5AFFD /* FoodDairyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34270E92290F810D00D5AFFD /* FoodDairyCell.xib */; };
+		34270E95290F965800D5AFFD /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E94290F965800D5AFFD /* UIView+Extension.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
 		34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642935290CF79A0070B425 /* DietRecordVC.swift */; };
@@ -63,6 +67,10 @@
 		34270E82290EB44900D5AFFD /* FoodBaseView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodBaseView.xib; sourceTree = "<group>"; };
 		34270E84290EB97600D5AFFD /* FoodBaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodBaseView.swift; sourceTree = "<group>"; };
 		34270E86290ED41000D5AFFD /* DietRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecord.swift; sourceTree = "<group>"; };
+		34270E8A290F7A5700D5AFFD /* DietInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietInputVC.swift; sourceTree = "<group>"; };
+		34270E90290F810100D5AFFD /* FoodDairyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDairyCell.swift; sourceTree = "<group>"; };
+		34270E92290F810D00D5AFFD /* FoodDairyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodDairyCell.xib; sourceTree = "<group>"; };
+		34270E94290F965800D5AFFD /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -106,14 +114,57 @@
 		34270E79290E977E00D5AFFD /* DietRecord */ = {
 			isa = PBXGroup;
 			children = (
-				34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */,
+				34270E8F290F80B700D5AFFD /* FoodDairyCell */,
+				34270E8E290F80A000D5AFFD /* FoodBaseView */,
+				34270E8D290F808D00D5AFFD /* DietRecordCell */,
+				34270E8C290F806D00D5AFFD /* CaloriesPieChartCell */,
+			);
+			path = DietRecord;
+			sourceTree = "<group>";
+		};
+		34270E89290F7A3D00D5AFFD /* DietRecord */ = {
+			isa = PBXGroup;
+			children = (
+				34642935290CF79A0070B425 /* DietRecordVC.swift */,
+				34270E8A290F7A5700D5AFFD /* DietInputVC.swift */,
+			);
+			path = DietRecord;
+			sourceTree = "<group>";
+		};
+		34270E8C290F806D00D5AFFD /* CaloriesPieChartCell */ = {
+			isa = PBXGroup;
+			children = (
 				34270E7C290E9BFC00D5AFFD /* CaloriesPieChartCell.xib */,
+				34270E7A290E9A4300D5AFFD /* CaloriesPieChartCell.swift */,
+			);
+			path = CaloriesPieChartCell;
+			sourceTree = "<group>";
+		};
+		34270E8D290F808D00D5AFFD /* DietRecordCell */ = {
+			isa = PBXGroup;
+			children = (
 				34270E7E290EAD0600D5AFFD /* DietRecordCell.swift */,
 				34270E80290EAD1400D5AFFD /* DietRecordCell.xib */,
+			);
+			path = DietRecordCell;
+			sourceTree = "<group>";
+		};
+		34270E8E290F80A000D5AFFD /* FoodBaseView */ = {
+			isa = PBXGroup;
+			children = (
 				34270E84290EB97600D5AFFD /* FoodBaseView.swift */,
 				34270E82290EB44900D5AFFD /* FoodBaseView.xib */,
 			);
-			path = DietRecord;
+			path = FoodBaseView;
+			sourceTree = "<group>";
+		};
+		34270E8F290F80B700D5AFFD /* FoodDairyCell */ = {
+			isa = PBXGroup;
+			children = (
+				34270E90290F810100D5AFFD /* FoodDairyCell.swift */,
+				34270E92290F810D00D5AFFD /* FoodDairyCell.xib */,
+			);
+			path = FoodDairyCell;
 			sourceTree = "<group>";
 		};
 		34642925290CF79A0070B425 = {
@@ -164,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				3464294C290D16E00070B425 /* Double+Extension.swift */,
+				34270E94290F965800D5AFFD /* UIView+Extension.swift */,
 				3464294F290D1EA20070B425 /* UIColor+Extension.swift */,
 			);
 			path = Extension;
@@ -197,7 +249,7 @@
 		34642953290D28500070B425 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				34642935290CF79A0070B425 /* DietRecordVC.swift */,
+				34270E89290F7A3D00D5AFFD /* DietRecord */,
 				34270E68290D530700D5AFFD /* WeightVC.swift */,
 				34270E6A290D531F00D5AFFD /* WaterVC.swift */,
 				34270E6C290D532900D5AFFD /* ProfileVC.swift */,
@@ -297,6 +349,7 @@
 				34270E64290D526500D5AFFD /* DietRecord.storyboard in Resources */,
 				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
+				34270E93290F810D00D5AFFD /* FoodDairyCell.xib in Resources */,
 				34270E83290EB44900D5AFFD /* FoodBaseView.xib in Resources */,
 				34270E61290D51F300D5AFFD /* Weight.storyboard in Resources */,
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
@@ -383,12 +436,15 @@
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
 				34270E87290ED41000D5AFFD /* DietRecord.swift in Sources */,
 				34642949290D07B80070B425 /* PieChart.swift in Sources */,
+				34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,
 				34270E69290D530700D5AFFD /* WeightVC.swift in Sources */,
+				34270E95290F965800D5AFFD /* UIView+Extension.swift in Sources */,
+				34270E91290F810100D5AFFD /* FoodDairyCell.swift in Sources */,
 				34642957290D2B2D0070B425 /* DRConstant.swift in Sources */,
 				34642932290CF79A0070B425 /* AppDelegate.swift in Sources */,
 				34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */,

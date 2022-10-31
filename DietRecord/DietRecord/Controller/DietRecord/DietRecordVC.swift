@@ -21,6 +21,14 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             forCellReuseIdentifier: DietRecordCell.reuseIdentifier)
     }
     
+    @objc func goToDietInputPage(sender: UIButton) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
+            as? DietInputVC {
+            self.navigationController?.pushViewController(dietInputPage, animated: false)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         2
     }
@@ -49,6 +57,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 for: indexPath) as? DietRecordCell
             else { fatalError("Could not create calories pie chart cell.") }
             cell.layoutCell(foods: ["dk kd", "sfvgf"], photo: " ", comment: "哈哈哈哈")
+            cell.editButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
             return cell
         }
     }

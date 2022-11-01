@@ -16,6 +16,9 @@ class FoodDairyCell: UITableViewCell {
     @IBOutlet weak var foodStackView: UIStackView!
     @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var editFoodButton: UIButton!
+    @IBOutlet weak var mealChooseButton: UIButton!
+    @IBOutlet weak var changePhotoButton: UIButton!
+    @IBOutlet weak var datePicker: UIDatePicker!
     
     func layoutCell(foods: [Food]) {
         for food in foods {
@@ -32,5 +35,7 @@ class FoodDairyCell: UITableViewCell {
             equalToConstant: CGFloat(40 * foods.count)
         )
         foodStackViewHeightConstraint.isActive = true
+        mealTextField.isUserInteractionEnabled = false
+        dateTextField.isUserInteractionEnabled = false
     }
 }

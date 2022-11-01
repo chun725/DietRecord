@@ -53,7 +53,7 @@
                             <constraint firstAttribute="height" constant="40" id="WKq-MY-hjJ"/>
                         </constraints>
                         <color key="textColor" name="drDarkGray"/>
-                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="24"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pD4-8P-LlY">
@@ -143,8 +143,8 @@
                             <constraint firstAttribute="bottom" secondItem="X6W-62-wR2" secondAttribute="bottom" id="iR5-aA-KDf"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FKS-20-zOe">
-                        <rect key="frame" x="42.5" y="344" width="146" height="146.5"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="FKS-20-zOe">
+                        <rect key="frame" x="42.5" y="345" width="146" height="144"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="FKS-20-zOe" secondAttribute="height" id="k7S-L5-jwp"/>
                         </constraints>
@@ -156,15 +156,42 @@
                         <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="TKN-IL-JpN">
+                        <rect key="frame" x="255" y="29" width="120" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="JjA-ZB-ehM"/>
+                            <constraint firstAttribute="width" constant="120" id="fav-sL-Y0B"/>
+                        </constraints>
+                        <locale key="locale" localeIdentifier="zh_TW"/>
+                    </datePicker>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czq-sh-zRs">
+                        <rect key="frame" x="358" y="96.5" width="24" height="23"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="01s-bo-kne"/>
+                            <constraint firstAttribute="width" secondItem="czq-sh-zRs" secondAttribute="height" id="Fh3-qE-sfh"/>
+                        </constraints>
+                        <color key="tintColor" name="drDarkGray"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" backgroundImage="chevron.down.circle" catalog="system"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QgO-s4-UIH">
+                        <rect key="frame" x="42.5" y="344" width="146" height="146.5"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" name="drLightGray"/>
                 <constraints>
+                    <constraint firstItem="QgO-s4-UIH" firstAttribute="bottom" secondItem="FKS-20-zOe" secondAttribute="bottom" id="3Yp-LB-CBM"/>
+                    <constraint firstItem="TKN-IL-JpN" firstAttribute="centerY" secondItem="o8y-Yv-adZ" secondAttribute="centerY" id="3bX-Mm-icL"/>
                     <constraint firstItem="6pV-5S-FL7" firstAttribute="leading" secondItem="WVD-gs-rNi" secondAttribute="trailing" id="5S3-hM-Y0c"/>
                     <constraint firstItem="WVD-gs-rNi" firstAttribute="leading" secondItem="fyx-iA-b7l" secondAttribute="leading" constant="24" id="7xU-N3-FbX"/>
+                    <constraint firstItem="QgO-s4-UIH" firstAttribute="height" secondItem="FKS-20-zOe" secondAttribute="height" id="92C-jp-Ory"/>
                     <constraint firstItem="6pV-5S-FL7" firstAttribute="top" secondItem="WSz-Dd-KPS" secondAttribute="bottom" constant="24" id="Bq3-H6-YVt"/>
                     <constraint firstAttribute="trailing" secondItem="WSz-Dd-KPS" secondAttribute="trailing" constant="24" id="Bu9-aI-2A8"/>
                     <constraint firstItem="hGO-8x-ucj" firstAttribute="top" secondItem="fyx-iA-b7l" secondAttribute="top" constant="24" id="Ckm-3W-DpD"/>
                     <constraint firstItem="pD4-8P-LlY" firstAttribute="top" secondItem="MSg-e7-zdo" secondAttribute="bottom" constant="24" id="Ehi-wp-Kkq"/>
+                    <constraint firstItem="QgO-s4-UIH" firstAttribute="top" secondItem="FKS-20-zOe" secondAttribute="top" id="HXa-Nc-mq2"/>
+                    <constraint firstItem="TKN-IL-JpN" firstAttribute="centerX" secondItem="o8y-Yv-adZ" secondAttribute="centerX" id="LXh-eF-OCa"/>
                     <constraint firstAttribute="bottom" secondItem="FKS-20-zOe" secondAttribute="bottom" constant="24" id="Li4-Lq-sae"/>
                     <constraint firstItem="3Le-mW-1oB" firstAttribute="leading" secondItem="6pV-5S-FL7" secondAttribute="leading" id="MPt-ae-4NR"/>
                     <constraint firstItem="MSg-e7-zdo" firstAttribute="leading" secondItem="fyx-iA-b7l" secondAttribute="leading" constant="24" id="NzR-Q4-a9L"/>
@@ -172,10 +199,14 @@
                     <constraint firstAttribute="centerX" secondItem="WVD-gs-rNi" secondAttribute="trailing" id="QrU-Ss-TJv"/>
                     <constraint firstItem="FKS-20-zOe" firstAttribute="centerX" secondItem="WVD-gs-rNi" secondAttribute="centerX" id="QvY-dy-NOQ"/>
                     <constraint firstItem="3Le-mW-1oB" firstAttribute="top" secondItem="6pV-5S-FL7" secondAttribute="bottom" constant="24" id="R2a-Vo-IRf"/>
+                    <constraint firstItem="czq-sh-zRs" firstAttribute="centerY" secondItem="0E4-cS-dck" secondAttribute="centerY" id="RNy-a3-C4s"/>
+                    <constraint firstItem="QgO-s4-UIH" firstAttribute="trailing" secondItem="FKS-20-zOe" secondAttribute="trailing" id="SSR-B9-qAc"/>
                     <constraint firstItem="hGO-8x-ucj" firstAttribute="leading" secondItem="fyx-iA-b7l" secondAttribute="leading" constant="24" id="ThW-Bm-hqY"/>
                     <constraint firstItem="WVD-gs-rNi" firstAttribute="top" secondItem="WSz-Dd-KPS" secondAttribute="bottom" constant="24" id="WGC-xl-aiI"/>
+                    <constraint firstItem="QgO-s4-UIH" firstAttribute="width" secondItem="FKS-20-zOe" secondAttribute="width" id="Xhn-uH-9AX"/>
                     <constraint firstItem="0E4-cS-dck" firstAttribute="centerY" secondItem="MSg-e7-zdo" secondAttribute="centerY" id="YYX-8d-Uo5"/>
                     <constraint firstItem="WSz-Dd-KPS" firstAttribute="top" secondItem="pD4-8P-LlY" secondAttribute="bottom" constant="24" id="ZgN-KQ-Rj2"/>
+                    <constraint firstItem="QgO-s4-UIH" firstAttribute="leading" secondItem="FKS-20-zOe" secondAttribute="leading" id="aqk-Cp-4xF"/>
                     <constraint firstAttribute="trailing" secondItem="0E4-cS-dck" secondAttribute="trailing" constant="24" id="bDs-JB-gyJ"/>
                     <constraint firstItem="WVD-gs-rNi" firstAttribute="width" secondItem="fyx-iA-b7l" secondAttribute="width" multiplier="0.5" constant="-24" id="cNe-Zd-MS9"/>
                     <constraint firstAttribute="trailing" secondItem="o8y-Yv-adZ" secondAttribute="trailing" constant="24" id="cgK-5B-afk"/>
@@ -184,6 +215,7 @@
                     <constraint firstAttribute="trailing" secondItem="3Le-mW-1oB" secondAttribute="trailing" constant="24" id="iW9-YM-qr6"/>
                     <constraint firstItem="Cin-r1-SW3" firstAttribute="centerY" secondItem="pD4-8P-LlY" secondAttribute="centerY" id="kd7-o7-1wp"/>
                     <constraint firstItem="WSz-Dd-KPS" firstAttribute="leading" secondItem="fyx-iA-b7l" secondAttribute="leading" constant="24" id="nhb-Ug-MAW"/>
+                    <constraint firstItem="czq-sh-zRs" firstAttribute="trailing" secondItem="0E4-cS-dck" secondAttribute="trailing" constant="-8" id="oLa-4J-paS"/>
                     <constraint firstAttribute="trailing" secondItem="Cin-r1-SW3" secondAttribute="trailing" constant="24" id="pbZ-Jz-krg"/>
                     <constraint firstItem="FKS-20-zOe" firstAttribute="width" secondItem="WVD-gs-rNi" secondAttribute="width" multiplier="0.8" id="ruG-98-CvO"/>
                     <constraint firstItem="MSg-e7-zdo" firstAttribute="top" secondItem="hGO-8x-ucj" secondAttribute="bottom" constant="24" id="si5-RR-glm"/>
@@ -193,19 +225,24 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="changePhotoButton" destination="QgO-s4-UIH" id="7Xd-Iv-3jx"/>
                 <outlet property="commentTextView" destination="3Le-mW-1oB" id="0Zf-ge-vUi"/>
+                <outlet property="datePicker" destination="TKN-IL-JpN" id="Ksn-Wg-lQ0"/>
                 <outlet property="dateTextField" destination="o8y-Yv-adZ" id="0Ne-VW-4OK"/>
                 <outlet property="editFoodButton" destination="Cin-r1-SW3" id="Eqy-ee-WwO"/>
                 <outlet property="foodStackView" destination="X6W-62-wR2" id="bab-da-pZk"/>
                 <outlet property="foodStackViewHeightConstraint" destination="7yc-nL-6eI" id="Jh9-bO-7Bc"/>
+                <outlet property="mealChooseButton" destination="czq-sh-zRs" id="3Df-nm-9pD"/>
                 <outlet property="mealImageView" destination="FKS-20-zOe" id="tjK-dw-CsQ"/>
                 <outlet property="mealTextField" destination="0E4-cS-dck" id="zNJ-Tt-gts"/>
             </connections>
-            <point key="canvasLocation" x="196" y="-310"/>
+            <point key="canvasLocation" x="195.6521739130435" y="-310.37946428571428"/>
         </tableViewCell>
     </objects>
     <resources>
+        <image name="chevron.down.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

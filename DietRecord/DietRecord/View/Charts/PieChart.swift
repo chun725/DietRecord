@@ -40,11 +40,11 @@ class PieChart: PieChartView {
         let gap = goal - (breakfast + lunch + dinner + others)
         
         let pieChartDataEntries: [PieChartDataEntry] = [
-            PieChartDataEntry(value: breakfast, label: "早餐"),
-            PieChartDataEntry(value: lunch, label: "午餐"),
-            PieChartDataEntry(value: dinner, label: "晚餐"),
-            PieChartDataEntry(value: others, label: "其他"),
-            PieChartDataEntry(value: gap, label: "差距")
+            PieChartDataEntry(value: breakfast, label: Meal.breakfast.rawValue),
+            PieChartDataEntry(value: lunch, label: Meal.lunch.rawValue),
+            PieChartDataEntry(value: dinner, label: Meal.dinner.rawValue),
+            PieChartDataEntry(value: others, label: Meal.others.rawValue),
+            PieChartDataEntry(value: gap, label: Meal.gap.rawValue)
         ]
         
         let set = PieChartDataSet(entries: pieChartDataEntries, label: "")
@@ -58,8 +58,8 @@ class PieChart: PieChartView {
         let gap = goal - water
         
         let pieChartDataEntries: [PieChartDataEntry] = [
-            PieChartDataEntry(value: water, label: "目前飲水量"),
-            PieChartDataEntry(value: gap, label: "與目標的差異")
+            PieChartDataEntry(value: water, label: Water.current.rawValue),
+            PieChartDataEntry(value: gap, label: Water.gap.rawValue)
         ]
         
         let set = PieChartDataSet(entries: pieChartDataEntries, label: "")

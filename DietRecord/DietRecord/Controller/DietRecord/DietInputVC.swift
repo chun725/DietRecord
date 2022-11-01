@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 class DietInputVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodDairyTableView: UITableView!
@@ -15,6 +16,11 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             foodDairyTableView.reloadData()
         }
     }
+    
+    var mealTextField: UITextField?
+    var mealImageView: UIImageView?
+    var datePicker: UIDatePicker?
+    var choosePhoto: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +40,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Action -
     @objc func goToFoodSearchPage(sender: UIButton) {
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
@@ -45,10 +52,52 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    @objc func chooseMeal(sender: UIButton) {
+        let optionMenu = UIAlertController(title: nil, message: "選擇餐類", preferredStyle: .actionSheet)
+        let breakfast = UIAlertAction(title: Meal.breakfast.rawValue, style: .default) { _ in
+            self.mealTextField?.text = Meal.breakfast.rawValue
+        }
+        let lunch = UIAlertAction(title: Meal.lunch.rawValue, style: .default) { _ in
+            self.mealTextField?.text = Meal.lunch.rawValue
+        }
+        let dinner = UIAlertAction(title: Meal.dinner.rawValue, style: .default) { _ in
+            self.mealTextField?.text = Meal.dinner.rawValue
+        }
+        let others = UIAlertAction(title: Meal.others.rawValue, style: .default) { _ in
+            self.mealTextField?.text = Meal.others.rawValue
+        }
+        optionMenu.addAction(breakfast)
+        optionMenu.addAction(lunch)
+        optionMenu.addAction(dinner)
+        optionMenu.addAction(others)
+        self.present(optionMenu, animated: false)
+    }
+    
+    @objc func choosePhotoSource(sender: UIButton) {
+        let optionMenu = UIAlertController(title: nil, message: "選擇照片來源", preferredStyle: .actionSheet)
+        let photoGallery = UIAlertAction(title: "照片圖庫", style: .default) { _ in
+            self.selectPhoto()
+        }
+        let camera = UIAlertAction(title: "相機", style: .default) { _ in
+            self.takeCamera()
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(photoGallery)
+        optionMenu.addAction(camera)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: false)
+    }
+    
     @IBAction func goBackToDietRecordPage(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
     
+    @IBAction func saveFoodDairy(_ sender: Any) {
+        guard let date = datePicker?.date else { return }
+        print(dateFormatter.string(from: date))
+    }
+    
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -60,6 +109,57 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         else { fatalError("Could not create food dairy cell.") }
         cell.layoutCell(foods: foods)
         cell.editFoodButton.addTarget(self, action: #selector(goToFoodSearchPage), for: .touchUpInside)
+        cell.mealChooseButton.addTarget(self, action: #selector(chooseMeal), for: .touchUpInside)
+        cell.changePhotoButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
+        mealTextField = cell.mealTextField
+        mealImageView = cell.mealImageView
+        datePicker = cell.datePicker
         return cell
+    }
+}
+
+extension DietInputVC: PHPickerViewControllerDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // MARK: - 從相簿上傳照片 -
+    func selectPhoto() {
+        var configuration = PHPickerConfiguration()
+        configuration.filter = .images
+        let picker = PHPickerViewController(configuration: configuration)
+        picker.delegate = self
+        present(picker, animated: false)
+    }
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: false)
+        let itemProviders = results.map(\.itemProvider)
+        if let itemProvider = itemProviders.first, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            let previousImage = self.mealImageView?.image
+            itemProvider.loadObject(ofClass: UIImage.self) {[weak self] image, _ in
+                DispatchQueue.main.async {
+                    guard let self = self,
+                        let image = image as? UIImage,
+                        let mealImageView = self.mealImageView,
+                        mealImageView.image == previousImage else { return }
+                    mealImageView.image = image
+                    self.choosePhoto = image
+                }
+            }
+        }
+    }
+    
+    // MARK: - 透過相機上傳照片 -
+    func takeCamera() {
+        let controller = UIImagePickerController()
+        controller.sourceType = .camera
+        controller.allowsEditing = true
+        controller.delegate = self
+        self.present(controller, animated: false)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+        if let pickedImage = info[.originalImage] as? UIImage {
+            self.mealImageView?.image = pickedImage
+            self.choosePhoto = pickedImage
+        }
+        picker.dismiss(animated: false)
     }
 }

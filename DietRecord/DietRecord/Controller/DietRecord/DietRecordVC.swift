@@ -19,6 +19,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         dietRecordTableView.register(
             UINib(nibName: DietRecordCell.reuseIdentifier, bundle: nil),
             forCellReuseIdentifier: DietRecordCell.reuseIdentifier)
+        configureDateformatter() // 之後可以刪掉
     }
     
     @objc func goToDietInputPage(sender: UIButton) {

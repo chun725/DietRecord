@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate, UITableViewDelegate {
+class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var foodInputTextField: UITextField!
     @IBOutlet weak var searchResultTableView: UITableView!
     
@@ -44,6 +44,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Action -
     @IBAction func saveFoods(_ sender: Any) {
         self.closure?(chooseFoods)
         self.navigationController?.popViewController(animated: false)
@@ -77,6 +78,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         self.navigationController?.popViewController(animated: false)
     }
     
+    // MARK: - TextFieldDelegate -
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let foodName = textField.text else { return }
         foodListProvider.fetchFoods(foodName: foodName) { result in
@@ -89,6 +91,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         }
     }
     
+    // MARK: - TableViewDataSource -
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
@@ -120,11 +123,27 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITextFieldDelegate
         return cell
     }
     
+    // MARK: - TableViewDelegate -
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         section == 0 ? "搜尋結果" : "已選擇的食物"
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: "刪除") { _, _, completionHandler in
+            self.chooseFoods.remove(at: indexPath.row)
+            self.searchResultTableView.reloadData()
+            completionHandler(true)
+        }
+        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        switch indexPath.section {
+        case 0:
+            return nil
+        default:
+            return trailingSwipeConfiguration
+        }
     }
 }

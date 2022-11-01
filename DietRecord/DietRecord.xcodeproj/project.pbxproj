@@ -34,6 +34,7 @@
 		34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */; };
 		34270EA1290FC55900D5AFFD /* FoodListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA0290FC55900D5AFFD /* FoodListProvider.swift */; };
 		34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA2290FCED100D5AFFD /* String+Extension.swift */; };
+		34270EA52910B51F00D5AFFD /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableViewCell+Extension.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
 		34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642935290CF79A0070B425 /* DietRecordVC.swift */; };
@@ -81,6 +82,7 @@
 		34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutrtionVC.swift; sourceTree = "<group>"; };
 		34270EA0290FC55900D5AFFD /* FoodListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListProvider.swift; sourceTree = "<group>"; };
 		34270EA2290FCED100D5AFFD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		34270EA42910B51F00D5AFFD /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				3464294C290D16E00070B425 /* Double+Extension.swift */,
+				34270EA42910B51F00D5AFFD /* UITableViewCell+Extension.swift */,
 				34270EA2290FCED100D5AFFD /* String+Extension.swift */,
 				34270E94290F965800D5AFFD /* UIView+Extension.swift */,
 				3464294F290D1EA20070B425 /* UIColor+Extension.swift */,
@@ -468,6 +471,7 @@
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
 				34642949290D07B80070B425 /* PieChart.swift in Sources */,
+				34270EA52910B51F00D5AFFD /* UITableViewCell+Extension.swift in Sources */,
 				34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */,
 				34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,

@@ -38,3 +38,13 @@ struct NutrientContent: Codable {
     var sodium: String
     var potassium: String
 }
+
+//struct FoodDairyInput: Codable {
+//    let meal: MealRecord
+//}
+
+struct MealRecord: Codable {
+    let foods: [Food]
+    let imageURL: String
+    let comment: String
+}

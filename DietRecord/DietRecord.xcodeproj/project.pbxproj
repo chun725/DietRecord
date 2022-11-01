@@ -32,7 +32,7 @@
 		34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */; };
 		34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E99290FA7D200D5AFFD /* FoodSearchResultCell.swift */; };
 		34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */; };
-		34270EA1290FC55900D5AFFD /* FoodListProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA0290FC55900D5AFFD /* FoodListProvider.swift */; };
+		34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */; };
 		34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA2290FCED100D5AFFD /* String+Extension.swift */; };
 		34270EA52910B51F00D5AFFD /* UITableViewCell+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableViewCell+Extension.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
@@ -80,7 +80,7 @@
 		34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchVC.swift; sourceTree = "<group>"; };
 		34270E99290FA7D200D5AFFD /* FoodSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchResultCell.swift; sourceTree = "<group>"; };
 		34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutrtionVC.swift; sourceTree = "<group>"; };
-		34270EA0290FC55900D5AFFD /* FoodListProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListProvider.swift; sourceTree = "<group>"; };
+		34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordProvider.swift; sourceTree = "<group>"; };
 		34270EA2290FCED100D5AFFD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		34270EA42910B51F00D5AFFD /* UITableViewCell+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Extension.swift"; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,7 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				34270E86290ED41000D5AFFD /* Food.swift */,
-				34270EA0290FC55900D5AFFD /* FoodListProvider.swift */,
+				34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */,
 			);
 			path = DietRecord;
 			sourceTree = "<group>";
@@ -477,7 +477,7 @@
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
-				34270EA1290FC55900D5AFFD /* FoodListProvider.swift in Sources */,
+				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,

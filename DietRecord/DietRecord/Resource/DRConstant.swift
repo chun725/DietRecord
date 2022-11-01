@@ -16,6 +16,9 @@ let fontName = "PingFang TC"
 let foodBaseView = "FoodBaseView"
 let dietRecord = "DietRecord"
 let foodIngredient = "FoodIngredient"
+let user = "User"
+let userID = "j9UZDoOiEEIoYo0r3z9S"
+let diet = "Diet"
 let kcalUnit = "kcal"
 let gUnit = "g"
 let mgUnit = "mg"
@@ -23,11 +26,6 @@ let mgUnit = "mg"
 func configureDateformatter() {
     dateFormatter.locale = .current
     dateFormatter.dateFormat = "yyyy-MM-dd"
-}
-
-enum Result<T> {
-    case success(T)
-    case failure(Error)
 }
 
 enum Meal: String {

@@ -16,11 +16,12 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             foodDairyTableView.reloadData()
         }
     }
-    
+    let dietRecordProvider = DietRecordProvider()
     var mealTextField: UITextField?
     var mealImageView: UIImageView?
     var datePicker: UIDatePicker?
     var choosePhoto: UIImage?
+    var commentTextView: UITextView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,9 +93,35 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         self.navigationController?.popViewController(animated: false)
     }
     
-    @IBAction func saveFoodDairy(_ sender: Any) {
-        guard let date = datePicker?.date else { return }
-        print(dateFormatter.string(from: date))
+    @IBAction func uploadImage(_ sender: Any) {
+        guard let image = self.mealImageView?.image else { return }
+        dietRecordProvider.uploadImage(image: image) { result in
+            switch result {
+            case .success(let url):
+                self.saveFoodDairy(imageURL: url.absoluteString)
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
+    }
+    
+    func saveFoodDairy(imageURL: String) {
+//        guard let date = datePicker?.date,
+//            let meal = mealTextField?.text,
+//            let comment = commentTextView?.text
+//        else { return }
+//        let mealRecord = MealRecord(foods: foods, imageURL: imageURL, comment: comment)
+//        let foodDairyInput = FoodDairyInput(meal: mealRecord)
+//        dietRecordProvider.createFoodDairy(
+//            date: dateFormatter.string(from: date),
+//            foodDairyInput: foodDairyInput) { result in
+//            switch result {
+//            case .success:
+//                print("Success")
+//            case .failure(let error):
+//                print("Error Info: \(error).")
+//            }
+//        }
     }
     
     // MARK: - TableViewDataSource -
@@ -114,6 +141,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         mealTextField = cell.mealTextField
         mealImageView = cell.mealImageView
         datePicker = cell.datePicker
+        commentTextView = cell.commentTextView
         return cell
     }
 }

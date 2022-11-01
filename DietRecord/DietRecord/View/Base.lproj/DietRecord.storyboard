@@ -22,7 +22,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="drYellow"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022/10/30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGN-nq-h8Z">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGN-nq-h8Z">
                                 <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                                 <color key="backgroundColor" name="drYellow"/>
                                 <constraints>
@@ -32,17 +32,17 @@
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2g9-ys-o2S">
-                                <rect key="frame" x="270" y="51" width="21" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="calendar" catalog="system"/>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BBL-ml-AV7">
                                 <rect key="frame" x="0.0" y="84" width="414" height="778"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                             </tableView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="p7y-vn-meF">
+                                <rect key="frame" x="157" y="48" width="100" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="lEB-m4-aEn"/>
+                                </constraints>
+                                <locale key="locale" localeIdentifier="zh_TW"/>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sn1-xz-SBu"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -50,9 +50,12 @@
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="trailing" secondItem="BBL-ml-AV7" secondAttribute="trailing" id="9Ps-BR-y89"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="width" secondItem="8fh-M8-AWa" secondAttribute="width" id="OGw-SJ-bkc"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="bottom" secondItem="BBL-ml-AV7" secondAttribute="bottom" id="SgF-ZA-1VY"/>
+                            <constraint firstItem="p7y-vn-meF" firstAttribute="centerY" secondItem="TGN-nq-h8Z" secondAttribute="centerY" id="Tyy-RB-Z56"/>
                             <constraint firstItem="BBL-ml-AV7" firstAttribute="top" secondItem="TGN-nq-h8Z" secondAttribute="bottom" id="VSh-yY-DMp"/>
+                            <constraint firstItem="p7y-vn-meF" firstAttribute="height" secondItem="TGN-nq-h8Z" secondAttribute="height" constant="-8" id="b1c-Xo-ezM"/>
                             <constraint firstItem="8fh-M8-AWa" firstAttribute="top" secondItem="Q69-tX-WNr" secondAttribute="top" id="coc-lm-pTs"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="top" secondItem="8fh-M8-AWa" secondAttribute="bottom" id="cso-jI-qOi"/>
+                            <constraint firstItem="p7y-vn-meF" firstAttribute="centerX" secondItem="TGN-nq-h8Z" secondAttribute="centerX" id="fMg-HN-RC8"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="trailing" secondItem="8fh-M8-AWa" secondAttribute="trailing" id="geH-Me-wOy"/>
                             <constraint firstItem="8fh-M8-AWa" firstAttribute="leading" secondItem="sn1-xz-SBu" secondAttribute="leading" id="hUB-UU-0eo"/>
                             <constraint firstItem="BBL-ml-AV7" firstAttribute="leading" secondItem="sn1-xz-SBu" secondAttribute="leading" id="nb0-id-Zpf"/>
@@ -115,7 +118,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" title="Save"/>
                                 <connections>
-                                    <action selector="saveFoodDairy:" destination="a2S-df-Uac" eventType="touchUpInside" id="9rl-xI-mhA"/>
+                                    <action selector="uploadImage:" destination="a2S-df-Uac" eventType="touchUpInside" id="wz5-rT-IU8"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Lmk-3m-ssF">
@@ -849,7 +852,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="calendar" catalog="system" width="128" height="106"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.right.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>

@@ -11,7 +11,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var foodInputTextField: UITextField!
     @IBOutlet weak var searchResultTableView: UITableView!
     
-    let foodListProvider = FoodListProvider()
+    let foodListProvider = DietRecordProvider()
     
     var closure: (([Food]) -> Void)?
     

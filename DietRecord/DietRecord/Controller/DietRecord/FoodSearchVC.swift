@@ -81,7 +81,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     // MARK: - TextFieldDelegate -
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let foodName = textField.text else { return }
-        foodListProvider.fetchFoods(foodName: foodName) { result in
+        foodListProvider.searchFoods(foodName: foodName) { result in
             switch result {
             case .success(let foods):
                 self.foodSearchResults = foods

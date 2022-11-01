@@ -10,7 +10,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="hL3-0k-aTX">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="InR-11-i34" sceneMemberID="viewController">
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="InR-11-i34" customClass="TabBarController" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d26-3p-6Cr">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>

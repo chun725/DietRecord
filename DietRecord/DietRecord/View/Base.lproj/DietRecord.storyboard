@@ -65,6 +65,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="2022/10/30" id="qzG-yn-r0k"/>
                     <connections>
+                        <outlet property="datePicker" destination="p7y-vn-meF" id="x2k-qB-A9C"/>
                         <outlet property="dietRecordTableView" destination="BBL-ml-AV7" id="QUc-6k-xMH"/>
                     </connections>
                 </viewController>

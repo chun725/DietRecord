@@ -32,6 +32,6 @@ class FoodBaseView: UIView {
         foodqtyLabel.text = qty.transform(unit: gUnit)
         foodNameLabel.text = name
         let calories = qty.transformToDouble() / 100 * calories.transformToDouble()
-        foodCaloriesLabel.text = calories.format(f: ".1").transform(unit: kcalUnit)
+        foodCaloriesLabel.text = calories.format().transform(unit: kcalUnit)
     }
 }

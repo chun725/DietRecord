@@ -17,7 +17,7 @@ class FoodSearchResultCell: UITableViewCell {
     func layoutResultCell(food: FoodIngredient) {
         foodNameLabel.text = food.name
         qtyLabel.text = "1份, \(food.weightPerUnit)克"
-        caloriesLabel.text = "\(food.nutrientContent.calories.transformToDouble().format(f: ".1")) kcal / 100 克"
+        caloriesLabel.text = "\(food.nutrientContent.calories.transformToDouble().format()) kcal / 100 克"
     }
     
     func layoutChooseCell(food: Food) {
@@ -25,6 +25,6 @@ class FoodSearchResultCell: UITableViewCell {
         qtyLabel.text = food.qty.transform(unit: gUnit)
         let calories = food.qty.transformToDouble() / 100 *
         food.foodIngredient.nutrientContent.calories.transformToDouble()
-        caloriesLabel.text = calories.format(f: ".1").transform(unit: kcalUnit)
+        caloriesLabel.text = calories.format().transform(unit: kcalUnit)
     }
 }

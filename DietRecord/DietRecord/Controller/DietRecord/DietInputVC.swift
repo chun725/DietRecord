@@ -106,22 +106,21 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     }
     
     func saveFoodDairy(imageURL: String) {
-//        guard let date = datePicker?.date,
-//            let meal = mealTextField?.text,
-//            let comment = commentTextView?.text
-//        else { return }
-//        let mealRecord = MealRecord(foods: foods, imageURL: imageURL, comment: comment)
-//        let foodDairyInput = FoodDairyInput(meal: mealRecord)
-//        dietRecordProvider.createFoodDairy(
-//            date: dateFormatter.string(from: date),
-//            foodDairyInput: foodDairyInput) { result in
-//            switch result {
-//            case .success:
-//                print("Success")
-//            case .failure(let error):
-//                print("Error Info: \(error).")
-//            }
-//        }
+        guard let date = datePicker?.date,
+            let meal = mealTextField?.text,
+            let comment = commentTextView?.text
+        else { return }
+        let mealRecord = MealRecord(meal: meal, foods: foods, imageURL: imageURL, comment: comment)
+        dietRecordProvider.createFoodDairy(
+            date: dateFormatter.string(from: date),
+            mealRecord: mealRecord) { result in
+            switch result {
+            case .success:
+                self.navigationController?.popViewController(animated: false)
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
     }
     
     // MARK: - TableViewDataSource -

@@ -34,10 +34,10 @@
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ReportBarChartCell" id="RGQ-Qi-CCM" customClass="ReportBarChartCell" customModule="DietRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="332"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="338"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RGQ-Qi-CCM" id="ius-wT-15h">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="332"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="338"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="每週數據" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Pg-wZ-6FD">
@@ -55,8 +55,8 @@
                                                         <constraint firstAttribute="height" constant="240" id="Nyy-eT-9if"/>
                                                     </constraints>
                                                 </view>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V5E-dC-eTc">
-                                                    <rect key="frame" x="100" y="300" width="214" height="12"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V5E-dC-eTc">
+                                                    <rect key="frame" x="100" y="306" width="214" height="12"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HiJ-Wc-MC4">
                                                             <rect key="frame" x="0.0" y="0.0" width="12" height="12"/>
@@ -118,6 +118,7 @@
                                                         <constraint firstItem="7sO-3z-ybz" firstAttribute="width" secondItem="7sO-3z-ybz" secondAttribute="height" id="6f9-S6-9if"/>
                                                         <constraint firstItem="mU9-vM-9ZG" firstAttribute="centerY" secondItem="IhD-Lc-Tgn" secondAttribute="centerY" id="LGW-Kd-sbU"/>
                                                         <constraint firstItem="DYX-TQ-IVJ" firstAttribute="width" secondItem="DYX-TQ-IVJ" secondAttribute="height" id="O4h-Ik-GJu"/>
+                                                        <constraint firstAttribute="width" constant="214" id="asg-C6-7W2"/>
                                                         <constraint firstAttribute="height" constant="12" id="wt2-JM-7iG"/>
                                                     </constraints>
                                                 </stackView>
@@ -127,11 +128,10 @@
                                                 <constraint firstAttribute="trailing" secondItem="2Pg-wZ-6FD" secondAttribute="trailing" constant="20" id="a3a-ec-Vf3"/>
                                                 <constraint firstItem="2Pg-wZ-6FD" firstAttribute="leading" secondItem="ius-wT-15h" secondAttribute="leading" constant="20" id="bgV-oJ-cRo"/>
                                                 <constraint firstItem="2Pg-wZ-6FD" firstAttribute="top" secondItem="ius-wT-15h" secondAttribute="top" constant="20" id="d6C-kn-P92"/>
-                                                <constraint firstItem="V5E-dC-eTc" firstAttribute="leading" relation="lessThanOrEqual" secondItem="ius-wT-15h" secondAttribute="leading" constant="100" id="dWn-WL-RND"/>
                                                 <constraint firstItem="ZMO-n0-VlG" firstAttribute="top" secondItem="2Pg-wZ-6FD" secondAttribute="bottom" constant="10" id="f68-iL-PcX"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZMO-n0-VlG" secondAttribute="trailing" constant="20" id="fhJ-re-DFK"/>
-                                                <constraint firstItem="V5E-dC-eTc" firstAttribute="top" secondItem="ZMO-n0-VlG" secondAttribute="bottom" constant="10" id="rww-DR-Qn5"/>
-                                                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="V5E-dC-eTc" secondAttribute="trailing" constant="100" id="woR-fL-rZH"/>
+                                                <constraint firstItem="V5E-dC-eTc" firstAttribute="top" secondItem="ZMO-n0-VlG" secondAttribute="bottom" constant="16" id="rww-DR-Qn5"/>
+                                                <constraint firstItem="V5E-dC-eTc" firstAttribute="centerX" secondItem="ius-wT-15h" secondAttribute="centerX" id="tYW-HD-cTY"/>
                                                 <constraint firstAttribute="bottom" secondItem="V5E-dC-eTc" secondAttribute="bottom" constant="20" id="yfG-Dq-iUl"/>
                                             </constraints>
                                         </tableViewCellContentView>

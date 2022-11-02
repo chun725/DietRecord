@@ -54,11 +54,11 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         let date = datePicker.date
         dietRecordProvider.fetchDietRecord(date: dateFormatter.string(from: date)) { result in
             switch result {
-            case .success(let result):
-                if result as? String == "Document doesn't exist." {
+            case .success(let data):
+                if data as? String == "Document doesn't exist." {
                     self.meals = nil
                 } else {
-                    let dietRecordData = result as? FoodDairyInput
+                    let dietRecordData = data as? FoodDailyInput
                     self.meals = dietRecordData?.mealRecord
                 }
             case .failure(let error):

@@ -9,11 +9,11 @@ import UIKit
 import PhotosUI
 
 class DietInputVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var foodDairyTableView: UITableView!
+    @IBOutlet weak var foodDailyTableView: UITableView!
     
     var foods: [Food] = [] {
         didSet {
-            foodDairyTableView.reloadData()
+            foodDailyTableView.reloadData()
         }
     }
     let dietRecordProvider = DietRecordProvider()
@@ -25,8 +25,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        foodDairyTableView.dataSource = self
-        foodDairyTableView.registerCellWithNib(identifier: FoodDairyCell.reuseIdentifier, bundle: nil)
+        foodDailyTableView.dataSource = self
+        foodDailyTableView.registerCellWithNib(identifier: FoodDailyCell.reuseIdentifier, bundle: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -98,20 +98,20 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         dietRecordProvider.uploadImage(image: image) { result in
             switch result {
             case .success(let url):
-                self.saveFoodDairy(imageURL: url.absoluteString)
+                self.saveFoodDaily(imageURL: url.absoluteString)
             case .failure(let error):
                 print("Error Info: \(error).")
             }
         }
     }
     
-    func saveFoodDairy(imageURL: String) {
+    func saveFoodDaily(imageURL: String) {
         guard let date = datePicker?.date,
             let meal = mealTextField?.text,
             let comment = commentTextView?.text
         else { return }
         let mealRecord = MealRecord(meal: meal, foods: foods, imageURL: imageURL, comment: comment)
-        dietRecordProvider.createFoodDairy(
+        dietRecordProvider.createFoodDaily(
             date: dateFormatter.string(from: date),
             mealRecord: mealRecord) { result in
             switch result {
@@ -130,9 +130,9 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: FoodDairyCell.reuseIdentifier,
-            for: indexPath) as? FoodDairyCell
-        else { fatalError("Could not create food dairy cell.") }
+            withIdentifier: FoodDailyCell.reuseIdentifier,
+            for: indexPath) as? FoodDailyCell
+        else { fatalError("Could not create food daily cell.") }
         cell.layoutCell(foods: foods)
         cell.editFoodButton.addTarget(self, action: #selector(goToFoodSearchPage), for: .touchUpInside)
         cell.mealChooseButton.addTarget(self, action: #selector(chooseMeal), for: .touchUpInside)

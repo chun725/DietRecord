@@ -150,7 +150,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="foodDairyTableView" destination="Lmk-3m-ssF" id="JrF-bK-PB9"/>
+                        <outlet property="foodDailyTableView" destination="Lmk-3m-ssF" id="JrF-bK-PB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zU1-aM-cdx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

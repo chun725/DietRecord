@@ -1,5 +1,5 @@
 //
-//  FoodDairyCell.swift
+//  FoodDailyCell.swift
 //  DietRecord
 //
 //  Created by chun on 2022/10/31.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FoodDairyCell: UITableViewCell {
+class FoodDailyCell: UITableViewCell {
     @IBOutlet weak var mealImageView: UIImageView!
     @IBOutlet weak var mealTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!

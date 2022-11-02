@@ -10,8 +10,8 @@ import UIKit
 
 typealias FoodSearchResults = (Result<[FoodIngredient], Error>) -> Void
 typealias UploadImageURL = (Result<URL, Error>) -> Void
-typealias CreateFoodDairyResult = (Result<Void, Error>) -> Void
-typealias DietRecordResult = (Result<Any, Error>) -> Void
+typealias CreateFoodDailyResult = (Result<Void, Error>) -> Void
+typealias FoodDailyResult = (Result<Any, Error>) -> Void
 
 class DietRecordProvider {
     let decoder = JSONDecoder()
@@ -44,16 +44,16 @@ class DietRecordProvider {
         }
     }
     
-    // MARK: - Add food dairy record -
-    func createFoodDairy(date: String, mealRecord: MealRecord, completion: @escaping CreateFoodDairyResult) {
+    // MARK: - Add food daily record -
+    func createFoodDaily(date: String, mealRecord: MealRecord, completion: @escaping CreateFoodDailyResult) {
         let documentReference = database.collection(user).document(userID).collection(diet).document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
-                var data = try? document.data(as: FoodDairyInput.self)
+                var data = try? document.data(as: FoodDailyInput.self)
             else {
                 do {
-                    try documentReference.setData(from: FoodDairyInput(mealRecord: [mealRecord]))
+                    try documentReference.setData(from: FoodDailyInput(date: date ,mealRecord: [mealRecord]))
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))
@@ -74,20 +74,60 @@ class DietRecordProvider {
         }
     }
     
-    func fetchDietRecord(date: String, completion: @escaping DietRecordResult) {
+    // MARK: - Fetch Diet Daily Record -
+    func fetchDietRecord(date: String, completion: @escaping FoodDailyResult) {
         database.collection(user).document(userID).collection(diet).document(date).getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
                 guard let document = document,
                     document.exists,
-                    let dietRecordData = try? document.data(as: FoodDairyInput.self)
+                    let dietRecordData = try? document.data(as: FoodDailyInput.self)
                 else {
                     completion(.success("Document doesn't exist."))
                     return
                 }
                 completion(.success(dietRecordData))
             }
+        }
+    }
+    
+    // MARK: - Fetch Diet Weekly Record -
+    func fetchWeeklyDietRecord(date: Date, completion: @escaping FoodDailyResult) {
+        var dates: [String] = []
+        for index in 0..<7 {
+            let nextDate = date.advanced(by: 60 * 60 * 24 * Double(index))
+            dates.append(dateFormatter.string(from: nextDate))
+        }
+        var weeklyDietRecord: [FoodDailyInput?] = []
+        let downloadGroup = DispatchGroup()
+        var blocks: [DispatchWorkItem] = []
+        for date in dates {
+            downloadGroup.enter()
+            let block = DispatchWorkItem(flags: .inheritQoS) {
+                let documentReference = database.collection(user).document(userID).collection(diet).document(date)
+                documentReference.getDocument { document, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        downloadGroup.leave()
+                    } else {
+                        guard let document = document,
+                            document.exists,
+                            let dietRecordData = try? document.data(as: FoodDailyInput.self)
+                        else {
+                            downloadGroup.leave()
+                            return }
+                        weeklyDietRecord.append(dietRecordData)
+                        downloadGroup.leave()
+                    }
+                }
+            }
+            blocks.append(block)
+            DispatchQueue.main.async(execute: block)
+        }
+        
+        downloadGroup.notify(queue: DispatchQueue.main) {
+            completion(.success(weeklyDietRecord))
         }
     }
 }

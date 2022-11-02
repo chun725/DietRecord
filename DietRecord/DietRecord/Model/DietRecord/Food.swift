@@ -45,6 +45,7 @@ struct MealRecord: Codable {
     let comment: String
 }
 
-struct FoodDairyInput: Codable {
+struct FoodDailyInput: Codable {
+    let date: String
     var mealRecord: [MealRecord]
 }

@@ -12,6 +12,7 @@ import FirebaseFirestore
 
 let database = Firestore.firestore()
 let dateFormatter = DateFormatter()
+let barChartDateFormatter = DateFormatter()
 let fontName = "PingFang TC"
 let foodBaseView = "FoodBaseView"
 let dietRecord = "DietRecord"

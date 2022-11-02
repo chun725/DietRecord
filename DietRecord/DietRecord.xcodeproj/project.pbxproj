@@ -54,6 +54,8 @@
 		3464295C290D48650070B425 /* BalloonMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464295B290D48650070B425 /* BalloonMarker.swift */; };
 		3469168C291255860021985F /* ReportBarChartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469168B291255860021985F /* ReportBarChartCell.swift */; };
 		3469168E291277A40021985F /* ChartXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469168D291277A40021985F /* ChartXAxis.swift */; };
+		3469169229127C430021985F /* ReportDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3469169129127C430021985F /* ReportDetailCell.xib */; };
+		3469169429127C510021985F /* ReportDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469169329127C510021985F /* ReportDetailCell.swift */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -110,6 +112,8 @@
 		3464295B290D48650070B425 /* BalloonMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalloonMarker.swift; sourceTree = "<group>"; };
 		3469168B291255860021985F /* ReportBarChartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportBarChartCell.swift; sourceTree = "<group>"; };
 		3469168D291277A40021985F /* ChartXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxis.swift; sourceTree = "<group>"; };
+		3469169129127C430021985F /* ReportDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportDetailCell.xib; sourceTree = "<group>"; };
+		3469169329127C510021985F /* ReportDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailCell.swift; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -330,9 +334,27 @@
 		3469168A291255680021985F /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				3469168B291255860021985F /* ReportBarChartCell.swift */,
+				3469169029127C140021985F /* ReportDetailCell */,
+				3469168F29127C040021985F /* ReportBarChartCell */,
 			);
 			path = Report;
+			sourceTree = "<group>";
+		};
+		3469168F29127C040021985F /* ReportBarChartCell */ = {
+			isa = PBXGroup;
+			children = (
+				3469168B291255860021985F /* ReportBarChartCell.swift */,
+			);
+			path = ReportBarChartCell;
+			sourceTree = "<group>";
+		};
+		3469169029127C140021985F /* ReportDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				3469169129127C430021985F /* ReportDetailCell.xib */,
+				3469169329127C510021985F /* ReportDetailCell.swift */,
+			);
+			path = ReportDetailCell;
 			sourceTree = "<group>";
 		};
 		CC8EFD0C720311DCA1A8582C /* Frameworks */ = {
@@ -419,6 +441,7 @@
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
 				34270E93290F810D00D5AFFD /* FoodDailyCell.xib in Resources */,
 				3422702629110680000B4A58 /* FoodIngredient.json in Resources */,
+				3469169229127C430021985F /* ReportDetailCell.xib in Resources */,
 				34270E83290EB44900D5AFFD /* FoodBaseView.xib in Resources */,
 				34270E61290D51F300D5AFFD /* Weight.storyboard in Resources */,
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
@@ -501,6 +524,7 @@
 				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
+				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,

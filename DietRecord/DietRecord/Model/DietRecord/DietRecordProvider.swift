@@ -53,7 +53,7 @@ class DietRecordProvider {
                 var data = try? document.data(as: FoodDailyInput.self)
             else {
                 do {
-                    try documentReference.setData(from: FoodDailyInput(date: date ,mealRecord: [mealRecord]))
+                    try documentReference.setData(from: FoodDailyInput(date: date, mealRecord: [mealRecord]))
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))
@@ -99,7 +99,7 @@ class DietRecordProvider {
             let nextDate = date.advanced(by: 60 * 60 * 24 * Double(index))
             dates.append(dateFormatter.string(from: nextDate))
         }
-        var weeklyDietRecord: [FoodDailyInput?] = []
+        var weeklyDietRecord: [FoodDailyInput] = []
         let downloadGroup = DispatchGroup()
         var blocks: [DispatchWorkItem] = []
         for date in dates {

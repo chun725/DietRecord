@@ -26,9 +26,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         foodDairyTableView.dataSource = self
-        foodDairyTableView.register(
-            UINib(nibName: FoodDairyCell.reuseIdentifier, bundle: nil),
-            forCellReuseIdentifier: FoodDairyCell.reuseIdentifier)
+        foodDairyTableView.registerCellWithNib(identifier: FoodDairyCell.reuseIdentifier, bundle: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,10 +65,12 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         let others = UIAlertAction(title: Meal.others.rawValue, style: .default) { _ in
             self.mealTextField?.text = Meal.others.rawValue
         }
+        let cancel = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(breakfast)
         optionMenu.addAction(lunch)
         optionMenu.addAction(dinner)
         optionMenu.addAction(others)
+        optionMenu.addAction(cancel)
         self.present(optionMenu, animated: false)
     }
     

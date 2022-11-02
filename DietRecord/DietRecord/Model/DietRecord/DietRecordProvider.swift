@@ -32,7 +32,7 @@ class DietRecordProvider {
     // MARK: - Upload image -
     func uploadImage(image: UIImage, completion: @escaping UploadImageURL ) {
         let fileReference = Storage.storage().reference().child(UUID().uuidString + ".jpg")
-        if let uploadData = image.jpegData(compressionQuality: 0.9) {
+        if let uploadData = image.jpegData(compressionQuality: 0.1) {
             fileReference.putData(uploadData) { result in
                 switch result {
                 case .success:

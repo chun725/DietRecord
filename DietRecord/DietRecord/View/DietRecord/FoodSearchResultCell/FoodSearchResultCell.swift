@@ -8,7 +8,6 @@
 import UIKit
 
 class FoodSearchResultCell: UITableViewCell {
-    static let reuseidentifier = "\(FoodSearchResultCell.self)"
     @IBOutlet weak var detailButton: UIButton!
     @IBOutlet weak var caloriesLabel: UILabel!
     @IBOutlet weak var qtyLabel: UILabel!

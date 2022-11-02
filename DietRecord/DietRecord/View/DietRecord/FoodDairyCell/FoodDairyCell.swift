@@ -8,7 +8,6 @@
 import UIKit
 
 class FoodDairyCell: UITableViewCell {
-    static let reuseIdentifier = "\(FoodDairyCell.self)"
     @IBOutlet weak var mealImageView: UIImageView!
     @IBOutlet weak var mealTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!

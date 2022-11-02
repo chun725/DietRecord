@@ -7,9 +7,7 @@
 
 import UIKit
 
-class CaloriesPieChartCell: UITableViewCell {
-    static let reuseIdentifier = "\(CaloriesPieChartCell.self)"
-    
+class CaloriesPieChartCell: UITableViewCell {    
     @IBOutlet weak var caloriesPieChartView: UIView!
     @IBOutlet weak var caloriesLabel: UILabel!
     @IBOutlet weak var fatLabel: UILabel!

@@ -36,12 +36,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         dietRecordTableView.dataSource = self
-        dietRecordTableView.register(
-            UINib(nibName: CaloriesPieChartCell.reuseIdentifier, bundle: nil),
-            forCellReuseIdentifier: CaloriesPieChartCell.reuseIdentifier)
-        dietRecordTableView.register(
-            UINib(nibName: DietRecordCell.reuseIdentifier, bundle: nil),
-            forCellReuseIdentifier: DietRecordCell.reuseIdentifier)
+        dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
+        dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
         datePicker.addTarget(self, action: #selector(changeDate), for: .valueChanged)
         changeDate()
     }

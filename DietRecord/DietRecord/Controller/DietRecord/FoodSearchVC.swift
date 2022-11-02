@@ -102,7 +102,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: FoodSearchResultCell.reuseidentifier,
+            withIdentifier: FoodSearchResultCell.reuseIdentifier,
             for: indexPath) as? FoodSearchResultCell
         else { fatalError("Could not create food search result cell.") }
         cell.backgroundColor = .clear

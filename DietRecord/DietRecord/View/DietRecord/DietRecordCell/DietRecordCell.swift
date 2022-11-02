@@ -8,7 +8,6 @@
 import UIKit
 
 class DietRecordCell: UITableViewCell {
-    static let reuseIdentifier = "\(DietRecordCell.self)"
     @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var mealLabel: UILabel!
     @IBOutlet weak var caloriesLabel: UILabel!

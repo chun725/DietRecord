@@ -8,9 +8,7 @@
 import Foundation
 
 extension Double {
-    
-    func format(f: String) -> String {
-        return String(format:"%\(f)f", self)
+    func format() -> String {
+        return String(format: "%.1f", self)
     }
-    
 }

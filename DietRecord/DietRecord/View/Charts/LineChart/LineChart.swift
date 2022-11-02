@@ -14,7 +14,6 @@ struct WeightData: Codable {
 }
 
 class LineChart: LineChartView, ChartViewDelegate {
-    
     var referenceTimeInterval: TimeInterval = 0
     
     init(frame: CGRect, superview: UIView) {
@@ -38,7 +37,8 @@ class LineChart: LineChartView, ChartViewDelegate {
             self.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             self.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
             self.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 1),
-            self.heightAnchor.constraint(equalToConstant: 200)])
+            self.heightAnchor.constraint(equalToConstant: 200)
+        ])
     }
 
     
@@ -59,12 +59,14 @@ class LineChart: LineChartView, ChartViewDelegate {
         dateFormatter.locale = .current
         dateFormatter.dateFormat = "yyyy-MM-dd"
         
-        let xValuesNumberFormatter = ChartXAxisFormatter(referenceTimeInterval: referenceTimeInterval, dateFormatter: dateFormatter)
+        let xValuesNumberFormatter = ChartXAxisFormatter(
+            referenceTimeInterval: referenceTimeInterval,
+            dateFormatter: dateFormatter)
         
         // 設定體重data
-        var dataEntries = [ChartDataEntry]()
+        var dataEntries: [ChartDataEntry] = []
         guard let originYvalue = datas.first?.value,
-              let lastYvalue = datas.last?.value
+            let lastYvalue = datas.last?.value
         else { return }
         
         dataEntries.append(ChartDataEntry(x: -20, y: originYvalue))
@@ -78,28 +80,29 @@ class LineChart: LineChartView, ChartViewDelegate {
         let nowXvalue = (Date().timeIntervalSince1970 - referenceTimeInterval) / (3600 * 24)
         dataEntries.append(ChartDataEntry(x: nowXvalue + 10, y: lastYvalue))
         
-        //这50条数据作为1根折线里的所有数据
         let chartDataSet = LineChartDataSet(entries: dataEntries, label: "")
         chartDataSet.colors = [UIColor.darkGray] // 線條顏色
-        chartDataSet.circleColors = [UIColor.Yellow] // 外圓顏色
+        chartDataSet.circleColors = [UIColor.drYellow] // 外圓顏色
         chartDataSet.circleHoleColor = UIColor.white // 內圓顏色
         chartDataSet.circleRadius = 3 // 外圓半徑
         chartDataSet.circleHoleRadius = 0 // 內圓半徑
         chartDataSet.drawFilledEnabled = true // 開啟填充色繪製
         
-        let gradientColors = [UIColor.Yellow.cgColor, UIColor.LightYellow.cgColor] as CFArray // 漸變顏色組合
+        let gradientColors = [UIColor.drYellow.cgColor, UIColor.drLightYellow.cgColor] as CFArray // 漸變顏色組合
         let colorLocations: [CGFloat] = [0.5, 0.0] // 每組顏色所在位置（範圍0~1）
-        let gradient = CGGradient.init(colorsSpace: CGColorSpaceCreateDeviceRGB(),
-                                       colors: gradientColors, locations: colorLocations) // 生成漸變色
-        chartDataSet.fill = LinearGradientFill(gradient: gradient!, angle: 90.0) // 將漸變色作為填充對象，角度為由上往下
+        guard let gradient = CGGradient.init(
+            colorsSpace: CGColorSpaceCreateDeviceRGB(),
+            colors: gradientColors,
+            locations: colorLocations) else { return } // 生成漸變色
+        chartDataSet.fill = LinearGradientFill(
+            gradient: gradient,
+            angle: 90.0) // 將漸變色作為填充對象，角度為由上往下
         
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false // 不顯示橫向十字線
         chartDataSet.drawVerticalHighlightIndicatorEnabled = false // 不顯示縱向十字線
         chartDataSet.drawValuesEnabled = false // 不顯示數字
-//        chartDataSet.highlightEnabled = false // 不能選中
-//        chartDataSet.mode = .horizontalBezier // 更改折線的樣式
-        
-        let chartData = LineChartData(dataSets: [chartDataSet]) // 折線圖數據只包含一組數據
+        let chartData = LineChartData(dataSets: [chartDataSet])
+        // 折線圖數據只包含一組數據
         self.data = chartData // 設置折線圖數據
         
         self.drawGridBackgroundEnabled = true // 要不要有背景
@@ -114,7 +117,10 @@ class LineChart: LineChartView, ChartViewDelegate {
         self.xAxis.axisMaximum = nowXvalue + 5
         
         // 讓x軸下有線(ticks)
-        let customXAxisRenderer = XAxisRendererWithTicks(viewPortHandler: self.viewPortHandler, axis: self.xAxis, transformer: self.getTransformer(forAxis: .left))
+        let customXAxisRenderer = XAxisRendererWithTicks(
+            viewPortHandler: self.viewPortHandler,
+            axis: self.xAxis,
+            transformer: self.getTransformer(forAxis: .left))
         self.xAxisRenderer = customXAxisRenderer
         
         
@@ -138,35 +144,37 @@ class LineChart: LineChartView, ChartViewDelegate {
         limitLine.lineDashLengths = [4, 2] // 設定警戒線為虛線
         
         self.setVisibleXRangeMaximum(90) // 圖表最多顯示10個點
-        self.moveViewToX(nowXvalue) //默認顯示最後一個數據
+        self.moveViewToX(nowXvalue) // 默認顯示最後一個數據
     }
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         // 將選擇的點置中
-        self.moveViewToAnimated(xValue: entry.x - 45, yValue: 0,
-                                          axis: .left, duration: 0.3)
+        self.moveViewToAnimated(
+            xValue: entry.x - 45,
+            yValue: 0,
+            axis: .left,
+            duration: 0.3)
         let date = Date(timeIntervalSince1970: entry.x * 3600 * 24 + self.referenceTimeInterval)
         let dateString = dateFormatter.string(from: date)
         self.showMarkerView(value: "\(entry.y)", date: dateString)
     }
     
-    private func showMarkerView(value: String, date: String){
-        // 氣泡標籤
-        let marker = BalloonMarker(color: UIColor.Gray,
-                                   font: .systemFont(ofSize: 12),
-                                   textColor: .white,
-                                   insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8))
+    private func showMarkerView(value: String, date: String) {
+        let marker = BalloonMarker(
+            color: UIColor.drGray,
+            font: .systemFont(ofSize: 12),
+            textColor: .white,
+            insets: UIEdgeInsets(top: 8, left: 8, bottom: 20, right: 8))
         marker.chartView = self
         marker.minimumSize = CGSize(width: 80, height: 40)
         marker.setLabel("\(date)\n\(value) kg")
         self.marker = marker
     }
-    
 }
 
 class ChartXAxisFormatter: NSObject {
-    fileprivate var dateFormatter: DateFormatter?
-    fileprivate var referenceTimeInterval: TimeInterval?
+    private var dateFormatter: DateFormatter?
+    private var referenceTimeInterval: TimeInterval?
 
     convenience init(referenceTimeInterval: TimeInterval, dateFormatter: DateFormatter) {
         self.init()
@@ -176,7 +184,6 @@ class ChartXAxisFormatter: NSObject {
 }
 
 extension ChartXAxisFormatter: AxisValueFormatter {
-    
     func stringForValue(_ value: Double, axis: AxisBase?) -> String {
         guard let dateFormatter = dateFormatter,
         let referenceTimeInterval = referenceTimeInterval
@@ -189,12 +196,19 @@ extension ChartXAxisFormatter: AxisValueFormatter {
 }
 
 class XAxisRendererWithTicks: XAxisRenderer {
-
     override func drawLabel(context: CGContext, formattedLabel: String, x: CGFloat, y: CGFloat, attributes: [NSAttributedString.Key: Any], constrainedTo constrainedToSize: CGSize, anchor: CGPoint, angleRadians: CGFloat) {
-        super.drawLabel(context: context, formattedLabel: formattedLabel, x: x, y: y, attributes: attributes, constrainedTo: constrainedToSize, anchor: anchor, angleRadians: angleRadians)
+        super.drawLabel(
+            context: context,
+            formattedLabel: formattedLabel,
+            x: x,
+            y: y,
+            attributes: attributes,
+            constrainedTo: constrainedToSize,
+            anchor: anchor,
+            angleRadians: angleRadians)
         context.beginPath()
         context.move(to: CGPoint(x: x, y: y))
         context.addLine(to: CGPoint(x: x, y: self.viewPortHandler.contentBottom))
         context.strokePath()
-     }
+    }
 }

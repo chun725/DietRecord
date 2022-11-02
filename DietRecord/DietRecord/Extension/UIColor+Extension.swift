@@ -8,23 +8,27 @@
 import UIKit
 
 private enum DRColor: String {
-    case LightYellow
-    case Yellow
-    case Green
-    case Orange
-    case Blue
-    case DarkBlue
-    case Gray
+    case drLightYellow
+    case drYellow
+    case drGreen
+    case drOrange
+    case drBlue
+    case drDarkBlue
+    case drLightGray
+    case drGray
+    case drDarkGray
 }
 
 extension UIColor {
-    static let LightYellow = DRColor(.LightYellow)
-    static let Yellow = DRColor(.Yellow)
-    static let Green = DRColor(.Green)
-    static let Orange = DRColor(.Orange)
-    static let Blue = DRColor(.Blue)
-    static let DarkBlue = DRColor(.DarkBlue)
-    static let Gray = DRColor(.Gray)
+    static let drLightYellow = DRColor(.drLightYellow)
+    static let drYellow = DRColor(.drYellow)
+    static let drGreen = DRColor(.drGreen)
+    static let drOrange = DRColor(.drOrange)
+    static let drBlue = DRColor(.drBlue)
+    static let drDarkBlue = DRColor(.drDarkBlue)
+    static let drLightGray = DRColor(.drLightGray)
+    static let drGray = DRColor(.drGray)
+    static let drDarkGray = DRColor(.drDarkGray)
     
     private static func DRColor(_ color: DRColor) -> UIColor {
         guard let DRcolor = UIColor(named: color.rawValue) else { return .gray}
@@ -53,4 +57,3 @@ extension UIColor {
         )
     }
 }
-

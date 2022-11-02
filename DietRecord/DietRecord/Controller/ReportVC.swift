@@ -20,7 +20,6 @@ class ReportVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.date = Date().advanced(by: -60 * 60 * 24 * 6)
         datePicker.addTarget(self, action: #selector(fetchWeeklyDiet), for: .valueChanged)
         fetchWeeklyDiet()
         reportTableView.dataSource = self

@@ -35,7 +35,8 @@ class BarChart: BarChartView {
     
     func setBarChart(date: String, foodDailyInputs: [FoodDailyInput]?, goal: Double) {
         guard let date = dateFormatter.date(from: date) else { return }
-        let referenceTimeInterval = date.timeIntervalSince1970
+        let firstDate = date.advanced(by: -60 * 60 * 24 *  6)
+        let referenceTimeInterval = firstDate.timeIntervalSince1970
         barChartDateFormatter.dateFormat = "MM/dd"
         barChartDateFormatter.locale = .current
         
@@ -64,7 +65,7 @@ class BarChart: BarChartView {
             let othersCalories = calculateMacroNutrition(foods: othersFoods, nutrient: .calories)
             
             guard let dietDate = dateFormatter.date(from: foodDailyInput.date) else { return }
-            let xValue = Double(date.distance(to: dietDate)) / (60 * 60 * 24)
+            let xValue = Double(firstDate.distance(to: dietDate)) / (60 * 60 * 24)
             let entry = BarChartDataEntry(
                 x: xValue,
                 yValues: [breakfastCalories, lunchCalories, dinnerCalories, othersCalories])
@@ -118,7 +119,7 @@ class BarChart: BarChartView {
         
         let limitLine = ChartLimitLine(limit: goal, label: "\(goal) kcal") // 設定目標線
         limitLine.valueTextColor = UIColor.darkGray  // 文字颜色
-        limitLine.valueFont = UIFont.systemFont(ofSize: 10)  // 文字大小
+        limitLine.valueFont = UIFont.systemFont(ofSize: 12)  // 文字大小
         limitLine.labelPosition = .rightTop // 文字在警戒線的右上
         limitLine.lineWidth = 1 // 線寬
         limitLine.lineColor = .red // 線條顏色

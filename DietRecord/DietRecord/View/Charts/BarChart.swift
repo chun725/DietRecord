@@ -35,7 +35,7 @@ class BarChart: BarChartView {
     
     func setBarChart(date: String, foodDailyInputs: [FoodDailyInput]?, goal: Double) {
         guard let date = dateFormatter.date(from: date) else { return }
-        let firstDate = date.advanced(by: -60 * 60 * 24 *  6)
+        let firstDate = date.advanced(by: -60 * 60 * 24 * 6)
         let referenceTimeInterval = firstDate.timeIntervalSince1970
         barChartDateFormatter.dateFormat = "MM/dd"
         barChartDateFormatter.locale = .current

@@ -60,6 +60,7 @@
 		34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */; };
 		34CF740D29135D02009F9264 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740C29135D02009F9264 /* Water.swift */; };
 		34CF7410291365DF009F9264 /* WaterInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740F291365DF009F9264 /* WaterInputVC.swift */; };
+		34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74112913978D009F9264 /* WaterReminderCell.swift */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -122,6 +123,7 @@
 		34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRecordProvider.swift; sourceTree = "<group>"; };
 		34CF740C29135D02009F9264 /* Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
 		34CF740F291365DF009F9264 /* WaterInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterInputVC.swift; sourceTree = "<group>"; };
+		34CF74112913978D009F9264 /* WaterReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterReminderCell.swift; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -371,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				34CF740729135742009F9264 /* TotalWaterCell.swift */,
+				34CF74112913978D009F9264 /* WaterReminderCell.swift */,
 			);
 			path = Water;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				34270E6D290D532900D5AFFD /* ProfileVC.swift in Sources */,
 				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
+				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,

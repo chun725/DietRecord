@@ -11,10 +11,11 @@ class TotalWaterCell: UITableViewCell {
     @IBOutlet weak var waterCurrentLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var whiteBackgroundView: UIView!
-    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var addWaterButton: UIButton!
     @IBOutlet weak var waterPieChartView: UIView!
     @IBOutlet weak var waterGoalLabel: UILabel!
     @IBOutlet weak var changeGoalButton: UIButton!
+    @IBOutlet weak var addReminderButton: UIButton!
     
     func layoutCell(water: Double, goal: Double) {
         waterCurrentLabel.text = water.formatNoPoint().transform(unit: mLUnit)

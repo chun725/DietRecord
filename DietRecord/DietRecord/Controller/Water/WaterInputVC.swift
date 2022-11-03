@@ -59,6 +59,32 @@ class WaterInputVC: UIViewController {
     }
     
     @objc func saveReminder() {
+        let content = UNMutableNotificationContent()
+        content.title = "🔔 在忙碌的同時也要記得喝水哦！"
+        content.badge = 1
+        content.sound = UNNotificationSound.default
+        timeDateFormatter.dateFormat = "HH:mm"
+        let timeString = timeDateFormatter.string(from: timePicker.date)
+        let time = timeString.components(separatedBy: ":")
+        guard let hour = Int(time[0]),
+            let minute = Int(time[1])
+        else { return }
+        let dateComponent = DateComponents(timeZone: .current, hour: hour, minute: minute)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
+        let request = UNNotificationRequest(
+            identifier: waterReminderNotification + timeString,
+            content: content,
+            trigger: trigger)
+        var reminders = userDefault.array(forKey: waterReminder) as? [String]
+        if reminders == nil {
+            userDefault.set([timeString], forKey: waterReminder)
+        } else {
+            reminders?.append(timeString)
+            userDefault.set(reminders, forKey: waterReminder)
+        }
+        UNUserNotificationCenter.current().add(request)
+        self.closure?(0.0)
+        self.dismiss(animated: false)
     }
     
     @IBAction func goBackToWaterPage(_ sender: Any) {

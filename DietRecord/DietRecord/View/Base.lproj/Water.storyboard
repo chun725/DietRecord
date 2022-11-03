@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--WaterVC-->
+        <!--Water-->
         <scene sceneID="SXA-zF-PAn">
             <objects>
                 <viewController id="cWa-85-EEg" customClass="WaterVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -43,25 +43,25 @@
                                 <state key="normal" backgroundImage="list.dash" catalog="system"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iFM-eY-72H">
-                                <rect key="frame" x="0.0" y="84" width="414" height="778"/>
+                                <rect key="frame" x="0.0" y="84" width="414" height="729"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TotalWaterCell" rowHeight="394" id="KrZ-9N-Pnj" customClass="TotalWaterCell" customModule="DietRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="394"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TotalWaterCell" rowHeight="437" id="KrZ-9N-Pnj" customClass="TotalWaterCell" customModule="DietRecord" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="437"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KrZ-9N-Pnj" id="j2U-sl-IvI">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="394"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="437"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Water" translatesAutoresizingMaskIntoConstraints="NO" id="1fy-wu-Nxo">
-                                                    <rect key="frame" x="16" y="264" width="24.5" height="30"/>
+                                                    <rect key="frame" x="16" y="280" width="24.5" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="1fy-wu-Nxo" secondAttribute="height" multiplier="105:128" id="K4D-Td-Wkt"/>
                                                         <constraint firstAttribute="height" constant="30" id="bQf-l0-HQV"/>
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeG-v7-HYV">
-                                                    <rect key="frame" x="374" y="267.5" width="24" height="23"/>
+                                                    <rect key="frame" x="374" y="283.5" width="24" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="2jV-nu-Ydn"/>
                                                         <constraint firstAttribute="width" secondItem="OeG-v7-HYV" secondAttribute="height" id="YL8-nu-G0b"/>
@@ -71,10 +71,10 @@
                                                     <state key="normal" backgroundImage="plus.circle" catalog="system"/>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QV5-fT-o9a">
-                                                    <rect key="frame" x="24" y="302" width="366" height="76"/>
+                                                    <rect key="frame" x="24" y="318" width="366" height="57"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1550 mL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4qf-2t-7cC">
-                                                            <rect key="frame" x="16" y="16" width="72.5" height="44"/>
+                                                            <rect key="frame" x="16" y="16" width="72.5" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="LqD-fo-VTA"/>
                                                             </constraints>
@@ -83,7 +83,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="77.5%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2u-Oh-4B9">
-                                                            <rect key="frame" x="296" y="26" width="54" height="24"/>
+                                                            <rect key="frame" x="296" y="16.5" width="54" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="ZMj-v0-kXU"/>
                                                             </constraints>
@@ -103,7 +103,7 @@
                                                     </constraints>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目前飲水量" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tnH-Zr-G5H">
-                                                    <rect key="frame" x="48.5" y="264" width="80" height="30"/>
+                                                    <rect key="frame" x="48.5" y="280" width="80" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Yrg-DG-J8q"/>
                                                     </constraints>
@@ -112,7 +112,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目標飲水量 2000 mL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kqH-4x-QI2">
-                                                    <rect key="frame" x="122" y="0.0" width="170" height="40"/>
+                                                    <rect key="frame" x="122" y="16" width="170" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="170" id="OIg-pk-cVg"/>
                                                         <constraint firstAttribute="height" constant="40" id="jcL-4k-EBu"/>
@@ -122,7 +122,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-ZH-8u2">
-                                                    <rect key="frame" x="296" y="8.5" width="24" height="23"/>
+                                                    <rect key="frame" x="296" y="24.5" width="24" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="Vbp-x5-wQq"/>
                                                     </constraints>
@@ -131,11 +131,36 @@
                                                     <state key="normal" backgroundImage="pencil.circle" catalog="system"/>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gM0-4a-An2">
-                                                    <rect key="frame" x="0.0" y="40" width="414" height="200"/>
+                                                    <rect key="frame" x="0.0" y="56" width="414" height="200"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="200" id="TlM-Jp-L6u"/>
                                                     </constraints>
                                                 </view>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Reminder" translatesAutoresizingMaskIntoConstraints="NO" id="J4M-mw-BLJ">
+                                                    <rect key="frame" x="16" y="391" width="24.5" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="J4M-mw-BLJ" secondAttribute="height" multiplier="105:128" id="COK-4l-ypd"/>
+                                                        <constraint firstAttribute="height" constant="30" id="cKS-Ab-oa6"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2f-Sr-eDt">
+                                                    <rect key="frame" x="374" y="394.5" width="24" height="23"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="24" id="eSD-dv-8XO"/>
+                                                    </constraints>
+                                                    <color key="tintColor" name="drDarkGray"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" backgroundImage="plus.circle" catalog="system"/>
+                                                </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喝水提醒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVr-cX-Hoq">
+                                                    <rect key="frame" x="48.5" y="391" width="64" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="YN8-e3-8ek"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                                                    <color key="textColor" name="drDarkGray"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="tnH-Zr-G5H" firstAttribute="top" secondItem="gM0-4a-An2" secondAttribute="bottom" constant="24" id="2MT-ZD-dfU"/>
@@ -143,30 +168,89 @@
                                                 <constraint firstItem="QV5-fT-o9a" firstAttribute="leading" secondItem="j2U-sl-IvI" secondAttribute="leading" constant="24" id="6K2-ia-BMd"/>
                                                 <constraint firstAttribute="trailing" secondItem="gM0-4a-An2" secondAttribute="trailing" id="6pJ-37-tEK"/>
                                                 <constraint firstItem="LN0-ZH-8u2" firstAttribute="width" secondItem="LN0-ZH-8u2" secondAttribute="height" id="Afb-uu-WkJ"/>
+                                                <constraint firstItem="f2f-Sr-eDt" firstAttribute="centerY" secondItem="TVr-cX-Hoq" secondAttribute="centerY" id="CBK-s6-a1M"/>
                                                 <constraint firstItem="OeG-v7-HYV" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tnH-Zr-G5H" secondAttribute="trailing" constant="8" id="DSv-CS-0uC"/>
                                                 <constraint firstAttribute="trailing" secondItem="QV5-fT-o9a" secondAttribute="trailing" constant="24" id="EXA-bb-eBH"/>
+                                                <constraint firstItem="f2f-Sr-eDt" firstAttribute="width" secondItem="f2f-Sr-eDt" secondAttribute="height" id="HhK-Lk-Vld"/>
                                                 <constraint firstItem="gM0-4a-An2" firstAttribute="leading" secondItem="j2U-sl-IvI" secondAttribute="leading" id="HjT-AJ-QId"/>
-                                                <constraint firstAttribute="bottom" secondItem="QV5-fT-o9a" secondAttribute="bottom" constant="16" id="Hlh-F9-hGE"/>
                                                 <constraint firstItem="gM0-4a-An2" firstAttribute="top" secondItem="kqH-4x-QI2" secondAttribute="bottom" id="Igf-eB-cmO"/>
                                                 <constraint firstItem="1fy-wu-Nxo" firstAttribute="top" secondItem="gM0-4a-An2" secondAttribute="bottom" constant="24" id="NkP-xO-tTM"/>
+                                                <constraint firstItem="TVr-cX-Hoq" firstAttribute="leading" secondItem="J4M-mw-BLJ" secondAttribute="trailing" constant="8" id="PIK-Of-7CM"/>
+                                                <constraint firstItem="J4M-mw-BLJ" firstAttribute="leading" secondItem="j2U-sl-IvI" secondAttribute="leading" constant="16" id="Wv0-fl-6pU"/>
+                                                <constraint firstAttribute="bottom" secondItem="J4M-mw-BLJ" secondAttribute="bottom" constant="16" id="a9d-uN-DeQ"/>
+                                                <constraint firstItem="f2f-Sr-eDt" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="TVr-cX-Hoq" secondAttribute="trailing" constant="8" id="dHf-fZ-gwb"/>
                                                 <constraint firstItem="OeG-v7-HYV" firstAttribute="centerY" secondItem="tnH-Zr-G5H" secondAttribute="centerY" id="dqs-Br-sg1"/>
                                                 <constraint firstItem="kqH-4x-QI2" firstAttribute="centerX" secondItem="j2U-sl-IvI" secondAttribute="centerX" id="fY6-ad-Bbq"/>
                                                 <constraint firstItem="1fy-wu-Nxo" firstAttribute="leading" secondItem="j2U-sl-IvI" secondAttribute="leading" constant="16" id="k5d-E9-QqN"/>
                                                 <constraint firstItem="LN0-ZH-8u2" firstAttribute="leading" secondItem="kqH-4x-QI2" secondAttribute="trailing" constant="4" id="lNY-eZ-sS7"/>
                                                 <constraint firstAttribute="trailing" secondItem="OeG-v7-HYV" secondAttribute="trailing" constant="16" id="ljU-Oa-y3l"/>
-                                                <constraint firstItem="kqH-4x-QI2" firstAttribute="top" secondItem="j2U-sl-IvI" secondAttribute="top" id="pHa-Oa-ZHe"/>
+                                                <constraint firstAttribute="trailing" secondItem="f2f-Sr-eDt" secondAttribute="trailing" constant="16" id="lo2-OH-UIw"/>
+                                                <constraint firstItem="J4M-mw-BLJ" firstAttribute="top" secondItem="QV5-fT-o9a" secondAttribute="bottom" constant="16" id="oGe-Bm-qKC"/>
+                                                <constraint firstItem="kqH-4x-QI2" firstAttribute="top" secondItem="j2U-sl-IvI" secondAttribute="top" constant="16" id="pHa-Oa-ZHe"/>
                                                 <constraint firstItem="tnH-Zr-G5H" firstAttribute="leading" secondItem="1fy-wu-Nxo" secondAttribute="trailing" constant="8" id="twh-bk-heP"/>
+                                                <constraint firstItem="TVr-cX-Hoq" firstAttribute="centerY" secondItem="J4M-mw-BLJ" secondAttribute="centerY" id="y97-dC-gfe"/>
                                                 <constraint firstItem="LN0-ZH-8u2" firstAttribute="centerY" secondItem="kqH-4x-QI2" secondAttribute="centerY" id="zXn-k4-zwK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="addButton" destination="OeG-v7-HYV" id="vpb-Pp-nme"/>
+                                            <outlet property="addReminderButton" destination="f2f-Sr-eDt" id="wSX-SF-Hox"/>
+                                            <outlet property="addWaterButton" destination="OeG-v7-HYV" id="vpb-Pp-nme"/>
                                             <outlet property="changeGoalButton" destination="LN0-ZH-8u2" id="mqb-FZ-MYQ"/>
                                             <outlet property="percentLabel" destination="D2u-Oh-4B9" id="MPc-fb-N4n"/>
                                             <outlet property="waterCurrentLabel" destination="4qf-2t-7cC" id="DY7-zu-ORI"/>
                                             <outlet property="waterGoalLabel" destination="kqH-4x-QI2" id="Kda-JZ-H22"/>
                                             <outlet property="waterPieChartView" destination="gM0-4a-An2" id="2kW-as-6st"/>
                                             <outlet property="whiteBackgroundView" destination="QV5-fT-o9a" id="nTm-i1-GYx"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WaterReminderCell" rowHeight="107" id="gOz-Xv-Wq2" customClass="WaterReminderCell" customModule="DietRecord" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="481.5" width="414" height="107"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gOz-Xv-Wq2" id="U6p-8w-ATZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="107"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJ3-1j-rJd">
+                                                    <rect key="frame" x="24" y="8" width="366" height="91"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-oC-akG">
+                                                            <rect key="frame" x="159" y="33" width="48" height="25.5"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                                            <color key="textColor" name="drDarkGray"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5M-pR-JC9">
+                                                            <rect key="frame" x="340" y="10.5" width="16" height="15"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" secondItem="h5M-pR-JC9" secondAttribute="height" id="MgZ-6e-sqb"/>
+                                                                <constraint firstAttribute="height" constant="16" id="mEH-5g-Mkg"/>
+                                                            </constraints>
+                                                            <color key="tintColor" name="drDarkGray"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal" backgroundImage="xmark.circle" catalog="system"/>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="h5M-pR-JC9" secondAttribute="trailing" constant="10" id="EX3-j7-QR8"/>
+                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerX" secondItem="HJ3-1j-rJd" secondAttribute="centerX" id="O1T-sX-VUC"/>
+                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="rgN-82-25c"/>
+                                                        <constraint firstAttribute="height" constant="40" id="tSH-Wn-XDX"/>
+                                                        <constraint firstItem="h5M-pR-JC9" firstAttribute="top" secondItem="HJ3-1j-rJd" secondAttribute="top" constant="10" id="z9c-UT-NVT"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="HJ3-1j-rJd" firstAttribute="leading" secondItem="U6p-8w-ATZ" secondAttribute="leading" constant="24" id="3cO-hm-2Dj"/>
+                                                <constraint firstAttribute="trailing" secondItem="HJ3-1j-rJd" secondAttribute="trailing" constant="24" id="EfM-KQ-fKU"/>
+                                                <constraint firstItem="HJ3-1j-rJd" firstAttribute="top" secondItem="U6p-8w-ATZ" secondAttribute="top" constant="8" id="b6U-VJ-DZO"/>
+                                                <constraint firstAttribute="bottom" secondItem="HJ3-1j-rJd" secondAttribute="bottom" constant="8" id="rN7-nx-FzA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="deleteButton" destination="h5M-pR-JC9" id="Dn5-Rb-sTN"/>
+                                            <outlet property="reminderBackgroundView" destination="HJ3-1j-rJd" id="f9c-uv-Rjl"/>
+                                            <outlet property="timeLabel" destination="EGr-oC-akG" id="bep-Vz-wnE"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -190,7 +274,8 @@
                             <constraint firstItem="TZJ-XY-RWw" firstAttribute="top" secondItem="0oa-ff-ebw" secondAttribute="bottom" id="s6B-Q0-QVz"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="W1A-SP-iuV"/>
+                    <tabBarItem key="tabBarItem" title="Water" image="wake" catalog="system" id="oo2-nE-jxC"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="waterTableView" destination="iFM-eY-72H" id="lD6-BM-hd0"/>
                     </connections>
@@ -199,7 +284,7 @@
             </objects>
             <point key="canvasLocation" x="-271.01449275362319" y="995.75892857142856"/>
         </scene>
-        <!--Water-->
+        <!--Water InputVC-->
         <scene sceneID="KNn-gG-ngt">
             <objects>
                 <viewController storyboardIdentifier="WaterInputVC" modalPresentationStyle="overFullScreen" id="FSY-Og-MrG" customClass="WaterInputVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -343,7 +428,6 @@
                             <constraint firstItem="wmM-uE-LeG" firstAttribute="leading" secondItem="BYR-rb-sbr" secondAttribute="leading" id="y4F-i6-kKY"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Water" image="wake" catalog="system" id="oo2-nE-jxC"/>
                     <connections>
                         <outlet property="allBackgroundView" destination="D4t-zR-ilv" id="u6E-N4-e3F"/>
                         <outlet property="grayBackgroundView" destination="ahm-Ad-c8k" id="DK1-3Q-wop"/>
@@ -362,11 +446,13 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image_Reminder" width="512" height="512"/>
         <image name="Image_Water" width="512" height="512"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="pencil.circle" catalog="system" width="128" height="121"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <image name="wake" catalog="system" width="128" height="121"/>
+        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

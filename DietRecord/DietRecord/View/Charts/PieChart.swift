@@ -52,9 +52,13 @@ class PieChart: PieChartView {
         
         let consumed = (goal - gap) / goal * 100
         configurePieChart(set: set, consumed: consumed)
+        
+        guard let font = UIFont(name: fontName, size: 8) else { return }
+        self.legend.font = font
     }
     
     func setWaterPieChart(water: Double, goal: Double) {
+        self.setExtraOffsets(left: 8, top: 8, right: 8, bottom: 0) // 讓圓餅圖周圍有邊界
         let gap = goal - water
         
         let pieChartDataEntries: [PieChartDataEntry] = [
@@ -67,6 +71,9 @@ class PieChart: PieChartView {
         
         let consumed = water / goal * 100
         configurePieChart(set: set, consumed: consumed)
+        
+        guard let font = UIFont(name: fontName, size: 12) else { return }
+        self.legend.font = font
     }
     
     private func configurePieChart(set: PieChartDataSet, consumed: Double) {
@@ -88,7 +95,5 @@ class PieChart: PieChartView {
         legend.verticalAlignment = .bottom
         legend.orientation = .horizontal
         legend.textColor = UIColor.drDarkGray
-        guard let font = UIFont(name: fontName, size: 8) else { return }
-        legend.font = font
     }
 }

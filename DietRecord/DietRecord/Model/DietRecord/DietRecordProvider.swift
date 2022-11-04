@@ -14,8 +14,6 @@ typealias CreateFoodDailyResult = (Result<Void, Error>) -> Void
 typealias FoodDailyResult = (Result<Any, Error>) -> Void
 
 class DietRecordProvider {
-    let decoder = JSONDecoder()
-    
     // MARK: - Search food in database -
     func searchFoods(foodName: String, completion: @escaping FoodSearchResults) {
         guard let foodIngredients = foodIngredients else { fatalError("Could not find food ingredient database.") }

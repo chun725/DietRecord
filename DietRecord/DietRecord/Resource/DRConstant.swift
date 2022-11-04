@@ -13,6 +13,10 @@ import FirebaseFirestore
 let database = Firestore.firestore()
 let dateFormatter = DateFormatter()
 let barChartDateFormatter = DateFormatter()
+let timeDateFormatter = DateFormatter()
+let decoder = JSONDecoder()
+let userDefault = UserDefaults()
+let waterReminder = "WaterReminder"
 let fontName = "PingFang TC"
 let foodBaseView = "FoodBaseView"
 let dietRecord = "DietRecord"
@@ -20,10 +24,13 @@ let foodIngredient = "FoodIngredient"
 let user = "User"
 let userID = "j9UZDoOiEEIoYo0r3z9S"
 let diet = "Diet"
+let water = "Water"
 let kcalUnit = "kcal"
 let gUnit = "g"
 let mgUnit = "mg"
-var foodIngredients: [FoodIngredient]?
+let mLUnit = "mL"
+let waterReminderNotification = "WaterReminderNotification"
+var foodIngredients: [FoodIngredient]? // 資料庫
 
 func configureDateformatter() {
     dateFormatter.locale = .current

@@ -11,4 +11,8 @@ extension Double {
     func format() -> String {
         return String(format: "%.1f", self)
     }
+    
+    func formatNoPoint() -> String {
+        return String(format: "%.0f", self)
+    }
 }

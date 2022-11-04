@@ -360,9 +360,9 @@
                                         </constraints>
                                     </view>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="GSf-F7-eoS">
-                                        <rect key="frame" x="80" y="170" width="90" height="30"/>
+                                        <rect key="frame" x="75" y="170" width="100" height="30"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="90" id="Gma-AP-OJc"/>
+                                            <constraint firstAttribute="width" constant="100" id="Gma-AP-OJc"/>
                                             <constraint firstAttribute="height" constant="30" id="qPc-Pj-8dQ"/>
                                         </constraints>
                                         <locale key="locale" localeIdentifier="zh_TW"/>

@@ -39,7 +39,7 @@ struct NutrientContent: Codable {
     var potassium: String
 }
 struct MealRecord: Codable {
-    let meal: String
+    let meal: Int
     let foods: [Food]
     let imageURL: String
     let comment: String

@@ -52,16 +52,16 @@ class BarChart: BarChartView {
             return
         }
         for foodDailyInput in foodDailyInputs {
-            let breakfastFoods = foodDailyInput.mealRecord.first { $0.meal == Meal.breakfast.rawValue }?.foods
+            let breakfastFoods = foodDailyInput.mealRecord.first { $0.meal == 0 }?.foods
             let breakfastCalories = calculateMacroNutrition(foods: breakfastFoods, nutrient: .calories)
             
-            let lunchFoods = foodDailyInput.mealRecord.first { $0.meal == Meal.lunch.rawValue }?.foods
+            let lunchFoods = foodDailyInput.mealRecord.first { $0.meal == 1 }?.foods
             let lunchCalories = calculateMacroNutrition(foods: lunchFoods, nutrient: .calories)
             
-            let dinnerFoods = foodDailyInput.mealRecord.first { $0.meal == Meal.dinner.rawValue }?.foods
+            let dinnerFoods = foodDailyInput.mealRecord.first { $0.meal == 2 }?.foods
             let dinnerCalories = calculateMacroNutrition(foods: dinnerFoods, nutrient: .calories)
             
-            let othersFoods = foodDailyInput.mealRecord.first { $0.meal == Meal.others.rawValue }?.foods
+            let othersFoods = foodDailyInput.mealRecord.first { $0.meal == 3 }?.foods
             let othersCalories = calculateMacroNutrition(foods: othersFoods, nutrient: .calories)
             
             guard let dietDate = dateFormatter.date(from: foodDailyInput.date) else { return }

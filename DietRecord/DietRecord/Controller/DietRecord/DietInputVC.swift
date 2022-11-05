@@ -110,7 +110,18 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             let meal = mealTextField?.text,
             let comment = commentTextView?.text
         else { return }
-        let mealRecord = MealRecord(meal: meal, foods: foods, imageURL: imageURL, comment: comment)
+        var index = 3
+        switch meal {
+        case Meal.breakfast.rawValue:
+            index = 0
+        case Meal.lunch.rawValue:
+            index = 1
+        case Meal.dinner.rawValue:
+            index = 2
+        default:
+            index = 3
+        }
+        let mealRecord = MealRecord(meal: index, foods: foods, imageURL: imageURL, comment: comment)
         dietRecordProvider.createFoodDaily(
             date: dateFormatter.string(from: date),
             mealRecord: mealRecord) { result in

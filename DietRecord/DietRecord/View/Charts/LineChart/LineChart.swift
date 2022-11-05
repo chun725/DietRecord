@@ -8,13 +8,8 @@
 import Foundation
 import Charts
 
-struct WeightData: Codable {
-    let date: Date
-    let value: Double
-}
-
 class LineChart: LineChartView, ChartViewDelegate {
-    var referenceTimeInterval: TimeInterval = 0
+    private var referenceTimeInterval: TimeInterval = 0
     
     init(frame: CGRect, superview: UIView) {
         super.init(frame: frame)
@@ -54,7 +49,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         
         if let minTimeInterval = (datas.map { $0.date.timeIntervalSince1970 }).min() {
             referenceTimeInterval = minTimeInterval
-            }
+        }
 
         let xValuesNumberFormatter = ChartXAxisFormatter(
             referenceTimeInterval: referenceTimeInterval,
@@ -108,18 +103,18 @@ class LineChart: LineChartView, ChartViewDelegate {
         
         self.xAxis.labelPosition = .bottom // x軸顯示在下方，預設為上方
         self.xAxis.drawGridLinesEnabled = false // 不要有每個x值的線
+        self.xAxis.drawLabelsEnabled = false // 不顯示x軸文字
         self.xAxis.valueFormatter = xValuesNumberFormatter
         self.xAxis.granularity = 30 // x軸的間隔
-        self.xAxis.axisMinimum = -10
+        self.xAxis.axisMinimum = -5
         self.xAxis.axisMaximum = nowXvalue + 5
         
         // 讓x軸下有線(ticks)
-        let customXAxisRenderer = XAxisRendererWithTicks(
-            viewPortHandler: self.viewPortHandler,
-            axis: self.xAxis,
-            transformer: self.getTransformer(forAxis: .left))
-        self.xAxisRenderer = customXAxisRenderer
-        
+        // let customXAxisRenderer = XAxisRendererWithTicks(
+        //     viewPortHandler: self.viewPortHandler,
+        //     axis: self.xAxis,
+        //    transformer: self.getTransformer(forAxis: .left))
+        // self.xAxisRenderer = customXAxisRenderer
         
         self.rightAxis.enabled = false // 不使用右側y軸
         self.leftAxis.drawGridLinesEnabled = false // 不要有每個y值的線
@@ -127,7 +122,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         self.leftAxis.drawAxisLineEnabled = false // 不顯示左側y軸線
         self.leftAxis.axisMinimum = -10 // 最小刻度值
         guard let maxWeight = datas.map({ $0.value }).max() else { return }
-        self.leftAxis.axisMaximum = maxWeight + 20 // 最大刻度值
+        self.leftAxis.axisMaximum = maxWeight + 50 // 最大刻度值
         
         // 設定目標線
         let limitLine = ChartLimitLine(limit: goal, label: "\(goal) kg") // 設置警戒線

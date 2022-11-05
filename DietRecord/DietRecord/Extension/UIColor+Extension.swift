@@ -8,6 +8,7 @@
 import UIKit
 
 private enum DRColor: String {
+    case drPink
     case drLightYellow
     case drYellow
     case drGreen
@@ -20,6 +21,7 @@ private enum DRColor: String {
 }
 
 extension UIColor {
+    static let drPink = DRColor(.drPink)
     static let drLightYellow = DRColor(.drLightYellow)
     static let drYellow = DRColor(.drYellow)
     static let drGreen = DRColor(.drGreen)

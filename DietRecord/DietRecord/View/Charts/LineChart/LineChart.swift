@@ -106,7 +106,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         self.xAxis.drawLabelsEnabled = false // 不顯示x軸文字
         self.xAxis.valueFormatter = xValuesNumberFormatter
         self.xAxis.granularity = 30 // x軸的間隔
-        self.xAxis.axisMinimum = 0
+        self.xAxis.axisMinimum = -5
         self.xAxis.axisMaximum = nowXvalue + 5
         
         // 讓x軸下有線(ticks)

@@ -10,6 +10,7 @@ import PhotosUI
 
 class DietInputVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodDailyTableView: UITableView!
+    @IBOutlet weak var saveButton: UIButton!
     
     var foods: [Food] = [] {
         didSet {
@@ -20,8 +21,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     var mealTextField: UITextField?
     var mealImageView: UIImageView?
     var datePicker: UIDatePicker?
-    var choosePhoto: UIImage?
     var commentTextView: UITextView?
+    var imageURL: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -93,22 +94,25 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         self.navigationController?.popViewController(animated: false)
     }
     
-    @IBAction func uploadImage(_ sender: Any) {
+    func uploadImage() {
+        saveButton.isEnabled = false
         guard let image = self.mealImageView?.image else { return }
         dietRecordProvider.uploadImage(image: image) { result in
             switch result {
             case .success(let url):
-                self.saveFoodDaily(imageURL: url.absoluteString)
+                self.imageURL = url.absoluteString
+                self.saveButton.isEnabled = true
             case .failure(let error):
                 print("Error Info: \(error).")
             }
         }
     }
     
-    func saveFoodDaily(imageURL: String) {
+    @IBAction func saveFoodDaily() {
         guard let date = datePicker?.date,
             let meal = mealTextField?.text,
-            let comment = commentTextView?.text
+            let comment = commentTextView?.text,
+            let imageURL = self.imageURL
         else { return }
         var index = 3
         switch meal {
@@ -178,7 +182,7 @@ extension DietInputVC: PHPickerViewControllerDelegate, UIImagePickerControllerDe
                         let mealImageView = self.mealImageView,
                         mealImageView.image == previousImage else { return }
                     mealImageView.image = image
-                    self.choosePhoto = image
+                    self.uploadImage()
                 }
             }
         }
@@ -196,7 +200,7 @@ extension DietInputVC: PHPickerViewControllerDelegate, UIImagePickerControllerDe
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let pickedImage = info[.originalImage] as? UIImage {
             self.mealImageView?.image = pickedImage
-            self.choosePhoto = pickedImage
+            self.uploadImage()
         }
         picker.dismiss(animated: false)
     }

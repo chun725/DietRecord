@@ -13,10 +13,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     
     var meals: [MealRecord]? {
         didSet {
-            breakfastMeal = meals?.first { $0.meal == Meal.breakfast.rawValue }
-            lunchMeal = meals?.first { $0.meal == Meal.lunch.rawValue }
-            dinnerMeal = meals?.first { $0.meal == Meal.dinner.rawValue }
-            othersMeal = meals?.first { $0.meal == Meal.others.rawValue }
+            breakfastMeal = meals?.first { $0.meal == 0 }
+            lunchMeal = meals?.first { $0.meal == 1 }
+            dinnerMeal = meals?.first { $0.meal == 2 }
+            othersMeal = meals?.first { $0.meal == 3 }
             totalFoods = meals?.map { $0.foods }.flatMap { $0 }
         }
     }

@@ -65,6 +65,10 @@
 		34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74162914C10E009F9264 /* WeightRecordProvider.swift */; };
 		34CF741A2914ECA7009F9264 /* WeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74192914ECA7009F9264 /* WeightCell.swift */; };
 		34CF741D2914F2D7009F9264 /* WeightInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF741C2914F2D7009F9264 /* WeightInputVC.swift */; };
+		34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF741F291660AC009F9264 /* ProfileCell.swift */; };
+		34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */; };
+		34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7424291661DF009F9264 /* ProfileProvider.swift */; };
+		34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7427291683D5009F9264 /* ProfileDetailVC.swift */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -132,6 +136,10 @@
 		34CF74162914C10E009F9264 /* WeightRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordProvider.swift; sourceTree = "<group>"; };
 		34CF74192914ECA7009F9264 /* WeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCell.swift; sourceTree = "<group>"; };
 		34CF741C2914F2D7009F9264 /* WeightInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightInputVC.swift; sourceTree = "<group>"; };
+		34CF741F291660AC009F9264 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
+		34CF7424291661DF009F9264 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
+		34CF7427291683D5009F9264 /* ProfileDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailVC.swift; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -151,6 +159,7 @@
 		34270E76290D576B00D5AFFD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				34CF7423291661C1009F9264 /* Profile */,
 				34CF74132914C0DD009F9264 /* Weight */,
 				34CF740929135B91009F9264 /* Water */,
 				34270E9F290FC4E300D5AFFD /* DietRecord */,
@@ -294,6 +303,7 @@
 			children = (
 				3464294C290D16E00070B425 /* Double+Extension.swift */,
 				34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */,
+				34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */,
 				34270EA2290FCED100D5AFFD /* String+Extension.swift */,
 				34270E94290F965800D5AFFD /* UIView+Extension.swift */,
 				3464294F290D1EA20070B425 /* UIColor+Extension.swift */,
@@ -314,6 +324,7 @@
 		34642952290D28340070B425 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				34CF741E29166094009F9264 /* Profile */,
 				34CF74182914EC98009F9264 /* Weight */,
 				3469168A291255680021985F /* Report */,
 				34CF74062913572A009F9264 /* Water */,
@@ -333,10 +344,10 @@
 		34642953290D28500070B425 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				34CF7426291683B8009F9264 /* Profile */,
 				34CF741B2914F2B8009F9264 /* Weight */,
 				34CF740E291365C4009F9264 /* Water */,
 				34270E89290F7A3D00D5AFFD /* DietRecord */,
-				34270E6C290D532900D5AFFD /* ProfileVC.swift */,
 				34270E6E290D533400D5AFFD /* ReportVC.swift */,
 				342270232911063A000B4A58 /* TabBarController.swift */,
 			);
@@ -430,6 +441,31 @@
 				34CF741C2914F2D7009F9264 /* WeightInputVC.swift */,
 			);
 			path = Weight;
+			sourceTree = "<group>";
+		};
+		34CF741E29166094009F9264 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				34CF741F291660AC009F9264 /* ProfileCell.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		34CF7423291661C1009F9264 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				34CF7424291661DF009F9264 /* ProfileProvider.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		34CF7426291683B8009F9264 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				34270E6C290D532900D5AFFD /* ProfileVC.swift */,
+				34CF7427291683D5009F9264 /* ProfileDetailVC.swift */,
+			);
+			path = Profile;
 			sourceTree = "<group>";
 		};
 		CC8EFD0C720311DCA1A8582C /* Frameworks */ = {
@@ -597,6 +633,7 @@
 			files = (
 				34270E6D290D532900D5AFFD /* ProfileVC.swift in Sources */,
 				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
+				34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
 				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
@@ -606,6 +643,8 @@
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
+				34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */,
+				34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
 				34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */,
 				34642949290D07B80070B425 /* PieChart.swift in Sources */,
@@ -619,6 +658,7 @@
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
 				34CF74152914C0ED009F9264 /* Weight.swift in Sources */,
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
+				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,

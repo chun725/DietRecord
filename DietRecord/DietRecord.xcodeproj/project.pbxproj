@@ -868,6 +868,10 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "食話食說想取用相機權限";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話食說想取用您健康app內的體重資料";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話食說想取用您健康app內的體重資料";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話食說想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -878,7 +882,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -899,6 +903,10 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "食話食說想取用相機權限";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話食說想取用您健康app內的體重資料";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話食說想取用您健康app內的體重資料";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話食說想取用相簿權限";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -909,7 +917,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

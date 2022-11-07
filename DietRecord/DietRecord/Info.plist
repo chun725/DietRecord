@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>食話食說想取用相簿權限</string>
-	<key>NSCameraUsageDescription</key>
-	<string>食話食說想取用相機權限</string>
-	<key>NSHealthUpdateUsageDescription</key>
-	<string>食話食說想取用您健康app內的體重資料</string>
-	<key>NSHealthShareUsageDescription</key>
-	<string>食話食說想取用您健康app內的體重資料</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

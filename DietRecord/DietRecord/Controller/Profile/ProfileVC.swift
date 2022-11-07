@@ -12,7 +12,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     var mealRecords: [MealRecord] = [] {
         didSet {
-            print(mealRecords)
             photoCollectionView.reloadData()
         }
     }

@@ -127,13 +127,14 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             index = 3
         }
         let mealRecord = MealRecord(
+            userID: userID,
             meal: index,
             date: dateFormatter.string(from: date),
             foods: foods,
             imageURL: imageURL,
             comment: comment,
             isShared: true,
-            createdTime: Timestamp(date: Date()),
+            createdTime: Date(),
             peopleLiked: [],
             response: [])
         dietRecordProvider.createFoodDaily(

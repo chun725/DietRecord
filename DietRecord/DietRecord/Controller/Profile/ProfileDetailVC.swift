@@ -17,6 +17,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         profileDetailTableView.dataSource = self
+        profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
     }
     
     @IBAction func goBackProfilePage(_ sender: Any) {

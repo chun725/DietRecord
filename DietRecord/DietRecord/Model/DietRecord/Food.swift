@@ -40,19 +40,19 @@ struct NutrientContent: Codable {
     var potassium: String
 }
 struct MealRecord: Codable {
+    let userID: String
     let meal: Int
     let date: String
     let foods: [Food]
     let imageURL: String
     let comment: String
     var isShared: Bool
-    let createdTime: Timestamp
+    let createdTime: Date
     var peopleLiked: [String]
     var response: [Response]
 }
 
 struct FoodDailyInput: Codable {
-    let date: String
     var mealRecord: [MealRecord]
 }
 

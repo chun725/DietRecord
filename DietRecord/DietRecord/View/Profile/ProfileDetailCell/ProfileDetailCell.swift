@@ -15,10 +15,12 @@ class ProfileDetailCell: UITableViewCell {
     @IBOutlet weak var likeButton: UIButton!
     @IBOutlet weak var responseButton: UIButton!
     @IBOutlet weak var likedCountLabel: UILabel!
+    @IBOutlet weak var checkResponseButton: UIButton!
     
     let profileProvider = ProfileProvider()
     var meal = 0
     var date = ""
+    var haveResponses = true
     
     func layoutCell(username: String, userImage: String, mealRecord: MealRecord) {
         self.backgroundColor = .clear
@@ -30,6 +32,9 @@ class ProfileDetailCell: UITableViewCell {
         likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
         self.meal = mealRecord.meal
         self.date = mealRecord.date
+        if haveResponses {
+            checkResponseButton.isHidden = true
+        }
         if mealRecord.peopleLiked.contains(userID) {
             likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
             likeButton.tag = mealRecord.peopleLiked.count - 1

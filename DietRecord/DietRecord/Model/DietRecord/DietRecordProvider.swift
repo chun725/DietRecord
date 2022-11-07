@@ -51,7 +51,7 @@ class DietRecordProvider {
                 var data = try? document.data(as: FoodDailyInput.self)
             else {
                 do {
-                    try documentReference.setData(from: FoodDailyInput(date: date, mealRecord: [mealRecord]))
+                    try documentReference.setData(from: FoodDailyInput(mealRecord: [mealRecord]))
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))

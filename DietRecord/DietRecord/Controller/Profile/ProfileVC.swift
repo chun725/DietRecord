@@ -9,10 +9,19 @@ import UIKit
 
 class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var homeButton: UIButton!
     
-    var mealRecords: [MealRecord] = [] {
+    var selfMealRecords: [MealRecord] = [] {
         didSet {
             photoCollectionView.reloadData()
+        }
+    }
+    
+    var followingPosts: [MealRecord] = [] {
+        didSet {
+            homeTableView.reloadData()
         }
     }
     
@@ -24,14 +33,17 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         photoCollectionView.collectionViewLayout = configureLayout()
+        homeTableView.dataSource = self
+        homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchDietRecord()
+        fetchFollowingPost()
+        fetchSelfDietRecord()
     }
     
-    func fetchDietRecord() {
+    func fetchSelfDietRecord() {
         profileProvider.fetchImage { result in
             switch result {
             case .success(let dietRecords):
@@ -42,30 +54,51 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                         mealDatas.append(mealRecord)
                     }
                 }
-                self.mealRecords = mealDatas.reversed()
+                self.selfMealRecords = mealDatas.reversed()
             case .failure(let error):
                 print("Error Info: \(error).")
             }
         }
     }
     
+    func fetchFollowingPost() {
+        profileProvider.fetchFollowingPost { result in
+            switch result {
+            case .success(let mealRecords):
+                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
+    }
+    
+    @IBAction func changePage(sender: UIButton) {
+        if sender == homeButton {
+            self.photoCollectionView.isHidden = true
+            self.homeTableView.isHidden = false
+        } else {
+            self.photoCollectionView.isHidden = false
+            self.homeTableView.isHidden = true
+        }
+    }
+    
     // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mealRecords.count
+        selfMealRecords.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ProfileCell.reuseIdentifier, for: indexPath) as? ProfileCell
         else { fatalError("Could not create the profile cell.") }
-        let mealRecord = mealRecords[indexPath.row]
+        let mealRecord = selfMealRecords[indexPath.row]
         cell.layoutCell(imageURL: mealRecord.imageURL)
         return cell
     }
     
     // MARK: - CollectionViewDelegate -
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mealRecord = mealRecords[indexPath.row]
+        let mealRecord = selfMealRecords[indexPath.row]
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
@@ -90,5 +123,21 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         return layout
+    }
+}
+
+extension ProfileVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        followingPosts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: ProfileDetailCell.reuseIdentifier, for: indexPath) as? ProfileDetailCell
+        else { fatalError("Could not create the profile detail cell.") }
+        let mealRecord = self.followingPosts[indexPath.row]
+        cell.haveResponses = false
+        cell.layoutCell(username: mealRecord.userID, userImage: "jdcd", mealRecord: mealRecord)
+        return cell
     }
 }

@@ -64,7 +64,7 @@ class BarChart: BarChartView {
             let othersFoods = foodDailyInput.mealRecord.first { $0.meal == 3 }?.foods
             let othersCalories = calculateMacroNutrition(foods: othersFoods, nutrient: .calories)
             
-            guard let dietDate = dateFormatter.date(from: foodDailyInput.date) else { return }
+            guard let dietDate = dateFormatter.date(from: foodDailyInput.mealRecord[0].date) else { return }
             let xValue = Double(firstDate.distance(to: dietDate)) / (60 * 60 * 24)
             let entry = BarChartDataEntry(
                 x: xValue,

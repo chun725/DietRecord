@@ -56,6 +56,13 @@
 		3469168E291277A40021985F /* ChartXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469168D291277A40021985F /* ChartXAxis.swift */; };
 		3469169229127C430021985F /* ReportDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3469169129127C430021985F /* ReportDetailCell.xib */; };
 		3469169429127C510021985F /* ReportDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469169329127C510021985F /* ReportDetailCell.swift */; };
+		349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D892918F66B002EB186 /* ProfileDetailCell.swift */; };
+		349B8D8C2918F696002EB186 /* ProfileResponseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */; };
+		349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */; };
+		349B8D9029193514002EB186 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8F29193514002EB186 /* User.swift */; };
+		349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */; };
+		349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D95291A215D002EB186 /* CheckRequestVC.swift */; };
+		349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D97291A22CF002EB186 /* RequestCell.swift */; };
 		34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740729135742009F9264 /* TotalWaterCell.swift */; };
 		34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */; };
 		34CF740D29135D02009F9264 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740C29135D02009F9264 /* Water.swift */; };
@@ -127,6 +134,13 @@
 		3469168D291277A40021985F /* ChartXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxis.swift; sourceTree = "<group>"; };
 		3469169129127C430021985F /* ReportDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportDetailCell.xib; sourceTree = "<group>"; };
 		3469169329127C510021985F /* ReportDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailCell.swift; sourceTree = "<group>"; };
+		349B8D892918F66B002EB186 /* ProfileDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailCell.swift; sourceTree = "<group>"; };
+		349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseCell.swift; sourceTree = "<group>"; };
+		349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFollowingVC.swift; sourceTree = "<group>"; };
+		349B8D8F29193514002EB186 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDetailCell.xib; sourceTree = "<group>"; };
+		349B8D95291A215D002EB186 /* CheckRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRequestVC.swift; sourceTree = "<group>"; };
+		349B8D97291A22CF002EB186 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		34CF740729135742009F9264 /* TotalWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterCell.swift; sourceTree = "<group>"; };
 		34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRecordProvider.swift; sourceTree = "<group>"; };
 		34CF740C29135D02009F9264 /* Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
@@ -389,6 +403,15 @@
 			path = ReportDetailCell;
 			sourceTree = "<group>";
 		};
+		349B8D882918F64F002EB186 /* ProfileDetailCell */ = {
+			isa = PBXGroup;
+			children = (
+				349B8D892918F66B002EB186 /* ProfileDetailCell.swift */,
+				349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */,
+			);
+			path = ProfileDetailCell;
+			sourceTree = "<group>";
+		};
 		34CF74062913572A009F9264 /* Water */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,7 +469,10 @@
 		34CF741E29166094009F9264 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				349B8D882918F64F002EB186 /* ProfileDetailCell */,
+				349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */,
 				34CF741F291660AC009F9264 /* ProfileCell.swift */,
+				349B8D97291A22CF002EB186 /* RequestCell.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -455,6 +481,7 @@
 			isa = PBXGroup;
 			children = (
 				34CF7424291661DF009F9264 /* ProfileProvider.swift */,
+				349B8D8F29193514002EB186 /* User.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -464,6 +491,8 @@
 			children = (
 				34270E6C290D532900D5AFFD /* ProfileVC.swift */,
 				34CF7427291683D5009F9264 /* ProfileDetailVC.swift */,
+				349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */,
+				349B8D95291A215D002EB186 /* CheckRequestVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -557,6 +586,7 @@
 				34270E61290D51F300D5AFFD /* Weight.storyboard in Resources */,
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
 				34270E67290D529100D5AFFD /* Report.storyboard in Resources */,
+				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
 				34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */,
@@ -635,6 +665,8 @@
 				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
 				34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
+				349B8D8C2918F696002EB186 /* ProfileResponseCell.swift in Sources */,
+				349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */,
 				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
@@ -651,16 +683,20 @@
 				3469168E291277A40021985F /* ChartXAxis.swift in Sources */,
 				34CF740D29135D02009F9264 /* Water.swift in Sources */,
 				34CF741A2914ECA7009F9264 /* WeightCell.swift in Sources */,
+				349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */,
 				34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */,
 				34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */,
+				349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */,
 				3469168C291255860021985F /* ReportBarChartCell.swift in Sources */,
 				34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
 				34CF74152914C0ED009F9264 /* Weight.swift in Sources */,
+				349B8D9029193514002EB186 /* User.swift in Sources */,
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
 				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
+				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,

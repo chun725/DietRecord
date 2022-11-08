@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileDetailCell" id="vnx-kn-mlZ" customClass="ProfileDetailCell" customModule="DietRecord" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="595.5"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="vnx-kn-mlZ" id="GV5-93-D0C">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="595.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3Jv-p5-AIT">
+                        <rect key="frame" x="16" y="16.5" width="30" height="29"/>
+                        <color key="tintColor" name="drDarkGray"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="9ov-mC-ZJ9"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KJT-m6-1fg">
+                        <rect key="frame" x="62" y="21" width="6" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="UWr-az-7Wq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                        <color key="textColor" name="drDarkGray"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Km-x2-bct">
+                        <rect key="frame" x="0.0" y="62" width="414" height="414"/>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nOq-DD-HcU">
+                        <rect key="frame" x="58" y="526.5" width="31" height="23.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="Iwd-F7-j7a"/>
+                        </constraints>
+                        <color key="tintColor" name="drDarkGray"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" backgroundImage="message" catalog="system"/>
+                    </button>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0人說讚" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbC-JR-jdv">
+                        <rect key="frame" x="16" y="567.5" width="65" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="pHS-fF-fhD"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                        <color key="textColor" name="drDarkGray"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAC-wz-Paa">
+                        <rect key="frame" x="16" y="484" width="382" height="25.5"/>
+                        <attributedString key="attributedText">
+                            <fragment content="Comment">
+                                <attributes>
+                                    <color key="NSColor" name="drDarkGray"/>
+                                    <font key="NSFont" size="18" name="PingFangTC-Semibold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R8y-bT-pkf">
+                        <rect key="frame" x="16" y="527" width="34" height="23.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="R8y-bT-pkf" secondAttribute="height" multiplier="1.3:1" id="3na-QT-uKq"/>
+                            <constraint firstAttribute="height" constant="26" id="j5X-Jd-y3c"/>
+                        </constraints>
+                        <color key="tintColor" name="drDarkGray"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" backgroundImage="heart" catalog="system"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WBH-F4-kdE">
+                        <rect key="frame" x="314" y="566" width="84" height="23"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
+                        <color key="tintColor" name="drDarkGray"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" title="查看回覆" image="arrow.forward.circle" catalog="system">
+                            <color key="titleColor" name="drDarkGray"/>
+                        </state>
+                    </button>
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2022-11-08 早餐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2I-qA-VzI">
+                        <rect key="frame" x="97" y="567.5" width="111.5" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="C4w-Ej-Faq"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
+                        <color key="textColor" systemColor="systemGrayColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="2Km-x2-bct" secondAttribute="trailing" id="2Fi-26-vYv"/>
+                    <constraint firstItem="e2I-qA-VzI" firstAttribute="bottom" secondItem="QbC-JR-jdv" secondAttribute="bottom" id="4zD-f7-dlz"/>
+                    <constraint firstAttribute="trailing" secondItem="bAC-wz-Paa" secondAttribute="trailing" constant="16" id="9iM-AI-gG5"/>
+                    <constraint firstItem="nOq-DD-HcU" firstAttribute="leading" secondItem="R8y-bT-pkf" secondAttribute="trailing" constant="8" id="AlZ-0d-Tty"/>
+                    <constraint firstItem="WBH-F4-kdE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="e2I-qA-VzI" secondAttribute="trailing" constant="8" id="BLZ-kZ-Yj5"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="QbC-JR-jdv" secondAttribute="trailing" constant="8" id="Fg9-53-irD"/>
+                    <constraint firstItem="3Jv-p5-AIT" firstAttribute="width" secondItem="3Jv-p5-AIT" secondAttribute="height" id="Fti-nx-myM"/>
+                    <constraint firstItem="3Jv-p5-AIT" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="GK6-ly-cUa"/>
+                    <constraint firstItem="bAC-wz-Paa" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="Gq9-N3-tNG"/>
+                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="KJT-m6-1fg" secondAttribute="trailing" constant="8" id="IbZ-z9-iuk"/>
+                    <constraint firstItem="WBH-F4-kdE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="QbC-JR-jdv" secondAttribute="trailing" constant="8" id="JVz-0T-pg1"/>
+                    <constraint firstAttribute="trailing" secondItem="WBH-F4-kdE" secondAttribute="trailing" constant="16" id="L1n-U0-bli"/>
+                    <constraint firstItem="2Km-x2-bct" firstAttribute="width" secondItem="2Km-x2-bct" secondAttribute="height" id="MqD-2X-uKm"/>
+                    <constraint firstItem="nOq-DD-HcU" firstAttribute="width" secondItem="nOq-DD-HcU" secondAttribute="height" multiplier="1.3:1" id="NkT-LR-hdg"/>
+                    <constraint firstItem="2Km-x2-bct" firstAttribute="top" secondItem="3Jv-p5-AIT" secondAttribute="bottom" constant="16" id="Pbr-6L-ftl"/>
+                    <constraint firstItem="3Jv-p5-AIT" firstAttribute="top" secondItem="GV5-93-D0C" secondAttribute="top" constant="16" id="R3V-Su-MvA"/>
+                    <constraint firstItem="2Km-x2-bct" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" id="TAj-pf-W2Q"/>
+                    <constraint firstItem="QbC-JR-jdv" firstAttribute="top" secondItem="R8y-bT-pkf" secondAttribute="bottom" constant="16" id="ZUP-5N-TVi"/>
+                    <constraint firstItem="QbC-JR-jdv" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="aMU-6G-nOV"/>
+                    <constraint firstItem="WBH-F4-kdE" firstAttribute="centerY" secondItem="QbC-JR-jdv" secondAttribute="centerY" id="anN-DF-a4a"/>
+                    <constraint firstItem="bAC-wz-Paa" firstAttribute="top" secondItem="2Km-x2-bct" secondAttribute="bottom" constant="8" id="asK-2p-2PC"/>
+                    <constraint firstItem="KJT-m6-1fg" firstAttribute="leading" secondItem="3Jv-p5-AIT" secondAttribute="trailing" constant="16" id="bDK-MT-eBO"/>
+                    <constraint firstItem="2Km-x2-bct" firstAttribute="width" secondItem="GV5-93-D0C" secondAttribute="width" id="cgb-IU-MDC"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nOq-DD-HcU" secondAttribute="trailing" constant="8" id="daa-Ct-cns"/>
+                    <constraint firstItem="e2I-qA-VzI" firstAttribute="leading" secondItem="QbC-JR-jdv" secondAttribute="trailing" constant="16" id="klE-Ib-mA5"/>
+                    <constraint firstItem="nOq-DD-HcU" firstAttribute="centerY" secondItem="R8y-bT-pkf" secondAttribute="centerY" id="ms3-Np-tnf"/>
+                    <constraint firstItem="R8y-bT-pkf" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="p5X-I7-ASk"/>
+                    <constraint firstAttribute="bottom" secondItem="QbC-JR-jdv" secondAttribute="bottom" constant="8" id="sFv-lR-PLs"/>
+                    <constraint firstItem="R8y-bT-pkf" firstAttribute="top" secondItem="bAC-wz-Paa" secondAttribute="bottom" constant="16" id="xEM-VP-AjU"/>
+                    <constraint firstItem="KJT-m6-1fg" firstAttribute="centerY" secondItem="3Jv-p5-AIT" secondAttribute="centerY" id="yoD-Ed-iYq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="checkResponseButton" destination="WBH-F4-kdE" id="W9a-3b-2Sc"/>
+                <outlet property="likeButton" destination="R8y-bT-pkf" id="WqM-WJ-MSe"/>
+                <outlet property="likedCountLabel" destination="QbC-JR-jdv" id="Wtf-9k-xRY"/>
+                <outlet property="mealCommentLabel" destination="bAC-wz-Paa" id="jAe-9J-DaB"/>
+                <outlet property="mealImageView" destination="2Km-x2-bct" id="NRw-lo-VFP"/>
+                <outlet property="responseButton" destination="nOq-DD-HcU" id="1wC-r5-M9B"/>
+                <outlet property="timeLabel" destination="e2I-qA-VzI" id="GNY-qZ-T8s"/>
+                <outlet property="userImageView" destination="3Jv-p5-AIT" id="cHG-3d-P5N"/>
+                <outlet property="usernameLabel" destination="KJT-m6-1fg" id="yGW-Tv-Lq9"/>
+            </connections>
+            <point key="canvasLocation" x="-67" y="-515"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="arrow.forward.circle" catalog="system" width="128" height="121"/>
+        <image name="heart" catalog="system" width="128" height="109"/>
+        <image name="message" catalog="system" width="128" height="113"/>
+        <image name="person.circle" catalog="system" width="128" height="121"/>
+        <namedColor name="drDarkGray">
+            <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

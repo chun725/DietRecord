@@ -10,17 +10,266 @@ import Foundation
 class ProfileProvider {
     func fetchImage(completion: @escaping (Result<[FoodDailyInput], Error>) -> Void) {
         var dietRecords: [FoodDailyInput] = []
-        database.collection(user).document(userID).collection(diet).order(by: "date").getDocuments { snapshot, error in
+        database.collection(user).document(userID).collection(diet).getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
             } else {
                 guard let snapshot = snapshot else { return }
-                let documents = snapshot.documents
+                var documents = snapshot.documents
+                documents = documents.sorted { $0.documentID < $1.documentID }
                 for document in documents {
                     guard let dietRecord = try? document.data(as: FoodDailyInput.self) else { return }
                     dietRecords.append(dietRecord)
                 }
                 completion(.success(dietRecords))
+            }
+        }
+    }
+    
+    func fetchFollowingPost(completion: @escaping (Result<[MealRecord], Error>) -> Void) {
+        var mealRecords: [MealRecord] = []
+        database.collection(user).document(userID).getDocument { document, error in
+            guard let document = document,
+                document.exists,
+                let userData = try? document.data(as: User.self)
+            else { return }
+            var followings = userData.following
+            followings.append(userData.userID)
+            let downloadGroup = DispatchGroup()
+            var blocks: [DispatchWorkItem] = []
+            for following in followings {
+                downloadGroup.enter()
+                let block = DispatchWorkItem(flags: .inheritQoS) {
+                    database.collection(user).document(following).collection(diet).getDocuments { snapshot, error in
+                        if let error = error {
+                            completion(.failure(error))
+                            downloadGroup.leave()
+                        } else {
+                            guard let snapshot = snapshot else { return }
+                            let documents = snapshot.documents
+                            for document in documents {
+                                guard let dietRecord = try? document.data(as: FoodDailyInput.self) else { return }
+                                let mealRecordsData = dietRecord.mealRecord.filter { $0.isShared == true }
+                                mealRecords.append(contentsOf: mealRecordsData)
+                            }
+                            downloadGroup.leave()
+                        }
+                    }
+                }
+                blocks.append(block)
+                DispatchQueue.main.async(execute: block)
+            }
+            downloadGroup.notify(queue: DispatchQueue.main) {
+                completion(.success(mealRecords))
+            }
+        }
+    }
+    
+    func changeLiked(authorID: String, date: String, meal: Int, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(authorID).collection(diet).document(date)
+        documentReference.getDocument { document, error in
+            guard let document = document,
+                document.exists,
+                var dietRecord = try? document.data(as: FoodDailyInput.self)
+            else { return }
+            var mealRecords = dietRecord.mealRecord
+            guard var mealRecord = mealRecords.first(where: { $0.meal == meal }) else { return }
+            if mealRecord.peopleLiked.contains(userID) {
+                mealRecord.peopleLiked.removeAll { $0 == userID }
+            } else {
+                mealRecord.peopleLiked.append(userID)
+            }
+            mealRecords.removeAll { $0.meal == meal }
+            mealRecords.append(mealRecord)
+            dietRecord.mealRecord = mealRecords
+            do {
+                try documentReference.setData(from: dietRecord)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func postResponse(userID: String, date: String, meal: Int, response: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(userID).collection(diet).document(date)
+        documentReference.getDocument { document, error in
+            guard let document = document,
+                document.exists,
+                var dietRecord = try? document.data(as: FoodDailyInput.self)
+            else { return }
+            var mealRecords = dietRecord.mealRecord
+            guard var mealRecord = mealRecords.first(where: { $0.meal == meal }) else { return }
+            let response = Response(person: userID, response: response)
+            mealRecord.response.append(response)
+            mealRecords.removeAll { $0.meal == meal }
+            mealRecords.append(mealRecord)
+            dietRecord.mealRecord = mealRecords
+            do {
+                try documentReference.setData(from: dietRecord)
+                completion(.success(()))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    func fetchUserData(userID: String, completion: @escaping (Result<User, Error>) -> Void) {
+        database.collection(user).document(userID).getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    let user = try? document.data(as: User.self)
+                else { return }
+                completion(.success(user))
+            }
+        }
+    }
+    
+    func changeRequest(isRequest: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(followID)
+        documentReference.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    var user = try? document.data(as: User.self)
+                else { return }
+                if isRequest {
+                    user.request.removeAll { $0 == userID }
+                } else {
+                    user.request.append(userID)
+                }
+                do {
+                    try documentReference.setData(from: user)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func changeFollow(isFollowing: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let followDocumentRef = database.collection(user).document(followID)
+        followDocumentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    var user = try? document.data(as: User.self)
+                else { return }
+                if isFollowing {
+                    user.followers.removeAll { $0 == userID }
+                } else {
+                    user.following.append(userID)
+                }
+                do {
+                    try followDocumentRef.setData(from: user)
+                    self.changeSelf(isFollowing: isFollowing, followID: followID) { result in
+                        switch result {
+                        case .success:
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    private func changeSelf(isFollowing: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let selfDocumentRef = database.collection(user).document(userID)
+        selfDocumentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    var user = try? document.data(as: User.self)
+                else { return }
+                if isFollowing {
+                    user.following.removeAll { $0 == followID }
+                } else {
+                    user.followers.append(followID)
+                    user.request.removeAll { $0 == followID }
+                }
+                do {
+                    try selfDocumentRef.setData(from: user)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func fetchRequest(completion: @escaping (Result<[User], Error>) -> Void) {
+        let documentRef = database.collection(user).document(userID)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    let userData = try? document.data(as: User.self)
+                else { return }
+                var users: [User] = []
+                let downloadGroup = DispatchGroup()
+                var blocks: [DispatchWorkItem] = []
+                for followerID in userData.request {
+                    downloadGroup.enter()
+                    let block = DispatchWorkItem(flags: .inheritQoS) {
+                        database.collection(user).document(followerID).getDocument { document, error in
+                            if let error = error {
+                                completion(.failure(error))
+                                downloadGroup.leave()
+                            } else {
+                                guard let document = document,
+                                    document.exists,
+                                    let user = try? document.data(as: User.self)
+                                else { return }
+                                users.append(user)
+                                downloadGroup.leave()
+                            }
+                        }
+                    }
+                    blocks.append(block)
+                    DispatchQueue.main.async(execute: block)
+                }
+                downloadGroup.notify(queue: DispatchQueue.main) {
+                    completion(.success(users))
+                }
+            }
+        }
+    }
+}
+
+extension ProfileProvider {
+    func cancelRequest(followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(userID)
+        documentReference.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    var user = try? document.data(as: User.self)
+                else { return }
+                user.request.removeAll { $0 == followID }
+                do {
+                    try documentReference.setData(from: user)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
             }
         }
     }

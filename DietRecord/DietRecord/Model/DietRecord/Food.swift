@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
 struct Food: Codable {
     let qty: String
@@ -39,13 +40,23 @@ struct NutrientContent: Codable {
     var potassium: String
 }
 struct MealRecord: Codable {
+    let userID: String
     let meal: Int
+    let date: String
     let foods: [Food]
     let imageURL: String
     let comment: String
+    var isShared: Bool
+    let createdTime: Date
+    var peopleLiked: [String]
+    var response: [Response]
 }
 
 struct FoodDailyInput: Codable {
-    let date: String
     var mealRecord: [MealRecord]
+}
+
+struct Response: Codable {
+    let person: String
+    let response: String
 }

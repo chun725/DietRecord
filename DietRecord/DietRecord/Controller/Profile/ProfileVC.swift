@@ -9,11 +9,25 @@ import UIKit
 
 class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var photoButton: UIButton!
+    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var postLabel: UILabel!
+    @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
     
-    var mealRecords: [MealRecord] = [] {
+    var selfMealRecords: [MealRecord] = [] {
         didSet {
-            print(mealRecords)
             photoCollectionView.reloadData()
+            postLabel.text = String(selfMealRecords.count)
+        }
+    }
+    
+    var followingPosts: [MealRecord] = [] {
+        didSet {
+            homeTableView.reloadData()
         }
     }
     
@@ -25,53 +39,107 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         photoCollectionView.collectionViewLayout = configureLayout()
+        homeTableView.dataSource = self
+        homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
+        userImageView.layer.cornerRadius = 25
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchDietRecord()
+        fetchFollowingPost()
+        fetchSelfDietRecord()
+        fetchSelfData()
     }
     
-    func fetchDietRecord() {
+    func fetchSelfDietRecord() {
         profileProvider.fetchImage { result in
             switch result {
             case .success(let dietRecords):
                 var mealDatas: [MealRecord] = []
                 for dietRecord in dietRecords {
                     let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }
-                    for mealRecord in mealRecords {
-                        mealDatas.append(mealRecord)
-                    }
+                    mealDatas.append(contentsOf: mealRecords)
                 }
-                self.mealRecords = mealDatas.reversed()
+                self.selfMealRecords = mealDatas.reversed()
             case .failure(let error):
                 print("Error Info: \(error).")
             }
         }
     }
     
+    func fetchFollowingPost() {
+        profileProvider.fetchFollowingPost { result in
+            switch result {
+            case .success(let mealRecords):
+                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
+    }
+    
+    func fetchSelfData() {
+        profileProvider.fetchUserData(userID: userID) { result in
+            switch result {
+            case .success(let user):
+                self.followersLabel.text = String(user.followers.count)
+                self.followingLabel.text = String(user.following.count)
+                self.usernameLabel.text = user.username
+                self.userImageView.loadImage(user.userImageURL)
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
+    }
+    
+    @IBAction func changePage(sender: UIButton) {
+        if sender == homeButton {
+            self.photoCollectionView.isHidden = true
+            self.homeTableView.isHidden = false
+        } else {
+            self.photoCollectionView.isHidden = false
+            self.homeTableView.isHidden = true
+        }
+    }
+    
+    @IBAction func goToCheckRequestPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
+            as? CheckRequestVC {
+            self.navigationController?.pushViewController(checkRequestPage, animated: false)
+        }
+    }
+    
+    @IBAction func goToAddFollowingPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let addFollowingPage = storyboard.instantiateViewController(withIdentifier: "\(AddFollowingVC.self)")
+            as? AddFollowingVC {
+            self.navigationController?.pushViewController(addFollowingPage, animated: false)
+        }
+    }
+    
     // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mealRecords.count
+        selfMealRecords.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ProfileCell.reuseIdentifier, for: indexPath) as? ProfileCell
         else { fatalError("Could not create the profile cell.") }
-        let mealRecord = mealRecords[indexPath.row]
+        let mealRecord = selfMealRecords[indexPath.row]
         cell.layoutCell(imageURL: mealRecord.imageURL)
         return cell
     }
     
     // MARK: - CollectionViewDelegate -
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mealRecord = mealRecords[indexPath.row]
+        let mealRecord = selfMealRecords[indexPath.row]
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
-            self.present(profileDetailPage, animated: false)
+            self.navigationController?.pushViewController(profileDetailPage, animated: false)
         }
     }
 }
@@ -91,5 +159,22 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         return layout
+    }
+}
+
+extension ProfileVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        followingPosts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: ProfileDetailCell.reuseIdentifier, for: indexPath) as? ProfileDetailCell
+        else { fatalError("Could not create the profile detail cell.") }
+        let mealRecord = self.followingPosts[indexPath.row]
+        cell.haveResponses = false
+        cell.controller = self
+        cell.layoutCell(mealRecord: mealRecord)
+        return cell
     }
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import FirebaseFirestore
 
 class DietInputVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodDailyTableView: UITableView!
@@ -125,7 +126,17 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         default:
             index = 3
         }
-        let mealRecord = MealRecord(meal: index, foods: foods, imageURL: imageURL, comment: comment)
+        let mealRecord = MealRecord(
+            userID: userID,
+            meal: index,
+            date: dateFormatter.string(from: date),
+            foods: foods,
+            imageURL: imageURL,
+            comment: comment,
+            isShared: true,
+            createdTime: Date(),
+            peopleLiked: [],
+            response: [])
         dietRecordProvider.createFoodDaily(
             date: dateFormatter.string(from: date),
             mealRecord: mealRecord) { result in

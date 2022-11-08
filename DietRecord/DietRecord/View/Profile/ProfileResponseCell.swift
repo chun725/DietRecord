@@ -12,8 +12,19 @@ class ProfileResponseCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     
+    let profileProvider = ProfileProvider()
+    
     func layoutCell(response: Response) {
         self.backgroundColor = .clear
         responseLabel.text = response.response
+        profileProvider.fetchUserData(userID: response.person) { result in
+            switch result {
+            case .success(let user):
+                self.usernameLabel.text = user.username
+                self.userImageView.loadImage(user.userImageURL)
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
     }
 }

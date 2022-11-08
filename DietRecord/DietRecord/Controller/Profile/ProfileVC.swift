@@ -50,9 +50,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 var mealDatas: [MealRecord] = []
                 for dietRecord in dietRecords {
                     let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }
-                    for mealRecord in mealRecords {
-                        mealDatas.append(mealRecord)
-                    }
+                    mealDatas.append(contentsOf: mealRecords)
                 }
                 self.selfMealRecords = mealDatas.reversed()
             case .failure(let error):
@@ -82,6 +80,22 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
+    @IBAction func goToCheckRequestPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
+            as? CheckRequestVC {
+            self.navigationController?.pushViewController(checkRequestPage, animated: false)
+        }
+    }
+    
+    @IBAction func goToAddFollowingPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let addFollowingPage = storyboard.instantiateViewController(withIdentifier: "\(AddFollowingVC.self)")
+            as? AddFollowingVC {
+            self.navigationController?.pushViewController(addFollowingPage, animated: false)
+        }
+    }
+    
     // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         selfMealRecords.count
@@ -103,7 +117,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
-            self.present(profileDetailPage, animated: false)
+            self.navigationController?.pushViewController(profileDetailPage, animated: false)
         }
     }
 }
@@ -137,7 +151,8 @@ extension ProfileVC: UITableViewDataSource {
         else { fatalError("Could not create the profile detail cell.") }
         let mealRecord = self.followingPosts[indexPath.row]
         cell.haveResponses = false
-        cell.layoutCell(username: mealRecord.userID, userImage: "jdcd", mealRecord: mealRecord)
+        cell.controller = self
+        cell.layoutCell(mealRecord: mealRecord)
         return cell
     }
 }

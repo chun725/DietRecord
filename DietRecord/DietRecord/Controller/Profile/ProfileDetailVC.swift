@@ -18,10 +18,16 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         profileDetailTableView.dataSource = self
         profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func goBackProfilePage(_ sender: Any) {
-        self.dismiss(animated: false)
+        self.navigationController?.popViewController(animated: false)
     }
     
     @IBAction func createResponse(_ sender: Any) {
@@ -59,7 +65,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
                 withIdentifier: ProfileDetailCell.reuseIdentifier, for: indexPath) as? ProfileDetailCell,
                 let mealRecord = mealRecord
             else { fatalError("Could not create the profile detail cell.") }
-            cell.layoutCell(username: "0000", userImage: "eeee", mealRecord: mealRecord)
+            cell.layoutCell(mealRecord: mealRecord)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(

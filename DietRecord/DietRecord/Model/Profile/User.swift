@@ -8,6 +8,10 @@
 import Foundation
 
 struct User: Codable {
-    let user: String
-    let following: [String]
+    let userID: String
+    var following: [String]
+    var followers: [String]
+    var request: [String]
+    let userImageURL: String
+    let username: String
 }

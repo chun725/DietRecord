@@ -12,10 +12,16 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var homeTableView: UITableView!
     @IBOutlet weak var photoButton: UIButton!
     @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var postLabel: UILabel!
+    @IBOutlet weak var followersLabel: UILabel!
+    @IBOutlet weak var followingLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var usernameLabel: UILabel!
     
     var selfMealRecords: [MealRecord] = [] {
         didSet {
             photoCollectionView.reloadData()
+            postLabel.text = String(selfMealRecords.count)
         }
     }
     
@@ -35,12 +41,14 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         photoCollectionView.collectionViewLayout = configureLayout()
         homeTableView.dataSource = self
         homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
+        userImageView.layer.cornerRadius = 25
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFollowingPost()
         fetchSelfDietRecord()
+        fetchSelfData()
     }
     
     func fetchSelfDietRecord() {
@@ -64,6 +72,20 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             switch result {
             case .success(let mealRecords):
                 self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }
+            case .failure(let error):
+                print("Error Info: \(error).")
+            }
+        }
+    }
+    
+    func fetchSelfData() {
+        profileProvider.fetchUserData(userID: userID) { result in
+            switch result {
+            case .success(let user):
+                self.followersLabel.text = String(user.followers.count)
+                self.followingLabel.text = String(user.following.count)
+                self.usernameLabel.text = user.username
+                self.userImageView.loadImage(user.userImageURL)
             case .failure(let error):
                 print("Error Info: \(error).")
             }

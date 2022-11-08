@@ -25,6 +25,7 @@ class ProfileDetailCell: UITableViewCell {
     
     func layoutCell(mealRecord: MealRecord) {
         self.backgroundColor = .clear
+        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         profileProvider.fetchUserData(userID: mealRecord.userID) { result in
             switch result {
             case .success(let user):

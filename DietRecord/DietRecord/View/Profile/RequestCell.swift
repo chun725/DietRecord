@@ -19,6 +19,7 @@ class RequestCell: UITableViewCell {
         self.backgroundColor = .clear
         usernameLabel.text = user.username
         userImageView.loadImage(user.userImageURL)
+        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         self.user = user
     }
     

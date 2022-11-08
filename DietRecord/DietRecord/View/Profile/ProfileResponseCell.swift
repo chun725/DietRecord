@@ -15,6 +15,7 @@ class ProfileResponseCell: UITableViewCell {
     let profileProvider = ProfileProvider()
     
     func layoutCell(response: Response) {
+        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         self.backgroundColor = .clear
         responseLabel.text = response.response
         profileProvider.fetchUserData(userID: response.person) { result in

@@ -20,6 +20,10 @@ class FoodDailyCell: UITableViewCell {
     @IBOutlet weak var datePicker: UIDatePicker!
     
     func layoutCell(foods: [Food]) {
+        let subviews = foodStackView.subviews
+        for subview in subviews {
+            subview.removeFromSuperview()
+        }
         for food in foods {
             let foodView = FoodBaseView(frame: .zero)
             foodStackView.addArrangedSubview(foodView)

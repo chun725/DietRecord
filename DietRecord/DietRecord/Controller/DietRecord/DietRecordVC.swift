@@ -42,6 +42,11 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         changeDate()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        dietRecordTableView.reloadData()
+    }
+    
     @objc func goToDietInputPage(sender: UIButton) {
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
@@ -79,23 +84,24 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         if indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CaloriesPieChartCell.reuseIdentifier,
-                for: indexPath) as? CaloriesPieChartCell
+                for: indexPath) as? CaloriesPieChartCell,
+                let userData = userData
             else { fatalError("Could not create calories pie chart cell.") }
             let calories = calculateMacroNutrition(foods: totalFoods, nutrient: .calories)
             let carbs = calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate)
             let protein = calculateMacroNutrition(foods: totalFoods, nutrient: .protein)
             let fat = calculateMacroNutrition(foods: totalFoods, nutrient: .lipid)
             cell.layoutCell(
-                calories: "\(calories.format())/2100 kcal",
-                carbs: "\(carbs.format())/89.4 g",
-                protein: "\(protein.format())/89.4 g",
-                fat: "\(fat.format())/89.4 g")
+                calories: "\(calories.format())/\(userData.goal[0]) kcal",
+                carbs: "\(carbs.format())/\(userData.goal[1]) g",
+                protein: "\(protein.format())/\(userData.goal[2]) g",
+                fat: "\(fat.format())/\(userData.goal[3]) g")
             cell.setPieChart(
                 breakfast: calculateMacroNutrition(foods: breakfastMeal?.foods, nutrient: .calories),
                 lunch: calculateMacroNutrition(foods: lunchMeal?.foods, nutrient: .calories),
                 dinner: calculateMacroNutrition(foods: dinnerMeal?.foods, nutrient: .calories),
                 others: calculateMacroNutrition(foods: othersMeal?.foods, nutrient: .calories),
-                goal: 2100)
+                goal: userData.goal[0].transformToDouble())
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(

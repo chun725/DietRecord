@@ -37,6 +37,9 @@ class GoalVC: UIViewController {
         let storyboard = UIStoryboard(name: report, bundle: nil)
         if let setupGoalPage = storyboard.instantiateViewController(withIdentifier: "\(SetupGoalVC.self)")
             as? SetupGoalVC {
+            if sender == inputButton {
+                setupGoalPage.isAutomatic = false
+            }
             setupGoalPage.closure = { [weak self] goal in
                 self?.caloriesLabel.text = goal[0].transform(unit: kcalUnit)
                 self?.carbsLabel.text = goal[1].transform(unit: gUnit)

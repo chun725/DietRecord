@@ -8,7 +8,7 @@
 import UIKit
 import SwiftUI
 
-class ReportGoalCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
+class ReportAutomaticGoalCell: UITableViewCell, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     @IBOutlet weak var genderTextField: UITextField!
     @IBOutlet weak var genderButton: UIButton!
     @IBOutlet weak var ageTextField: UITextField!

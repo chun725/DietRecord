@@ -9,14 +9,20 @@ import UIKit
 
 class SetupGoalVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var selfInfoTableView: UITableView!
+    @IBOutlet weak var titleLabel: UILabel!
     
     let reportProvider = ReportProvider()
+    var isAutomatic = true
     var personalInfo: PersonalInfo?
+    var goal: [String] = ["", "", "", ""]
     var closure: (([String]) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         selfInfoTableView.dataSource = self
+        if !isAutomatic {
+            titleLabel.text = "請輸入營養素目標"
+        }
     }
     
     @IBAction func goBack(_ sender: Any) {
@@ -28,39 +34,58 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ReportGoalCell.reuseIdentifier, for: indexPath) as? ReportGoalCell
-        else { fatalError("Could not create the report goal cell.") }
-        cell.controller = self
-        cell.layoutCell()
-        return cell
+        if isAutomatic {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: ReportAutomaticGoalCell.reuseIdentifier, for: indexPath) as? ReportAutomaticGoalCell
+            else { fatalError("Could not create the report automatic goal cell.") }
+            cell.controller = self
+            cell.layoutCell()
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: ReportSetGoalCell.reuseIdentifier, for: indexPath) as? ReportSetGoalCell
+            else { fatalError("Could not create the report set goal cell.") }
+            cell.controller = self
+            cell.layoutCell()
+            return cell
+        }
     }
     
     @IBAction func saveInfo(_ sender: Any) {
-        guard let personalInfo = personalInfo,
-            !personalInfo.gender.isEmpty,
-            !personalInfo.age.isEmpty,
-            !personalInfo.height.isEmpty,
-            !personalInfo.weight.isEmpty,
-            !personalInfo.activityLevel.isEmpty,
-            !personalInfo.dietGoal.isEmpty,
-            !personalInfo.dietPlan.isEmpty
-        else {
-            let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(action)
-            present(alert, animated: false)
-            return
+        if isAutomatic {
+            guard let personalInfo = personalInfo,
+                !personalInfo.gender.isEmpty,
+                !personalInfo.age.isEmpty,
+                !personalInfo.height.isEmpty,
+                !personalInfo.weight.isEmpty,
+                !personalInfo.activityLevel.isEmpty,
+                !personalInfo.dietGoal.isEmpty,
+                !personalInfo.dietPlan.isEmpty
+            else {
+                let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(action)
+                present(alert, animated: false)
+                return
+            }
+            self.goal = calculateGoal(personalInfo: personalInfo)
+        } else {
+            guard goal.first(where: { $0.isEmpty }) == nil else {
+                let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
+                let action = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(action)
+                present(alert, animated: false)
+                return
+            }
         }
-        self.closure?(calculateGoal(personalInfo: personalInfo))
-        reportProvider.changeGoal(goal: calculateGoal(personalInfo: personalInfo)) { result in
+        self.closure?(goal)
+        reportProvider.changeGoal(goal: goal) { result in
             switch result {
             case .success:
                 self.dismiss(animated: false)
             case .failure(let error):
                 print("Error Info: \(error).")
             }
-            
         }
     }
     

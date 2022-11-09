@@ -14,4 +14,5 @@ struct User: Codable {
     var request: [String]
     let userImageURL: String
     let username: String
+    var goal: [String]
 }

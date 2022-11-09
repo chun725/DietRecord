@@ -11,7 +11,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var reportTableView: UITableView!
     
-    let dietRecordProvider = DietRecordProvider()
+    let reportProvider = ReportProvider()
     var weeklyDietRecord: [FoodDailyInput]? {
         didSet {
             reportTableView.reloadData()
@@ -27,7 +27,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func fetchWeeklyDiet() {
-        dietRecordProvider.fetchWeeklyDietRecord(date: datePicker.date) { result in
+        reportProvider.fetchWeeklyDietRecord(date: datePicker.date) { result in
             switch result {
             case .success(let data):
                 let weeklyDietRecordData = data as? [FoodDailyInput]
@@ -35,6 +35,14 @@ class ReportVC: UIViewController, UITableViewDataSource {
             case .failure(let error):
                 print("Error Info: \(error).")
             }
+        }
+    }
+    
+    @IBAction func goToGoalPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: report, bundle: nil)
+        if let goalPage = storyboard.instantiateViewController(withIdentifier: "\(GoalVC.self)")
+            as? GoalVC {
+            present(goalPage, animated: false)
         }
     }
     

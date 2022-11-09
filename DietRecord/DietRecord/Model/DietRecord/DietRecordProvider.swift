@@ -6,7 +6,6 @@
 //
 
 import FirebaseStorage
-import UIKit
 
 typealias FoodSearchResults = (Result<[FoodIngredient], Error>) -> Void
 typealias UploadImageURL = (Result<URL, Error>) -> Void
@@ -87,45 +86,6 @@ class DietRecordProvider {
                 }
                 completion(.success(dietRecordData))
             }
-        }
-    }
-    
-    // MARK: - Fetch Diet Weekly Record -
-    func fetchWeeklyDietRecord(date: Date, completion: @escaping FoodDailyResult) {
-        var dates: [String] = []
-        for index in 0..<7 {
-            let lastDate = date.advanced(by: -60 * 60 * 24 * Double(index))
-            dates.append(dateFormatter.string(from: lastDate))
-        }
-        var weeklyDietRecord: [FoodDailyInput] = []
-        let downloadGroup = DispatchGroup()
-        var blocks: [DispatchWorkItem] = []
-        for date in dates {
-            downloadGroup.enter()
-            let block = DispatchWorkItem(flags: .inheritQoS) {
-                let documentReference = database.collection(user).document(userID).collection(diet).document(date)
-                documentReference.getDocument { document, error in
-                    if let error = error {
-                        completion(.failure(error))
-                        downloadGroup.leave()
-                    } else {
-                        guard let document = document,
-                            document.exists,
-                            let dietRecordData = try? document.data(as: FoodDailyInput.self)
-                        else {
-                            downloadGroup.leave()
-                            return }
-                        weeklyDietRecord.append(dietRecordData)
-                        downloadGroup.leave()
-                    }
-                }
-            }
-            blocks.append(block)
-            DispatchQueue.main.async(execute: block)
-        }
-        
-        downloadGroup.notify(queue: DispatchQueue.main) {
-            completion(.success(weeklyDietRecord))
         }
     }
 }

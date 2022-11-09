@@ -26,6 +26,11 @@ class ReportVC: UIViewController, UITableViewDataSource {
         reportTableView.registerCellWithNib(identifier: ReportDetailCell.reuseIdentifier, bundle: nil)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reportTableView.reloadData()
+    }
+    
     @objc func fetchWeeklyDiet() {
         reportProvider.fetchWeeklyDietRecord(date: datePicker.date) { result in
             switch result {
@@ -42,7 +47,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
         let storyboard = UIStoryboard(name: report, bundle: nil)
         if let goalPage = storyboard.instantiateViewController(withIdentifier: "\(GoalVC.self)")
             as? GoalVC {
-            present(goalPage, animated: false)
+            self.navigationController?.pushViewController(goalPage, animated: false)
         }
     }
     
@@ -53,30 +58,19 @@ class ReportVC: UIViewController, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: ReportBarChartCell.reuseIdentifier, for: indexPath) as? ReportBarChartCell
+                withIdentifier: ReportBarChartCell.reuseIdentifier, for: indexPath) as? ReportBarChartCell,
+                let goal = userData?.goal[0]
             else { fatalError("Could not create report bar chart cell.") }
             let date = dateFormatter.string(from: datePicker.date)
-            cell.setBarChart(date: date, foodDailyInputs: weeklyDietRecord, goal: 1800)
+            cell.setBarChart(date: date, foodDailyInputs: weeklyDietRecord, goal: goal.transformToDouble())
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: ReportDetailCell.reuseIdentifier, for: indexPath) as? ReportDetailCell
+                withIdentifier: ReportDetailCell.reuseIdentifier, for: indexPath) as? ReportDetailCell,
+                let userData = userData
             else { fatalError("Could not create report detail cell.") }
             cell.layoutCell(foodDailyInputs: weeklyDietRecord)
-            let goal = NutrientContent(
-                calories: "2100",
-                water: "100",
-                protein: "100",
-                carbohydrate: "100",
-                dietaryFiber: "100",
-                sugar: "100",
-                lipid: "100",
-                saturatedLipid: "-",
-                polyunsaturatedLipid: "-",
-                monounsaturatedLipid: "-",
-                cholesterol: "-",
-                sodium: "-",
-                potassium: "-")
+            let goal = userData.goal
             cell.layoutOfGoal(goal: goal)
             return cell
         }

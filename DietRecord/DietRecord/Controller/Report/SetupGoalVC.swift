@@ -26,7 +26,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.dismiss(animated: false)
+        self.navigationController?.popViewController(animated: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +82,16 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         reportProvider.changeGoal(goal: goal) { result in
             switch result {
             case .success:
-                self.dismiss(animated: false)
+                let profileProvider = ProfileProvider()
+                profileProvider.fetchUserData(userID: userID) { result in
+                    switch result {
+                    case .success(let user):
+                        userData = user
+                        self.navigationController?.popViewController(animated: false)
+                    case .failure(let error):
+                        print("Error Info: \(error).")
+                    }
+                }
             case .failure(let error):
                 print("Error Info: \(error).")
             }

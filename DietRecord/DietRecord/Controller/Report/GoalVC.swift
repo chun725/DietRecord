@@ -46,20 +46,11 @@ class GoalVC: UIViewController {
                 self?.proteinLabel.text = goal[2].transform(unit: gUnit)
                 self?.fatLabel.text = goal[3].transform(unit: gUnit)
             }
-            present(setupGoalPage, animated: false)
+            self.navigationController?.pushViewController(setupGoalPage, animated: false)
         }
     }
     
     @IBAction func goBack(_ sender: Any) {
-        let profileProvider = ProfileProvider()
-        profileProvider.fetchUserData(userID: userID) { result in
-            switch result {
-            case .success(let user):
-                userData = user
-                self.dismiss(animated: false)
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
-        }
+        self.navigationController?.popViewController(animated: false)
     }
 }

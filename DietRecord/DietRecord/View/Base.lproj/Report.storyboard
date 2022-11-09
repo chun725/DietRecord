@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="16Q-ZS-Rt7">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5ib-C3-W4m">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Report-->
+        <!--ReportVC-->
         <scene sceneID="rUk-1d-HUq">
             <objects>
                 <viewController id="16Q-ZS-Rt7" customClass="ReportVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -165,7 +165,7 @@
                             <constraint firstItem="trT-Ck-G9r" firstAttribute="top" secondItem="Gj0-Y6-zv6" secondAttribute="bottom" id="zhr-iB-sCT"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Report" id="Zbd-gP-pry"/>
+                    <navigationItem key="navigationItem" id="3cg-w4-j7U"/>
                     <connections>
                         <outlet property="datePicker" destination="KDi-Di-vTa" id="wbF-TB-68s"/>
                         <outlet property="reportTableView" destination="trT-Ck-G9r" id="7Zb-Aq-lFh"/>
@@ -173,7 +173,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YE6-64-saK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="886.95652173913049" y="995.75892857142856"/>
+            <point key="canvasLocation" x="1797.1014492753625" y="995.75892857142856"/>
         </scene>
         <!--GoalVC-->
         <scene sceneID="4oa-DE-wLk">
@@ -372,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VBd-hy-Y7s" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1715.9420289855075" y="995.75892857142856"/>
+            <point key="canvasLocation" x="2626.0869565217395" y="995.75892857142856"/>
         </scene>
         <!--Setup GoalVC-->
         <scene sceneID="M7R-qb-eJY">
@@ -855,7 +855,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MkN-hO-kKz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2482.608695652174" y="995.75892857142856"/>
+            <point key="canvasLocation" x="3392.753623188406" y="995.75892857142856"/>
+        </scene>
+        <!--Report-->
+        <scene sceneID="fFb-7i-yaD">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="5ib-C3-W4m" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Report" id="Zbd-gP-pry"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="17z-gY-pP6">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="16Q-ZS-Rt7" kind="relationship" relationship="rootViewController" id="AzC-t1-HIt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bqO-0d-gG4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="886.95652173913049" y="995.75892857142856"/>
         </scene>
     </scenes>
     <resources>

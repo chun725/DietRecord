@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarController: UITabBarController {
+class TabBarController: UITabBarController, UITabBarControllerDelegate {
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
@@ -18,6 +18,7 @@ class TabBarController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.delegate = self
         fetchSelfData()
     }
     
@@ -41,6 +42,20 @@ class TabBarController: UITabBarController {
             case .failure(let error):
                 print("Error Info: \(error).")
             }
+        }
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        guard let viewControllers = tabBarController.viewControllers else {
+            return false }
+        if viewController == viewControllers[3] || viewController == viewControllers[2] {
+            if userData == nil {
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return true
         }
     }
 }

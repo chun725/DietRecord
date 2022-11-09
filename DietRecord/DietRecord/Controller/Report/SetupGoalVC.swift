@@ -68,7 +68,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                 present(alert, animated: false)
                 return
             }
-            self.goal = calculateGoal(personalInfo: personalInfo)
+            self.goal = calculateTDEE(personalInfo: personalInfo)
         } else {
             guard goal.first(where: { $0.isEmpty }) == nil else {
                 let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
@@ -89,7 +89,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    func calculateGoal(personalInfo: PersonalInfo) -> [String] {
+    func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
         var bmr: Double = 0
         var tdee: Double = 0
         var finalTDEE: Double = 0
@@ -124,7 +124,10 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         default:
             finalTDEE = tdee
         }
-        
+        return calculateProportion(tdee: finalTDEE, personalInfo: personalInfo)
+    }
+    
+    func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
         var proportion: [Double] = [55, 20, 25]
         switch personalInfo.dietPlan {
         case DietPlan.general.rawValue:
@@ -140,10 +143,10 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
         
         let goal = [
-            finalTDEE.format(),
-            (finalTDEE * proportion[0] / 100 / 4).format(),
-            (finalTDEE * proportion[1] / 100 / 4).format(),
-            (finalTDEE * proportion[2] / 100 / 9).format()
+            tdee.format(),
+            (tdee * proportion[0] / 100 / 4).format(),
+            (tdee * proportion[1] / 100 / 4).format(),
+            (tdee * proportion[2] / 100 / 9).format()
         ]
         return goal
     }

@@ -56,6 +56,9 @@ class ReportAutomaticGoalCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
         ageTextField.inputView = agePickerView
         heightTextField.inputView = heightPickerView
         weightTextField.inputView = weightPickerView
+        agePickerView.selectRow(25, inComponent: 0, animated: false)
+        heightPickerView.selectRow(160, inComponent: 0, animated: false)
+        weightPickerView.selectRow(50, inComponent: 0, animated: false)
         buttonAddTargent(buttons: [genderButton, activityButton, dietGoalButton, dietPlanButton])
         textFieldAddTarget(textFields: [ageTextField, heightTextField, weightTextField])
     }

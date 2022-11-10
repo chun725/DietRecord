@@ -17,4 +17,12 @@ extension UIView {
         objectView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         objectView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
+    func setShadowAndRadius(radius: Double) {
+        self.layer.cornerRadius = radius
+        self.layer.shadowOffset = CGSize(width: 5, height: 5)
+        self.layer.shadowRadius = 5
+        self.layer.shadowColor = UIColor.drDarkGray.cgColor
+        self.layer.shadowOpacity = 0.5
+    }
 }

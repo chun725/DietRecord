@@ -54,7 +54,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
-            foodNutritionPage.food = foodSearchResults[sender.tag]
+            foodNutritionPage.newFood = foodSearchResults[sender.tag]
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
             }

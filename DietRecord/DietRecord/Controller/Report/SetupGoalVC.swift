@@ -62,19 +62,13 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                 !personalInfo.dietGoal.isEmpty,
                 !personalInfo.dietPlan.isEmpty
             else {
-                let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default)
-                alert.addAction(action)
-                present(alert, animated: false)
+                self.presentInputAlert()
                 return
             }
             self.goal = calculateTDEE(personalInfo: personalInfo)
         } else {
             guard goal.first(where: { $0.isEmpty }) == nil else {
-                let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
-                let action = UIAlertAction(title: "OK", style: .default)
-                alert.addAction(action)
-                present(alert, animated: false)
+                self.presentInputAlert()
                 return
             }
         }

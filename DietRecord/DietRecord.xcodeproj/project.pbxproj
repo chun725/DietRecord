@@ -70,6 +70,11 @@
 		349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D95291A215D002EB186 /* CheckRequestVC.swift */; };
 		349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D97291A22CF002EB186 /* RequestCell.swift */; };
 		34C00058291C8EAC00670CA4 /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */; };
+		34C0005C291C901600670CA4 /* FoodNutritionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0005A291C901600670CA4 /* FoodNutritionCell.swift */; };
+		34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C0005B291C901600670CA4 /* FoodNutritionCell.xib */; };
+		34C0005F291C958800670CA4 /* CommonNameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0005E291C958800670CA4 /* CommonNameCell.swift */; };
+		34C00061291CA43600670CA4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00060291CA43600670CA4 /* UITextField+Extension.swift */; };
+		34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00062291CAB1000670CA4 /* UIViewController+Extension.swift */; };
 		34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740729135742009F9264 /* TotalWaterCell.swift */; };
 		34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */; };
 		34CF740D29135D02009F9264 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740C29135D02009F9264 /* Water.swift */; };
@@ -155,6 +160,11 @@
 		349B8D95291A215D002EB186 /* CheckRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRequestVC.swift; sourceTree = "<group>"; };
 		349B8D97291A22CF002EB186 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
+		34C0005A291C901600670CA4 /* FoodNutritionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutritionCell.swift; sourceTree = "<group>"; };
+		34C0005B291C901600670CA4 /* FoodNutritionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodNutritionCell.xib; sourceTree = "<group>"; };
+		34C0005E291C958800670CA4 /* CommonNameCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNameCell.swift; sourceTree = "<group>"; };
+		34C00060291CA43600670CA4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
+		34C00062291CAB1000670CA4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		34CF740729135742009F9264 /* TotalWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterCell.swift; sourceTree = "<group>"; };
 		34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRecordProvider.swift; sourceTree = "<group>"; };
 		34CF740C29135D02009F9264 /* Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
@@ -199,6 +209,7 @@
 		34270E79290E977E00D5AFFD /* DietRecord */ = {
 			isa = PBXGroup;
 			children = (
+				34C00059291C8FE300670CA4 /* FoodNutritionCell */,
 				34270E98290FA7B900D5AFFD /* FoodSearchResultCell */,
 				34270E8F290F80B700D5AFFD /* FoodDailyCell */,
 				34270E8E290F80A000D5AFFD /* FoodBaseView */,
@@ -360,11 +371,13 @@
 			isa = PBXGroup;
 			children = (
 				3464294C290D16E00070B425 /* Double+Extension.swift */,
+				34C00060291CA43600670CA4 /* UITextField+Extension.swift */,
 				34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */,
 				34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */,
 				34270EA2290FCED100D5AFFD /* String+Extension.swift */,
 				34270E94290F965800D5AFFD /* UIView+Extension.swift */,
 				3464294F290D1EA20070B425 /* UIColor+Extension.swift */,
+				34C00062291CAB1000670CA4 /* UIViewController+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -455,6 +468,16 @@
 				349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */,
 			);
 			path = ProfileDetailCell;
+			sourceTree = "<group>";
+		};
+		34C00059291C8FE300670CA4 /* FoodNutritionCell */ = {
+			isa = PBXGroup;
+			children = (
+				34C0005E291C958800670CA4 /* CommonNameCell.swift */,
+				34C0005A291C901600670CA4 /* FoodNutritionCell.swift */,
+				34C0005B291C901600670CA4 /* FoodNutritionCell.xib */,
+			);
+			path = FoodNutritionCell;
 			sourceTree = "<group>";
 		};
 		34CF74062913572A009F9264 /* Water */ = {
@@ -624,6 +647,7 @@
 				34270E64290D526500D5AFFD /* DietRecord.storyboard in Resources */,
 				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
+				34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */,
 				34270E93290F810D00D5AFFD /* FoodDailyCell.xib in Resources */,
 				3422702629110680000B4A58 /* FoodIngredient.json in Resources */,
 				3469169229127C430021985F /* ReportDetailCell.xib in Resources */,
@@ -716,6 +740,7 @@
 				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
 				3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */,
+				34C0005C291C901600670CA4 /* FoodNutritionCell.swift in Sources */,
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,
 				34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */,
@@ -723,6 +748,7 @@
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
+				34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */,
 				34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */,
 				34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
@@ -760,6 +786,8 @@
 				34CF7410291365DF009F9264 /* WaterInputVC.swift in Sources */,
 				34642932290CF79A0070B425 /* AppDelegate.swift in Sources */,
 				342270242911063A000B4A58 /* TabBarController.swift in Sources */,
+				34C00061291CA43600670CA4 /* UITextField+Extension.swift in Sources */,
+				34C0005F291C958800670CA4 /* CommonNameCell.swift in Sources */,
 				34C00058291C8EAC00670CA4 /* JGProgressHUDWrapper.swift in Sources */,
 				34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */,
 				34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */,

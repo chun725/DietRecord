@@ -79,14 +79,24 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     // MARK: - TextFieldDelegate -
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        foodSearchResults = []
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let foodName = textField.text else { return }
-        foodListProvider.searchFoods(foodName: foodName) { result in
-            switch result {
-            case .success(let foods):
-                self.foodSearchResults = foods
-            case .failure(let error):
-                print("Error Info: \(error)")
+        if !foodName.isEmpty {
+            foodListProvider.searchFoods(foodName: foodName) { result in
+                switch result {
+                case .success(let foods):
+                    if foods.isEmpty {
+                        LKProgressHUD.showFailure(text: "無此食物")
+                    } else {
+                        self.foodSearchResults = foods
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error)")
+                }
             }
         }
     }
@@ -130,6 +140,10 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        tableView.headerView(forSection: 0)?.contentView.backgroundColor = .drLightGray
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

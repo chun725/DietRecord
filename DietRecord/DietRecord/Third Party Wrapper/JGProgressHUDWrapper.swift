@@ -20,7 +20,11 @@ class LKProgressHUD {
     let hud = JGProgressHUD(style: .dark)
     
     var view: UIView {
-        return AppDelegate.shared.window!.rootViewController!.view
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate,
+            let view = sceneDelegate.window?.rootViewController?.view
+        else { fatalError("Could not find view.") }
+        return view
     }
 
     static func show(type: HUDType) {
@@ -42,7 +46,7 @@ class LKProgressHUD {
         shared.hud.textLabel.text = text
         shared.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
         shared.hud.show(in: shared.view)
-        shared.hud.dismiss(afterDelay: 1.5)
+        shared.hud.dismiss(afterDelay: 0.5)
     }
 
     static func showFailure(text: String = "Failure") {
@@ -55,7 +59,7 @@ class LKProgressHUD {
         shared.hud.textLabel.text = text
         shared.hud.indicatorView = JGProgressHUDErrorIndicatorView()
         shared.hud.show(in: shared.view)
-        shared.hud.dismiss(afterDelay: 1.5)
+        shared.hud.dismiss(afterDelay: 0.5)
     }
 
     static func show() {

@@ -44,7 +44,7 @@ class PieChart: PieChartView {
             PieChartDataEntry(value: lunch, label: Meal.lunch.rawValue),
             PieChartDataEntry(value: dinner, label: Meal.dinner.rawValue),
             PieChartDataEntry(value: others, label: Meal.others.rawValue),
-            PieChartDataEntry(value: gap, label: Meal.gap.rawValue)
+            PieChartDataEntry(value: gap >= 0 ? gap : 0, label: Meal.gap.rawValue)
         ]
         
         let set = PieChartDataSet(entries: pieChartDataEntries, label: "")
@@ -63,7 +63,7 @@ class PieChart: PieChartView {
         
         let pieChartDataEntries: [PieChartDataEntry] = [
             PieChartDataEntry(value: water, label: Water.current.rawValue),
-            PieChartDataEntry(value: gap, label: Water.gap.rawValue)
+            PieChartDataEntry(value: gap >= 0 ? gap : 0, label: Water.gap.rawValue)
         ]
         
         let set = PieChartDataSet(entries: pieChartDataEntries, label: "")

@@ -140,13 +140,13 @@
                             <constraint firstItem="vvw-29-5Rr" firstAttribute="top" secondItem="WSz-Dd-KPS" secondAttribute="top" constant="16" id="wGq-WX-ADi"/>
                         </constraints>
                     </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="FKS-20-zOe">
-                        <rect key="frame" x="42.5" y="349.5" width="146" height="144"/>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="FKS-20-zOe">
+                        <rect key="frame" x="42.5" y="348.5" width="146" height="146.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="FKS-20-zOe" secondAttribute="height" id="k7S-L5-jwp"/>
                         </constraints>
                     </imageView>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3Le-mW-1oB">
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="3Le-mW-1oB">
                         <rect key="frame" x="207" y="348.5" width="183" height="146.5"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" name="drDarkGray"/>
@@ -237,9 +237,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Image_Placeholder" width="2999" height="1687"/>
         <image name="chevron.down.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="photo" catalog="system" width="128" height="93"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

@@ -55,7 +55,7 @@ class DietRecordCell: UITableViewCell {
                 foods: mealRecord.foods,
                 nutrient: .calories).format().transform(unit: kcalUnit)
             commentLabel.text = mealRecord.comment
-            mealImage.loadImage(mealRecord.imageURL, placeHolder: UIImage(named: "Image_Placeholder"))
+            mealImage.loadImage(mealRecord.imageURL)
         }
     }
 }

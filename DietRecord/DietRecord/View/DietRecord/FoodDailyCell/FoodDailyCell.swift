@@ -17,7 +17,8 @@ class FoodDailyCell: UITableViewCell {
     @IBOutlet weak var editFoodButton: UIButton!
     @IBOutlet weak var mealChooseButton: UIButton!
     @IBOutlet weak var changePhotoButton: UIButton!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    
+    weak var controller: DietInputVC?
     
     func layoutCell(foods: [Food]) {
         let subviews = foodStackView.subviews
@@ -40,5 +41,16 @@ class FoodDailyCell: UITableViewCell {
         foodStackViewHeightConstraint.isActive = true
         mealTextField.isUserInteractionEnabled = false
         dateTextField.isUserInteractionEnabled = false
+    }
+    
+    @IBAction func goToChooseDatePage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
+            as? ChooseDateVC {
+            chooseDatePage.closure = { [weak self] date in
+                self?.dateTextField.text = date
+            }
+            controller?.present(chooseDatePage, animated: false)
+        }
     }
 }

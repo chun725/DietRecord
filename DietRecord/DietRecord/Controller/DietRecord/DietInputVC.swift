@@ -165,8 +165,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         cell.changePhotoButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
         mealTextField = cell.mealTextField
         mealImageView = cell.mealImageView
-        datePicker = cell.datePicker
         commentTextView = cell.commentTextView
+        cell.controller = self
         return cell
     }
 }

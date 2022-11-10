@@ -37,6 +37,7 @@ let mLUnit = "mL"
 let waterReminderNotification = "WaterReminderNotification"
 var userData: User?
 var foodIngredients: [FoodIngredient]? // 資料庫
+var fullScreenSize = UIScreen.main.bounds.size
 
 func configureDateformatter() {
     dateFormatter.locale = .current

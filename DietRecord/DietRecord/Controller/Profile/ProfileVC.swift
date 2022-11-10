@@ -31,7 +31,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
-    var fullScreenSize = UIScreen.main.bounds.size
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {

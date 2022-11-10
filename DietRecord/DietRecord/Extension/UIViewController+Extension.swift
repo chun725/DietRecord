@@ -8,8 +8,8 @@
 import UIKit
 
 extension UIViewController {
-    func presentInputAlert() {
-        let alert = UIAlertController(title: "輸入欄不得為空", message: nil, preferredStyle: .alert)
+    func presentInputAlert(title: String) {
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default)
         alert.addAction(action)
         self.present(alert, animated: false)

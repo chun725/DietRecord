@@ -10,7 +10,7 @@ import UIKit
 class ProfileCell: UICollectionViewCell {
     @IBOutlet weak var photoImageView: UIImageView!
     
-    func layoutCell(imageURL: String) {
+    func layoutCell(imageURL: String?) {
         photoImageView.loadImage(imageURL)
     }
 }

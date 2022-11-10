@@ -59,7 +59,7 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
             self.closure?(food)
             self.navigationController?.popViewController(animated: false)
         } else {
-            self.presentInputAlert()
+            self.presentInputAlert(title: "輸入欄位不得為空")
         }
     }
     

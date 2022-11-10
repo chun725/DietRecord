@@ -21,6 +21,8 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    var oldfoods: [Food] = []
+    
     var chooseFoods: [Food] = [] {
         didSet {
             searchResultTableView.reloadData()
@@ -32,6 +34,9 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         searchResultTableView.dataSource = self
         searchResultTableView.delegate = self
         foodInputTextField.delegate = self
+        if !oldfoods.isEmpty {
+            chooseFoods = oldfoods
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

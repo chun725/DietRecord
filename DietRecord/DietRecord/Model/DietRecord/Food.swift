@@ -44,7 +44,7 @@ struct MealRecord: Codable {
     let meal: Int
     let date: String
     let foods: [Food]
-    let imageURL: String
+    let imageURL: String?
     let comment: String
     var isShared: Bool
     let createdTime: Date

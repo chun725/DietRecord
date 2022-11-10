@@ -19,11 +19,13 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         }
     }
     let dietRecordProvider = DietRecordProvider()
+    var isShared = true
     var mealTextField: UITextField?
     var mealImageView: UIImageView?
-    var datePicker: UIDatePicker?
+    var dateTextField: UITextField?
     var commentTextView: UITextView?
     var imageURL: String?
+    var closure: ((String) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +48,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
             as? FoodSearchVC {
+            foodSearchPage.oldfoods = foods
             foodSearchPage.closure = { [weak self] foods in
                 self?.foods = foods
             }
@@ -55,23 +58,13 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     @objc func chooseMeal(sender: UIButton) {
         let optionMenu = UIAlertController(title: nil, message: "選擇餐類", preferredStyle: .actionSheet)
-        let breakfast = UIAlertAction(title: Meal.breakfast.rawValue, style: .default) { _ in
-            self.mealTextField?.text = Meal.breakfast.rawValue
-        }
-        let lunch = UIAlertAction(title: Meal.lunch.rawValue, style: .default) { _ in
-            self.mealTextField?.text = Meal.lunch.rawValue
-        }
-        let dinner = UIAlertAction(title: Meal.dinner.rawValue, style: .default) { _ in
-            self.mealTextField?.text = Meal.dinner.rawValue
-        }
-        let others = UIAlertAction(title: Meal.others.rawValue, style: .default) { _ in
-            self.mealTextField?.text = Meal.others.rawValue
+        for mealString in Meal.allCases.map({ $0.rawValue }) where mealString != "差異" {
+            let action = UIAlertAction(title: mealString, style: .default) { _ in
+                self.mealTextField?.text = mealString
+            }
+            optionMenu.addAction(action)
         }
         let cancel = UIAlertAction(title: "取消", style: .cancel)
-        optionMenu.addAction(breakfast)
-        optionMenu.addAction(lunch)
-        optionMenu.addAction(dinner)
-        optionMenu.addAction(others)
         optionMenu.addAction(cancel)
         self.present(optionMenu, animated: false)
     }
@@ -110,41 +103,44 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func saveFoodDaily() {
-        guard let date = datePicker?.date,
+        guard let date = dateTextField?.text,
             let meal = mealTextField?.text,
-            let comment = commentTextView?.text,
-            let imageURL = self.imageURL
+            let comment = commentTextView?.text
         else { return }
-        var index = 3
-        switch meal {
-        case Meal.breakfast.rawValue:
-            index = 0
-        case Meal.lunch.rawValue:
-            index = 1
-        case Meal.dinner.rawValue:
-            index = 2
-        default:
-            index = 3
-        }
-        let mealRecord = MealRecord(
-            userID: userID,
-            meal: index,
-            date: dateFormatter.string(from: date),
-            foods: foods,
-            imageURL: imageURL,
-            comment: comment,
-            isShared: true,
-            createdTime: Date(),
-            peopleLiked: [],
-            response: [])
-        dietRecordProvider.createFoodDaily(
-            date: dateFormatter.string(from: date),
-            mealRecord: mealRecord) { result in
-            switch result {
-            case .success:
-                self.navigationController?.popViewController(animated: false)
-            case .failure(let error):
-                print("Error Info: \(error).")
+        if date.isEmpty {
+            self.presentInputAlert(title: "請選擇日期")
+        } else if meal.isEmpty {
+            self.presentInputAlert(title: "請選擇餐類")
+        } else if foods.isEmpty {
+            self.presentInputAlert(title: "請輸入飲食紀錄")
+        } else if imageURL == nil && isShared {
+            self.presentInputAlert(title: "若要分享到個人頁面，需新增相片")
+        } else {
+            LKProgressHUD.show()
+            guard let index = Meal.allCases.map({ $0.rawValue }).firstIndex(of: meal) else { return }
+            let mealRecord = MealRecord(
+                userID: userID,
+                meal: index,
+                date: date,
+                foods: foods,
+                imageURL: imageURL,
+                comment: comment,
+                isShared: self.isShared,
+                createdTime: Date(),
+                peopleLiked: [],
+                response: [])
+            dietRecordProvider.createFoodDaily(
+                date: date,
+                mealRecord: mealRecord) { result in
+                switch result {
+                case .success:
+                    LKProgressHUD.showSuccess(text: "儲存成功")
+                    self.closure?(date)
+                    self.navigationController?.popViewController(animated: false)
+                case .failure(let error):
+                    LKProgressHUD.showFailure(text: "儲存失敗")
+                    print("Error Info: \(error).")
+                }
             }
         }
     }
@@ -166,6 +162,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         mealTextField = cell.mealTextField
         mealImageView = cell.mealImageView
         commentTextView = cell.commentTextView
+        dateTextField = cell.dateTextField
         cell.controller = self
         return cell
     }

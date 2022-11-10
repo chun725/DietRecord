@@ -51,6 +51,11 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
             as? DietInputVC {
+            dietInputPage.closure = { [weak self] date in
+                guard let date = dateFormatter.date(from: date) else { return }
+                self?.datePicker.date = date
+                self?.changeDate()
+            }
             self.navigationController?.pushViewController(dietInputPage, animated: false)
         }
     }

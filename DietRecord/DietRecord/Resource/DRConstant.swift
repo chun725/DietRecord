@@ -44,7 +44,7 @@ func configureDateformatter() {
     dateFormatter.dateFormat = "yyyy-MM-dd"
 }
 
-enum Meal: String {
+enum Meal: String, CaseIterable {
     case breakfast = "早餐"
     case lunch = "午餐"
     case dinner = "晚餐"

@@ -534,16 +534,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S63-Nj-L1a">
-                                <rect key="frame" x="0.0" y="862" width="414" height="444"/>
+                                <rect key="frame" x="0.0" y="862" width="414" height="460"/>
                                 <subviews>
                                     <datePicker opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="arH-DR-a0i">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="364"/>
+                                        <rect key="frame" x="8" y="16" width="398" height="364"/>
                                         <color key="backgroundColor" name="drGray"/>
                                         <color key="tintColor" name="drDarkGray"/>
                                         <locale key="locale" localeIdentifier="zh_TW"/>
                                     </datePicker>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8hI-aP-A1e">
-                                        <rect key="frame" x="157" y="384" width="100" height="40"/>
+                                        <rect key="frame" x="157" y="400" width="100" height="40"/>
                                         <color key="backgroundColor" name="drYellow"/>
                                         <constraints>
                                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="WaS-d1-LTo"/>
@@ -558,16 +558,17 @@
                                 </subviews>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <constraints>
-                                    <constraint firstItem="arH-DR-a0i" firstAttribute="leading" secondItem="S63-Nj-L1a" secondAttribute="leading" id="8Wt-e8-ToE"/>
+                                    <constraint firstItem="arH-DR-a0i" firstAttribute="leading" secondItem="S63-Nj-L1a" secondAttribute="leading" constant="8" id="8Wt-e8-ToE"/>
+                                    <constraint firstAttribute="height" constant="460" id="Gae-Ad-ZRR"/>
                                     <constraint firstAttribute="bottom" secondItem="8hI-aP-A1e" secondAttribute="bottom" constant="20" id="Ydx-FH-Odl"/>
-                                    <constraint firstAttribute="trailing" secondItem="arH-DR-a0i" secondAttribute="trailing" id="lVw-lN-z9n"/>
-                                    <constraint firstItem="arH-DR-a0i" firstAttribute="top" secondItem="S63-Nj-L1a" secondAttribute="top" id="oqr-ek-q0o"/>
+                                    <constraint firstAttribute="trailing" secondItem="arH-DR-a0i" secondAttribute="trailing" constant="8" id="lVw-lN-z9n"/>
+                                    <constraint firstItem="arH-DR-a0i" firstAttribute="top" secondItem="S63-Nj-L1a" secondAttribute="top" constant="16" id="oqr-ek-q0o"/>
                                     <constraint firstItem="8hI-aP-A1e" firstAttribute="top" secondItem="arH-DR-a0i" secondAttribute="bottom" constant="20" id="xWs-R8-ysY"/>
                                     <constraint firstItem="8hI-aP-A1e" firstAttribute="centerX" secondItem="S63-Nj-L1a" secondAttribute="centerX" id="yCI-Ma-lek"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-nh-70Z">
-                                <rect key="frame" x="0.0" y="1286" width="414" height="20"/>
+                                <rect key="frame" x="0.0" y="1302" width="414" height="20"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="XND-8W-09p"/>

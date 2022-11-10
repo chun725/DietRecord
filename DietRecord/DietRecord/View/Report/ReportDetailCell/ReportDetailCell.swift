@@ -58,18 +58,18 @@ class ReportDetailCell: UITableViewCell {
             foods: totalFoods, nutrient: .potassium) / 1000).format()
     }
     
-    func layoutOfGoal(goal: NutrientContent) {
-        self.caloriesGoalLabel.text = (goal.calories.transformToDouble() * 7).format()
-        self.carbsGoalLabel.text = (goal.carbohydrate.transformToDouble() * 7).format()
-        self.fiberGoalLabel.text = (goal.dietaryFiber.transformToDouble() * 7).format()
-        self.sugarGoalLabel.text = (goal.sugar.transformToDouble() * 7).format()
-        self.proteinGoalLabel.text = (goal.protein.transformToDouble() * 7).format()
-        self.fatGoalLabel.text = (goal.lipid.transformToDouble() * 7).format()
-        self.saturatedFatGoalLabel.text = (goal.lipid.transformToDouble() * 7).format()
-        self.monounsaturatedFatGoalLabel.text = (goal.monounsaturatedLipid.transformToDouble() * 7 / 1000).format()
-        self.polyunsaturatedFatGoalLabel.text = (goal.polyunsaturatedLipid.transformToDouble() * 7 / 1000).format()
-        self.cholesterolGoalLabel.text = (goal.cholesterol.transformToDouble() * 7 / 1000).format()
-        self.sodiumGoalLabel.text = (goal.sodium.transformToDouble() * 7 / 1000).format()
-        self.potassiumGoalLabel.text = (goal.potassium.transformToDouble() * 7 / 1000).format()
+    func layoutOfGoal(goal: [String]) {
+        self.caloriesGoalLabel.text = (goal[0].transformToDouble() * 7).format()
+        self.carbsGoalLabel.text = (goal[1].transformToDouble() * 7).format()
+        self.proteinGoalLabel.text = (goal[2].transformToDouble() * 7).format()
+        self.fatGoalLabel.text = (goal[3].transformToDouble() * 7).format()
+//        self.fiberGoalLabel.text = (goal.dietaryFiber.transformToDouble() * 7).format()
+//        self.sugarGoalLabel.text = (goal.sugar.transformToDouble() * 7).format()
+//        self.saturatedFatGoalLabel.text = (goal.lipid.transformToDouble() * 7).format()
+//        self.monounsaturatedFatGoalLabel.text = (goal.monounsaturatedLipid.transformToDouble() * 7 / 1000).format()
+//        self.polyunsaturatedFatGoalLabel.text = (goal.polyunsaturatedLipid.transformToDouble() * 7 / 1000).format()
+//        self.cholesterolGoalLabel.text = (goal.cholesterol.transformToDouble() * 7 / 1000).format()
+//        self.sodiumGoalLabel.text = (goal.sodium.transformToDouble() * 7 / 1000).format()
+//        self.potassiumGoalLabel.text = (goal.potassium.transformToDouble() * 7 / 1000).format()
     }
 }

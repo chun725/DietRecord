@@ -39,6 +39,12 @@
 		34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */; };
 		343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD69329111C6E0048046E /* KingFisherWrapper.swift */; };
 		343CD698291223850048046E /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD697291223850048046E /* BarChart.swift */; };
+		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
+		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
+		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
+		3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7E291B9FAA002ED662 /* Goal.swift */; };
+		3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED80291BB255002ED662 /* ReportProvider.swift */; };
+		3460ED83291BCC66002ED662 /* ReportSetGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
 		34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642935290CF79A0070B425 /* DietRecordVC.swift */; };
@@ -115,6 +121,12 @@
 		34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		343CD69329111C6E0048046E /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		343CD697291223850048046E /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
+		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
+		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
+		3460ED7E291B9FAA002ED662 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		3460ED80291BB255002ED662 /* ReportProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProvider.swift; sourceTree = "<group>"; };
+		3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSetGoalCell.swift; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		34642933290CF79A0070B425 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +185,7 @@
 		34270E76290D576B00D5AFFD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				3460ED7D291B9F9E002ED662 /* Report */,
 				34CF7423291661C1009F9264 /* Profile */,
 				34CF74132914C0DD009F9264 /* Weight */,
 				34CF740929135B91009F9264 /* Water */,
@@ -263,6 +276,34 @@
 				343CD69329111C6E0048046E /* KingFisherWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
+			sourceTree = "<group>";
+		};
+		3460ED75291B717C002ED662 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				34270E6E290D533400D5AFFD /* ReportVC.swift */,
+				3460ED7B291B9748002ED662 /* GoalVC.swift */,
+				3460ED76291B71AC002ED662 /* SetupGoalVC.swift */,
+			);
+			path = Report;
+			sourceTree = "<group>";
+		};
+		3460ED78291B7712002ED662 /* ReportGoalCell */ = {
+			isa = PBXGroup;
+			children = (
+				3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */,
+				3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */,
+			);
+			path = ReportGoalCell;
+			sourceTree = "<group>";
+		};
+		3460ED7D291B9F9E002ED662 /* Report */ = {
+			isa = PBXGroup;
+			children = (
+				3460ED7E291B9FAA002ED662 /* Goal.swift */,
+				3460ED80291BB255002ED662 /* ReportProvider.swift */,
+			);
+			path = Report;
 			sourceTree = "<group>";
 		};
 		34642925290CF79A0070B425 = {
@@ -358,11 +399,11 @@
 		34642953290D28500070B425 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				3460ED75291B717C002ED662 /* Report */,
 				34CF7426291683B8009F9264 /* Profile */,
 				34CF741B2914F2B8009F9264 /* Weight */,
 				34CF740E291365C4009F9264 /* Water */,
 				34270E89290F7A3D00D5AFFD /* DietRecord */,
-				34270E6E290D533400D5AFFD /* ReportVC.swift */,
 				342270232911063A000B4A58 /* TabBarController.swift */,
 			);
 			path = Controller;
@@ -380,6 +421,7 @@
 		3469168A291255680021985F /* Report */ = {
 			isa = PBXGroup;
 			children = (
+				3460ED78291B7712002ED662 /* ReportGoalCell */,
 				3469169029127C140021985F /* ReportDetailCell */,
 				3469168F29127C040021985F /* ReportBarChartCell */,
 			);
@@ -662,6 +704,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				34270E6D290D532900D5AFFD /* ProfileVC.swift in Sources */,
+				3460ED83291BCC66002ED662 /* ReportSetGoalCell.swift in Sources */,
 				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
 				34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
@@ -669,9 +712,11 @@
 				349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */,
 				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
+				3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */,
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,
 				34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */,
+				3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
@@ -687,9 +732,11 @@
 				34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */,
 				34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */,
 				349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */,
+				3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */,
 				3469168C291255860021985F /* ReportBarChartCell.swift in Sources */,
 				34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
+				3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */,
 				34CF74152914C0ED009F9264 /* Weight.swift in Sources */,
 				349B8D9029193514002EB186 /* User.swift in Sources */,
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
@@ -706,6 +753,7 @@
 				34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */,
 				34270E91290F810100D5AFFD /* FoodDailyCell.swift in Sources */,
 				34642957290D2B2D0070B425 /* DRConstant.swift in Sources */,
+				3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */,
 				34CF7410291365DF009F9264 /* WaterInputVC.swift in Sources */,
 				34642932290CF79A0070B425 /* AppDelegate.swift in Sources */,
 				342270242911063A000B4A58 /* TabBarController.swift in Sources */,

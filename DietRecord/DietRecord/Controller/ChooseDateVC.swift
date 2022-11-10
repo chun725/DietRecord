@@ -14,6 +14,7 @@ class ChooseDateVC: UIViewController {
     @IBOutlet weak var chooseDateButton: UIButton!
     @IBOutlet weak var grayBackgroundView: UIView!
     
+    var date: String?
     var closure: ((String) -> Void)?
     
     override func viewWillAppear(_ animated: Bool) {
@@ -27,6 +28,9 @@ class ChooseDateVC: UIViewController {
         }
         dateView.layer.cornerRadius = 15
         chooseDateButton.layer.cornerRadius = 10
+        if let date = date {
+            datePicker.date = dateFormatter.date(from: date) ?? Date()
+        }
     }
     
     @IBAction func chooseDate(_ sender: Any) {

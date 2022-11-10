@@ -26,11 +26,15 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     var commentTextView: UITextView?
     var imageURL: String?
     var closure: ((String) -> Void)?
+    var mealRecord: MealRecord?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         foodDailyTableView.dataSource = self
         foodDailyTableView.registerCellWithNib(identifier: FoodDailyCell.reuseIdentifier, bundle: nil)
+        if let mealRecord = mealRecord {
+            foods = mealRecord.foods
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -155,6 +159,9 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             withIdentifier: FoodDailyCell.reuseIdentifier,
             for: indexPath) as? FoodDailyCell
         else { fatalError("Could not create food daily cell.") }
+        if let mealRecord = mealRecord {
+            cell.mealRecord = mealRecord
+        }
         cell.layoutCell(foods: foods)
         cell.editFoodButton.addTarget(self, action: #selector(goToFoodSearchPage), for: .touchUpInside)
         cell.mealChooseButton.addTarget(self, action: #selector(chooseMeal), for: .touchUpInside)

@@ -6,7 +6,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -32,41 +31,78 @@
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="請輸入飲食紀錄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zJh-bn-CcY">
+                                <rect key="frame" x="137" y="434" width="140" height="28"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
+                                <color key="textColor" name="drDarkGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQe-X7-twB">
+                                <rect key="frame" x="368" y="49" width="30" height="28.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="9NM-zk-FaQ"/>
+                                </constraints>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BBL-ml-AV7">
                                 <rect key="frame" x="0.0" y="84" width="414" height="778"/>
-                                <color key="backgroundColor" name="drLightGray"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
-                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="p7y-vn-meF">
-                                <rect key="frame" x="157" y="48" width="100" height="32"/>
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2022-11-10" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-AO-3cD">
+                                <rect key="frame" x="157" y="51" width="100" height="26"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="lEB-m4-aEn"/>
+                                    <constraint firstAttribute="width" constant="100" id="XfF-vO-lik"/>
                                 </constraints>
-                                <locale key="locale" localeIdentifier="zh_TW"/>
-                            </datePicker>
+                                <color key="textColor" name="drDarkGray"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDz-sW-Ps9">
+                                <rect key="frame" x="265" y="52" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="BXv-vv-Qdy"/>
+                                    <constraint firstAttribute="width" secondItem="hDz-sW-Ps9" secondAttribute="height" id="aVs-ry-nv6"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="Image_Calendar"/>
+                                <connections>
+                                    <action selector="goToChooseDatePage:" destination="3zY-ln-cus" eventType="touchUpInside" id="9sv-sw-9gw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="sn1-xz-SBu"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="drLightGray"/>
                         <constraints>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="trailing" secondItem="BBL-ml-AV7" secondAttribute="trailing" id="9Ps-BR-y89"/>
+                            <constraint firstItem="hDz-sW-Ps9" firstAttribute="centerY" secondItem="vZ2-AO-3cD" secondAttribute="centerY" id="Hea-u3-d3X"/>
+                            <constraint firstItem="YQe-X7-twB" firstAttribute="width" secondItem="YQe-X7-twB" secondAttribute="height" id="Hki-qo-4q9"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="width" secondItem="8fh-M8-AWa" secondAttribute="width" id="OGw-SJ-bkc"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="bottom" secondItem="BBL-ml-AV7" secondAttribute="bottom" id="SgF-ZA-1VY"/>
-                            <constraint firstItem="p7y-vn-meF" firstAttribute="centerY" secondItem="TGN-nq-h8Z" secondAttribute="centerY" id="Tyy-RB-Z56"/>
                             <constraint firstItem="BBL-ml-AV7" firstAttribute="top" secondItem="TGN-nq-h8Z" secondAttribute="bottom" id="VSh-yY-DMp"/>
-                            <constraint firstItem="p7y-vn-meF" firstAttribute="height" secondItem="TGN-nq-h8Z" secondAttribute="height" constant="-8" id="b1c-Xo-ezM"/>
+                            <constraint firstItem="zJh-bn-CcY" firstAttribute="centerY" secondItem="Q69-tX-WNr" secondAttribute="centerY" id="bHW-I7-GS0"/>
                             <constraint firstItem="8fh-M8-AWa" firstAttribute="top" secondItem="Q69-tX-WNr" secondAttribute="top" id="coc-lm-pTs"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="top" secondItem="8fh-M8-AWa" secondAttribute="bottom" id="cso-jI-qOi"/>
-                            <constraint firstItem="p7y-vn-meF" firstAttribute="centerX" secondItem="TGN-nq-h8Z" secondAttribute="centerX" id="fMg-HN-RC8"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="trailing" secondItem="8fh-M8-AWa" secondAttribute="trailing" id="geH-Me-wOy"/>
                             <constraint firstItem="8fh-M8-AWa" firstAttribute="leading" secondItem="sn1-xz-SBu" secondAttribute="leading" id="hUB-UU-0eo"/>
+                            <constraint firstItem="hDz-sW-Ps9" firstAttribute="leading" secondItem="vZ2-AO-3cD" secondAttribute="trailing" constant="8" id="imY-i6-x6s"/>
+                            <constraint firstItem="vZ2-AO-3cD" firstAttribute="centerY" secondItem="TGN-nq-h8Z" secondAttribute="centerY" id="lys-Lo-6ZR"/>
                             <constraint firstItem="BBL-ml-AV7" firstAttribute="leading" secondItem="sn1-xz-SBu" secondAttribute="leading" id="nb0-id-Zpf"/>
+                            <constraint firstItem="YQe-X7-twB" firstAttribute="centerY" secondItem="TGN-nq-h8Z" secondAttribute="centerY" id="nlD-Ad-BrV"/>
+                            <constraint firstItem="vZ2-AO-3cD" firstAttribute="centerX" secondItem="TGN-nq-h8Z" secondAttribute="centerX" id="qyx-Ob-bNy"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="centerX" secondItem="Q69-tX-WNr" secondAttribute="centerX" id="sUV-Qr-UkF"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="top" secondItem="8fh-M8-AWa" secondAttribute="bottom" id="t4b-R5-lSl"/>
+                            <constraint firstItem="YQe-X7-twB" firstAttribute="trailing" secondItem="TGN-nq-h8Z" secondAttribute="trailing" constant="-16" id="vbS-y0-k3W"/>
+                            <constraint firstItem="zJh-bn-CcY" firstAttribute="centerX" secondItem="Q69-tX-WNr" secondAttribute="centerX" id="zRg-gR-vFV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="2022/10/30" id="qzG-yn-r0k"/>
                     <connections>
-                        <outlet property="datePicker" destination="p7y-vn-meF" id="x2k-qB-A9C"/>
+                        <outlet property="createDietRecordButton" destination="YQe-X7-twB" id="uwK-bX-sHu"/>
+                        <outlet property="dateTextField" destination="vZ2-AO-3cD" id="3qK-hj-6Kz"/>
                         <outlet property="dietRecordTableView" destination="BBL-ml-AV7" id="QUc-6k-xMH"/>
+                        <outlet property="placeholderLabel" destination="zJh-bn-CcY" id="Mlu-aD-McR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dj-fi-LW9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -611,9 +647,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image_Calendar" width="512" height="512"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.right.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
@@ -626,8 +664,5 @@
         <namedColor name="drYellow">
             <color red="1" green="0.82352941176470584" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

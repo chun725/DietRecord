@@ -22,8 +22,16 @@ class FoodDailyCell: UITableViewCell {
     @IBOutlet weak var switchButton: UISwitch!
     
     weak var controller: DietInputVC?
+    var mealRecord: MealRecord?
     
     func layoutCell(foods: [Food]) {
+        if let mealRecord = mealRecord {
+            dateTextField.text = mealRecord.date
+            mealTextField.text = Meal.allCases[mealRecord.meal].rawValue
+            mealImageView.loadImage(mealRecord.imageURL)
+            commentTextView.text = mealRecord.comment
+            switchButton.isOn = mealRecord.isShared
+        }
         if foods.isEmpty {
             photoTopConstraint.constant = 24
             foodsView.isHidden = true

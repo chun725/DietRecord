@@ -26,6 +26,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    var isLoading = true // 讓tableView在loading時被清掉
+    
     let dietRecordProvider = DietRecordProvider()
     
     override func viewDidLoad() {
@@ -63,8 +65,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             as? ChooseDateVC {
             chooseDatePage.date = self.dateTextField.text
             chooseDatePage.closure = { [weak self] date in
-                self?.dateTextField.text = date
-                self?.changeDate()
+                if self?.dateTextField.text != date {
+                    self?.dateTextField.text = date
+                    self?.changeDate()
+                }
             }
             self.present(chooseDatePage, animated: false)
         }
@@ -72,14 +76,17 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     
     @objc func changeDate() {
         LKProgressHUD.show()
+        self.isLoading = true
         self.meals = []
         guard let date = dateTextField.text else { return }
         dietRecordProvider.fetchDietRecord(date: date) { result in
             switch result {
             case .success(let data):
+                self.isLoading = false
                 if data as? String == "Document doesn't exist." {
                     LKProgressHUD.dismiss()
                     self.placeholderLabel.isHidden = false
+                    self.meals = []
                 } else {
                     guard let dietRecordData = data as? FoodDailyInput else { return }
                     self.meals = dietRecordData.mealRecord
@@ -102,7 +109,11 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : meals.count
+        if isLoading {
+            return 0
+        } else {
+            return section == 0 ? 1 : meals.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

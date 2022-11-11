@@ -15,4 +15,5 @@ struct User: Codable {
     let userImageURL: String
     let username: String
     var goal: [String]
+    var waterGoal: String
 }

@@ -21,6 +21,7 @@ class WaterInputVC: UIViewController {
     var waterCurrent: Double?
     var closure: ((Double) -> Void)?
     var isWaterInput = true
+    var isGoalInput = false
     let waterRecordProvider = WaterRecordProvider()
     
     override func viewDidLoad() {
@@ -30,15 +31,36 @@ class WaterInputVC: UIViewController {
         saveButton.layer.cornerRadius = 20
         grayBackgroundView.layer.cornerRadius = 20
         if isWaterInput {
-            titleLabel.text = "輸入飲水量"
+            if isGoalInput {
+                titleLabel.text = "輸入飲水量目標"
+                saveButton.addTarget(self, action: #selector(saveWaterGoal), for: .touchUpInside)
+            } else {
+                titleLabel.text = "輸入飲水量"
+                saveButton.addTarget(self, action: #selector(saveWaterRecord), for: .touchUpInside)
+            }
             imageView.image = UIImage(named: "Image_Water")
             timePicker.isHidden = true
-            saveButton.addTarget(self, action: #selector(saveWaterRecord), for: .touchUpInside)
         } else {
             titleLabel.text = "設定喝水提醒"
             imageView.image = UIImage(named: "Image_Reminder")
             waterInputView.isHidden = true
             saveButton.addTarget(self, action: #selector(saveReminder), for: .touchUpInside)
+        }
+    }
+    
+    @objc func saveWaterGoal() {
+        guard let waterGoal = inputTextField.text else { return }
+        waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
+            switch result {
+            case .success:
+                LKProgressHUD.showSuccess()
+                self.closure?(waterGoal.transformToDouble())
+                userData?.waterGoal = waterGoal
+                self.dismiss(animated: false)
+            case .failure(let error):
+                LKProgressHUD.showFailure(text: "儲存失敗")
+                print("Error Info: \(error).")
+            }
         }
     }
     
@@ -50,11 +72,13 @@ class WaterInputVC: UIViewController {
         waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { result in
             switch result {
             case .success:
+                LKProgressHUD.showSuccess()
                 self.closure?(totalWater)
+                self.dismiss(animated: false)
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
             }
-            self.dismiss(animated: false)
         }
     }
     
@@ -83,6 +107,7 @@ class WaterInputVC: UIViewController {
             userDefault.set(reminders, forKey: waterReminder)
         }
         UNUserNotificationCenter.current().add(request)
+        LKProgressHUD.showSuccess()
         self.closure?(0.0)
         self.dismiss(animated: false)
     }

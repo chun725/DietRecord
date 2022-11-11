@@ -41,6 +41,9 @@
                                 <color key="tintColor" name="drDarkGray"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal" backgroundImage="list.dash" catalog="system"/>
+                                <connections>
+                                    <action selector="goToHistoryPage:" destination="cWa-85-EEg" eventType="touchUpInside" id="Zwo-uk-wsG"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="iFM-eY-72H">
                                 <rect key="frame" x="0.0" y="84" width="414" height="729"/>
@@ -82,8 +85,8 @@
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="77.5%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2u-Oh-4B9">
-                                                            <rect key="frame" x="296" y="16.5" width="54" height="24"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D2u-Oh-4B9">
+                                                            <rect key="frame" x="339" y="16.5" width="11" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="ZMj-v0-kXU"/>
                                                             </constraints>
@@ -129,6 +132,9 @@
                                                     <color key="tintColor" name="drDarkGray"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <state key="normal" backgroundImage="pencil.circle" catalog="system"/>
+                                                    <connections>
+                                                        <action selector="goToChangeGoalPage:" destination="KrZ-9N-Pnj" eventType="touchUpInside" id="V5K-di-fuV"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gM0-4a-An2">
                                                     <rect key="frame" x="0.0" y="56" width="414" height="200"/>
@@ -195,7 +201,6 @@
                                         <connections>
                                             <outlet property="addReminderButton" destination="f2f-Sr-eDt" id="wSX-SF-Hox"/>
                                             <outlet property="addWaterButton" destination="OeG-v7-HYV" id="vpb-Pp-nme"/>
-                                            <outlet property="changeGoalButton" destination="LN0-ZH-8u2" id="mqb-FZ-MYQ"/>
                                             <outlet property="percentLabel" destination="D2u-Oh-4B9" id="MPc-fb-N4n"/>
                                             <outlet property="waterCurrentLabel" destination="4qf-2t-7cC" id="DY7-zu-ORI"/>
                                             <outlet property="waterGoalLabel" destination="kqH-4x-QI2" id="Kda-JZ-H22"/>
@@ -444,10 +449,79 @@
             </objects>
             <point key="canvasLocation" x="471.01449275362324" y="995.75892857142856"/>
         </scene>
+        <!--Water HistoryVC-->
+        <scene sceneID="rjl-E6-dbK">
+            <objects>
+                <viewController storyboardIdentifier="WaterHistoryVC" modalPresentationStyle="overFullScreen" id="YEy-fp-1hr" customClass="WaterHistoryVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="BZB-rl-CuT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="飲水量記錄" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l8B-q4-eFV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="40"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Slm-jf-AY1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
+                                <color key="textColor" name="drDarkGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pRd-9E-tvN">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                <color key="backgroundColor" name="drYellow"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RS4-Oz-Jbh">
+                                <rect key="frame" x="0.0" y="328" width="414" height="240"/>
+                                <color key="backgroundColor" name="drLightGray"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="Jhb-1b-xPY"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vt8-Tt-zQP">
+                                <rect key="frame" x="16" y="49.5" width="30" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="W5q-Jy-ZTL"/>
+                                </constraints>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="chevron.backward.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="goBack:" destination="YEy-fp-1hr" eventType="touchUpInside" id="oKL-mz-FsX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1mh-r4-E3y"/>
+                        <color key="backgroundColor" name="drLightGray"/>
+                        <constraints>
+                            <constraint firstItem="pRd-9E-tvN" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="1B8-h3-9P7"/>
+                            <constraint firstItem="Vt8-Tt-zQP" firstAttribute="width" secondItem="Vt8-Tt-zQP" secondAttribute="height" id="1Cu-45-sBx"/>
+                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="5k6-aj-bJi"/>
+                            <constraint firstItem="Vt8-Tt-zQP" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" constant="16" id="9QP-dT-DNt"/>
+                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="CKE-VB-SJQ"/>
+                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="centerY" secondItem="BZB-rl-CuT" secondAttribute="centerY" id="J7e-tR-Bfj"/>
+                            <constraint firstItem="Vt8-Tt-zQP" firstAttribute="centerY" secondItem="l8B-q4-eFV" secondAttribute="centerY" id="PSk-4p-nMc"/>
+                            <constraint firstItem="pRd-9E-tvN" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="XQi-Lv-xZv"/>
+                            <constraint firstItem="l8B-q4-eFV" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="bBK-rj-7Wg"/>
+                            <constraint firstItem="pRd-9E-tvN" firstAttribute="top" secondItem="BZB-rl-CuT" secondAttribute="top" id="cK6-85-moK"/>
+                            <constraint firstItem="l8B-q4-eFV" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="jcY-hz-kzE"/>
+                            <constraint firstItem="1mh-r4-E3y" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="quM-bv-fhc"/>
+                            <constraint firstItem="l8B-q4-eFV" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="wlY-vN-FiW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="waterHistoryBarChart" destination="RS4-Oz-Jbh" id="nAb-ax-cZa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0oH-1l-mpi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1218.840579710145" y="995.75892857142856"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Image_Reminder" width="512" height="512"/>
         <image name="Image_Water" width="512" height="512"/>
+        <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
         <image name="pencil.circle" catalog="system" width="128" height="121"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>

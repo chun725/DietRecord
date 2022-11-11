@@ -87,7 +87,9 @@ class PieChart: PieChartView {
         self.data = data
         self.holeColor = .clear // 空心位置的背景顏色
         self.backgroundColor = .clear // 背景為透明
-        self.centerText = consumed.format() + "%" // 設定空心位置的文字
+        if consumed != 1.0 / 0.0 {
+            self.centerText = consumed.format() + "%" // 設定空心位置的文字
+        }
 
         let legend = self.legend
         legend.form = .circle

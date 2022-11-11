@@ -48,4 +48,43 @@ class WaterRecordProvider {
             completion(.failure(error))
         }
     }
+    // MARK: - Fetch history water record -
+    func fetchHistoryWaterRecords(completion: @escaping (Result<[WaterRecord], Error>) -> Void) {
+        var waterRecords: [WaterRecord] = []
+        database.collection(user).document(userID).collection(water).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let snapshot = snapshot else { return }
+                var documents = snapshot.documents
+                documents = documents.sorted { $0.documentID < $1.documentID }
+                for document in documents {
+                    guard let waterRecord = try? document.data(as: WaterRecord.self) else { return }
+                    waterRecords.append(waterRecord)
+                }
+                completion(.success(waterRecords))
+            }
+        }
+    }
+    // MARK: - Update water goal -
+    func updateWaterGoal(waterGoal: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(userID)
+        documentReference.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    var userData = try? document.data(as: User.self)
+                else { return }
+                userData.waterGoal = waterGoal
+                do {
+                    try documentReference.setData(from: userData)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

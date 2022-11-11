@@ -37,13 +37,14 @@ let mLUnit = "mL"
 let waterReminderNotification = "WaterReminderNotification"
 var userData: User?
 var foodIngredients: [FoodIngredient]? // 資料庫
+var fullScreenSize = UIScreen.main.bounds.size
 
 func configureDateformatter() {
     dateFormatter.locale = .current
     dateFormatter.dateFormat = "yyyy-MM-dd"
 }
 
-enum Meal: String {
+enum Meal: String, CaseIterable {
     case breakfast = "早餐"
     case lunch = "午餐"
     case dinner = "晚餐"

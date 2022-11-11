@@ -15,6 +15,7 @@ pod 'SwiftLint'
 pod 'Kingfisher'
 pod 'IQKeyboardManagerSwift'
 pod 'Firebase/Storage'
+pod 'JGProgressHUD'
 
 end
 

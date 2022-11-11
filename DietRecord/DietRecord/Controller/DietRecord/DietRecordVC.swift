@@ -9,15 +9,14 @@ import UIKit
 
 class DietRecordVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var dietRecordTableView: UITableView!
-    @IBOutlet weak var datePicker: UIDatePicker!
+    @IBOutlet weak var createDietRecordButton: UIButton!
+    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var placeholderLabel: UILabel!
     
-    var meals: [MealRecord]? {
+    var meals: [MealRecord] = [] {
         didSet {
-            breakfastMeal = meals?.first { $0.meal == 0 }
-            lunchMeal = meals?.first { $0.meal == 1 }
-            dinnerMeal = meals?.first { $0.meal == 2 }
-            othersMeal = meals?.first { $0.meal == 3 }
-            totalFoods = meals?.map { $0.foods }.flatMap { $0 }
+            meals = meals.sorted { $0.meal < $1.meal }
+            totalFoods = meals.map { $0.foods }.flatMap { $0 }
         }
     }
     
@@ -26,10 +25,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             dietRecordTableView.reloadData()
         }
     }
-    var breakfastMeal: MealRecord?
-    var lunchMeal: MealRecord?
-    var dinnerMeal: MealRecord?
-    var othersMeal: MealRecord?
+    
+    var isLoading = true // 讓tableView在loading時被清掉
     
     let dietRecordProvider = DietRecordProvider()
     
@@ -38,8 +35,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         dietRecordTableView.dataSource = self
         dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
         dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
-        datePicker.addTarget(self, action: #selector(changeDate), for: .valueChanged)
         changeDate()
+        createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,22 +48,57 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
             as? DietInputVC {
+            if sender != createDietRecordButton {
+                dietInputPage.mealRecord = self.meals[sender.tag]
+            }
+            dietInputPage.closure = { [weak self] date in
+                self?.dateTextField.text = date
+                self?.changeDate()
+            }
             self.navigationController?.pushViewController(dietInputPage, animated: false)
         }
     }
     
+    @IBAction func goToChooseDatePage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
+            as? ChooseDateVC {
+            chooseDatePage.date = self.dateTextField.text
+            chooseDatePage.closure = { [weak self] date in
+                if self?.dateTextField.text != date {
+                    self?.dateTextField.text = date
+                    self?.changeDate()
+                }
+            }
+            self.present(chooseDatePage, animated: false)
+        }
+    }
+    
     @objc func changeDate() {
-        let date = datePicker.date
-        dietRecordProvider.fetchDietRecord(date: dateFormatter.string(from: date)) { result in
+        LKProgressHUD.show()
+        self.isLoading = true
+        self.meals = []
+        guard let date = dateTextField.text else { return }
+        dietRecordProvider.fetchDietRecord(date: date) { result in
             switch result {
             case .success(let data):
+                self.isLoading = false
                 if data as? String == "Document doesn't exist." {
-                    self.meals = nil
+                    LKProgressHUD.dismiss()
+                    self.placeholderLabel.isHidden = false
+                    self.meals = []
                 } else {
-                    let dietRecordData = data as? FoodDailyInput
-                    self.meals = dietRecordData?.mealRecord
+                    guard let dietRecordData = data as? FoodDailyInput else { return }
+                    self.meals = dietRecordData.mealRecord
+                    LKProgressHUD.dismiss()
+                    if self.meals.isEmpty {
+                        self.placeholderLabel.isHidden = false
+                    } else {
+                        self.placeholderLabel.isHidden = true
+                    }
                 }
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "找不到飲食紀錄")
                 print("Error Info: \(error).")
             }
         }
@@ -77,7 +109,11 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : 4
+        if isLoading {
+            return 0
+        } else {
+            return section == 0 ? 1 : meals.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -97,10 +133,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 protein: "\(protein.format())/\(userData.goal[2]) g",
                 fat: "\(fat.format())/\(userData.goal[3]) g")
             cell.setPieChart(
-                breakfast: calculateMacroNutrition(foods: breakfastMeal?.foods, nutrient: .calories),
-                lunch: calculateMacroNutrition(foods: lunchMeal?.foods, nutrient: .calories),
-                dinner: calculateMacroNutrition(foods: dinnerMeal?.foods, nutrient: .calories),
-                others: calculateMacroNutrition(foods: othersMeal?.foods, nutrient: .calories),
+                breakfast: calculateMacroNutrition(foods: meals.first { $0.meal == 0 }?.foods, nutrient: .calories),
+                lunch: calculateMacroNutrition(foods: meals.first { $0.meal == 1 }?.foods, nutrient: .calories),
+                dinner: calculateMacroNutrition(foods: meals.first { $0.meal == 2 }?.foods, nutrient: .calories),
+                others: calculateMacroNutrition(foods: meals.first { $0.meal == 3 }?.foods, nutrient: .calories),
                 goal: userData.goal[0].transformToDouble())
             return cell
         } else {
@@ -109,22 +145,19 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 for: indexPath) as? DietRecordCell
             else { fatalError("Could not create diet record cell.") }
             cell.editButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
-            let mealRecord: MealRecord?
-            switch indexPath.row {
+            cell.editButton.tag = indexPath.row
+            let mealRecord = meals[indexPath.row]
+            switch mealRecord.meal {
             case 0:
-                mealRecord = breakfastMeal
                 cell.mealLabel.text = Meal.breakfast.rawValue
                 cell.mealLabel.backgroundColor = .drYellow
             case 1:
-                mealRecord = lunchMeal
                 cell.mealLabel.text = Meal.lunch.rawValue
                 cell.mealLabel.backgroundColor = .drGreen
             case 2:
-                mealRecord = dinnerMeal
                 cell.mealLabel.text = Meal.dinner.rawValue
                 cell.mealLabel.backgroundColor = .drOrange
             default:
-                mealRecord = othersMeal
                 cell.mealLabel.text = Meal.others.rawValue
                 cell.mealLabel.backgroundColor = .drDarkBlue
             }

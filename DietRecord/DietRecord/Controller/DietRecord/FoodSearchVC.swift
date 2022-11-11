@@ -21,6 +21,8 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
+    var oldfoods: [Food] = []
+    
     var chooseFoods: [Food] = [] {
         didSet {
             searchResultTableView.reloadData()
@@ -32,6 +34,9 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         searchResultTableView.dataSource = self
         searchResultTableView.delegate = self
         foodInputTextField.delegate = self
+        if !oldfoods.isEmpty {
+            chooseFoods = oldfoods
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +59,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
-            foodNutritionPage.food = foodSearchResults[sender.tag]
+            foodNutritionPage.newFood = foodSearchResults[sender.tag]
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
             }
@@ -79,14 +84,24 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     // MARK: - TextFieldDelegate -
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        foodSearchResults = []
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let foodName = textField.text else { return }
-        foodListProvider.searchFoods(foodName: foodName) { result in
-            switch result {
-            case .success(let foods):
-                self.foodSearchResults = foods
-            case .failure(let error):
-                print("Error Info: \(error)")
+        if !foodName.isEmpty {
+            foodListProvider.searchFoods(foodName: foodName) { result in
+                switch result {
+                case .success(let foods):
+                    if foods.isEmpty {
+                        LKProgressHUD.showFailure(text: "無此食物")
+                    } else {
+                        self.foodSearchResults = foods
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error)")
+                }
             }
         }
     }
@@ -130,6 +145,10 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        tableView.headerView(forSection: 0)?.contentView.backgroundColor = .drLightGray
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

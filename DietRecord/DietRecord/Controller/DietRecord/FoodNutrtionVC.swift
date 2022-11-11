@@ -7,57 +7,33 @@
 
 import UIKit
 
-class FoodNutritionVC: UIViewController {
+class FoodNutritionVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodNameLabel: UILabel!
-    @IBOutlet weak var servingSizeLabel: UILabel!
-    @IBOutlet weak var caloriesLabel: UILabel!
-    @IBOutlet weak var carbsLabel: UILabel!
-    @IBOutlet weak var fiberLabel: UILabel!
-    @IBOutlet weak var sugarLabel: UILabel!
-    @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var saturatedFatLabel: UILabel!
-    @IBOutlet weak var monounsaturatedLabel: UILabel!
-    @IBOutlet weak var polyunsaturatedLabel: UILabel!
-    @IBOutlet weak var cholesterolLabel: UILabel!
-    @IBOutlet weak var sodiumLabel: UILabel!
-    @IBOutlet weak var potassiumLabel: UILabel!
     @IBOutlet weak var qtyTextField: UITextField!
     @IBOutlet weak var addOrSaveButton: UIButton!
+    @IBOutlet weak var nutritionTableView: UITableView!
     
-    var food: FoodIngredient?
+    var isModify = false
+    var newFood: FoodIngredient?
     var chooseFood: Food?
+    var food: FoodIngredient?
     var closure: ((Food) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if chooseFood != nil {
+        if isModify {
             addOrSaveButton.setTitle("Save", for: .normal)
             guard let chooseFood = chooseFood else { return }
             qtyTextField.text = chooseFood.qty
-            configureNutritionInformation(food: chooseFood.foodIngredient)
+            foodNameLabel.text = chooseFood.foodIngredient.name
+            food = chooseFood.foodIngredient
         } else {
-            guard let food = food else { return }
-            configureNutritionInformation(food: food)
+            guard let newFood = newFood else { return }
+            foodNameLabel.text = newFood.name
+            food = newFood
         }
-    }
-    
-    func configureNutritionInformation(food: FoodIngredient) {
-        foodNameLabel.text = food.name
-        let nutrition = food.nutrientContent
-        servingSizeLabel.text = "\(food.weightPerUnit)克"
-        caloriesLabel.text = nutrition.calories.transform(unit: kcalUnit)
-        carbsLabel.text = nutrition.carbohydrate.transform(unit: gUnit)
-        fiberLabel.text = nutrition.dietaryFiber.transform(unit: gUnit)
-        sugarLabel.text = nutrition.sugar.transform(unit: gUnit)
-        proteinLabel.text = nutrition.protein.transform(unit: gUnit)
-        fatLabel.text = nutrition.lipid.transform(unit: gUnit)
-        saturatedFatLabel.text = nutrition.saturatedLipid.transform(unit: gUnit)
-        monounsaturatedLabel.text = nutrition.monounsaturatedLipid.transform(unit: mgUnit)
-        polyunsaturatedLabel.text = nutrition.polyunsaturatedLipid.transform(unit: mgUnit)
-        cholesterolLabel.text = nutrition.cholesterol.transform(unit: mgUnit)
-        sodiumLabel.text = nutrition.sodium.transform(unit: mgUnit)
-        potassiumLabel.text = nutrition.potassium.transform(unit: mgUnit)
+        nutritionTableView.dataSource = self
+        nutritionTableView.registerCellWithNib(identifier: FoodNutritionCell.reuseIdentifier, bundle: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -77,16 +53,39 @@ class FoodNutritionVC: UIViewController {
     @IBAction func addOrSaveFood(sender: Any) {
         guard let food = food,
             let qty = qtyTextField.text
-        else {
-            if let chooseFood = chooseFood, let qty = qtyTextField.text {
-                let newFood = Food(qty: qty, foodIngredient: chooseFood.foodIngredient)
-                self.closure?(newFood)
-                self.navigationController?.popViewController(animated: false)
-            }
-            return
+        else { return }
+        if !qty.isEmpty {
+            let food = Food(qty: qty, foodIngredient: food)
+            self.closure?(food)
+            self.navigationController?.popViewController(animated: false)
+        } else {
+            self.presentInputAlert(title: "輸入欄位不得為空")
         }
-        let chooseFood = Food(qty: qty, foodIngredient: food)
-        self.closure?(chooseFood)
-        self.navigationController?.popViewController(animated: false)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let food = food else { fatalError("Could not find food.") }
+        if food.commonName.isEmpty {
+            return 1
+        } else {
+            return 2
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let food = food else { fatalError("Could not find food.") }
+        if food.commonName.isEmpty || indexPath.row == 1 {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: FoodNutritionCell.reuseIdentifier, for: indexPath) as? FoodNutritionCell
+            else { fatalError("Could not create the food nutrition cell.") }
+            cell.layoutCell(food: food)
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: CommonNameCell.reuseIdentifier, for: indexPath) as? CommonNameCell
+            else { fatalError("Could not create the commonname cell.") }
+            cell.layoutCell(food: food)
+            return cell
+        }
     }
 }

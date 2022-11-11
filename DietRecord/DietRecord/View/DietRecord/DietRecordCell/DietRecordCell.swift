@@ -15,6 +15,10 @@ class DietRecordCell: UITableViewCell {
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var foodStackView: UIStackView!
     @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var commentTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var commentButtomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var whiteBackgroundView: UIView!
+    @IBOutlet weak var commentTitleLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -33,6 +37,7 @@ class DietRecordCell: UITableViewCell {
     }
     
     func layoutCell(mealRecord: MealRecord?) {
+        whiteBackgroundView.setShadowAndRadius(radius: 10)
         mealLabel.clipsToBounds = true
         mealLabel.layer.cornerRadius = 10
         if let mealRecord = mealRecord {
@@ -54,8 +59,23 @@ class DietRecordCell: UITableViewCell {
             caloriesLabel.text = calculateMacroNutrition(
                 foods: mealRecord.foods,
                 nutrient: .calories).format().transform(unit: kcalUnit)
-            commentLabel.text = mealRecord.comment
-            mealImage.loadImage(mealRecord.imageURL, placeHolder: UIImage(named: "Image_Placeholder"))
+            if let imageURL = mealRecord.imageURL {
+                mealImage.loadImage(imageURL)
+                commentTopConstraint.constant = 202
+            } else {
+                commentTopConstraint.constant = 8
+            }
+            
+            if !mealRecord.comment.isEmpty {
+                commentLabel.text = mealRecord.comment
+                commentButtomConstraint.constant = 36
+                commentLabel.isHidden = false
+                commentTitleLabel.isHidden = false
+            } else {
+                commentButtomConstraint.constant = 0
+                commentLabel.isHidden = true
+                commentTitleLabel.isHidden = true
+            }
         }
     }
 }

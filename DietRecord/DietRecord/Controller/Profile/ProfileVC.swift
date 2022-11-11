@@ -31,7 +31,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
-    var fullScreenSize = UIScreen.main.bounds.size
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
@@ -57,7 +56,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             case .success(let dietRecords):
                 var mealDatas: [MealRecord] = []
                 for dietRecord in dietRecords {
-                    let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }
+                    let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
                     mealDatas.append(contentsOf: mealRecords)
                 }
                 self.selfMealRecords = mealDatas.reversed()
@@ -71,7 +70,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         profileProvider.fetchFollowingPost { result in
             switch result {
             case .success(let mealRecords):
-                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }
+                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
             case .failure(let error):
                 print("Error Info: \(error).")
             }

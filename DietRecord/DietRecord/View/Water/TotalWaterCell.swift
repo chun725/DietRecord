@@ -23,7 +23,7 @@ class TotalWaterCell: UITableViewCell {
         if goal != 0.0 {
             percentLabel.text = (water / goal * 100).format() + "%"
         }
-        whiteBackgroundView.setShadowAndRadius(radius: 20)
+        whiteBackgroundView.setShadowAndRadius(radius: 10)
         self.backgroundColor = .clear
         let subviews = waterPieChartView.subviews
         for subview in subviews {

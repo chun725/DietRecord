@@ -33,10 +33,10 @@
                                 <color key="backgroundColor" name="drYellow"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mmA-ZR-dJ6">
-                                <rect key="frame" x="374" y="55" width="24" height="18"/>
+                                <rect key="frame" x="368" y="52" width="30" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="mmA-ZR-dJ6" secondAttribute="height" id="7hy-EZ-Lva"/>
-                                    <constraint firstAttribute="height" constant="24" id="gvw-Du-ZQh"/>
+                                    <constraint firstAttribute="height" constant="30" id="gvw-Du-ZQh"/>
                                 </constraints>
                                 <color key="tintColor" name="drDarkGray"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -64,14 +64,14 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OeG-v7-HYV">
-                                                    <rect key="frame" x="374" y="283.5" width="24" height="23"/>
+                                                    <rect key="frame" x="374" y="285" width="24" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="2jV-nu-Ydn"/>
                                                         <constraint firstAttribute="width" secondItem="OeG-v7-HYV" secondAttribute="height" id="YL8-nu-G0b"/>
                                                     </constraints>
                                                     <color key="tintColor" name="drDarkGray"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" backgroundImage="plus.circle" catalog="system"/>
+                                                    <state key="normal" backgroundImage="plus" catalog="system"/>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QV5-fT-o9a">
                                                     <rect key="frame" x="24" y="318" width="366" height="57"/>
@@ -125,13 +125,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LN0-ZH-8u2">
-                                                    <rect key="frame" x="296" y="24.5" width="24" height="23"/>
+                                                    <rect key="frame" x="296" y="24" width="24" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="Vbp-x5-wQq"/>
                                                     </constraints>
                                                     <color key="tintColor" name="drDarkGray"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" backgroundImage="pencil.circle" catalog="system"/>
+                                                    <state key="normal" backgroundImage="Image_Edit-1"/>
                                                     <connections>
                                                         <action selector="goToChangeGoalPage:" destination="KrZ-9N-Pnj" eventType="touchUpInside" id="V5K-di-fuV"/>
                                                     </connections>
@@ -150,13 +150,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f2f-Sr-eDt">
-                                                    <rect key="frame" x="374" y="394.5" width="24" height="23"/>
+                                                    <rect key="frame" x="374" y="396" width="24" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="24" id="eSD-dv-8XO"/>
                                                     </constraints>
                                                     <color key="tintColor" name="drDarkGray"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" backgroundImage="plus.circle" catalog="system"/>
+                                                    <state key="normal" backgroundImage="plus" catalog="system"/>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="喝水提醒" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TVr-cX-Hoq">
                                                     <rect key="frame" x="48.5" y="391" width="64" height="30"/>
@@ -216,46 +216,52 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJ3-1j-rJd">
-                                                    <rect key="frame" x="24" y="8" width="366" height="91"/>
+                                                    <rect key="frame" x="24" y="8" width="366" height="83"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:20" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-oC-akG">
-                                                            <rect key="frame" x="159" y="33" width="48" height="25.5"/>
-                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-oC-akG">
+                                                            <rect key="frame" x="141.5" y="8" width="83.5" height="67"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="40" id="lMe-s2-Mpn"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="30"/>
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
+                                                            <size key="shadowOffset" width="0.0" height="0.0"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h5M-pR-JC9">
-                                                            <rect key="frame" x="340" y="10.5" width="16" height="15"/>
+                                                            <rect key="frame" x="332" y="29.5" width="24" height="24"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="h5M-pR-JC9" secondAttribute="height" id="MgZ-6e-sqb"/>
-                                                                <constraint firstAttribute="height" constant="16" id="mEH-5g-Mkg"/>
+                                                                <constraint firstAttribute="height" constant="24" id="mEH-5g-Mkg"/>
                                                             </constraints>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                            <state key="normal" backgroundImage="xmark.circle" catalog="system"/>
+                                                            <state key="normal" backgroundImage="Image_Delete"/>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="h5M-pR-JC9" secondAttribute="trailing" constant="10" id="EX3-j7-QR8"/>
-                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerX" secondItem="HJ3-1j-rJd" secondAttribute="centerX" id="O1T-sX-VUC"/>
-                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="rgN-82-25c"/>
-                                                        <constraint firstAttribute="height" constant="40" id="tSH-Wn-XDX"/>
-                                                        <constraint firstItem="h5M-pR-JC9" firstAttribute="top" secondItem="HJ3-1j-rJd" secondAttribute="top" constant="10" id="z9c-UT-NVT"/>
+                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerX" secondItem="HJ3-1j-rJd" secondAttribute="centerX" id="6yB-hd-I1I"/>
+                                                        <constraint firstItem="h5M-pR-JC9" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="SOA-cc-uv4"/>
+                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="top" secondItem="HJ3-1j-rJd" secondAttribute="top" constant="8" id="ZHI-Sl-CdD"/>
+                                                        <constraint firstAttribute="bottom" secondItem="EGr-oC-akG" secondAttribute="bottom" constant="8" id="a05-P5-CGc"/>
+                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="nZV-U4-Rkb"/>
+                                                        <constraint firstItem="h5M-pR-JC9" firstAttribute="trailing" secondItem="HJ3-1j-rJd" secondAttribute="trailing" constant="-10" id="u3f-Vb-Rl1"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
+                                            <color key="backgroundColor" name="drLightGray"/>
                                             <constraints>
-                                                <constraint firstItem="HJ3-1j-rJd" firstAttribute="leading" secondItem="U6p-8w-ATZ" secondAttribute="leading" constant="24" id="3cO-hm-2Dj"/>
-                                                <constraint firstAttribute="trailing" secondItem="HJ3-1j-rJd" secondAttribute="trailing" constant="24" id="EfM-KQ-fKU"/>
-                                                <constraint firstItem="HJ3-1j-rJd" firstAttribute="top" secondItem="U6p-8w-ATZ" secondAttribute="top" constant="8" id="b6U-VJ-DZO"/>
-                                                <constraint firstAttribute="bottom" secondItem="HJ3-1j-rJd" secondAttribute="bottom" constant="8" id="rN7-nx-FzA"/>
+                                                <constraint firstItem="HJ3-1j-rJd" firstAttribute="leading" secondItem="U6p-8w-ATZ" secondAttribute="leading" constant="24" id="F0F-ag-98W"/>
+                                                <constraint firstAttribute="trailing" secondItem="HJ3-1j-rJd" secondAttribute="trailing" constant="24" id="MLV-Ug-Hb8"/>
+                                                <constraint firstItem="HJ3-1j-rJd" firstAttribute="top" secondItem="U6p-8w-ATZ" secondAttribute="top" constant="8" id="fEr-xR-zAE"/>
+                                                <constraint firstAttribute="bottom" secondItem="HJ3-1j-rJd" secondAttribute="bottom" constant="16" id="x2o-rI-ajL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="deleteButton" destination="h5M-pR-JC9" id="Dn5-Rb-sTN"/>
-                                            <outlet property="reminderBackgroundView" destination="HJ3-1j-rJd" id="f9c-uv-Rjl"/>
-                                            <outlet property="timeLabel" destination="EGr-oC-akG" id="bep-Vz-wnE"/>
+                                            <outlet property="reminderBackgroundView" destination="HJ3-1j-rJd" id="9ct-S2-KF1"/>
+                                            <outlet property="reminderTimeLabel" destination="EGr-oC-akG" id="oUd-df-Nqg"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -471,9 +477,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="drYellow"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_WaterPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="NDe-9u-lmC">
+                                <rect key="frame" x="0.0" y="374" width="414" height="488"/>
+                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RS4-Oz-Jbh">
-                                <rect key="frame" x="0.0" y="328" width="414" height="240"/>
-                                <color key="backgroundColor" name="drLightGray"/>
+                                <rect key="frame" x="0.0" y="134" width="414" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="Jhb-1b-xPY"/>
                                 </constraints>
@@ -496,14 +504,18 @@
                         <constraints>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="1B8-h3-9P7"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="width" secondItem="Vt8-Tt-zQP" secondAttribute="height" id="1Cu-45-sBx"/>
+                            <constraint firstItem="NDe-9u-lmC" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="4JU-9f-FWt"/>
                             <constraint firstItem="RS4-Oz-Jbh" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="5k6-aj-bJi"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" constant="16" id="9QP-dT-DNt"/>
                             <constraint firstItem="RS4-Oz-Jbh" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="CKE-VB-SJQ"/>
-                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="centerY" secondItem="BZB-rl-CuT" secondAttribute="centerY" id="J7e-tR-Bfj"/>
+                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="top" secondItem="l8B-q4-eFV" secondAttribute="bottom" constant="50" id="Gzs-oS-QDh"/>
+                            <constraint firstItem="1mh-r4-E3y" firstAttribute="trailing" secondItem="NDe-9u-lmC" secondAttribute="trailing" id="O25-0i-jbI"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="centerY" secondItem="l8B-q4-eFV" secondAttribute="centerY" id="PSk-4p-nMc"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="XQi-Lv-xZv"/>
+                            <constraint firstItem="1mh-r4-E3y" firstAttribute="bottom" secondItem="NDe-9u-lmC" secondAttribute="bottom" id="Yvc-Uy-GGw"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="bBK-rj-7Wg"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="top" secondItem="BZB-rl-CuT" secondAttribute="top" id="cK6-85-moK"/>
+                            <constraint firstItem="NDe-9u-lmC" firstAttribute="top" secondItem="RS4-Oz-Jbh" secondAttribute="bottom" id="jTm-vg-hOV"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="jcY-hz-kzE"/>
                             <constraint firstItem="1mh-r4-E3y" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="quM-bv-fhc"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="wlY-vN-FiW"/>
@@ -519,14 +531,15 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image_Delete" width="512" height="512"/>
+        <image name="Image_Edit-1" width="512" height="512"/>
         <image name="Image_Reminder" width="512" height="512"/>
         <image name="Image_Water" width="512" height="512"/>
+        <image name="Image_WaterPlaceholder" width="2999" height="1687"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="list.dash" catalog="system" width="128" height="85"/>
-        <image name="pencil.circle" catalog="system" width="128" height="121"/>
-        <image name="plus.circle" catalog="system" width="128" height="121"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="wake" catalog="system" width="128" height="121"/>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

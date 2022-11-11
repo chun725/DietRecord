@@ -104,6 +104,7 @@ class WaterInputVC: UIViewController {
             userDefault.set([timeString], forKey: waterReminder)
         } else {
             reminders?.append(timeString)
+            reminders = reminders?.sorted()
             userDefault.set(reminders, forKey: waterReminder)
         }
         UNUserNotificationCenter.current().add(request)

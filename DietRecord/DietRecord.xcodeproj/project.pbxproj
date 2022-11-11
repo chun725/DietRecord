@@ -76,6 +76,7 @@
 		34C00061291CA43600670CA4 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00060291CA43600670CA4 /* UITextField+Extension.swift */; };
 		34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00062291CAB1000670CA4 /* UIViewController+Extension.swift */; };
 		34C00065291CE31B00670CA4 /* ChooseDateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00064291CE31B00670CA4 /* ChooseDateVC.swift */; };
+		34C00067291E1FD600670CA4 /* WaterHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00066291E1FD600670CA4 /* WaterHistoryVC.swift */; };
 		34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740729135742009F9264 /* TotalWaterCell.swift */; };
 		34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */; };
 		34CF740D29135D02009F9264 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740C29135D02009F9264 /* Water.swift */; };
@@ -167,6 +168,7 @@
 		34C00060291CA43600670CA4 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		34C00062291CAB1000670CA4 /* UIViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extension.swift"; sourceTree = "<group>"; };
 		34C00064291CE31B00670CA4 /* ChooseDateVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateVC.swift; sourceTree = "<group>"; };
+		34C00066291E1FD600670CA4 /* WaterHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterHistoryVC.swift; sourceTree = "<group>"; };
 		34CF740729135742009F9264 /* TotalWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterCell.swift; sourceTree = "<group>"; };
 		34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRecordProvider.swift; sourceTree = "<group>"; };
 		34CF740C29135D02009F9264 /* Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
@@ -505,6 +507,7 @@
 			isa = PBXGroup;
 			children = (
 				34270E6A290D531F00D5AFFD /* WaterVC.swift */,
+				34C00066291E1FD600670CA4 /* WaterHistoryVC.swift */,
 				34CF740F291365DF009F9264 /* WaterInputVC.swift */,
 			);
 			path = Water;
@@ -786,6 +789,7 @@
 				34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */,
 				34270E91290F810100D5AFFD /* FoodDailyCell.swift in Sources */,
 				34642957290D2B2D0070B425 /* DRConstant.swift in Sources */,
+				34C00067291E1FD600670CA4 /* WaterHistoryVC.swift in Sources */,
 				3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */,
 				34CF7410291365DF009F9264 /* WaterInputVC.swift in Sources */,
 				34642932290CF79A0070B425 /* AppDelegate.swift in Sources */,

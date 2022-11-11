@@ -10,11 +10,10 @@ import UIKit
 class WaterReminderCell: UITableViewCell {
     @IBOutlet weak var reminderBackgroundView: UIView!
     @IBOutlet weak var deleteButton: UIButton!
-    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var reminderTimeLabel: UILabel!
     
     func layoutCell(time: String) {
-        self.backgroundColor = .clear
-        reminderBackgroundView.layer.cornerRadius = 5
-        timeLabel.text = time
+        reminderBackgroundView.setShadowAndRadius(radius: 10)
+        reminderTimeLabel.text = time
     }
 }

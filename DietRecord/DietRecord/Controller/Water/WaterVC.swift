@@ -16,7 +16,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    var waterGoal: Double = 2000 {
+    var waterGoal: Double = userData?.waterGoal.transformToDouble() ?? 0.0 {
         didSet {
             waterTableView.reloadData()
         }
@@ -28,6 +28,8 @@ class WaterVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    var isLoading = true
+    
     let waterRecordProvider = WaterRecordProvider()
     
     override func viewDidLoad() {
@@ -38,6 +40,14 @@ class WaterVC: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchWaterRecord()
+    }
+    
+    @IBAction func goToHistoryPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: water, bundle: nil)
+        if let waterHistoryPage = storyboard.instantiateViewController(withIdentifier: "\(WaterHistoryVC.self)")
+            as? WaterHistoryVC {
+            present(waterHistoryPage, animated: false)
+        }
     }
     
     @objc func goToWaterInputVC(sender: UIButton) {
@@ -74,10 +84,13 @@ class WaterVC: UIViewController, UITableViewDataSource {
         waterRecordProvider.fetchWaterRecord { result in
             switch result {
             case .success(let data):
+                self.isLoading = false
+                self.waterGoal = userData?.waterGoal.transformToDouble() ?? 0.0
                 if let waterRecord = data as? WaterRecord {
                     self.waterCurrent = waterRecord.water.transformToDouble()
                 }
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "無法讀取飲水量資料")
                 print("Error Info: \(error)")
             }
         }
@@ -88,8 +101,12 @@ class WaterVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let reminders = reminders else { return section == 0 ? 1 : 0 }
-        return section == 0 ? 1 : reminders.count
+        if isLoading {
+            return 0
+        } else {
+            guard let reminders = reminders else { return section == 0 ? 1 : 0 }
+            return section == 0 ? 1 : reminders.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -101,6 +118,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
             cell.addWaterButton.addTarget(self, action: #selector(goToWaterInputVC), for: .touchUpInside)
             cell.addReminderButton.tag = 1
             cell.addReminderButton.addTarget(self, action: #selector(goToWaterInputVC), for: .touchUpInside)
+            cell.controller = self
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(

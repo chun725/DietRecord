@@ -17,6 +17,6 @@ class ReportBarChartCell: UITableViewCell {
             subview.removeFromSuperview()
         }
         let barChart = BarChart(frame: .zero, superview: barChartView)
-        barChart.setBarChart(date: date, foodDailyInputs: foodDailyInputs, goal: goal)
+        barChart.setReportBarChart(date: date, foodDailyInputs: foodDailyInputs, goal: goal)
     }
 }

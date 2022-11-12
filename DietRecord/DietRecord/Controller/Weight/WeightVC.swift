@@ -92,11 +92,14 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func fetchWeightRecord() {
+        LKProgressHUD.show()
         weightRecordProvider.fetchWeightRecord { result in
             switch result {
             case .success(let weightDatas):
+                LKProgressHUD.dismiss()
                 self.weightRecord = weightDatas
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")
             }
         }

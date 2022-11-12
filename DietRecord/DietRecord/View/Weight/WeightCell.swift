@@ -23,7 +23,7 @@ class WeightCell: UITableViewCell {
     func layoutCell(weightData: WeightData) {
         dateLabel.text = dateFormatter.string(from: weightData.date)
         weightLabel.text = weightData.value.format().transform(unit: kgUnit)
-        whiteBackgroundView.layer.cornerRadius = 20
+        whiteBackgroundView.setShadowAndRadius(radius: 20)
         self.backgroundColor = .clear
     }
 }

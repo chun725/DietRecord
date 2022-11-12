@@ -11,18 +11,22 @@ import CoreMIDI
 
 class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var weightLineChart: UIView!
-    @IBOutlet weak var weightCurrentLabel: UILabel!
     @IBOutlet weak var weightTableView: UITableView!
+    @IBOutlet weak var changeGoalButton: UIButton!
+    @IBOutlet weak var weightGoalLabel: UILabel!
     
     var weightRecord: [WeightData] = [] {
         didSet {
-            lineChart?.setWeightLineChart(datas: weightRecord, goal: 52)
-            let lastWeight = weightRecord.last?.value
-            weightCurrentLabel.text = lastWeight?.format().transform(unit: kgUnit)
+            lineChart?.setWeightLineChart(datas: weightRecord, goal: weightGoal)
             weightTableView.reloadData()
         }
     }
-    
+    var weightGoal: Double = 0.0 {
+        didSet {
+            lineChart?.setWeightLineChart(datas: weightRecord, goal: weightGoal)
+            weightGoalLabel.text = "目標體重 \(weightGoal.format()) kg"
+        }
+    }
     var lineChart: LineChart?
     let healthManager = HealthKitManager()
     let weightRecordProvider = WeightRecordProvider()
@@ -30,7 +34,6 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         lineChart = LineChart(frame: .zero, superview: weightLineChart)
-        lineChart?.setWeightLineChart(datas: weightRecord, goal: 52)
         weightTableView.dataSource = self
         weightTableView.delegate = self
         getHealthKitPermission()
@@ -39,6 +42,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchWeightRecord()
+        self.weightGoal = userData?.weightGoal.transformToDouble() ?? 0.0
     }
     
     func getHealthKitPermission() {
@@ -98,12 +102,19 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    @IBAction func goToWeightInputVC(_ sender: Any) {
+    @IBAction func goToWeightInputVC(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: weight, bundle: nil)
         if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
             as? WeightInputVC {
-            weightInputPage.closure = { [weak self] in
-                self?.fetchWeightRecord()
+            if sender == changeGoalButton {
+                weightInputPage.isSetGoal = true
+                weightInputPage.closure = { [weak self] weight in
+                    self?.weightGoal = weight
+                }
+            } else {
+                weightInputPage.closure = { [weak self] _ in
+                    self?.fetchWeightRecord()
+            }
             }
             self.present(weightInputPage, animated: false)
         }
@@ -134,11 +145,17 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - TableViewDelegate -
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        "體重紀錄"
+        "體重記錄"
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         40
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let view = view as? UITableViewHeaderFooterView {
+            view.contentView.backgroundColor = .drLightGray
+        }
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

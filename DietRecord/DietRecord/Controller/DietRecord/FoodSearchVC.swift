@@ -149,6 +149,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         tableView.headerView(forSection: 0)?.contentView.backgroundColor = .drLightGray
+        tableView.headerView(forSection: 1)?.contentView.backgroundColor = .drLightGray
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {

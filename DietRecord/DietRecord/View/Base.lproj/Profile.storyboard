@@ -11,7 +11,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--ProfileVC-->
+        <!--Profile-->
         <scene sceneID="8oP-xM-VBU">
             <objects>
                 <viewController id="UXb-N6-1iu" customClass="ProfileVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
@@ -35,7 +35,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ubp-ae-ezY">
-                                <rect key="frame" x="0.0" y="260" width="414" height="602"/>
+                                <rect key="frame" x="0.0" y="260" width="414" height="553"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hCy-6L-Oww">
                                     <size key="itemSize" width="128" height="128"/>
@@ -134,7 +134,7 @@
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="4le-0R-joQ">
-                                <rect key="frame" x="0.0" y="260" width="414" height="602"/>
+                                <rect key="frame" x="0.0" y="260" width="414" height="553"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="U3H-CA-Fm5">
@@ -269,7 +269,9 @@
                             <constraint firstItem="1r6-Na-zxT" firstAttribute="centerX" secondItem="AKq-Sp-0zC" secondAttribute="centerX" id="zJr-22-eqK"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="Profile" image="person" catalog="system" selectedImage="person.fill" id="EcH-XH-d5z"/>
                     <navigationItem key="navigationItem" id="G9v-lL-fZd"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="followersLabel" destination="2ub-mT-91L" id="9D5-3U-yUF"/>
                         <outlet property="followingLabel" destination="4XG-RP-Crr" id="hMN-Rk-YCH"/>
@@ -283,7 +285,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j4Z-sX-fhe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <tabBarItem title="Profile" id="EcH-XH-d5z"/>
             </objects>
             <point key="canvasLocation" x="2547.826086956522" y="869.86607142857144"/>
         </scene>
@@ -755,7 +756,9 @@
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
+        <image name="person" catalog="system" width="128" height="117"/>
         <image name="person.circle" catalog="system" width="128" height="121"/>
+        <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">

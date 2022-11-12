@@ -8,7 +8,9 @@
 import Foundation
 import Charts
 
-class BarChart: BarChartView {
+class BarChart: BarChartView, ChartViewDelegate {
+    private var referenceTimeInterval: TimeInterval = 0
+    
     init(frame: CGRect, superview: UIView) {
         super.init(frame: frame)
         initView(superview: superview)
@@ -36,15 +38,6 @@ class BarChart: BarChartView {
     func setReportBarChart(date: String, foodDailyInputs: [FoodDailyInput]?, goal: Double) {
         guard let date = dateFormatter.date(from: date) else { return }
         let firstDate = date.advanced(by: -60 * 60 * 24 * 6)
-        
-        let referenceTimeInterval = firstDate.timeIntervalSince1970
-        barChartDateFormatter.dateFormat = "MM/dd"
-        barChartDateFormatter.locale = .current
-        
-        let xValuesNumberFormatter = ChartXAxisFormatter(
-            referenceTimeInterval: referenceTimeInterval,
-            dateFormatter: barChartDateFormatter)
-        self.xAxis.valueFormatter = xValuesNumberFormatter
         
         self.dragEnabled = false // 關閉拖移手勢
         self.xAxis.axisMinimum = -0.9
@@ -111,7 +104,7 @@ class BarChart: BarChartView {
         limitLine.lineColor = .red // 線條顏色
         limitLine.lineDashLengths = [4, 2] // 設定警戒線為虛線
         self.leftAxis.addLimitLine(limitLine)
-        self.leftAxis.drawLimitLinesBehindDataEnabled = true // 警戒線在折線圖下
+        self.leftAxis.drawLimitLinesBehindDataEnabled = false // 警戒線在折線圖下
     }
     
     func setWaterBarChart(waterRecords: [WaterRecord]) {
@@ -152,7 +145,7 @@ class BarChart: BarChartView {
     }
     
     private func configureBarChart(firstDate: Date, chartData: BarChartData) {
-        let referenceTimeInterval = firstDate.timeIntervalSince1970
+        self.referenceTimeInterval = firstDate.timeIntervalSince1970
         barChartDateFormatter.dateFormat = "MM/dd"
         barChartDateFormatter.locale = .current
         
@@ -179,5 +172,6 @@ class BarChart: BarChartView {
         self.leftAxis.drawAxisLineEnabled = false // 不顯示左側y軸線
         self.leftAxis.granularity = 300
         self.leftAxis.axisMinimum = 0 // 最小刻度值
+        self.animate(yAxisDuration: 1)
     }
 }

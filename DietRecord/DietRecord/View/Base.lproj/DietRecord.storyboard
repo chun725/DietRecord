@@ -38,13 +38,13 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YQe-X7-twB">
-                                <rect key="frame" x="368" y="49" width="30" height="28.5"/>
+                                <rect key="frame" x="368" y="49" width="30" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="30" id="9NM-zk-FaQ"/>
                                 </constraints>
                                 <color key="tintColor" name="drDarkGray"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
+                                <state key="normal" backgroundImage="Image_Edit-1"/>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BBL-ml-AV7">
                                 <rect key="frame" x="0.0" y="84" width="414" height="778"/>
@@ -198,7 +198,7 @@
         <scene sceneID="kwt-m7-qWJ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="75Q-Fb-smX" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="DietRecord" id="Z60-uJ-5Bt"/>
+                    <tabBarItem key="tabBarItem" title="DietRecord" image="fork.knife.circle" catalog="system" selectedImage="fork.knife.circle.fill" id="Z60-uJ-5Bt"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3ql-6V-6Gh">
                         <autoresizingMask key="autoresizingMask"/>
@@ -648,10 +648,12 @@
     </scenes>
     <resources>
         <image name="Image_Calendar" width="512" height="512"/>
+        <image name="Image_Edit-1" width="512" height="512"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.right.circle" catalog="system" width="128" height="121"/>
+        <image name="fork.knife.circle" catalog="system" width="128" height="121"/>
+        <image name="fork.knife.circle.fill" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

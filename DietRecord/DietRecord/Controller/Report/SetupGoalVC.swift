@@ -25,6 +25,16 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     @IBAction func goBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }

@@ -8,8 +8,8 @@
 import UIKit
 
 class ReportVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var reportTableView: UITableView!
+    @IBOutlet weak var dateTextField: UITextField!
     
     let reportProvider = ReportProvider()
     var weeklyDietRecord: [FoodDailyInput]? {
@@ -18,12 +18,14 @@ class ReportVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    var isLoading = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        datePicker.addTarget(self, action: #selector(fetchWeeklyDiet), for: .valueChanged)
         fetchWeeklyDiet()
         reportTableView.dataSource = self
         reportTableView.registerCellWithNib(identifier: ReportDetailCell.reuseIdentifier, bundle: nil)
+        dateTextField.text = dateFormatter.string(from: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,13 +33,36 @@ class ReportVC: UIViewController, UITableViewDataSource {
         reportTableView.reloadData()
     }
     
+    @IBAction func goToChooseDatePage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
+            as? ChooseDateVC {
+            chooseDatePage.date = self.dateTextField.text
+            chooseDatePage.closure = { [weak self] date in
+                if self?.dateTextField.text != date {
+                    self?.dateTextField.text = date
+                    self?.fetchWeeklyDiet()
+                }
+            }
+            self.present(chooseDatePage, animated: false)
+        }
+    }
+    
     @objc func fetchWeeklyDiet() {
-        reportProvider.fetchWeeklyDietRecord(date: datePicker.date) { result in
+        LKProgressHUD.show()
+        isLoading = true
+        guard let dateString = dateTextField.text,
+            let date = dateFormatter.date(from: dateString)
+        else { return }
+        reportProvider.fetchWeeklyDietRecord(date: date) { result in
             switch result {
             case .success(let data):
+                self.isLoading = false
+                LKProgressHUD.dismiss()
                 let weeklyDietRecordData = data as? [FoodDailyInput]
                 self.weeklyDietRecord = weeklyDietRecordData
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "讀取飲食記錄失敗")
                 print("Error Info: \(error).")
             }
         }
@@ -52,16 +77,20 @@ class ReportVC: UIViewController, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        2
+        if isLoading {
+            return 0
+        } else {
+            return 2
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: ReportBarChartCell.reuseIdentifier, for: indexPath) as? ReportBarChartCell,
-                let goal = userData?.goal[0]
+                let goal = userData?.goal[0],
+                let date = dateTextField.text
             else { fatalError("Could not create report bar chart cell.") }
-            let date = dateFormatter.string(from: datePicker.date)
             cell.setBarChart(date: date, foodDailyInputs: weeklyDietRecord, goal: goal.transformToDouble())
             return cell
         } else {

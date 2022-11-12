@@ -26,6 +26,12 @@ class GoalVC: UIViewController {
         carbsLabel.text = userData?.goal[1].transform(unit: gUnit)
         proteinLabel.text = userData?.goal[2].transform(unit: gUnit)
         fatLabel.text = userData?.goal[3].transform(unit: gUnit)
+        whiteBackgroundView.setShadowAndRadius(radius: 10)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {

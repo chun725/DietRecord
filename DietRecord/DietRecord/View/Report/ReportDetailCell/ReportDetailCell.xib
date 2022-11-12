@@ -553,6 +553,7 @@
                 <outlet property="fatGoalLabel" destination="Ep1-cL-sK9" id="k4O-Ju-Bw7"/>
                 <outlet property="fiberCurrentLabel" destination="LyN-E7-J5B" id="Mn7-SV-ueF"/>
                 <outlet property="fiberGoalLabel" destination="yy6-OR-Vx6" id="iyS-GQ-Zef"/>
+                <outlet property="grayBackgroundView" destination="hIZ-2w-uNL" id="NEk-Xv-t6M"/>
                 <outlet property="monounsaturatedFatCurrentLabel" destination="y3y-og-5Vh" id="TYd-L0-zFK"/>
                 <outlet property="monounsaturatedFatGoalLabel" destination="UDr-UJ-Shd" id="XEx-xl-rjo"/>
                 <outlet property="polyunsaturatedFatCurrentLabel" destination="bEb-hp-TKh" id="wOh-E1-gaV"/>

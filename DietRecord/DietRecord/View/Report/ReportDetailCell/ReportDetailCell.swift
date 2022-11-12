@@ -21,6 +21,7 @@ class ReportDetailCell: UITableViewCell {
     @IBOutlet weak var sodiumCurrentLabel: UILabel!
     @IBOutlet weak var potassiumCurrentLabel: UILabel!
     
+    @IBOutlet weak var grayBackgroundView: UIView!
     
     @IBOutlet weak var caloriesGoalLabel: UILabel!
     @IBOutlet weak var carbsGoalLabel: UILabel!
@@ -36,6 +37,7 @@ class ReportDetailCell: UITableViewCell {
     @IBOutlet weak var potassiumGoalLabel: UILabel!
     
     func layoutCell(foodDailyInputs: [FoodDailyInput]?) {
+        grayBackgroundView.setShadowAndRadius(radius: 10)
         guard let foodDailyInputs = foodDailyInputs else { return }
         let totalFoods = foodDailyInputs.flatMap { $0.mealRecord }.flatMap { $0.foods }
         self.caloriesCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .calories).format()

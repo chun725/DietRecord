@@ -201,7 +201,7 @@
                             <constraint firstItem="lhg-An-67W" firstAttribute="top" secondItem="DXy-4i-k2x" secondAttribute="bottom" constant="16" id="vXC-w2-kLU"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weight" id="9Nd-Hb-ocg"/>
+                    <tabBarItem key="tabBarItem" title="Weight" image="figure.stand" catalog="system" id="9Nd-Hb-ocg"/>
                     <connections>
                         <outlet property="weightCurrentLabel" destination="lhg-An-67W" id="U8I-eN-Cks"/>
                         <outlet property="weightLineChart" destination="WAw-ys-ibZ" id="1Uk-zh-r9J"/>
@@ -377,6 +377,7 @@
         <image name="Image_Weight" width="512" height="512"/>
         <image name="arrow.down.circle" catalog="system" width="128" height="121"/>
         <image name="arrow.up.circle" catalog="system" width="128" height="121"/>
+        <image name="figure.stand" catalog="system" width="77" height="128"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkBlue">
             <color red="0.24699999392032623" green="0.45500001311302185" blue="0.74099999666213989" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

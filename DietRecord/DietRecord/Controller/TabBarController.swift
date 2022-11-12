@@ -14,6 +14,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
         super.viewDidLoad()
         configureDateformatter()
         fetchFoodIngredient()
+        self.tabBar.tintColor = .drDarkGray
     }
     
     override func viewWillAppear(_ animated: Bool) {

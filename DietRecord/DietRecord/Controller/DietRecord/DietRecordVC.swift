@@ -37,6 +37,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
         changeDate()
         createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
+        dateTextField.text = dateFormatter.string(from: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {

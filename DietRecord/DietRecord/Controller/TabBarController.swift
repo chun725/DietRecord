@@ -47,14 +47,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        guard let viewControllers = tabBarController.viewControllers else {
-            return false }
-        if viewController == viewControllers[3] || viewController == viewControllers[2] {
-            if userData == nil {
-                return false
-            } else {
-                return true
-            }
+        if userData == nil {
+            return false
         } else {
             return true
         }

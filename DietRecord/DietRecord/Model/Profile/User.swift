@@ -16,4 +16,5 @@ struct User: Codable {
     let username: String
     var goal: [String]
     var waterGoal: String
+    var weightGoal: String
 }

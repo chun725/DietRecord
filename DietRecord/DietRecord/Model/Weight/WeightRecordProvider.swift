@@ -86,4 +86,25 @@ class WeightRecordProvider {
             }
         }
     }
+    
+    func updateWeightGoal(weightGoal: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(userID)
+        documentReference.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    document.exists,
+                    var userData = try? document.data(as: User.self)
+                else { return }
+                userData.weightGoal = weightGoal
+                do {
+                    try documentReference.setData(from: userData)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

@@ -125,6 +125,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         self.leftAxis.axisMaximum = maxWeight + 50 // 最大刻度值
         
         // 設定目標線
+        self.leftAxis.removeAllLimitLines()
         let limitLine = ChartLimitLine(limit: goal, label: "\(goal) kg") // 設置警戒線
         self.leftAxis.addLimitLine(limitLine)
         self.leftAxis.drawLimitLinesBehindDataEnabled = true // 警戒線在折線圖下

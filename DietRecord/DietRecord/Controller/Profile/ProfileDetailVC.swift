@@ -33,7 +33,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
     @IBAction func createResponse(_ sender: Any) {
         guard let mealRecord = mealRecord else { return }
         profileProvider.postResponse(
-            userID: userID,
+            postUserID: mealRecord.userID,
             date: mealRecord.date,
             meal: mealRecord.meal,
             response: responseTextView.text) { result in
@@ -65,6 +65,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
                 withIdentifier: ProfileDetailCell.reuseIdentifier, for: indexPath) as? ProfileDetailCell,
                 let mealRecord = mealRecord
             else { fatalError("Could not create the profile detail cell.") }
+            cell.controller = self
             cell.layoutCell(mealRecord: mealRecord)
             return cell
         } else {
@@ -73,6 +74,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
                 let mealRecord = mealRecord
             else { fatalError("Could not create the profile detail cell.") }
             let response = mealRecord.response[indexPath.row]
+            cell.controller = self
             cell.layoutCell(response: response)
             return cell
         }

@@ -22,6 +22,7 @@ class ProfileDetailCell: UITableViewCell {
     let profileProvider = ProfileProvider()
     var haveResponses = true
     var mealRecord: MealRecord?
+    var otherUserID: String?
     
     func layoutCell(mealRecord: MealRecord) {
         self.backgroundColor = .clear
@@ -41,6 +42,7 @@ class ProfileDetailCell: UITableViewCell {
         likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
         checkResponseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         self.mealRecord = mealRecord
+        otherUserID = mealRecord.userID
         if haveResponses {
             checkResponseButton.isHidden = true
             timeLabel.isHidden = false
@@ -56,6 +58,9 @@ class ProfileDetailCell: UITableViewCell {
                 mealString = Meal.others.rawValue
             }
             timeLabel.text = mealRecord.date + " " + mealString
+            responseButton.addTarget(self, action: #selector(beginResponse), for: .touchUpInside)
+        } else {
+            responseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         }
         if mealRecord.peopleLiked.contains(userID) {
             likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
@@ -93,6 +98,21 @@ class ProfileDetailCell: UITableViewCell {
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
             controller?.navigationController?.pushViewController(profileDetailPage, animated: false)
+        }
+    }
+    
+    @IBAction func goToUserPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
+            as? ProfileVC {
+            userProfilePage.otherUserID = otherUserID
+            controller?.navigationController?.pushViewController(userProfilePage, animated: false)
+        }
+    }
+    
+    @objc func beginResponse() {
+        if let controller = controller as? ProfileDetailVC {
+            controller.responseTextView.becomeFirstResponder()
         }
     }
 }

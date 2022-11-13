@@ -222,11 +222,11 @@
                                                     <rect key="frame" x="24" y="8" width="366" height="83"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-oC-akG">
-                                                            <rect key="frame" x="141.5" y="8" width="83.5" height="67"/>
+                                                            <rect key="frame" x="149.5" y="8" width="67" height="67"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="lMe-s2-Mpn"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="30"/>
+                                                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="24"/>
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -288,7 +288,7 @@
                             <constraint firstItem="TZJ-XY-RWw" firstAttribute="top" secondItem="0oa-ff-ebw" secondAttribute="bottom" id="s6B-Q0-QVz"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Water" image="cup.and.saucer" catalog="system" selectedImage="cup.and.saucer.fill" id="oo2-nE-jxC"/>
+                    <tabBarItem key="tabBarItem" title="Water" image="drop" catalog="system" selectedImage="drop.fill" id="oo2-nE-jxC"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="waterTableView" destination="iFM-eY-72H" id="lD6-BM-hd0"/>
@@ -540,8 +540,8 @@
         <image name="Image_Water" width="512" height="512"/>
         <image name="Image_WaterPlaceholder" width="2999" height="1687"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
-        <image name="cup.and.saucer" catalog="system" width="128" height="91"/>
-        <image name="cup.and.saucer.fill" catalog="system" width="128" height="91"/>
+        <image name="drop" catalog="system" width="101" height="128"/>
+        <image name="drop.fill" catalog="system" width="101" height="128"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">

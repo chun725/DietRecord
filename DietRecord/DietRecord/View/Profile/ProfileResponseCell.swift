@@ -12,12 +12,15 @@ class ProfileResponseCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     
+    var otherUserID: String?
+    weak var controller: UIViewController?
     let profileProvider = ProfileProvider()
     
     func layoutCell(response: Response) {
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         self.backgroundColor = .clear
         responseLabel.text = response.response
+        self.otherUserID = response.person
         profileProvider.fetchUserData(userID: response.person) { result in
             switch result {
             case .success(let user):
@@ -26,6 +29,15 @@ class ProfileResponseCell: UITableViewCell {
             case .failure(let error):
                 print("Error Info: \(error).")
             }
+        }
+    }
+
+    @IBAction func goToUserPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
+            as? ProfileVC {
+            userProfilePage.otherUserID = otherUserID
+            controller?.navigationController?.pushViewController(userProfilePage, animated: false)
         }
     }
 }

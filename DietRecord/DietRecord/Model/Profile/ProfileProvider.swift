@@ -8,7 +8,7 @@
 import Foundation
 
 class ProfileProvider {
-    func fetchImage(completion: @escaping (Result<[FoodDailyInput], Error>) -> Void) {
+    func fetchImage(userID: String, completion: @escaping (Result<[FoodDailyInput], Error>) -> Void) {
         var dietRecords: [FoodDailyInput] = []
         database.collection(user).document(userID).collection(diet).getDocuments { snapshot, error in
             if let error = error {
@@ -91,8 +91,8 @@ class ProfileProvider {
         }
     }
     
-    func postResponse(userID: String, date: String, meal: Int, response: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(userID).collection(diet).document(date)
+    func postResponse(postUserID: String, date: String, meal: Int, response: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(postUserID).collection(diet).document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
@@ -211,7 +211,7 @@ class ProfileProvider {
         }
     }
     
-    func fetchRequest(completion: @escaping (Result<[User], Error>) -> Void) {
+    func fetchUsersData(userID: String, need: String, completion: @escaping (Result<[User], Error>) -> Void) {
         let documentRef = database.collection(user).document(userID)
         documentRef.getDocument { document, error in
             if let error = error {
@@ -224,7 +224,16 @@ class ProfileProvider {
                 var users: [User] = []
                 let downloadGroup = DispatchGroup()
                 var blocks: [DispatchWorkItem] = []
-                for followerID in userData.request {
+                var usersID: [String] = []
+                switch need {
+                case "Followers":
+                    usersID = userData.followers
+                case "Following":
+                    usersID = userData.following
+                default:
+                    usersID = userData.request
+                }
+                for followerID in usersID {
                     downloadGroup.enter()
                     let block = DispatchWorkItem(flags: .inheritQoS) {
                         database.collection(user).document(followerID).getDocument { document, error in

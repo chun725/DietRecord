@@ -9,25 +9,26 @@ import UIKit
 
 class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
     @IBOutlet weak var photoCollectionView: UICollectionView!
-    @IBOutlet weak var homeTableView: UITableView!
-    @IBOutlet weak var photoButton: UIButton!
-    @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
+    @IBOutlet weak var homeButton: UIButton!
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var editButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var followingButton: UIButton!
+    @IBOutlet weak var followersButton: UIButton!
     
-    var selfMealRecords: [MealRecord] = [] {
+    var otherUserID: String?
+    var otherUserData: User?
+    var mealRecords: [MealRecord] = [] {
         didSet {
             photoCollectionView.reloadData()
-            postLabel.text = String(selfMealRecords.count)
-        }
-    }
-    
-    var followingPosts: [MealRecord] = [] {
-        didSet {
-            homeTableView.reloadData()
+            postLabel.text = String(mealRecords.count)
         }
     }
     
@@ -38,20 +39,34 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         photoCollectionView.collectionViewLayout = configureLayout()
-        homeTableView.dataSource = self
-        homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
-        userImageView.layer.cornerRadius = 25
+        userImageView.layer.cornerRadius = userImageView.bounds.height / 2
+        if otherUserID != nil {
+            self.homeButton.isHidden = true
+            self.checkButton.isHidden = true
+            self.addButton.isHidden = true
+            self.photoCollectionView.isHidden = true
+            titleLabel.text = ""
+        } else {
+            self.backButton.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchFollowingPost()
-        fetchSelfDietRecord()
-        fetchSelfData()
+        fetchDietRecord()
+        fetchData()
+        if otherUserID != nil {
+            self.tabBarController?.tabBar.isHidden = true
+        }
+        editButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
     }
     
-    func fetchSelfDietRecord() {
-        profileProvider.fetchImage { result in
+    func fetchDietRecord() {
+        var id = userID
+        if let otherUserID = otherUserID {
+            id = otherUserID
+        }
+        profileProvider.fetchImage(userID: id) { result in
             switch result {
             case .success(let dietRecords):
                 var mealDatas: [MealRecord] = []
@@ -59,52 +74,68 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                     let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
                     mealDatas.append(contentsOf: mealRecords)
                 }
-                self.selfMealRecords = mealDatas.reversed()
+                self.mealRecords = mealDatas.reversed()
             case .failure(let error):
                 print("Error Info: \(error).")
             }
         }
     }
     
-    func fetchFollowingPost() {
-        profileProvider.fetchFollowingPost { result in
-            switch result {
-            case .success(let mealRecords):
-                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
+    func fetchData() {
+        var id = userID
+        if let otherUserID = otherUserID {
+            id = otherUserID
         }
-    }
-    
-    func fetchSelfData() {
-        profileProvider.fetchUserData(userID: userID) { result in
+        profileProvider.fetchUserData(userID: id) { result in
             switch result {
             case .success(let user):
                 self.followersLabel.text = String(user.followers.count)
                 self.followingLabel.text = String(user.following.count)
                 self.usernameLabel.text = user.username
                 self.userImageView.loadImage(user.userImageURL)
+                if id == userID {
+                    userData = user
+                } else {
+                    self.otherUserData = user
+                }
+                if user.userID == userID {
+                    self.photoCollectionView.isHidden = false
+                    self.editButton.setTitle("編輯個人資料", for: .normal)
+                } else if user.followers.contains(userID) {
+                    self.photoCollectionView.isHidden = false
+                    self.editButton.setTitle("Following", for: .normal)
+                } else if user.request.contains(userID) {
+                    self.editButton.setTitle("Requested", for: .normal)
+                    self.editButton.backgroundColor = .drGray
+                    self.followersButton.isEnabled = false
+                    self.followingButton.isEnabled = false
+                } else {
+                    self.editButton.setTitle("Follow", for: .normal)
+                    self.followersButton.isEnabled = false
+                    self.followingButton.isEnabled = false
+                }
+                
             case .failure(let error):
                 print("Error Info: \(error).")
             }
         }
     }
     
-    @IBAction func changePage(sender: UIButton) {
-        if sender == homeButton {
-            self.photoCollectionView.isHidden = true
-            self.homeTableView.isHidden = false
-        } else {
-            self.photoCollectionView.isHidden = false
-            self.homeTableView.isHidden = true
-        }
-    }
-    
-    @IBAction func goToCheckRequestPage(_ sender: Any) {
+    @IBAction func goToCheckRequestPage(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
+            var id = userID
+            if let otherUserID = otherUserID {
+                id = otherUserID
+            }
+            if sender == followingButton {
+                checkRequestPage.need = "Following"
+                checkRequestPage.otherUserID = id
+            } else if sender == followersButton {
+                checkRequestPage.need = "Followers"
+                checkRequestPage.otherUserID = id
+            }
             self.navigationController?.pushViewController(checkRequestPage, animated: false)
         }
     }
@@ -117,23 +148,79 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
     }
     
+    @IBAction func goToHomePage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let homePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileHomePageVC.self)")
+            as? ProfileHomePageVC {
+            self.navigationController?.pushViewController(homePage, animated: false)
+        }
+    }
+    
+    @objc func requestFollow(sender: UIButton) {
+        guard let otherUserID = otherUserID, let otherUserData = otherUserData else { return }
+        if sender.title(for: .normal) == "Follow" {
+            profileProvider.changeRequest(isRequest: false, followID: otherUserID) { result in
+                switch result {
+                case .success:
+                    sender.setTitle("Requested", for: .normal)
+                    sender.backgroundColor = .drGray
+                case .failure(let error):
+                    print("Error Info: \(error).")
+                }
+            }
+        } else if sender.title(for: .normal) == "Requested" {
+            profileProvider.changeRequest(isRequest: true, followID: otherUserID) { result in
+                switch result {
+                case .success:
+                    sender.setTitle("Follow", for: .normal)
+                    sender.backgroundColor = .drDarkGray
+                case .failure(let error):
+                    print("Error Info: \(error).")
+                }
+            }
+        } else {
+            let alert = UIAlertController(
+                title: "確定要取消對\(otherUserData.username)的追蹤?",
+                message: nil,
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "確定", style: .default) { _ in
+                self.profileProvider.changeFollow(isFollowing: true, followID: otherUserID) { result in
+                    switch result {
+                    case .success:
+                        sender.setTitle("Follow", for: .normal)
+                    case .failure(let error):
+                        print("Error Info: \(error).")
+                    }
+                }
+            }
+            let cancel = UIAlertAction(title: "返回", style: .default)
+            alert.addAction(action)
+            alert.addAction(cancel)
+            self.present(alert, animated: false)
+        }
+    }
+    
+    @IBAction func goBack(_ sender: Any) {
+        self.navigationController?.popViewController(animated: false)
+    }
+    
     // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        selfMealRecords.count
+        mealRecords.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ProfileCell.reuseIdentifier, for: indexPath) as? ProfileCell
         else { fatalError("Could not create the profile cell.") }
-        let mealRecord = selfMealRecords[indexPath.row]
+        let mealRecord = mealRecords[indexPath.row]
         cell.layoutCell(imageURL: mealRecord.imageURL)
         return cell
     }
     
     // MARK: - CollectionViewDelegate -
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let mealRecord = selfMealRecords[indexPath.row]
+        let mealRecord = mealRecords[indexPath.row]
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
@@ -158,22 +245,5 @@ extension ProfileVC: UICollectionViewDelegateFlowLayout {
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         return layout
-    }
-}
-
-extension ProfileVC: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        followingPosts.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: ProfileDetailCell.reuseIdentifier, for: indexPath) as? ProfileDetailCell
-        else { fatalError("Could not create the profile detail cell.") }
-        let mealRecord = self.followingPosts[indexPath.row]
-        cell.haveResponses = false
-        cell.controller = self
-        cell.layoutCell(mealRecord: mealRecord)
-        return cell
     }
 }

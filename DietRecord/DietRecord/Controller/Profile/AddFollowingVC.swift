@@ -105,4 +105,13 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
             self.present(alert, animated: false)
         }
     }
+    
+    @IBAction func goToUserPage(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
+            as? ProfileVC {
+            userProfilePage.otherUserID = self.userInputTextField.text
+            self.navigationController?.pushViewController(userProfilePage, animated: false)
+        }
+    }
 }

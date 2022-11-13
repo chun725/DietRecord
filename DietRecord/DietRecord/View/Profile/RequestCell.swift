@@ -10,6 +10,8 @@ import UIKit
 class RequestCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var checkButton: UIButton!
+    @IBOutlet weak var cancelButton: UIButton!
     
     weak var controller: CheckRequestVC?
     var user: User?

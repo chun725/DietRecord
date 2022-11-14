@@ -22,10 +22,10 @@ class ReportVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateTextField.text = dateFormatter.string(from: Date())
         fetchWeeklyDiet()
         reportTableView.dataSource = self
         reportTableView.registerCellWithNib(identifier: ReportDetailCell.reuseIdentifier, bundle: nil)
-        dateTextField.text = dateFormatter.string(from: Date())
     }
     
     override func viewWillAppear(_ animated: Bool) {

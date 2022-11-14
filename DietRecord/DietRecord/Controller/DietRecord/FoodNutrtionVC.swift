@@ -12,7 +12,10 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var qtyTextField: UITextField!
     @IBOutlet weak var addOrSaveButton: UIButton!
     @IBOutlet weak var nutritionTableView: UITableView!
+    @IBOutlet weak var tableViewButtomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var qtyTextFieldBackground: UIView!
     
+    var isCollectionCell = false
     var isModify = false
     var newFood: FoodIngredient?
     var chooseFood: Food?
@@ -21,16 +24,25 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isModify {
-            addOrSaveButton.setTitle("Save", for: .normal)
-            guard let chooseFood = chooseFood else { return }
-            qtyTextField.text = chooseFood.qty
-            foodNameLabel.text = chooseFood.foodIngredient.name
-            food = chooseFood.foodIngredient
+        if isCollectionCell {
+            tableViewButtomConstraint.isActive = false
+            tableViewButtomConstraint = nutritionTableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            tableViewButtomConstraint.isActive = true
+            addOrSaveButton.isHidden = true
+            qtyTextFieldBackground.isHidden = true
+            foodNameLabel.text = food?.name
         } else {
-            guard let newFood = newFood else { return }
-            foodNameLabel.text = newFood.name
-            food = newFood
+            if isModify {
+                addOrSaveButton.setTitle("Save", for: .normal)
+                guard let chooseFood = chooseFood else { return }
+                qtyTextField.text = chooseFood.qty
+                foodNameLabel.text = chooseFood.foodIngredient.name
+                food = chooseFood.foodIngredient
+            } else {
+                guard let newFood = newFood else { return }
+                foodNameLabel.text = newFood.name
+                food = newFood
+            }
         }
         nutritionTableView.dataSource = self
         nutritionTableView.registerCellWithNib(identifier: FoodNutritionCell.reuseIdentifier, bundle: nil)
@@ -39,11 +51,6 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func goBackToFoodSearchVC(_ sender: Any) {

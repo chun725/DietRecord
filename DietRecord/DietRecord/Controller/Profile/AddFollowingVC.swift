@@ -47,11 +47,14 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let userInput = userInputTextField.text else { return }
         if !userInput.isEmpty {
+            LKProgressHUD.show()
             profileProvider.fetchUserData(userID: userInput) { result in
                 switch result {
                 case .success(let user):
+                    LKProgressHUD.dismiss()
                     self.userSearchResult = user
                 case .failure(let error):
+                    LKProgressHUD.showFailure(text: "無法查詢用戶")
                     print("Error Info: \(error).")
                 }
             }

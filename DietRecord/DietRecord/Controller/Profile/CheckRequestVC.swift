@@ -39,6 +39,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func fetchRequest() {
+        LKProgressHUD.show()
         var id = userID
         if let otherUserID = otherUserID {
             id = otherUserID
@@ -46,8 +47,10 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         profileProvider.fetchUsersData(userID: id, need: need) { result in
             switch result {
             case .success(let users):
+                LKProgressHUD.dismiss()
                 self.requests = users
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "無法獲得資料")
                 print("Error Info: \(error).")
             }
         }

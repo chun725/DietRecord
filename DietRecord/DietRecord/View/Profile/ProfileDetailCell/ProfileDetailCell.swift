@@ -17,11 +17,23 @@ class ProfileDetailCell: UITableViewCell {
     @IBOutlet weak var likedCountLabel: UILabel!
     @IBOutlet weak var checkResponseButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var foodCollectionView: UICollectionView! {
+        didSet {
+            foodCollectionView.dataSource = self
+            foodCollectionView.delegate = self
+            foodCollectionView.collectionViewLayout = configureLayout()
+            foodCollectionView.registerCellWithNib(identifier: FoodCollectionViewCell.reuseIdentifier, bundle: nil)
+        }
+    }
     
     weak var controller: UIViewController?
     let profileProvider = ProfileProvider()
     var haveResponses = true
-    var mealRecord: MealRecord?
+    var mealRecord: MealRecord? {
+        didSet {
+            foodCollectionView.reloadData()
+        }
+    }
     var otherUserID: String?
     
     func layoutCell(mealRecord: MealRecord) {
@@ -63,19 +75,30 @@ class ProfileDetailCell: UITableViewCell {
             responseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         }
         if mealRecord.peopleLiked.contains(userID) {
-            likeButton.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            likeButton.setBackgroundImage(
+                UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate),
+                for: .normal)
+            likeButton.tintColor = .red
             likeButton.tag = mealRecord.peopleLiked.count - 1
         } else {
+            likeButton.setBackgroundImage(
+                UIImage(systemName: "heart"),
+                for: .normal)
+            likeButton.tintColor = .drDarkGray
             likeButton.tag = mealRecord.peopleLiked.count
         }
     }
     
     @objc func addLiked(sender: UIButton) {
         if sender.backgroundImage(for: .normal) == UIImage(systemName: "heart") {
-            sender.setBackgroundImage(UIImage(systemName: "heart.fill"), for: .normal)
+            sender.setBackgroundImage(
+                UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate),
+                for: .normal)
+            sender.tintColor = .red
             likedCountLabel.text = "\(sender.tag + 1)人說讚"
         } else {
             sender.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
+            sender.tintColor = .drDarkGray
             likedCountLabel.text = "\(sender.tag)人說讚"
         }
         guard let mealRecord = mealRecord else { return }
@@ -113,6 +136,43 @@ class ProfileDetailCell: UITableViewCell {
     @objc func beginResponse() {
         if let controller = controller as? ProfileDetailVC {
             controller.responseTextView.becomeFirstResponder()
+        }
+    }
+}
+
+extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        mealRecord?.foods.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: FoodCollectionViewCell.reuseIdentifier, for: indexPath) as? FoodCollectionViewCell,
+            let mealRecord = mealRecord
+        else { fatalError("Could not create the food collection cell.") }
+        let food = mealRecord.foods[indexPath.row]
+        cell.layoutCell(foodname: food.foodIngredient.name)
+        return cell
+    }
+    
+    func configureLayout() -> UICollectionViewFlowLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
+        layout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
+        layout.scrollDirection = .horizontal
+        return layout
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
+            as? FoodNutritionVC {
+            guard let food = mealRecord?.foods[indexPath.row] else { return }
+            foodNutritionPage.food = food.foodIngredient
+            foodNutritionPage.isCollectionCell = true
+            controller?.navigationController?.pushViewController(foodNutritionPage, animated: false)
         }
     }
 }

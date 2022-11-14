@@ -39,6 +39,11 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         followButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let userInput = userInputTextField.text else { return }
         if !userInput.isEmpty {

@@ -55,7 +55,9 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         super.viewWillAppear(animated)
         fetchDietRecord()
         fetchData()
-        if otherUserID != nil {
+        if otherUserID == nil {
+            self.tabBarController?.tabBar.isHidden = false
+        } else {
             self.tabBarController?.tabBar.isHidden = true
         }
         editButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)

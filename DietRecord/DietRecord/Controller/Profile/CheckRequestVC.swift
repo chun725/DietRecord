@@ -33,6 +33,11 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func fetchRequest() {
         var id = userID
         if let otherUserID = otherUserID {
@@ -61,9 +66,12 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             withIdentifier: RequestCell.reuseIdentifier, for: indexPath) as? RequestCell
         else { fatalError("Could not create the request cell.") }
         let user = requests[indexPath.row]
-        if need != "Requset" {
+        if need != "Request" {
             cell.checkButton.isHidden = true
             cell.cancelButton.isHidden = true
+        } else {
+            cell.checkButton.isHidden = false
+            cell.cancelButton.isHidden = false
         }
         cell.controller = self
         cell.layoutCell(user: user)

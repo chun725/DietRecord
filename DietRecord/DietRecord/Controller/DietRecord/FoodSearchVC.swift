@@ -72,6 +72,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             foodNutritionPage.chooseFood = chooseFoods[sender.tag]
+            foodNutritionPage.isModify = true
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods[sender.tag] = food
             }

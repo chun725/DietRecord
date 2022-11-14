@@ -19,6 +19,7 @@ class DietRecordCell: UITableViewCell {
     @IBOutlet weak var commentButtomConstraint: NSLayoutConstraint!
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var commentTitleLabel: UILabel!
+    @IBOutlet weak var photoTitleLabel: UILabel!
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -62,8 +63,12 @@ class DietRecordCell: UITableViewCell {
             if let imageURL = mealRecord.imageURL {
                 mealImage.loadImage(imageURL)
                 commentTopConstraint.constant = 202
+                photoTitleLabel.isHidden = false
+                mealImage.isHidden = false
             } else {
                 commentTopConstraint.constant = 8
+                photoTitleLabel.isHidden = true
+                mealImage.isHidden = true
             }
             
             if !mealRecord.comment.isEmpty {

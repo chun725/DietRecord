@@ -11,7 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="839" id="FtX-TS-geu" customClass="FoodDailyCell" customModule="DietRecord" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="FtX-TS-geu" customClass="FoodDailyCell" customModule="DietRecord" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="839"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="FtX-TS-geu" id="fyx-iA-b7l">
@@ -100,7 +100,7 @@
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <state key="normal" backgroundImage="magnifyingglass" catalog="system"/>
                     </button>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WSz-Dd-KPS">
+                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WSz-Dd-KPS">
                         <rect key="frame" x="24" y="216" width="366" height="54"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="arN-sm-m6d">
@@ -128,11 +128,8 @@
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X6W-62-wR2">
+                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="X6W-62-wR2">
                                 <rect key="frame" x="0.0" y="46" width="366" height="0.0"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="7yc-nL-6eI"/>
-                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -244,7 +241,6 @@
                 <outlet property="dateTextField" destination="o8y-Yv-adZ" id="0Ne-VW-4OK"/>
                 <outlet property="editFoodButton" destination="Cin-r1-SW3" id="Eqy-ee-WwO"/>
                 <outlet property="foodStackView" destination="X6W-62-wR2" id="bab-da-pZk"/>
-                <outlet property="foodStackViewHeightConstraint" destination="7yc-nL-6eI" id="Jh9-bO-7Bc"/>
                 <outlet property="foodsView" destination="WSz-Dd-KPS" id="Z82-24-7rY"/>
                 <outlet property="mealChooseButton" destination="czq-sh-zRs" id="3Df-nm-9pD"/>
                 <outlet property="mealImageView" destination="FKS-20-zOe" id="tjK-dw-CsQ"/>

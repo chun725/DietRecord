@@ -19,17 +19,17 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-5M-gBo">
-                        <rect key="frame" x="16" y="8" width="382" height="364"/>
+                        <rect key="frame" x="16" y="8" width="382" height="356"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CQ3-BM-sYr">
-                                <rect key="frame" x="344" y="12" width="22" height="20.5"/>
+                                <rect key="frame" x="344" y="12" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="CQ3-BM-sYr" secondAttribute="height" id="IrD-Fh-y1j"/>
                                     <constraint firstAttribute="width" constant="22" id="Tg2-9k-1tC"/>
                                 </constraints>
                                 <color key="tintColor" name="drDarkGray"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" backgroundImage="square.and.pencil" catalog="system"/>
+                                <state key="normal" backgroundImage="Image_Edit-1"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="早餐" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Whl-Iz-0we">
                                 <rect key="frame" x="141" y="8" width="100" height="30"/>
@@ -92,7 +92,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHo-Qw-PBo">
-                                <rect key="frame" x="16" y="320" width="350" height="20"/>
+                                <rect key="frame" x="16" y="320" width="350" height="12"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
@@ -129,7 +129,7 @@
                 <color key="backgroundColor" name="LightGray"/>
                 <constraints>
                     <constraint firstItem="8hk-5M-gBo" firstAttribute="leading" secondItem="y1u-k9-oDr" secondAttribute="leading" constant="16" id="79J-gr-x2R"/>
-                    <constraint firstAttribute="bottom" secondItem="8hk-5M-gBo" secondAttribute="bottom" constant="8" id="SOU-3d-jd7"/>
+                    <constraint firstAttribute="bottom" secondItem="8hk-5M-gBo" secondAttribute="bottom" constant="16" id="SOU-3d-jd7"/>
                     <constraint firstItem="8hk-5M-gBo" firstAttribute="top" secondItem="y1u-k9-oDr" secondAttribute="top" constant="8" id="W4e-9i-Xft"/>
                     <constraint firstAttribute="trailing" secondItem="8hk-5M-gBo" secondAttribute="trailing" constant="16" id="WKe-fu-AbJ"/>
                 </constraints>
@@ -145,13 +145,14 @@
                 <outlet property="foodStackViewHeightConstraint" destination="hV2-Jz-zJd" id="ZoD-bT-Rn1"/>
                 <outlet property="mealImage" destination="FDi-Cc-7tg" id="4lK-Rb-xv1"/>
                 <outlet property="mealLabel" destination="Whl-Iz-0we" id="KG1-0m-G3m"/>
+                <outlet property="photoTitleLabel" destination="X9v-rj-wui" id="UIf-tK-lP2"/>
                 <outlet property="whiteBackgroundView" destination="8hk-5M-gBo" id="Ttq-IT-MRp"/>
             </connections>
             <point key="canvasLocation" x="24.637681159420293" y="33.482142857142854"/>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="square.and.pencil" catalog="system" width="128" height="115"/>
+        <image name="Image_Edit-1" width="512" height="512"/>
         <namedColor name="LightGray">
             <color red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

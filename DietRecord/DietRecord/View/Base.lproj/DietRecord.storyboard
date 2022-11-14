@@ -551,6 +551,8 @@
                         <outlet property="foodNameLabel" destination="AIU-Qc-FJf" id="bER-0Q-PYc"/>
                         <outlet property="nutritionTableView" destination="pqr-lS-DMM" id="eyy-me-KLg"/>
                         <outlet property="qtyTextField" destination="dKl-4t-oe5" id="IRJ-ft-cQD"/>
+                        <outlet property="qtyTextFieldBackground" destination="UXh-VE-FCd" id="D4j-QC-Vzu"/>
+                        <outlet property="tableViewButtomConstraint" destination="uqq-eR-jUp" id="7WF-vf-39f"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vry-UA-gXX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -569,6 +571,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rlc-HH-zW3">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <connections>
+                                    <action selector="chooseDate:" destination="gRL-Md-sVa" eventType="touchUpInside" id="eRR-cl-bzu"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S63-Nj-L1a">
                                 <rect key="frame" x="0.0" y="862" width="414" height="460"/>
                                 <subviews>
@@ -621,14 +630,18 @@
                             <constraint firstAttribute="bottom" secondItem="Brb-v6-V5V" secondAttribute="bottom" id="4Ol-od-P6H"/>
                             <constraint firstItem="Brb-v6-V5V" firstAttribute="top" secondItem="eQv-Dq-s7h" secondAttribute="top" id="5cz-uA-Qm9"/>
                             <constraint firstItem="NWy-Nr-SEN" firstAttribute="trailing" secondItem="Brb-v6-V5V" secondAttribute="trailing" id="B5G-6u-y4g"/>
+                            <constraint firstItem="Rlc-HH-zW3" firstAttribute="top" secondItem="Brb-v6-V5V" secondAttribute="top" id="BNG-hB-wie"/>
                             <constraint firstAttribute="bottom" secondItem="zAz-d5-hJs" secondAttribute="bottom" id="EVw-oc-Hyl"/>
                             <constraint firstItem="zAz-d5-hJs" firstAttribute="leading" secondItem="NWy-Nr-SEN" secondAttribute="leading" id="Oas-3b-FKE"/>
                             <constraint firstItem="zAz-d5-hJs" firstAttribute="top" secondItem="NWy-Nr-SEN" secondAttribute="bottom" id="Qyw-Pz-qcs"/>
                             <constraint firstItem="cKO-nh-70Z" firstAttribute="bottom" secondItem="S63-Nj-L1a" secondAttribute="bottom" id="TfU-6j-BuB"/>
                             <constraint firstItem="S63-Nj-L1a" firstAttribute="top" secondItem="NWy-Nr-SEN" secondAttribute="bottom" id="XlW-VL-s31"/>
+                            <constraint firstItem="Rlc-HH-zW3" firstAttribute="bottom" secondItem="Brb-v6-V5V" secondAttribute="bottom" id="ZDk-nC-4x4"/>
                             <constraint firstItem="S63-Nj-L1a" firstAttribute="leading" secondItem="NWy-Nr-SEN" secondAttribute="leading" id="bOK-fZ-hx6"/>
+                            <constraint firstItem="Rlc-HH-zW3" firstAttribute="trailing" secondItem="Brb-v6-V5V" secondAttribute="trailing" id="dSa-KB-22Z"/>
                             <constraint firstItem="cKO-nh-70Z" firstAttribute="trailing" secondItem="S63-Nj-L1a" secondAttribute="trailing" id="exT-wl-nYA"/>
                             <constraint firstItem="Brb-v6-V5V" firstAttribute="leading" secondItem="NWy-Nr-SEN" secondAttribute="leading" id="giU-Qb-2rf"/>
+                            <constraint firstItem="Rlc-HH-zW3" firstAttribute="leading" secondItem="Brb-v6-V5V" secondAttribute="leading" id="mLS-XJ-ZJs"/>
                             <constraint firstItem="NWy-Nr-SEN" firstAttribute="trailing" secondItem="zAz-d5-hJs" secondAttribute="trailing" id="mtb-OF-9zv"/>
                             <constraint firstItem="S63-Nj-L1a" firstAttribute="trailing" secondItem="NWy-Nr-SEN" secondAttribute="trailing" id="rk6-ye-zmd"/>
                         </constraints>

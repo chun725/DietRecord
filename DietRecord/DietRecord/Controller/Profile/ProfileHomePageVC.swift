@@ -30,9 +30,11 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
     }
     
     func fetchFollowingPost() {
+        LKProgressHUD.show()
         profileProvider.fetchFollowingPost { result in
             switch result {
             case .success(let mealRecords):
+                LKProgressHUD.dismiss()
                 self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
             case .failure(let error):
                 print("Error Info: \(error).")

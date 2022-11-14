@@ -25,4 +25,10 @@ extension UIView {
         self.layer.shadowColor = UIColor.drDarkGray.cgColor
         self.layer.shadowOpacity = 0.5
     }
+    
+    func setBorder(width: CGFloat, color: UIColor, radius: CGFloat) {
+        self.layer.borderColor = color.cgColor
+        self.layer.borderWidth = width
+        self.layer.cornerRadius = radius
+    }
 }

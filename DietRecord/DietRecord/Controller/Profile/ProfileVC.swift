@@ -53,8 +53,10 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchDietRecord()
-        fetchData()
+        if mealRecords.isEmpty {
+            fetchDietRecord()
+            fetchData()
+        }
         if otherUserID == nil {
             self.tabBarController?.tabBar.isHidden = false
         } else {
@@ -64,6 +66,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
     
     func fetchDietRecord() {
+        LKProgressHUD.show()
         var id = userID
         if let otherUserID = otherUserID {
             id = otherUserID
@@ -71,6 +74,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         profileProvider.fetchImage(userID: id) { result in
             switch result {
             case .success(let dietRecords):
+                LKProgressHUD.dismiss()
                 var mealDatas: [MealRecord] = []
                 for dietRecord in dietRecords {
                     let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
@@ -78,12 +82,14 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 }
                 self.mealRecords = mealDatas.reversed()
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "無法讀取用戶資料")
                 print("Error Info: \(error).")
             }
         }
     }
     
     func fetchData() {
+        LKProgressHUD.show()
         var id = userID
         if let otherUserID = otherUserID {
             id = otherUserID
@@ -91,6 +97,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         profileProvider.fetchUserData(userID: id) { result in
             switch result {
             case .success(let user):
+                LKProgressHUD.dismiss()
                 self.followersLabel.text = String(user.followers.count)
                 self.followingLabel.text = String(user.following.count)
                 self.usernameLabel.text = user.username
@@ -116,8 +123,8 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                     self.followersButton.isEnabled = false
                     self.followingButton.isEnabled = false
                 }
-                
             case .failure(let error):
+                LKProgressHUD.showFailure(text: "無法讀取用戶資料")
                 print("Error Info: \(error).")
             }
         }

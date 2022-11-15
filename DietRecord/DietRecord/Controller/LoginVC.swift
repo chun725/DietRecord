@@ -19,7 +19,9 @@ class LoginVC: UIViewController {
     }
     
     func setSignInWithAppleBtn() {
-        let signInWithAppleBtn = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: chooseAppleButtonStyle())
+        let signInWithAppleBtn = ASAuthorizationAppleIDButton(
+            authorizationButtonType: .signIn,
+            authorizationButtonStyle: chooseAppleButtonStyle())
         view.addSubview(signInWithAppleBtn)
         signInWithAppleBtn.cornerRadius = 25
         
@@ -50,26 +52,26 @@ class LoginVC: UIViewController {
     
     private func randomNonceString(length: Int = 32) -> String {
         precondition(length > 0)
-        let charset: Array<Character> = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+        let charset = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
         var result = ""
         var remainingLength = length
 
-        while(remainingLength > 0) {
+        while remainingLength > 0 {
             let randoms: [UInt8] = (0 ..< 16).map { _ in
                 var random: UInt8 = 0
                 let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if (errorCode != errSecSuccess) {
+                if errorCode != errSecSuccess {
                     fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
                 }
                 return random
             }
 
             randoms.forEach { random in
-                if (remainingLength == 0) {
+                if remainingLength == 0 {
                     return
                 }
 
-                if (random < charset.count) {
+                if random < charset.count {
                     result.append(charset[Int(random)])
                     remainingLength -= 1
                 }
@@ -81,9 +83,7 @@ class LoginVC: UIViewController {
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
-        let hashString = hashedData.compactMap {
-            return String(format: "%02x", $0)
-        }.joined()
+        let hashString = hashedData.compactMap { String(format: "%02x", $0) }.joined()
         return hashString
     }
 }
@@ -95,11 +95,11 @@ extension LoginVC: ASAuthorizationControllerDelegate {
             let fullname = credential.fullName
             let email = credential.email
             guard let idToken = credential.identityToken,
-                  let nonce = currentNonce,
-                  let idTokenString = String(data: idToken, encoding: .utf8)
+                let nonce = currentNonce,
+                let idTokenString = String(data: idToken, encoding: .utf8)
             else { return }
             print("---------\(userId)")
-            print("---------\(fullname)")
+            print("---------\(String(describing: fullname))")
             print("---------\(email ?? "")")
             print("---------\(idToken)")
             print("---------\(idTokenString)")
@@ -124,9 +124,8 @@ extension LoginVC: ASAuthorizationControllerPresentationContextProviding {
 extension LoginVC {
     // MARK: - 透過 Credential 與 Firebase Auth 串接
     func firebaseSignInWithApple(credential: AuthCredential) {
-        Auth.auth().signIn(with: credential) { authResult, error in
+        Auth.auth().signIn(with: credential) { _, error in
             guard error == nil else {
-                print(error)
                 return
             }
             self.getFirebaseUserInfo()
@@ -143,6 +142,6 @@ extension LoginVC {
         let uid = user.uid
         let email = user.email
         print("------\(uid)")
-        print("------\(email)")
+        print("------\(email ?? "")")
     }
 }

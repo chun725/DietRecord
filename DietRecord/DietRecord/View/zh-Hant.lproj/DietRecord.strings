@@ -1,0 +1,51 @@
+
+/* Class = "UIButton"; normalTitle = "Choose"; ObjectID = "8hI-aP-A1e"; */
+"8hI-aP-A1e.normalTitle" = "Choose";
+
+/* Class = "UILabel"; text = "FoodName"; ObjectID = "AIU-Qc-FJf"; */
+"AIU-Qc-FJf.text" = "FoodName";
+
+/* Class = "UILabel"; text = "搜尋食物"; ObjectID = "O97-zA-OXQ"; */
+"O97-zA-OXQ.text" = "搜尋食物";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "OoJ-ZE-kWG"; */
+"OoJ-ZE-kWG.normalTitle" = "Save";
+
+/* Class = "UITextField"; placeholder = "在這裡輸入食物"; ObjectID = "PJM-Sq-EBV"; */
+"PJM-Sq-EBV.placeholder" = "在這裡輸入食物";
+
+/* Class = "UITabBarItem"; title = "DietRecord"; ObjectID = "Z60-uJ-5Bt"; */
+"Z60-uJ-5Bt.title" = "DietRecord";
+
+/* Class = "UIButton"; normalTitle = "Add food"; ObjectID = "aL9-sb-RPY"; */
+"aL9-sb-RPY.normalTitle" = "Add food";
+
+/* Class = "UITextField"; placeholder = "輸入克數"; ObjectID = "dKl-4t-oe5"; */
+"dKl-4t-oe5.placeholder" = "輸入克數";
+
+/* Class = "UILabel"; text = "FoodName"; ObjectID = "eeP-yS-9za"; */
+"eeP-yS-9za.text" = "FoodName";
+
+/* Class = "UILabel"; text = "1份(395克)"; ObjectID = "iQG-tg-M2J"; */
+"iQG-tg-M2J.text" = "1份(395克)";
+
+/* Class = "UILabel"; text = "每日飲食"; ObjectID = "jmY-LH-jUr"; */
+"jmY-LH-jUr.text" = "每日飲食";
+
+/* Class = "UINavigationItem"; title = "2022/10/30"; ObjectID = "qzG-yn-r0k"; */
+"qzG-yn-r0k.title" = "2022/10/30";
+
+/* Class = "UILabel"; text = "565 kcal"; ObjectID = "s9N-py-u82"; */
+"s9N-py-u82.text" = "565 kcal";
+
+/* Class = "UILabel"; text = "俗名："; ObjectID = "tPb-KS-pWR"; */
+"tPb-KS-pWR.text" = "俗名：";
+
+/* Class = "UITextField"; text = "2022-11-10"; ObjectID = "vZ2-AO-3cD"; */
+"vZ2-AO-3cD.text" = "2022-11-10";
+
+/* Class = "UILabel"; text = "請輸入飲食紀錄"; ObjectID = "zJh-bn-CcY"; */
+"zJh-bn-CcY.text" = "請輸入飲食紀錄";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "zVX-Ap-PUp"; */
+"zVX-Ap-PUp.normalTitle" = "Save";

@@ -1,0 +1,39 @@
+
+/* Class = "UILabel"; text = "1550 mL"; ObjectID = "4qf-2t-7cC"; */
+"4qf-2t-7cC.text" = "1550 mL";
+
+/* Class = "UILabel"; text = "-"; ObjectID = "D2u-Oh-4B9"; */
+"D2u-Oh-4B9.text" = "-";
+
+/* Class = "UILabel"; text = "08:20"; ObjectID = "EGr-oC-akG"; */
+"EGr-oC-akG.text" = "08:20";
+
+/* Class = "UILabel"; text = "輸入飲水量"; ObjectID = "Osk-Wc-TBn"; */
+"Osk-Wc-TBn.text" = "輸入飲水量";
+
+/* Class = "UILabel"; text = "喝水提醒"; ObjectID = "TVr-cX-Hoq"; */
+"TVr-cX-Hoq.text" = "喝水提醒";
+
+/* Class = "UILabel"; text = "飲水量"; ObjectID = "TZJ-XY-RWw"; */
+"TZJ-XY-RWw.text" = "飲水量";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "Yr5-Zt-3Bd"; */
+"Yr5-Zt-3Bd.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "mL"; ObjectID = "flR-BW-NKJ"; */
+"flR-BW-NKJ.text" = "mL";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "gvb-ll-eci"; */
+"gvb-ll-eci.normalTitle" = "Cancel";
+
+/* Class = "UILabel"; text = "目標飲水量 2000 mL"; ObjectID = "kqH-4x-QI2"; */
+"kqH-4x-QI2.text" = "目標飲水量 2000 mL";
+
+/* Class = "UILabel"; text = "飲水量記錄"; ObjectID = "l8B-q4-eFV"; */
+"l8B-q4-eFV.text" = "飲水量記錄";
+
+/* Class = "UITabBarItem"; title = "Water"; ObjectID = "oo2-nE-jxC"; */
+"oo2-nE-jxC.title" = "Water";
+
+/* Class = "UILabel"; text = "目前飲水量"; ObjectID = "tnH-Zr-G5H"; */
+"tnH-Zr-G5H.text" = "目前飲水量";

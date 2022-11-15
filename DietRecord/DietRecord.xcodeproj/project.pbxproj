@@ -166,6 +166,13 @@
 		349B8D95291A215D002EB186 /* CheckRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRequestVC.swift; sourceTree = "<group>"; };
 		349B8D97291A22CF002EB186 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		34A2B5A1292337DE00E01545 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		34A2B5A3292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Profile.strings"; sourceTree = "<group>"; };
+		34A2B5A4292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Report.strings"; sourceTree = "<group>"; };
+		34A2B5A5292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/DietRecord.strings"; sourceTree = "<group>"; };
+		34A2B5A6292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Weight.strings"; sourceTree = "<group>"; };
+		34A2B5A7292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Water.strings"; sourceTree = "<group>"; };
+		34A2B5A8292349FB00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		34A2B5A9292349FB00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		34C0005A291C901600670CA4 /* FoodNutritionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutritionCell.swift; sourceTree = "<group>"; };
 		34C0005B291C901600670CA4 /* FoodNutritionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodNutritionCell.xib; sourceTree = "<group>"; };
@@ -654,6 +661,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 34642925290CF79A0070B425;
 			productRefGroup = 3464292F290CF79A0070B425 /* Products */;
@@ -835,6 +843,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E5D290D518A00D5AFFD /* Base */,
+				34A2B5A7292349FA00E01545 /* zh-Hant */,
 			);
 			name = Water.storyboard;
 			sourceTree = "<group>";
@@ -843,6 +852,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E60290D51F300D5AFFD /* Base */,
+				34A2B5A6292349FA00E01545 /* zh-Hant */,
 			);
 			name = Weight.storyboard;
 			sourceTree = "<group>";
@@ -851,6 +861,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E63290D526500D5AFFD /* Base */,
+				34A2B5A5292349FA00E01545 /* zh-Hant */,
 			);
 			name = DietRecord.storyboard;
 			sourceTree = "<group>";
@@ -859,6 +870,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E66290D529100D5AFFD /* Base */,
+				34A2B5A4292349FA00E01545 /* zh-Hant */,
 			);
 			name = Report.storyboard;
 			sourceTree = "<group>";
@@ -867,6 +879,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E71290D54B700D5AFFD /* Base */,
+				34A2B5A3292349FA00E01545 /* zh-Hant */,
 			);
 			name = Profile.storyboard;
 			sourceTree = "<group>";
@@ -875,6 +888,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34642938290CF79A0070B425 /* Base */,
+				34A2B5A9292349FB00E01545 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -883,6 +897,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3464293D290CF79A0070B425 /* Base */,
+				34A2B5A8292349FB00E01545 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -894,6 +909,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -954,6 +970,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

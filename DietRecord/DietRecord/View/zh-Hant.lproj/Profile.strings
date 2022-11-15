@@ -1,0 +1,48 @@
+
+/* Class = "UIButton"; normalTitle = "Follow"; ObjectID = "0MD-iH-Hdh"; */
+"0MD-iH-Hdh.normalTitle" = "Follow";
+
+/* Class = "UILabel"; text = " "; ObjectID = "1r6-Na-zxT"; */
+"1r6-Na-zxT.text" = " ";
+
+/* Class = "UILabel"; text = "Followers"; ObjectID = "4v2-oX-X1h"; */
+"4v2-oX-X1h.text" = "Followers";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "EcH-XH-d5z"; */
+"EcH-XH-d5z.title" = "Profile";
+
+/* Class = "UITextField"; placeholder = "在這裡輸入用戶名稱"; ObjectID = "GEp-QK-fir"; */
+"GEp-QK-fir.placeholder" = "在這裡輸入用戶名稱";
+
+/* Class = "UILabel"; text = "邱子瑜"; ObjectID = "GSr-y6-LS0"; */
+"GSr-y6-LS0.text" = "邱子瑜";
+
+/* Class = "UILabel"; text = "Following"; ObjectID = "KAY-FZ-PrW"; */
+"KAY-FZ-PrW.text" = "Following";
+
+/* Class = "UILabel"; text = "搜尋用戶"; ObjectID = "Qde-hb-nw9"; */
+"Qde-hb-nw9.text" = "搜尋用戶";
+
+/* Class = "UITabBarItem"; title = "Profile"; ObjectID = "ShO-Ur-cpb"; */
+"ShO-Ur-cpb.title" = "Profile";
+
+/* Class = "UILabel"; text = "Posts"; ObjectID = "TEF-jq-xgq"; */
+"TEF-jq-xgq.text" = "Posts";
+
+/* Class = "UILabel"; text = "追蹤要求"; ObjectID = "aYC-LM-27H"; */
+"aYC-LM-27H.text" = "追蹤要求";
+
+/* Class = "UILabel"; text = "個人頁面"; ObjectID = "bdH-yX-34L"; */
+"bdH-yX-34L.text" = "個人頁面";
+
+/* Class = "UILabel"; text = "個人頁面"; ObjectID = "jjG-LP-TkY"; */
+"jjG-LP-TkY.text" = "個人頁面";
+
+/* Class = "UILabel"; text = "追蹤用戶後即可觀看其貼文"; ObjectID = "mOk-M9-Bk8"; */
+"mOk-M9-Bk8.text" = "追蹤用戶後即可觀看其貼文";
+
+/* Class = "UIButton"; normalTitle = "發佈"; ObjectID = "rjH-cK-MNb"; */
+"rjH-cK-MNb.normalTitle" = "發佈";
+
+/* Class = "UILabel"; text = "動態消息"; ObjectID = "ucg-Bz-7bQ"; */
+"ucg-Bz-7bQ.text" = "動態消息";

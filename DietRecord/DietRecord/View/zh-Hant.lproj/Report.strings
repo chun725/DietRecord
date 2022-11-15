@@ -1,0 +1,108 @@
+
+/* Class = "UILabel"; text = "每週數據"; ObjectID = "2Pg-wZ-6FD"; */
+"2Pg-wZ-6FD.text" = "每週數據";
+
+/* Class = "UILabel"; text = "80.0 g"; ObjectID = "5RC-8x-ZZT"; */
+"5RC-8x-ZZT.text" = "80.0 g";
+
+/* Class = "UILabel"; text = "體重 (公斤)"; ObjectID = "8IJ-v0-K2U"; */
+"8IJ-v0-K2U.text" = "體重 (公斤)";
+
+/* Class = "UILabel"; text = "其他"; ObjectID = "Bfv-vy-gxX"; */
+"Bfv-vy-gxX.text" = "其他";
+
+/* Class = "UILabel"; text = "熱量"; ObjectID = "DYJ-sh-L06"; */
+"DYJ-sh-L06.text" = "熱量";
+
+/* Class = "UIButton"; normalTitle = "自行設定"; ObjectID = "Grw-FP-pKc"; */
+"Grw-FP-pKc.normalTitle" = "自行設定";
+
+/* Class = "UILabel"; text = "80.0 g"; ObjectID = "H9R-9j-aIg"; */
+"H9R-9j-aIg.text" = "80.0 g";
+
+/* Class = "UILabel"; text = "午餐"; ObjectID = "IhD-Lc-Tgn"; */
+"IhD-Lc-Tgn.text" = "午餐";
+
+/* Class = "UILabel"; text = "脂肪"; ObjectID = "LWy-yC-c2b"; */
+"LWy-yC-c2b.text" = "脂肪";
+
+/* Class = "UILabel"; text = "飲食目標"; ObjectID = "MOs-ZJ-OAq"; */
+"MOs-ZJ-OAq.text" = "飲食目標";
+
+/* Class = "UILabel"; text = "g"; ObjectID = "OcT-69-1WL"; */
+"OcT-69-1WL.text" = "g";
+
+/* Class = "UILabel"; text = "蛋白質"; ObjectID = "PeF-ux-VF9"; */
+"PeF-ux-VF9.text" = "蛋白質";
+
+/* Class = "UILabel"; text = "輸入個人資訊"; ObjectID = "RPw-xO-hkp"; */
+"RPw-xO-hkp.text" = "輸入個人資訊";
+
+/* Class = "UILabel"; text = "目前目標"; ObjectID = "RRJ-if-k1f"; */
+"RRJ-if-k1f.text" = "目前目標";
+
+/* Class = "UILabel"; text = "g"; ObjectID = "RnV-P2-vkw"; */
+"RnV-P2-vkw.text" = "g";
+
+/* Class = "UIButton"; normalTitle = "輸入個人資訊自動計算"; ObjectID = "TkU-Hm-ErI"; */
+"TkU-Hm-ErI.normalTitle" = "輸入個人資訊自動計算";
+
+/* Class = "UITabBarItem"; title = "Report"; ObjectID = "Zbd-gP-pry"; */
+"Zbd-gP-pry.title" = "Report";
+
+/* Class = "UILabel"; text = "碳水化合物"; ObjectID = "Ztq-2V-prZ"; */
+"Ztq-2V-prZ.text" = "碳水化合物";
+
+/* Class = "UILabel"; text = "性別"; ObjectID = "aZc-qb-H9a"; */
+"aZc-qb-H9a.text" = "性別";
+
+/* Class = "UILabel"; text = "1800 kcal"; ObjectID = "b5t-eh-TxS"; */
+"b5t-eh-TxS.text" = "1800 kcal";
+
+/* Class = "UILabel"; text = "蛋白質"; ObjectID = "dmX-wD-P3I"; */
+"dmX-wD-P3I.text" = "蛋白質";
+
+/* Class = "UILabel"; text = "脂肪"; ObjectID = "eAa-nW-Bff"; */
+"eAa-nW-Bff.text" = "脂肪";
+
+/* Class = "UILabel"; text = "碳水化合物"; ObjectID = "f4j-et-SO8"; */
+"f4j-et-SO8.text" = "碳水化合物";
+
+/* Class = "UILabel"; text = "晚餐"; ObjectID = "fd6-OH-Evd"; */
+"fd6-OH-Evd.text" = "晚餐";
+
+/* Class = "UILabel"; text = "年齡"; ObjectID = "fzs-Mk-xKU"; */
+"fzs-Mk-xKU.text" = "年齡";
+
+/* Class = "UILabel"; text = "kcal"; ObjectID = "g3G-wI-Fj5"; */
+"g3G-wI-Fj5.text" = "kcal";
+
+/* Class = "UILabel"; text = "設定飲食目標"; ObjectID = "g5T-cz-SZw"; */
+"g5T-cz-SZw.text" = "設定飲食目標";
+
+/* Class = "UILabel"; text = "活躍程度"; ObjectID = "hFz-Hs-Kqm"; */
+"hFz-Hs-Kqm.text" = "活躍程度";
+
+/* Class = "UILabel"; text = "飲食計畫"; ObjectID = "hN6-hX-gjt"; */
+"hN6-hX-gjt.text" = "飲食計畫";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "hxd-7F-FUx"; */
+"hxd-7F-FUx.normalTitle" = "Save";
+
+/* Class = "UILabel"; text = "熱量"; ObjectID = "q94-Wb-iKw"; */
+"q94-Wb-iKw.text" = "熱量";
+
+/* Class = "UILabel"; text = "80.0 g"; ObjectID = "rNS-Gl-twc"; */
+"rNS-Gl-twc.text" = "80.0 g";
+
+/* Class = "UILabel"; text = "身高 (公分)"; ObjectID = "tGs-eB-qwf"; */
+"tGs-eB-qwf.text" = "身高 (公分)";
+
+/* Class = "UILabel"; text = "g"; ObjectID = "vbf-gi-iZs"; */
+"vbf-gi-iZs.text" = "g";
+
+/* Class = "UILabel"; text = "早餐"; ObjectID = "viR-QE-zgC"; */
+"viR-QE-zgC.text" = "早餐";
+
+/* Class = "UITextField"; text = "2022-11-10"; ObjectID = "yEX-LV-8Xr"; */
+"yEX-LV-8Xr.text" = "2022-11-10";

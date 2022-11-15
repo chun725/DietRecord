@@ -608,6 +608,9 @@ PODS:
     - SwiftAlgorithms (~> 1.0)
   - Firebase/Analytics (10.0.0):
     - Firebase/Core
+  - Firebase/Auth (10.0.0):
+    - Firebase/CoreOnly
+    - FirebaseAuth (~> 10.0.0)
   - Firebase/Core (10.0.0):
     - Firebase/CoreOnly
     - FirebaseAnalytics (~> 10.0.0)
@@ -638,6 +641,11 @@ PODS:
     - "GoogleUtilities/NSData+zlib (~> 7.8)"
     - nanopb (< 2.30910.0, >= 2.30908.0)
   - FirebaseAppCheckInterop (10.1.0)
+  - FirebaseAuth (10.0.0):
+    - FirebaseCore (~> 10.0)
+    - GoogleUtilities/AppDelegateSwizzler (~> 7.8)
+    - GoogleUtilities/Environment (~> 7.8)
+    - GTMSessionFetcher/Core (~> 2.1)
   - FirebaseAuthInterop (10.1.0)
   - FirebaseCore (10.0.0):
     - FirebaseCoreInternal (~> 10.0)
@@ -790,6 +798,7 @@ PODS:
 DEPENDENCIES:
   - Charts
   - Firebase/Analytics
+  - Firebase/Auth
   - Firebase/Core
   - Firebase/Firestore
   - Firebase/Storage
@@ -807,6 +816,7 @@ SPEC REPOS:
     - Firebase
     - FirebaseAnalytics
     - FirebaseAppCheckInterop
+    - FirebaseAuth
     - FirebaseAuthInterop
     - FirebaseCore
     - FirebaseCoreExtension
@@ -838,6 +848,7 @@ SPEC CHECKSUMS:
   Firebase: 1b810f3d0c0532e27a48f1961f8c0400a668a2cf
   FirebaseAnalytics: 9921a52739f4ab66099da31b6e0243db78a3ac0a
   FirebaseAppCheckInterop: 53eec3c354a95f8fe6ff947dd9518ea17f624914
+  FirebaseAuth: 493382cf533cc45e2862b00e9aa4cfe4c98daf71
   FirebaseAuthInterop: 15b2c717321d5e46a60562e388c4d1b039ea7e28
   FirebaseCore: 97f48a3a567a72b8d4daa0f03c3aadb78df4e995
   FirebaseCoreExtension: 449595a035812f16314ca88cebf959e3bb77dd67
@@ -862,6 +873,6 @@ SPEC CHECKSUMS:
   SwiftAlgorithms: 38dda4731d19027fdeee1125f973111bf3386b53
   SwiftLint: 32ee33ded0636d0905ef6911b2b67bbaeeedafa5
 
-PODFILE CHECKSUM: 02bc022650d97bbee5849729aca9ea75ac9b727e
+PODFILE CHECKSUM: 3ff6b833939d33cdde2e011bac47c0caef9722c4
 
 COCOAPODS: 1.11.3

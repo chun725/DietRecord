@@ -72,6 +72,12 @@ class ProfileInformationCell: UITableViewCell {
         weightGoalTextField.delegate = self
         usernameTextField.delegate = self
         changeImageButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
+        if let controller = controller, controller.isUpdated {
+            userImageView.loadImage(user.userImageURL)
+            usernameTextField.text = user.username
+            waterGoalTextField.text = user.waterGoal.transform(unit: mLUnit)
+            weightGoalTextField.text = user.weightGoal.transform(unit: kgUnit)
+        }
     }
     
     func uploadImage() {

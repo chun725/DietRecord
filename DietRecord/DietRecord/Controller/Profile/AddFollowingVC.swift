@@ -52,6 +52,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 switch result {
                 case .success(let user):
                     LKProgressHUD.dismiss()
+                    let user = user as? User
                     self.userSearchResult = user
                 case .failure(let error):
                     LKProgressHUD.showFailure(text: "無法查詢用戶")

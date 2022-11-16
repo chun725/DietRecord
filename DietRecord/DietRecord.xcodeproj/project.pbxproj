@@ -62,6 +62,7 @@
 		3469168E291277A40021985F /* ChartXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469168D291277A40021985F /* ChartXAxis.swift */; };
 		3469169229127C430021985F /* ReportDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3469169129127C430021985F /* ReportDetailCell.xib */; };
 		3469169429127C510021985F /* ReportDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469169329127C510021985F /* ReportDetailCell.swift */; };
+		34930BB929238E6F0037A82E /* DietGoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34930BB829238E6F0037A82E /* DietGoalCollectionViewCell.swift */; };
 		349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D892918F66B002EB186 /* ProfileDetailCell.swift */; };
 		349B8D8C2918F696002EB186 /* ProfileResponseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */; };
 		349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */; };
@@ -70,6 +71,8 @@
 		349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D95291A215D002EB186 /* CheckRequestVC.swift */; };
 		349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D97291A22CF002EB186 /* RequestCell.swift */; };
 		34A2B5A2292337DE00E01545 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2B5A1292337DE00E01545 /* LoginVC.swift */; };
+		34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2B5AA292371AB00E01545 /* ProfileInformationVC.swift */; };
+		34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2B5AD2923898A00E01545 /* ProfileInformationCell.swift */; };
 		34C00058291C8EAC00670CA4 /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */; };
 		34C0005C291C901600670CA4 /* FoodNutritionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0005A291C901600670CA4 /* FoodNutritionCell.swift */; };
 		34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C0005B291C901600670CA4 /* FoodNutritionCell.xib */; };
@@ -158,6 +161,7 @@
 		3469168D291277A40021985F /* ChartXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxis.swift; sourceTree = "<group>"; };
 		3469169129127C430021985F /* ReportDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportDetailCell.xib; sourceTree = "<group>"; };
 		3469169329127C510021985F /* ReportDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailCell.swift; sourceTree = "<group>"; };
+		34930BB829238E6F0037A82E /* DietGoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietGoalCollectionViewCell.swift; sourceTree = "<group>"; };
 		349B8D892918F66B002EB186 /* ProfileDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailCell.swift; sourceTree = "<group>"; };
 		349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseCell.swift; sourceTree = "<group>"; };
 		349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFollowingVC.swift; sourceTree = "<group>"; };
@@ -173,6 +177,8 @@
 		34A2B5A7292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Water.strings"; sourceTree = "<group>"; };
 		34A2B5A8292349FB00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		34A2B5A9292349FB00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		34A2B5AA292371AB00E01545 /* ProfileInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationVC.swift; sourceTree = "<group>"; };
+		34A2B5AD2923898A00E01545 /* ProfileInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationCell.swift; sourceTree = "<group>"; };
 		34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		34C0005A291C901600670CA4 /* FoodNutritionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutritionCell.swift; sourceTree = "<group>"; };
 		34C0005B291C901600670CA4 /* FoodNutritionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodNutritionCell.xib; sourceTree = "<group>"; };
@@ -491,6 +497,15 @@
 			path = ProfileDetailCell;
 			sourceTree = "<group>";
 		};
+		34A2B5AC2923895200E01545 /* ProfileInformationCell */ = {
+			isa = PBXGroup;
+			children = (
+				34A2B5AD2923898A00E01545 /* ProfileInformationCell.swift */,
+				34930BB829238E6F0037A82E /* DietGoalCollectionViewCell.swift */,
+			);
+			path = ProfileInformationCell;
+			sourceTree = "<group>";
+		};
 		34C00059291C8FE300670CA4 /* FoodNutritionCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -568,6 +583,7 @@
 		34CF741E29166094009F9264 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				34A2B5AC2923895200E01545 /* ProfileInformationCell */,
 				34C0006C2922490A00670CA4 /* FoodCollectionViewCell */,
 				349B8D882918F64F002EB186 /* ProfileDetailCell */,
 				349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */,
@@ -594,6 +610,7 @@
 				34CF7427291683D5009F9264 /* ProfileDetailVC.swift */,
 				349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */,
 				349B8D95291A215D002EB186 /* CheckRequestVC.swift */,
+				34A2B5AA292371AB00E01545 /* ProfileInformationVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -783,10 +800,12 @@
 				34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */,
 				3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
+				34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
 				34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */,
 				34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */,
+				34930BB929238E6F0037A82E /* DietGoalCollectionViewCell.swift in Sources */,
 				34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
 				34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */,
@@ -812,6 +831,7 @@
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
+				34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,

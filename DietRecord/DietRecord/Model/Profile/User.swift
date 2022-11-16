@@ -12,8 +12,8 @@ struct User: Codable {
     var following: [String]
     var followers: [String]
     var request: [String]
-    let userImageURL: String
-    let username: String
+    var userImageURL: String
+    var username: String
     var goal: [String]
     var waterGoal: String
     var weightGoal: String

@@ -10,7 +10,9 @@ import UIKit
 import FirebaseFirestoreSwift
 import FirebaseFirestore
 import SwiftUI
+import FirebaseAuth
 
+var userID = ""
 let database = Firestore.firestore()
 let dateFormatter = DateFormatter()
 let barChartDateFormatter = DateFormatter()
@@ -24,8 +26,8 @@ let dietRecord = "DietRecord"
 let foodIngredient = "FoodIngredient"
 let user = "User"
 // let userID = "j9UZDoOiEEIoYo0r3z9S"
-//let userID = "12345"
- let userID = "1Zx8R1tAynuQ1RucPUDF"
+// let userID = "12345"
+// let userID = "1Zx8R1tAynuQ1RucPUDF"
 let diet = "Diet"
 let water = "Water"
 let weight = "Weight"
@@ -40,6 +42,7 @@ let waterReminderNotification = "WaterReminderNotification"
 var userData: User?
 var foodIngredients: [FoodIngredient]? // 資料庫
 var fullScreenSize = UIScreen.main.bounds.size
+let placeholderURL = "https://firebasestorage.googleapis.com:443/v0/b/dietmanagement-cd871.appspot.com/o/83274520-623A-4C01-9BA5-552A03254CA0.jpg?alt=media&token=d618d6e0-ffd5-4ab6-87b6-83d1c070ff04"
 
 func configureDateformatter() {
     dateFormatter.locale = .current
@@ -59,14 +62,14 @@ enum Water: String {
     case gap = "與目標的差異"
 }
 
-enum MacroNutrient: String {
-    case calories
-    case water
-    case protein
-    case carbohydrate
-    case dietaryFiber
-    case sugar
-    case lipid
+enum MacroNutrient: String, CaseIterable {
+    case calories = "熱量"
+    case carbohydrate = "碳水化合物"
+    case protein = "蛋白質"
+    case lipid = "脂肪"
+    case water = "水分"
+    case dietaryFiber = "膳食纖維"
+    case sugar = "糖"
 }
 
 enum MicroNutrient: String {

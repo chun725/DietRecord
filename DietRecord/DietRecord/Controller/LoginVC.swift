@@ -12,6 +12,7 @@ import CryptoKit
 
 class LoginVC: UIViewController {
     private var currentNonce: String?
+    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,7 @@ class LoginVC: UIViewController {
             authorizationButtonType: .signIn,
             authorizationButtonStyle: chooseAppleButtonStyle())
         view.addSubview(signInWithAppleBtn)
-        signInWithAppleBtn.cornerRadius = 25
-        
+        signInWithAppleBtn.cornerRadius = 20
         signInWithAppleBtn.addTarget(self, action: #selector(signInWithApple), for: .touchUpInside)
         signInWithAppleBtn.translatesAutoresizingMaskIntoConstraints = false
         signInWithAppleBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
@@ -140,8 +140,35 @@ extension LoginVC {
             return
         }
         let uid = user.uid
+        userID = uid
         let email = user.email
         print("------\(uid)")
         print("------\(email ?? "")")
+        LKProgressHUD.show()
+        profileProvider.fetchUserData(userID: userID) { result in
+            switch result {
+            case .success(let result):
+                LKProgressHUD.dismiss()
+                if let result = result as? String, result == "document不存在" {
+                    let storyboard = UIStoryboard(name: profile, bundle: nil)
+                    if let profileInfoPage = storyboard.instantiateViewController(
+                        withIdentifier: "\(ProfileInformationVC.self)")
+                        as? ProfileInformationVC {
+                        self.navigationController?.pushViewController(profileInfoPage, animated: false)
+                    }
+                } else if let user = result as? User {
+                    userData = user
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let tabbarController = storyboard.instantiateViewController(
+                        withIdentifier: "\(TabBarController.self)")
+                        as? TabBarController {
+                        self.navigationController?.pushViewController(tabbarController, animated: false)
+                    }
+                }
+            case .failure(let error):
+                LKProgressHUD.showFailure(text: "無法登入")
+                print("Error Info: \(error).")
+            }
+        }
     }
 }

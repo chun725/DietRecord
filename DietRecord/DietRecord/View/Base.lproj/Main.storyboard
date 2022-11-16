@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4CT-vI-9mi">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="E5M-UP-1Ap">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -19,15 +19,16 @@
                         <viewLayoutGuide key="safeArea" id="oW9-Lp-zhy"/>
                         <color key="backgroundColor" name="drLightGray"/>
                     </view>
+                    <navigationItem key="navigationItem" id="lMq-jB-rtt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exw-y1-gam" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1674" y="52"/>
+            <point key="canvasLocation" x="-1364" y="52"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hL3-0k-aTX">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="InR-11-i34" customClass="TabBarController" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="InR-11-i34" customClass="TabBarController" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d26-3p-6Cr">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -95,6 +96,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BYv-eP-Ktp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1694" y="704"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Dgu-Wv-1gz">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="E5M-UP-1Ap" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="JSm-60-XC5">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4CT-vI-9mi" kind="relationship" relationship="rootViewController" id="qTR-pU-TKW"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tKc-cB-pkD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2210" y="52"/>
         </scene>
     </scenes>
     <resources>

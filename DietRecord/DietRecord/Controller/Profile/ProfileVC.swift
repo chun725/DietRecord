@@ -98,6 +98,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             switch result {
             case .success(let user):
                 LKProgressHUD.dismiss()
+                guard let user = user as? User else { return }
                 self.followersLabel.text = String(user.followers.count)
                 self.followingLabel.text = String(user.following.count)
                 self.usernameLabel.text = user.username

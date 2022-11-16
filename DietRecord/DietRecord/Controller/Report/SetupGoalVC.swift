@@ -83,21 +83,26 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
             }
         }
         self.closure?(goal)
-        reportProvider.changeGoal(goal: goal) { result in
-            switch result {
-            case .success:
-                let profileProvider = ProfileProvider()
-                profileProvider.fetchUserData(userID: userID) { result in
-                    switch result {
-                    case .success(let user):
-                        userData = user
-                        self.navigationController?.popViewController(animated: false)
-                    case .failure(let error):
-                        print("Error Info: \(error).")
+        if userData == nil {
+            self.navigationController?.popViewController(animated: false)
+        } else {
+            reportProvider.changeGoal(goal: goal) { result in
+                switch result {
+                case .success:
+                    let profileProvider = ProfileProvider()
+                    profileProvider.fetchUserData(userID: userID) { result in
+                        switch result {
+                        case .success(let user):
+                            let user = user as? User
+                            userData = user
+                            self.navigationController?.popViewController(animated: false)
+                        case .failure(let error):
+                            print("Error Info: \(error).")
+                        }
                     }
+                case .failure(let error):
+                    print("Error Info: \(error).")
                 }
-            case .failure(let error):
-                print("Error Info: \(error).")
             }
         }
     }

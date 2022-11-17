@@ -18,7 +18,9 @@ let dateFormatter = DateFormatter()
 let barChartDateFormatter = DateFormatter()
 let timeDateFormatter = DateFormatter()
 let decoder = JSONDecoder()
+let encoder = JSONEncoder()
 let userDefault = UserDefaults()
+let groupUserDefaults = UserDefaults(suiteName: "group.chun.DietRecord")
 let waterReminder = "WaterReminder"
 let fontName = "PingFang TC"
 let foodBaseView = "FoodBaseView"
@@ -191,4 +193,12 @@ enum AlertTitle: String {
     case activityLevel = "請選擇活動程度"
     case dietGoal = "請選擇飲食目標"
     case dietPlan = "請選擇飲食計畫(碳水化合物/蛋白質/脂肪)"
+}
+
+enum GroupUserDefault: String {
+    case waterDate = "WaterDate"
+    case waterImage = "WaterImage"
+    case dietDate = "DietDate"
+    case dietImage = "DietImage"
+    case widgetName = "ChartViewWidget"
 }

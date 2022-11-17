@@ -39,6 +39,13 @@
 		34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */; };
 		343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD69329111C6E0048046E /* KingFisherWrapper.swift */; };
 		343CD698291223850048046E /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD697291223850048046E /* BarChart.swift */; };
+		344DC7BF2926200800D245A2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344DC7BE2926200800D245A2 /* WidgetKit.framework */; };
+		344DC7C12926200800D245A2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344DC7C02926200800D245A2 /* SwiftUI.framework */; };
+		344DC7C42926200800D245A2 /* ChartViewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7C32926200800D245A2 /* ChartViewWidget.swift */; };
+		344DC7C62926200800D245A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7C52926200800D245A2 /* Assets.xcassets */; };
+		344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		344DC7D22926333D00D245A2 /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7D02926333D00D245A2 /* DietImage.png */; };
+		344DC7D32926333D00D245A2 /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7D12926333D00D245A2 /* WaterImage.png */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
 		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
 		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
@@ -103,6 +110,30 @@
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		344DC7C82926200800D245A2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34642926290CF79A0070B425 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 344DC7BC2926200800D245A2;
+			remoteInfo = ChartViewWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		344DC7CB2926200800D245A2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0F70E0A7FBB5357DB1F3479B /* Pods-DietRecord.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietRecord.debug.xcconfig"; path = "Target Support Files/Pods-DietRecord/Pods-DietRecord.debug.xcconfig"; sourceTree = "<group>"; };
 		1AFFCECFF9E58FBA689E2C5A /* Pods-DietRecord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietRecord.release.xcconfig"; path = "Target Support Files/Pods-DietRecord/Pods-DietRecord.release.xcconfig"; sourceTree = "<group>"; };
@@ -139,6 +170,15 @@
 		34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		343CD69329111C6E0048046E /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		343CD697291223850048046E /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChartViewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		344DC7BE2926200800D245A2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		344DC7C02926200800D245A2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		344DC7C32926200800D245A2 /* ChartViewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewWidget.swift; sourceTree = "<group>"; };
+		344DC7C52926200800D245A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		344DC7C72926200800D245A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartViewWidgetExtension.entitlements; sourceTree = "<group>"; };
+		344DC7D02926333D00D245A2 /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
+		344DC7D12926333D00D245A2 /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
 		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
 		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
@@ -213,6 +253,15 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		344DC7BA2926200800D245A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				344DC7C12926200800D245A2 /* SwiftUI.framework in Frameworks */,
+				344DC7BF2926200800D245A2 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3464292B290CF79A0070B425 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +372,18 @@
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
 		};
+		344DC7C22926200800D245A2 /* ChartViewWidget */ = {
+			isa = PBXGroup;
+			children = (
+				344DC7D02926333D00D245A2 /* DietImage.png */,
+				344DC7D12926333D00D245A2 /* WaterImage.png */,
+				344DC7C32926200800D245A2 /* ChartViewWidget.swift */,
+				344DC7C52926200800D245A2 /* Assets.xcassets */,
+				344DC7C72926200800D245A2 /* Info.plist */,
+			);
+			path = ChartViewWidget;
+			sourceTree = "<group>";
+		};
 		3460ED75291B717C002ED662 /* Report */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,7 +415,9 @@
 		34642925290CF79A0070B425 = {
 			isa = PBXGroup;
 			children = (
+				344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */,
 				34642930290CF79A0070B425 /* DietRecord */,
+				344DC7C22926200800D245A2 /* ChartViewWidget */,
 				3464292F290CF79A0070B425 /* Products */,
 				D68BFFBBA7D721B67E087B17 /* Pods */,
 				CC8EFD0C720311DCA1A8582C /* Frameworks */,
@@ -365,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				3464292E290CF79A0070B425 /* DietRecord.app */,
+				344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -637,6 +701,8 @@
 			children = (
 				34270E74290D566D00D5AFFD /* HealthKit.framework */,
 				6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */,
+				344DC7BE2926200800D245A2 /* WidgetKit.framework */,
+				344DC7C02926200800D245A2 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -653,6 +719,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		344DC7BC2926200800D245A2 /* ChartViewWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 344DC7CE2926200800D245A2 /* Build configuration list for PBXNativeTarget "ChartViewWidgetExtension" */;
+			buildPhases = (
+				344DC7B92926200800D245A2 /* Sources */,
+				344DC7BA2926200800D245A2 /* Frameworks */,
+				344DC7BB2926200800D245A2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChartViewWidgetExtension;
+			productName = ChartViewWidgetExtension;
+			productReference = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		3464292D290CF79A0070B425 /* DietRecord */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 34642942290CF79A0070B425 /* Build configuration list for PBXNativeTarget "DietRecord" */;
@@ -663,10 +746,12 @@
 				3464292C290CF79A0070B425 /* Resources */,
 				0C50704D3DF0A17A3ED5D99A /* [CP] Embed Pods Frameworks */,
 				34270E88290F5D2800D5AFFD /* ShellScript */,
+				344DC7CB2926200800D245A2 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				344DC7C92926200800D245A2 /* PBXTargetDependency */,
 			);
 			name = DietRecord;
 			productName = DietRecord;
@@ -683,6 +768,9 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					344DC7BC2926200800D245A2 = {
+						CreatedOnToolsVersion = 13.4.1;
+					};
 					3464292D290CF79A0070B425 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -703,11 +791,22 @@
 			projectRoot = "";
 			targets = (
 				3464292D290CF79A0070B425 /* DietRecord */,
+				344DC7BC2926200800D245A2 /* ChartViewWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		344DC7BB2926200800D245A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				344DC7C62926200800D245A2 /* Assets.xcassets in Resources */,
+				344DC7D32926333D00D245A2 /* WaterImage.png in Resources */,
+				344DC7D22926333D00D245A2 /* DietImage.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3464292C290CF79A0070B425 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -795,6 +894,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		344DC7B92926200800D245A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				344DC7C42926200800D245A2 /* ChartViewWidget.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3464292A290CF79A0070B425 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -878,6 +985,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		344DC7C92926200800D245A2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 344DC7BC2926200800D245A2 /* ChartViewWidgetExtension */;
+			targetProxy = 344DC7C82926200800D245A2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		34270E5C290D518A00D5AFFD /* Water.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -945,6 +1060,64 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		344DC7CC2926200800D245A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ChartViewWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChartViewWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ChartViewWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord.ChartViewWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		344DC7CD2926200800D245A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = ChartViewWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChartViewWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = ChartViewWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 0.2.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord.ChartViewWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		34642940290CF79A0070B425 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1065,6 +1238,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 0F70E0A7FBB5357DB1F3479B /* Pods-DietRecord.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DietRecord/DietRecord.entitlements;
@@ -1100,6 +1274,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1AFFCECFF9E58FBA689E2C5A /* Pods-DietRecord.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = DietRecord/DietRecord.entitlements;
@@ -1134,6 +1309,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		344DC7CE2926200800D245A2 /* Build configuration list for PBXNativeTarget "ChartViewWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				344DC7CC2926200800D245A2 /* Debug */,
+				344DC7CD2926200800D245A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		34642929290CF79A0070B425 /* Build configuration list for PBXProject "DietRecord" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

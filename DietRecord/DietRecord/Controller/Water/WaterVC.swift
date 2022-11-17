@@ -6,15 +6,14 @@
 //
 
 import UIKit
+import WidgetKit
 
 class WaterVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var waterTableView: UITableView!
     
-    var waterCurrent: Double = 0.0 {
-        didSet {
-            waterTableView.reloadData()
-        }
-    }
+    var pieChartView: PieChart?
+    
+    var waterCurrent: Double = 0.0
     
     var waterGoal: Double = userData?.waterGoal.transformToDouble() ?? 0.0 {
         didSet {
@@ -50,6 +49,19 @@ class WaterVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    func changeImage() {
+        guard let image = self.pieChartView?.getChartImage(transparent: false),
+            let imageData = try? encoder.encode(image.pngData())
+        else { fatalError("Could not find the image of bar chart view.") }
+        groupUserDefaults?.set(
+            dateFormatter.string(from: Date()),
+            forKey: GroupUserDefault.waterDate.rawValue)
+        groupUserDefaults?.set(
+            imageData,
+            forKey: GroupUserDefault.waterImage.rawValue)
+        WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.widgetName.rawValue)
+    }
+    
     @objc func goToWaterInputVC(sender: UIButton) {
         let storyboard = UIStoryboard(name: water, bundle: nil)
         if let waterInputPage = storyboard.instantiateViewController(withIdentifier: "\(WaterInputVC.self)")
@@ -63,6 +75,9 @@ class WaterVC: UIViewController, UITableViewDataSource {
                 waterInputPage.waterCurrent = self.waterCurrent
                 waterInputPage.closure = { [weak self] totalWater in
                     self?.waterCurrent = totalWater
+                    self?.waterTableView.reloadData()
+                    self?.waterTableView.layoutIfNeeded()
+                    self?.changeImage()
                 }
             }
             self.present(waterInputPage, animated: false)

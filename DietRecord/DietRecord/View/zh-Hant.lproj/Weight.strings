@@ -1,0 +1,30 @@
+
+/* Class = "UITabBarItem"; title = "Weight"; ObjectID = "9Nd-Hb-ocg"; */
+"9Nd-Hb-ocg.title" = "Weight";
+
+/* Class = "UILabel"; text = "設定目標體重"; ObjectID = "Cta-GB-NLm"; */
+"Cta-GB-NLm.text" = "設定目標體重";
+
+/* Class = "UILabel"; text = "2022-11-07"; ObjectID = "Jep-j0-tTf"; */
+"Jep-j0-tTf.text" = "2022-11-07";
+
+/* Class = "UILabel"; text = "體重"; ObjectID = "M1m-bb-cnW"; */
+"M1m-bb-cnW.text" = "體重";
+
+/* Class = "UILabel"; text = "目標體重 52.0 kg"; ObjectID = "ROa-vc-xk6"; */
+"ROa-vc-xk6.text" = "目標體重 52.0 kg";
+
+/* Class = "UILabel"; text = "2022-11-12"; ObjectID = "Zzs-Sl-RlF"; */
+"Zzs-Sl-RlF.text" = "2022-11-12";
+
+/* Class = "UILabel"; text = "kg"; ObjectID = "cbw-9D-nGf"; */
+"cbw-9D-nGf.text" = "kg";
+
+/* Class = "UILabel"; text = "52.0 kg"; ObjectID = "hsY-re-aJr"; */
+"hsY-re-aJr.text" = "52.0 kg";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "kjl-yA-iNB"; */
+"kjl-yA-iNB.normalTitle" = "Cancel";
+
+/* Class = "UIButton"; normalTitle = "Save"; ObjectID = "lwC-6j-rQM"; */
+"lwC-6j-rQM.normalTitle" = "Save";

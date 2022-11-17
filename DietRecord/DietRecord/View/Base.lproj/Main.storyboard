@@ -1,16 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="InR-11-i34">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3bH-c7-jB0">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--InitialVC-->
+        <scene sceneID="eBT-G7-c0A">
+            <objects>
+                <viewController storyboardIdentifier="InitialVC" id="H67-pR-6Th" customClass="InitialVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0A0-UX-szh">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="iJ7-BH-qAL"/>
+                        <color key="backgroundColor" name="drLightGray"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ct8-u6-BTA"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="viu-aL-BIe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="213.04347826086959" y="-681.02678571428567"/>
+        </scene>
+        <!--LoginVC-->
+        <scene sceneID="6sh-61-k3d">
+            <objects>
+                <viewController storyboardIdentifier="LoginVC" id="4CT-vI-9mi" customClass="LoginVC" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kN3-87-MyX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="oW9-Lp-zhy"/>
+                        <color key="backgroundColor" name="drLightGray"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="lMq-jB-rtt"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="exw-y1-gam" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1364" y="52"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="hL3-0k-aTX">
             <objects>
-                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="InR-11-i34" customClass="TabBarController" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" automaticallyAdjustsScrollViewInsets="NO" id="InR-11-i34" customClass="TabBarController" customModule="DietRecord" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="d26-3p-6Cr">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
@@ -79,5 +113,27 @@
             </objects>
             <point key="canvasLocation" x="1694" y="704"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="sVM-ve-hOm">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="3bH-c7-jB0" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aZ4-aw-d9Y">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="H67-pR-6Th" kind="relationship" relationship="rootViewController" id="aea-Tg-BDg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JSg-ng-mkH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-697.10144927536237" y="-681.02678571428567"/>
+        </scene>
     </scenes>
+    <resources>
+        <namedColor name="drLightGray">
+            <color red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>

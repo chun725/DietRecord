@@ -62,6 +62,10 @@
 		3469168E291277A40021985F /* ChartXAxis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469168D291277A40021985F /* ChartXAxis.swift */; };
 		3469169229127C430021985F /* ReportDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3469169129127C430021985F /* ReportDetailCell.xib */; };
 		3469169429127C510021985F /* ReportDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3469169329127C510021985F /* ReportDetailCell.swift */; };
+		34930BB929238E6F0037A82E /* DietGoalCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34930BB829238E6F0037A82E /* DietGoalCollectionViewCell.swift */; };
+		34930BBB292470510037A82E /* InitialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34930BBA292470510037A82E /* InitialVC.swift */; };
+		34930BBD292487F40037A82E /* ProfileSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34930BBC292487F40037A82E /* ProfileSettingVC.swift */; };
+		34930BC02924932A0037A82E /* ProfileSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34930BBF2924932A0037A82E /* ProfileSettingCell.swift */; };
 		349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D892918F66B002EB186 /* ProfileDetailCell.swift */; };
 		349B8D8C2918F696002EB186 /* ProfileResponseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */; };
 		349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */; };
@@ -69,6 +73,9 @@
 		349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */; };
 		349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D95291A215D002EB186 /* CheckRequestVC.swift */; };
 		349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 349B8D97291A22CF002EB186 /* RequestCell.swift */; };
+		34A2B5A2292337DE00E01545 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2B5A1292337DE00E01545 /* LoginVC.swift */; };
+		34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2B5AA292371AB00E01545 /* ProfileInformationVC.swift */; };
+		34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34A2B5AD2923898A00E01545 /* ProfileInformationCell.swift */; };
 		34C00058291C8EAC00670CA4 /* JGProgressHUDWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */; };
 		34C0005C291C901600670CA4 /* FoodNutritionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0005A291C901600670CA4 /* FoodNutritionCell.swift */; };
 		34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C0005B291C901600670CA4 /* FoodNutritionCell.xib */; };
@@ -157,6 +164,10 @@
 		3469168D291277A40021985F /* ChartXAxis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartXAxis.swift; sourceTree = "<group>"; };
 		3469169129127C430021985F /* ReportDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportDetailCell.xib; sourceTree = "<group>"; };
 		3469169329127C510021985F /* ReportDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportDetailCell.swift; sourceTree = "<group>"; };
+		34930BB829238E6F0037A82E /* DietGoalCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietGoalCollectionViewCell.swift; sourceTree = "<group>"; };
+		34930BBA292470510037A82E /* InitialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialVC.swift; sourceTree = "<group>"; };
+		34930BBC292487F40037A82E /* ProfileSettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingVC.swift; sourceTree = "<group>"; };
+		34930BBF2924932A0037A82E /* ProfileSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSettingCell.swift; sourceTree = "<group>"; };
 		349B8D892918F66B002EB186 /* ProfileDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailCell.swift; sourceTree = "<group>"; };
 		349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResponseCell.swift; sourceTree = "<group>"; };
 		349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFollowingVC.swift; sourceTree = "<group>"; };
@@ -164,6 +175,16 @@
 		349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileDetailCell.xib; sourceTree = "<group>"; };
 		349B8D95291A215D002EB186 /* CheckRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckRequestVC.swift; sourceTree = "<group>"; };
 		349B8D97291A22CF002EB186 /* RequestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
+		34A2B5A1292337DE00E01545 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		34A2B5A3292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Profile.strings"; sourceTree = "<group>"; };
+		34A2B5A4292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Report.strings"; sourceTree = "<group>"; };
+		34A2B5A5292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/DietRecord.strings"; sourceTree = "<group>"; };
+		34A2B5A6292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Weight.strings"; sourceTree = "<group>"; };
+		34A2B5A7292349FA00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Water.strings"; sourceTree = "<group>"; };
+		34A2B5A8292349FB00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		34A2B5A9292349FB00E01545 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		34A2B5AA292371AB00E01545 /* ProfileInformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationVC.swift; sourceTree = "<group>"; };
+		34A2B5AD2923898A00E01545 /* ProfileInformationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInformationCell.swift; sourceTree = "<group>"; };
 		34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JGProgressHUDWrapper.swift; sourceTree = "<group>"; };
 		34C0005A291C901600670CA4 /* FoodNutritionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutritionCell.swift; sourceTree = "<group>"; };
 		34C0005B291C901600670CA4 /* FoodNutritionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodNutritionCell.xib; sourceTree = "<group>"; };
@@ -432,6 +453,8 @@
 				34270E89290F7A3D00D5AFFD /* DietRecord */,
 				342270232911063A000B4A58 /* TabBarController.swift */,
 				34C00064291CE31B00670CA4 /* ChooseDateVC.swift */,
+				34A2B5A1292337DE00E01545 /* LoginVC.swift */,
+				34930BBA292470510037A82E /* InitialVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -472,6 +495,14 @@
 			path = ReportDetailCell;
 			sourceTree = "<group>";
 		};
+		34930BBE2924930C0037A82E /* ProfileSettingCell */ = {
+			isa = PBXGroup;
+			children = (
+				34930BBF2924932A0037A82E /* ProfileSettingCell.swift */,
+			);
+			path = ProfileSettingCell;
+			sourceTree = "<group>";
+		};
 		349B8D882918F64F002EB186 /* ProfileDetailCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +510,15 @@
 				349B8D9129193D7B002EB186 /* ProfileDetailCell.xib */,
 			);
 			path = ProfileDetailCell;
+			sourceTree = "<group>";
+		};
+		34A2B5AC2923895200E01545 /* ProfileInformationCell */ = {
+			isa = PBXGroup;
+			children = (
+				34A2B5AD2923898A00E01545 /* ProfileInformationCell.swift */,
+				34930BB829238E6F0037A82E /* DietGoalCollectionViewCell.swift */,
+			);
+			path = ProfileInformationCell;
 			sourceTree = "<group>";
 		};
 		34C00059291C8FE300670CA4 /* FoodNutritionCell */ = {
@@ -558,6 +598,8 @@
 		34CF741E29166094009F9264 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				34930BBE2924930C0037A82E /* ProfileSettingCell */,
+				34A2B5AC2923895200E01545 /* ProfileInformationCell */,
 				34C0006C2922490A00670CA4 /* FoodCollectionViewCell */,
 				349B8D882918F64F002EB186 /* ProfileDetailCell */,
 				349B8D8B2918F696002EB186 /* ProfileResponseCell.swift */,
@@ -584,6 +626,8 @@
 				34CF7427291683D5009F9264 /* ProfileDetailVC.swift */,
 				349B8D8D29192E7E002EB186 /* AddFollowingVC.swift */,
 				349B8D95291A215D002EB186 /* CheckRequestVC.swift */,
+				34A2B5AA292371AB00E01545 /* ProfileInformationVC.swift */,
+				34930BBC292487F40037A82E /* ProfileSettingVC.swift */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -651,6 +695,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 34642925290CF79A0070B425;
 			productRefGroup = 3464292F290CF79A0070B425 /* Products */;
@@ -758,6 +803,7 @@
 				3460ED83291BCC66002ED662 /* ReportSetGoalCell.swift in Sources */,
 				34270E7B290E9A4300D5AFFD /* CaloriesPieChartCell.swift in Sources */,
 				34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */,
+				34930BBD292487F40037A82E /* ProfileSettingVC.swift in Sources */,
 				34C00069291FA32F00670CA4 /* ProfileHomePageVC.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
 				34C0006F2922494900670CA4 /* FoodCollectionViewCell.swift in Sources */,
@@ -772,10 +818,12 @@
 				34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */,
 				3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
+				34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
 				34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */,
 				34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */,
+				34930BB929238E6F0037A82E /* DietGoalCollectionViewCell.swift in Sources */,
 				34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
 				34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */,
@@ -792,14 +840,18 @@
 				34270E8B290F7A5700D5AFFD /* DietInputVC.swift in Sources */,
 				3464295C290D48650070B425 /* BalloonMarker.swift in Sources */,
 				3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */,
+				34A2B5A2292337DE00E01545 /* LoginVC.swift in Sources */,
 				34CF74152914C0ED009F9264 /* Weight.swift in Sources */,
 				34C00065291CE31B00670CA4 /* ChooseDateVC.swift in Sources */,
 				349B8D9029193514002EB186 /* User.swift in Sources */,
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
+				34930BC02924932A0037A82E /* ProfileSettingCell.swift in Sources */,
+				34930BBB292470510037A82E /* InitialVC.swift in Sources */,
 				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
+				34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
 				34270E6B290D531F00D5AFFD /* WaterVC.swift in Sources */,
@@ -831,6 +883,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E5D290D518A00D5AFFD /* Base */,
+				34A2B5A7292349FA00E01545 /* zh-Hant */,
 			);
 			name = Water.storyboard;
 			sourceTree = "<group>";
@@ -839,6 +892,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E60290D51F300D5AFFD /* Base */,
+				34A2B5A6292349FA00E01545 /* zh-Hant */,
 			);
 			name = Weight.storyboard;
 			sourceTree = "<group>";
@@ -847,6 +901,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E63290D526500D5AFFD /* Base */,
+				34A2B5A5292349FA00E01545 /* zh-Hant */,
 			);
 			name = DietRecord.storyboard;
 			sourceTree = "<group>";
@@ -855,6 +910,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E66290D529100D5AFFD /* Base */,
+				34A2B5A4292349FA00E01545 /* zh-Hant */,
 			);
 			name = Report.storyboard;
 			sourceTree = "<group>";
@@ -863,6 +919,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34270E71290D54B700D5AFFD /* Base */,
+				34A2B5A3292349FA00E01545 /* zh-Hant */,
 			);
 			name = Profile.storyboard;
 			sourceTree = "<group>";
@@ -871,6 +928,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				34642938290CF79A0070B425 /* Base */,
+				34A2B5A9292349FB00E01545 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -879,6 +937,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				3464293D290CF79A0070B425 /* Base */,
+				34A2B5A8292349FB00E01545 /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -890,6 +949,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -950,6 +1010,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

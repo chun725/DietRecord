@@ -114,16 +114,17 @@ class ProfileProvider {
         }
     }
     
-    func fetchUserData(userID: String, completion: @escaping (Result<User, Error>) -> Void) {
+    func fetchUserData(userID: String, completion: @escaping (Result<Any, Error>) -> Void) {
         database.collection(user).document(userID).getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
-                guard let document = document,
-                    document.exists,
-                    let user = try? document.data(as: User.self)
-                else { return }
-                completion(.success(user))
+                guard let document = document else { return }
+                if document.exists, let user = try? document.data(as: User.self) {
+                    completion(.success(user))
+                } else {
+                    completion(.success("document不存在"))
+                }
             }
         }
     }
@@ -275,6 +276,22 @@ extension ProfileProvider {
                 user.request.removeAll { $0 == followID }
                 do {
                     try documentReference.setData(from: user)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func createUserInfo(userData: User, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentReference = database.collection(user).document(userData.userID)
+        documentReference.getDocument { _, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                do {
+                    try documentReference.setData(from: userData)
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))

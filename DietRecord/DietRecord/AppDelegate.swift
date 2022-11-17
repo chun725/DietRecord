@@ -33,6 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         // 代理 UNUserNotificationCenterDelegate，這麼做可讓 App 在前景狀態下收到通知
         UNUserNotificationCenter.current().delegate = self
+        
         return true
     }
 

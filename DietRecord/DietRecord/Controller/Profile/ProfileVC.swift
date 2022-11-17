@@ -98,6 +98,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             switch result {
             case .success(let user):
                 LKProgressHUD.dismiss()
+                guard let user = user as? User else { return }
                 self.followersLabel.text = String(user.followers.count)
                 self.followingLabel.text = String(user.following.count)
                 self.usernameLabel.text = user.username
@@ -109,7 +110,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 }
                 if user.userID == userID {
                     self.photoCollectionView.isHidden = false
-                    self.editButton.setTitle("編輯個人資料", for: .normal)
+                    self.editButton.setTitle("查看個人資料", for: .normal)
                 } else if user.followers.contains(userID) {
                     self.photoCollectionView.isHidden = false
                     self.editButton.setTitle("Following", for: .normal)
@@ -166,7 +167,16 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
     
     @objc func requestFollow(sender: UIButton) {
-        guard let otherUserID = otherUserID, let otherUserData = otherUserData else { return }
+        guard let otherUserID = otherUserID,
+            let otherUserData = otherUserData
+        else {
+            let storyboard = UIStoryboard(name: profile, bundle: nil)
+            if let profileSettingPage = storyboard.instantiateViewController(
+                withIdentifier: "\(ProfileSettingVC.self)")
+                as? ProfileSettingVC {
+                self.navigationController?.pushViewController(profileSettingPage, animated: false)
+            }
+            return }
         if sender.title(for: .normal) == "Follow" {
             profileProvider.changeRequest(isRequest: false, followID: otherUserID) { result in
                 switch result {

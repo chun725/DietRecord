@@ -24,6 +24,7 @@ class ProfileResponseCell: UITableViewCell {
         profileProvider.fetchUserData(userID: response.person) { result in
             switch result {
             case .success(let user):
+                guard let user = user as? User else { return }
                 self.usernameLabel.text = user.username
                 self.userImageView.loadImage(user.userImageURL)
             case .failure(let error):

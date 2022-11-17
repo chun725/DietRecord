@@ -200,5 +200,6 @@ enum GroupUserDefault: String {
     case waterImage = "WaterImage"
     case dietDate = "DietDate"
     case dietImage = "DietImage"
-    case widgetName = "ChartViewWidget"
+    case firstWidgetName = "ChartViewWidget"
+    case secondWidgetName = "DietPieChartWidget"
 }

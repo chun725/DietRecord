@@ -52,14 +52,14 @@ class WaterVC: UIViewController, UITableViewDataSource {
     func changeImage() {
         guard let image = self.pieChartView?.getChartImage(transparent: false),
             let imageData = try? encoder.encode(image.pngData())
-        else { fatalError("Could not find the image of bar chart view.") }
+        else { fatalError("Could not find the image of water pie chart view.") }
         groupUserDefaults?.set(
             dateFormatter.string(from: Date()),
             forKey: GroupUserDefault.waterDate.rawValue)
         groupUserDefaults?.set(
             imageData,
             forKey: GroupUserDefault.waterImage.rawValue)
-        WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.widgetName.rawValue)
+        WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.firstWidgetName.rawValue)
     }
     
     @objc func goToWaterInputVC(sender: UIButton) {

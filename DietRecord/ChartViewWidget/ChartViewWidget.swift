@@ -64,11 +64,14 @@ struct ChartViewWidgetEntryView: View {
     var entry: Provider.Entry
 
     var body: some View {
-        Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill)
+        VStack {
+            Spacer()
+            Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill)
+            Spacer()
+        }
     }
 }
 
-@main
 struct ChartViewWidget: Widget {
     let kind: String = "ChartViewWidget"
 
@@ -88,5 +91,15 @@ struct ChartViewWidget_Previews: PreviewProvider {
             date: Date(),
             imageData: (UIImage(named: "WaterImage")?.pngData())!))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
+    }
+}
+
+
+@main
+struct SwiftWidgetsBundle: WidgetBundle {
+    @WidgetBundleBuilder
+    var body: some Widget {
+        ChartViewWidget()
+        DietPieChartWidget()
     }
 }

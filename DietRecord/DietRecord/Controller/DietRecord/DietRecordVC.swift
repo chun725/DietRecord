@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 class DietRecordVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var dietRecordTableView: UITableView!
@@ -13,18 +14,11 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var dateTextField: UITextField!
     @IBOutlet weak var placeholderLabel: UILabel!
     
-    var meals: [MealRecord] = [] {
-        didSet {
-            meals = meals.sorted { $0.meal < $1.meal }
-            totalFoods = meals.map { $0.foods }.flatMap { $0 }
-        }
-    }
+    var dietPieChartView: PieChart?
     
-    var totalFoods: [Food]? {
-        didSet {
-            dietRecordTableView.reloadData()
-        }
-    }
+    var meals: [MealRecord] = []
+    
+    var totalFoods: [Food] = []
     
     var isLoading = true // 讓tableView在loading時被清掉
     
@@ -88,9 +82,13 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                     LKProgressHUD.dismiss()
                     self.placeholderLabel.isHidden = false
                     self.meals = []
+                    self.totalFoods = []
+                    self.changeDietImage()
                 } else {
                     guard let dietRecordData = data as? FoodDailyInput else { return }
-                    self.meals = dietRecordData.mealRecord
+                    self.meals = dietRecordData.mealRecord.sorted { $0.meal < $1.meal }
+                    self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
+                    self.changeDietImage()
                     LKProgressHUD.dismiss()
                     if self.meals.isEmpty {
                         self.placeholderLabel.isHidden = false
@@ -104,6 +102,24 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             }
         }
     }
+    
+    func changeDietImage() {
+        self.dietRecordTableView.reloadData()
+        self.dietRecordTableView.layoutIfNeeded()
+        if dateTextField.text == dateFormatter.string(from: Date()) {
+            guard let image = self.dietPieChartView?.getChartImage(transparent: false),
+                let imageData = try? encoder.encode(image.pngData())
+            else { fatalError("Could not find the image of diet pie chart view.") }
+            groupUserDefaults?.set(
+                dateFormatter.string(from: Date()),
+                forKey: GroupUserDefault.dietDate.rawValue)
+            groupUserDefaults?.set(
+                imageData,
+                forKey: GroupUserDefault.dietImage.rawValue)
+            WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.secondWidgetName.rawValue)
+        }
+    }
+    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         2
@@ -128,6 +144,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             let carbs = calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate)
             let protein = calculateMacroNutrition(foods: totalFoods, nutrient: .protein)
             let fat = calculateMacroNutrition(foods: totalFoods, nutrient: .lipid)
+            cell.controller = self
             cell.layoutCell(
                 calories: "\(calories.format())/\(userData.goal[0]) kcal",
                 carbs: "\(carbs.format())/\(userData.goal[1]) g",

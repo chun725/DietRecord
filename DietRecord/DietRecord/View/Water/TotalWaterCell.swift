@@ -31,6 +31,7 @@ class TotalWaterCell: UITableViewCell {
         }
         let pieChart = PieChart(frame: .zero, superview: waterPieChartView)
         pieChart.setWaterPieChart(water: water, goal: goal)
+        controller?.pieChartView = pieChart
         guard let userData = userData else { return }
         waterGoalLabel.text = "目標飲水量 " + userData.waterGoal.transform(unit: mLUnit)
     }

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 class CaloriesPieChartCell: UITableViewCell {    
     @IBOutlet weak var caloriesPieChartView: UIView!
@@ -14,6 +15,7 @@ class CaloriesPieChartCell: UITableViewCell {
     @IBOutlet weak var proteinLabel: UILabel!
     @IBOutlet weak var carbsLabel: UILabel!
     
+    weak var controller: DietRecordVC?
     
     func layoutCell(calories: String, carbs: String, protein: String, fat: String) {
         caloriesLabel.text = calories
@@ -31,5 +33,6 @@ class CaloriesPieChartCell: UITableViewCell {
         }
         let pieChart = PieChart(frame: .zero, superview: caloriesPieChartView)
         pieChart.setCaloriesPieChart(breakfast: breakfast, lunch: lunch, dinner: dinner, others: others, goal: goal)
+        controller?.dietPieChartView = pieChart
     }
 }

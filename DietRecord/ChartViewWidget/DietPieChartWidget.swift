@@ -12,7 +12,7 @@ struct DietProvider: TimelineProvider {
     func placeholder(in context: Context) -> DietEntry {
         guard let imagePath = Bundle.main.url(forResource: "DietImage", withExtension: ".png"),
             let imageData = try? Data(contentsOf: imagePath)
-        else { fatalError("Could not find water image.") }
+        else { fatalError("Could not find diet image.") }
         return DietEntry(date: Date(), imageData: imageData)
     }
 

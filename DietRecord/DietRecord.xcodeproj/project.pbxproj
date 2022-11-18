@@ -44,9 +44,9 @@
 		344DC7C42926200800D245A2 /* ChartViewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7C32926200800D245A2 /* ChartViewWidget.swift */; };
 		344DC7C62926200800D245A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7C52926200800D245A2 /* Assets.xcassets */; };
 		344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		344DC7D22926333D00D245A2 /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7D02926333D00D245A2 /* DietImage.png */; };
-		344DC7D32926333D00D245A2 /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7D12926333D00D245A2 /* WaterImage.png */; };
 		344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */; };
+		344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7DB29273E3C00D245A2 /* WaterImage.png */; };
+		344DC7E62927422E00D245A2 /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E52927422E00D245A2 /* DietImage.png */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
 		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
 		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
@@ -178,9 +178,9 @@
 		344DC7C52926200800D245A2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		344DC7C72926200800D245A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartViewWidgetExtension.entitlements; sourceTree = "<group>"; };
-		344DC7D02926333D00D245A2 /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
-		344DC7D12926333D00D245A2 /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
 		344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPieChartWidget.swift; sourceTree = "<group>"; };
+		344DC7DB29273E3C00D245A2 /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
+		344DC7E52927422E00D245A2 /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
 		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
 		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
@@ -377,8 +377,8 @@
 		344DC7C22926200800D245A2 /* ChartViewWidget */ = {
 			isa = PBXGroup;
 			children = (
-				344DC7D02926333D00D245A2 /* DietImage.png */,
-				344DC7D12926333D00D245A2 /* WaterImage.png */,
+				344DC7E52927422E00D245A2 /* DietImage.png */,
+				344DC7DB29273E3C00D245A2 /* WaterImage.png */,
 				344DC7C32926200800D245A2 /* ChartViewWidget.swift */,
 				344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */,
 				344DC7C52926200800D245A2 /* Assets.xcassets */,
@@ -805,8 +805,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				344DC7C62926200800D245A2 /* Assets.xcassets in Resources */,
-				344DC7D32926333D00D245A2 /* WaterImage.png in Resources */,
-				344DC7D22926333D00D245A2 /* DietImage.png in Resources */,
+				344DC7E62927422E00D245A2 /* DietImage.png in Resources */,
+				344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

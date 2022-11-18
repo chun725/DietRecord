@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class ProfileSettingCell: UITableViewCell {
     @IBOutlet weak var infoBackgroundView: UIView!
@@ -42,6 +43,15 @@ class ProfileSettingCell: UITableViewCell {
     }
     
     @IBAction func logout(_ sender: Any) {
+        let firebaseAuth = Auth.auth()
+        do {
+            try firebaseAuth.signOut()
+            userID = ""
+            userData = nil
+            controller?.tabBarController?.navigationController?.popToRootViewController(animated: false)
+        } catch let signOutError as NSError {
+            print("Error signing out: %@", signOutError)
+        }
     }
     
     @IBAction func deleteAccount(_ sender: Any) {

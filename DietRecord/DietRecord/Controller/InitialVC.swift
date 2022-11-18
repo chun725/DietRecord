@@ -14,6 +14,10 @@ class InitialVC: UIViewController {
         super.viewDidLoad()
         configureDateformatter()
         fetchFoodIngredient()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getUserData()
     }
     

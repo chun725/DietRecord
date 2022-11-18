@@ -57,7 +57,7 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
         let mealRecord = self.followingPosts[indexPath.row]
         cell.haveResponses = false
         cell.controller = self
-        cell.layoutCell(mealRecord: mealRecord)
+        cell.layoutCell(mealRecord: mealRecord, nowUserData: nil)
         return cell
     }
 }

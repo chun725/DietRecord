@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import AuthenticationServices
 import CryptoKit
+import Lottie
 
 class LoginVC: UIViewController {
     private var currentNonce: String?
@@ -17,6 +18,15 @@ class LoginVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setSignInWithAppleBtn()
+        let animationView = LottieAnimationView(name: "82624-foodies")
+        animationView.frame = CGRect(x: 0, y: 0, width: fullScreenSize.width, height: 350)
+        animationView.center = CGPoint(x: self.view.center.x, y: self.view.bounds.minY + 175)
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopMode = .loop
+        animationView.animationSpeed = 1.25
+        
+        view.addSubview(animationView)
+        animationView.play()
     }
     
     func setSignInWithAppleBtn() {

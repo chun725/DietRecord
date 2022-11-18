@@ -8,6 +8,7 @@
 import UIKit
 import FirebaseAuth
 
+
 class InitialVC: UIViewController {
     let profileProvider = ProfileProvider()
     override func viewDidLoad() {

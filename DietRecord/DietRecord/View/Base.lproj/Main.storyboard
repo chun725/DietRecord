@@ -16,8 +16,19 @@
                     <view key="view" contentMode="scaleToFill" id="0A0-UX-szh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Launch" translatesAutoresizingMaskIntoConstraints="NO" id="c9e-v4-CpV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="iJ7-BH-qAL"/>
                         <color key="backgroundColor" name="drLightGray"/>
+                        <constraints>
+                            <constraint firstItem="c9e-v4-CpV" firstAttribute="top" secondItem="iJ7-BH-qAL" secondAttribute="top" id="PsP-QD-Ftb"/>
+                            <constraint firstItem="iJ7-BH-qAL" firstAttribute="bottom" secondItem="c9e-v4-CpV" secondAttribute="bottom" id="ffj-rm-hpy"/>
+                            <constraint firstItem="iJ7-BH-qAL" firstAttribute="trailing" secondItem="c9e-v4-CpV" secondAttribute="trailing" id="qGv-m0-Smv"/>
+                            <constraint firstItem="c9e-v4-CpV" firstAttribute="leading" secondItem="iJ7-BH-qAL" secondAttribute="leading" id="sut-gE-ckP"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ct8-u6-BTA"/>
                 </viewController>
@@ -32,8 +43,21 @@
                     <view key="view" contentMode="scaleToFill" id="kN3-87-MyX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Launch" translatesAutoresizingMaskIntoConstraints="NO" id="pIS-bh-fTh">
+                                <rect key="frame" x="0.0" y="392" width="414" height="350"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="350" id="ntI-Ne-Sis"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="oW9-Lp-zhy"/>
                         <color key="backgroundColor" name="drLightGray"/>
+                        <constraints>
+                            <constraint firstItem="pIS-bh-fTh" firstAttribute="leading" secondItem="oW9-Lp-zhy" secondAttribute="leading" id="6Ic-jJ-fBX"/>
+                            <constraint firstItem="pIS-bh-fTh" firstAttribute="trailing" secondItem="oW9-Lp-zhy" secondAttribute="trailing" id="SdB-MP-aAh"/>
+                            <constraint firstItem="oW9-Lp-zhy" firstAttribute="bottom" secondItem="pIS-bh-fTh" secondAttribute="bottom" constant="120" id="wiL-C1-dUZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lMq-jB-rtt"/>
                 </viewController>
@@ -132,6 +156,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image_Launch" width="1408" height="1125"/>
         <namedColor name="drLightGray">
             <color red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

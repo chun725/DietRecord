@@ -8,12 +8,17 @@
 import UIKit
 import FirebaseAuth
 
+
 class InitialVC: UIViewController {
     let profileProvider = ProfileProvider()
     override func viewDidLoad() {
         super.viewDidLoad()
         configureDateformatter()
         fetchFoodIngredient()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getUserData()
     }
     

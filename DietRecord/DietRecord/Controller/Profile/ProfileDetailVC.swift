@@ -10,6 +10,7 @@ import UIKit
 class ProfileDetailVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var profileDetailTableView: UITableView!
     @IBOutlet weak var responseTextView: UITextView!
+    @IBOutlet weak var userSelfIDLabel: UILabel!
     
     var mealRecord: MealRecord?
     var nowUserData: User?

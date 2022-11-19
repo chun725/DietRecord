@@ -40,23 +40,9 @@ class ProfileDetailCell: UITableViewCell {
     var otherUserID: String?
     
     func layoutCell(mealRecord: MealRecord, nowUserData: User?) {
+        configureUserData(mealRecord: mealRecord, nowUserData: nowUserData)
         self.backgroundColor = .clear
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2
-        if let nowUserData = nowUserData {
-            usernameLabel.text = nowUserData.username
-            userImageView.loadImage(nowUserData.userImageURL)
-        } else {
-            profileProvider.fetchUserData(userID: mealRecord.userID) { result in
-                switch result {
-                case .success(let user):
-                    guard let user = user as? User else { return }
-                    self.usernameLabel.text = user.username
-                    self.userImageView.loadImage(user.userImageURL)
-                case .failure(let error):
-                    print("Error Info: \(error).")
-                }
-            }
-        }
         likeBackground.layer.cornerRadius = 10
         mealImageView.loadImage(mealRecord.imageURL)
         mealCommentLabel.text = mealRecord.comment
@@ -100,6 +86,30 @@ class ProfileDetailCell: UITableViewCell {
         }
         if mealRecord.comment.isEmpty {
             timeLabelTopConstraint.constant = 0
+        }
+    }
+    
+    private func configureUserData(mealRecord: MealRecord, nowUserData: User?) {
+        if let nowUserData = nowUserData {
+            usernameLabel.text = nowUserData.username
+            userImageView.loadImage(nowUserData.userImageURL)
+            if let controller = controller as? ProfileDetailVC {
+                controller.userSelfIDLabel.text = nowUserData.userSelfID
+            }
+        } else {
+            profileProvider.fetchUserData(userID: mealRecord.userID) { result in
+                switch result {
+                case .success(let user):
+                    guard let user = user as? User else { return }
+                    self.usernameLabel.text = user.username
+                    self.userImageView.loadImage(user.userImageURL)
+                    if let controller = self.controller as? ProfileDetailVC {
+                        controller.userSelfIDLabel.text = user.userSelfID
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error).")
+                }
+            }
         }
     }
     

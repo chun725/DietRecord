@@ -9,6 +9,7 @@ import Foundation
 
 struct User: Codable {
     let userID: String
+    var userSelfID: String
     var following: [String]
     var followers: [String]
     var request: [String]

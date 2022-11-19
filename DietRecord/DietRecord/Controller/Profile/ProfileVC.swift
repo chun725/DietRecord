@@ -45,7 +45,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             self.checkButton.isHidden = true
             self.addButton.isHidden = true
             self.photoCollectionView.isHidden = true
-            titleLabel.text = ""
         } else {
             self.backButton.isHidden = true
         }
@@ -101,6 +100,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 self.followingLabel.text = String(user.following.count)
                 self.usernameLabel.text = user.username
                 self.userImageView.loadImage(user.userImageURL)
+                self.titleLabel.text = user.userSelfID
                 if id == userID {
                     userData = user
                 } else {

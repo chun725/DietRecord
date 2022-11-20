@@ -38,6 +38,7 @@ let gUnit = "g"
 let mgUnit = "mg"
 let mLUnit = "mL"
 let waterReminderNotification = "WaterReminderNotification"
+let weightPermission = "WeightPermission"
 var userData: User?
 var foodIngredients: [FoodIngredient]? // 資料庫
 var fullScreenSize = UIScreen.main.bounds.size
@@ -202,4 +203,9 @@ enum GroupUserDefault: String {
     case dietImage = "DietImage"
     case firstWidgetName = "ChartViewWidget"
     case secondWidgetName = "DietPieChartWidget"
+}
+
+enum WeightDataSource: String {
+    case dietRecord = "DietRecord"
+    case healthApp = "HealthApp"
 }

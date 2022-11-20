@@ -10,4 +10,5 @@ import Foundation
 struct WeightData: Codable {
     let date: Date
     let value: Double
+    let dataSource: String
 }

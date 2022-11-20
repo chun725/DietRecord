@@ -93,6 +93,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         chartDataSet.drawHorizontalHighlightIndicatorEnabled = false // 不顯示橫向十字線
         chartDataSet.drawVerticalHighlightIndicatorEnabled = false // 不顯示縱向十字線
         chartDataSet.drawValuesEnabled = false // 不顯示數字
+        // chartDataSet.mode = .horizontalBezier // 改變折線弧度
         let chartData = LineChartData(dataSets: [chartDataSet])
         // 折線圖數據只包含一組數據
         self.data = chartData // 設置折線圖數據
@@ -120,9 +121,11 @@ class LineChart: LineChartView, ChartViewDelegate {
         self.leftAxis.drawGridLinesEnabled = false // 不要有每個y值的線
         self.leftAxis.drawLabelsEnabled = false // 不顯示左側y軸文字
         self.leftAxis.drawAxisLineEnabled = false // 不顯示左側y軸線
-        self.leftAxis.axisMinimum = -10 // 最小刻度值
-        guard let maxWeight = datas.map({ $0.value }).max() else { return }
-        self.leftAxis.axisMaximum = maxWeight + 50 // 最大刻度值
+        guard let maxWeight = datas.map({ $0.value }).max(),
+            let minWeight = datas.map({ $0.value }).min()
+        else { return }
+        self.leftAxis.axisMinimum = minWeight - 20 // 最小刻度值
+        self.leftAxis.axisMaximum = maxWeight + 20 // 最大刻度值
         
         // 設定目標線
         self.leftAxis.removeAllLimitLines()
@@ -142,11 +145,11 @@ class LineChart: LineChartView, ChartViewDelegate {
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         // 將選擇的點置中
-        self.moveViewToAnimated(
-            xValue: entry.x - 45,
-            yValue: 0,
-            axis: .left,
-            duration: 0.3)
+//        self.moveViewToAnimated(
+//            xValue: entry.x - 45,
+//            yValue: 0,
+//            axis: .left,
+//            duration: 0.3)
         let date = Date(timeIntervalSince1970: entry.x * 3600 * 24 + self.referenceTimeInterval)
         let dateString = dateFormatter.string(from: date)
         self.showMarkerView(value: "\(entry.y)", date: dateString)

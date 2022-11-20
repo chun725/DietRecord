@@ -66,7 +66,7 @@ class WeightInputVC: UIViewController {
                 }
             }
         } else {
-            let weightData = WeightData(date: date, value: weight)
+            let weightData = WeightData(date: date, value: weight, dataSource: WeightDataSource.dietRecord.rawValue)
             weightRecordProvider.createWeightRecord(weightData: weightData) { result in
                 switch result {
                 case .success:

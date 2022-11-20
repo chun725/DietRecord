@@ -129,6 +129,24 @@ class ProfileProvider {
         }
     }
     
+    func searchUser(userSelfID: String, completion: @escaping (Result<Any, Error>) -> Void) {
+        database.collection(user).whereField("userSelfID", isEqualTo: userSelfID).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let snapshot = snapshot else { return }
+                if snapshot.documents.isEmpty {
+                    completion(.success("document不存在"))
+                } else {
+                    guard let document = snapshot.documents.first,
+                          let user = try? document.data(as: User.self)
+                    else { return }
+                    completion(.success(user))
+                }
+            }
+        }
+    }
+    
     func changeRequest(isRequest: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let documentReference = database.collection(user).document(followID)
         documentReference.getDocument { document, error in
@@ -295,6 +313,21 @@ extension ProfileProvider {
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func fetchUserSelfID(selfID: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+        database.collection(user).whereField("userSelfID", isEqualTo: selfID).getDocuments { snapshot, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let snapshot = snapshot else { return }
+                if snapshot.documents.isEmpty {
+                    completion(.success(true))
+                } else {
+                    completion(.success(false))
                 }
             }
         }

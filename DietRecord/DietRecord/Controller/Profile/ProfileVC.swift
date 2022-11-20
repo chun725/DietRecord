@@ -45,7 +45,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             self.checkButton.isHidden = true
             self.addButton.isHidden = true
             self.photoCollectionView.isHidden = true
-            titleLabel.text = ""
         } else {
             self.backButton.isHidden = true
         }
@@ -53,10 +52,8 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if mealRecords.isEmpty {
-            fetchDietRecord()
-            fetchData()
-        }
+        fetchDietRecord()
+        fetchData()
         if otherUserID == nil {
             self.tabBarController?.tabBar.isHidden = false
         } else {
@@ -103,6 +100,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 self.followingLabel.text = String(user.following.count)
                 self.usernameLabel.text = user.username
                 self.userImageView.loadImage(user.userImageURL)
+                self.titleLabel.text = user.userSelfID
                 if id == userID {
                     userData = user
                 } else {
@@ -132,6 +130,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
     
     @IBAction func goToCheckRequestPage(_ sender: UIButton) {
+        print("fndkjkndfkvn")
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
@@ -244,6 +243,11 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
+            if let otherUserData = otherUserData {
+                profileDetailPage.nowUserData = otherUserData
+            } else {
+                profileDetailPage.nowUserData = userData
+            }
             self.navigationController?.pushViewController(profileDetailPage, animated: false)
         }
     }
@@ -253,14 +257,15 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
 extension ProfileVC: UICollectionViewDelegateFlowLayout {
     // MARK: - DelegateFlowLayout -
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let size = CGSize(width: CGFloat(fullScreenSize.width / 3), height: CGFloat(fullScreenSize.width) / 3)
+        let width = (fullScreenSize.width - 10) / 3
+        let size = CGSize(width: width, height: width)
         return size
     }
     
     // MARK: - FlowLayout -
     func configureLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         return layout

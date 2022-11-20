@@ -41,7 +41,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     @objc func createUserInfo() {
         LKProgressHUD.show()
         guard let user = user else { return }
-        if user.username.isEmpty || user.weightGoal.isEmpty || user.waterGoal.isEmpty || user.goal.isEmpty {
+        if user.userSelfID.isEmpty || user.username.isEmpty || user.weightGoal.isEmpty || user.waterGoal.isEmpty || user.goal.isEmpty {
             LKProgressHUD.dismiss()
             self.presentInputAlert(title: "請輸入完整資料")
         } else {

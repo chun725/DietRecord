@@ -25,6 +25,9 @@ class ProfileDetailCell: UITableViewCell {
             foodCollectionView.registerCellWithNib(identifier: FoodCollectionViewCell.reuseIdentifier, bundle: nil)
         }
     }
+    @IBOutlet weak var responseCountLabel: UILabel!
+    @IBOutlet weak var timeLabelTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var likeBackground: UIView!
     
     weak var controller: UIViewController?
     let profileProvider = ProfileProvider()
@@ -36,29 +39,21 @@ class ProfileDetailCell: UITableViewCell {
     }
     var otherUserID: String?
     
-    func layoutCell(mealRecord: MealRecord) {
+    func layoutCell(mealRecord: MealRecord, nowUserData: User?) {
+        configureUserData(mealRecord: mealRecord, nowUserData: nowUserData)
         self.backgroundColor = .clear
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2
-        profileProvider.fetchUserData(userID: mealRecord.userID) { result in
-            switch result {
-            case .success(let user):
-                guard let user = user as? User else { return }
-                self.usernameLabel.text = user.username
-                self.userImageView.loadImage(user.userImageURL)
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
-        }
+        likeBackground.layer.cornerRadius = 10
         mealImageView.loadImage(mealRecord.imageURL)
         mealCommentLabel.text = mealRecord.comment
-        likedCountLabel.text = "\(mealRecord.peopleLiked.count)人說讚"
+        likedCountLabel.text = "\(mealRecord.peopleLiked.count)"
+        responseCountLabel.text = "\(mealRecord.response.count)"
         likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
         checkResponseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         self.mealRecord = mealRecord
         otherUserID = mealRecord.userID
         if haveResponses {
             checkResponseButton.isHidden = true
-            timeLabel.isHidden = false
             var mealString = ""
             switch mealRecord.meal {
             case 0:
@@ -73,6 +68,7 @@ class ProfileDetailCell: UITableViewCell {
             timeLabel.text = mealRecord.date + " " + mealString
             responseButton.addTarget(self, action: #selector(beginResponse), for: .touchUpInside)
         } else {
+            timeLabel.text = dateFormatter.string(from: mealRecord.createdTime)
             responseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         }
         if mealRecord.peopleLiked.contains(userID) {
@@ -85,8 +81,35 @@ class ProfileDetailCell: UITableViewCell {
             likeButton.setBackgroundImage(
                 UIImage(systemName: "heart"),
                 for: .normal)
-            likeButton.tintColor = .drDarkGray
+            likeButton.tintColor = .white
             likeButton.tag = mealRecord.peopleLiked.count
+        }
+        if mealRecord.comment.isEmpty {
+            timeLabelTopConstraint.constant = 0
+        }
+    }
+    
+    private func configureUserData(mealRecord: MealRecord, nowUserData: User?) {
+        if let nowUserData = nowUserData {
+            usernameLabel.text = nowUserData.username
+            userImageView.loadImage(nowUserData.userImageURL)
+            if let controller = controller as? ProfileDetailVC {
+                controller.userSelfIDLabel.text = nowUserData.userSelfID
+            }
+        } else {
+            profileProvider.fetchUserData(userID: mealRecord.userID) { result in
+                switch result {
+                case .success(let user):
+                    guard let user = user as? User else { return }
+                    self.usernameLabel.text = user.username
+                    self.userImageView.loadImage(user.userImageURL)
+                    if let controller = self.controller as? ProfileDetailVC {
+                        controller.userSelfIDLabel.text = user.userSelfID
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error).")
+                }
+            }
         }
     }
     
@@ -96,11 +119,11 @@ class ProfileDetailCell: UITableViewCell {
                 UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate),
                 for: .normal)
             sender.tintColor = .red
-            likedCountLabel.text = "\(sender.tag + 1)人說讚"
+            likedCountLabel.text = "\(sender.tag + 1)"
         } else {
             sender.setBackgroundImage(UIImage(systemName: "heart"), for: .normal)
-            sender.tintColor = .drDarkGray
-            likedCountLabel.text = "\(sender.tag)人說讚"
+            sender.tintColor = .white
+            likedCountLabel.text = "\(sender.tag)"
         }
         guard let mealRecord = mealRecord else { return }
         profileProvider.changeLiked(

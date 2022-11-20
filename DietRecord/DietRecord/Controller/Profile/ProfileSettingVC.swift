@@ -8,10 +8,12 @@
 import UIKit
 
 class ProfileSettingVC: UIViewController, UITableViewDataSource {
+    @IBOutlet weak var userSelfIDLabel: UILabel!
     @IBOutlet weak var settingTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTableView.dataSource = self
+        userSelfIDLabel.text = userData?.userSelfID
     }
     
     override func viewWillAppear(_ animated: Bool) {

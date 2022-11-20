@@ -48,22 +48,24 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         guard let userInput = userInputTextField.text else { return }
         if !userInput.isEmpty {
             LKProgressHUD.show()
-            profileProvider.fetchUserData(userID: userInput) { result in
+            profileProvider.searchUser(userSelfID: userInput) { result in
                 switch result {
-                case .success(let user):
-                    LKProgressHUD.dismiss()
-                    let user = user as? User
-                    self.userSearchResult = user
+                case .success(let response):
+                    if response as? String == "document不存在" {
+                        LKProgressHUD.showFailure(text: "用戶不存在")
+                        self.usernameLabel.isHidden = true
+                        self.userImageView.isHidden = true
+                        self.followButton.isHidden = true
+                    } else {
+                        LKProgressHUD.dismiss()
+                        let user = response as? User
+                        self.userSearchResult = user
+                    }
                 case .failure(let error):
                     LKProgressHUD.showFailure(text: "無法查詢用戶")
                     print("Error Info: \(error).")
                 }
             }
-        } else {
-            let alert = UIAlertController(title: "請輸入用戶名稱", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(action)
-            self.present(alert, animated: false)
         }
     }
     
@@ -119,7 +121,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
-            userProfilePage.otherUserID = self.userInputTextField.text
+            userProfilePage.otherUserID = self.userSearchResult?.userID
             self.navigationController?.pushViewController(userProfilePage, animated: false)
         }
     }

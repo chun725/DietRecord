@@ -11,6 +11,7 @@ import PhotosUI
 class ProfileInformationCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var changeImageButton: UIButton!
+    @IBOutlet weak var userSelfIDTextfield: UITextField!
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var waterGoalTextField: UITextField!
     @IBOutlet weak var weightGoalTextField: UITextField!
@@ -20,6 +21,9 @@ class ProfileInformationCell: UITableViewCell {
     @IBOutlet weak var weightView: UIView!
     @IBOutlet weak var waterView: UIView!
     @IBOutlet weak var nameView: UIView!
+    @IBOutlet weak var idView: UIView!
+    
+    @IBOutlet weak var infoImageView: UIImageView!
     @IBOutlet weak var dietGoalCollectionView: UICollectionView! {
         didSet {
             dietGoalCollectionView.dataSource = self
@@ -28,6 +32,7 @@ class ProfileInformationCell: UITableViewCell {
         }
     }
     
+    let profileProvider = ProfileProvider()
     let dietRecordProvider = DietRecordProvider()
     var imageURL = placeholderURL {
         didSet {
@@ -44,6 +49,7 @@ class ProfileInformationCell: UITableViewCell {
     
     var user = User(
         userID: userID,
+        userSelfID: "",
         following: [],
         followers: [],
         request: [],
@@ -64,19 +70,21 @@ class ProfileInformationCell: UITableViewCell {
         automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         changeImageButton.layer.cornerRadius = changeImageButton.bounds.width / 2
-        let views = [nameView, waterView, weightView, dietView]
+        let views = [idView, nameView, waterView, weightView, dietView]
         for view in views {
             view?.setBorder(width: 1, color: .drGray, radius: 15)
         }
         waterGoalTextField.delegate = self
         weightGoalTextField.delegate = self
         usernameTextField.delegate = self
+        userSelfIDTextfield.delegate = self
         changeImageButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
         if let controller = controller, controller.isUpdated {
             userImageView.loadImage(user.userImageURL)
             usernameTextField.text = user.username
             waterGoalTextField.text = user.waterGoal.transform(unit: mLUnit)
             weightGoalTextField.text = user.weightGoal.transform(unit: kgUnit)
+            userSelfIDTextfield.text = user.userSelfID
         }
     }
     
@@ -165,6 +173,32 @@ extension ProfileInformationCell: UITextFieldDelegate {
             textField.text = textField.text?.transform(unit: kgUnit)
         } else if textField == usernameTextField {
             user.username = textField.text ?? ""
+        } else if textField == userSelfIDTextfield {
+            if textField.text == "" {
+                self.controller?.presentInputAlert(title: "用戶名不能為空")
+                self.infoImageView.isHidden = false
+            } else if textField.text == userData?.userSelfID {
+                print("使用舊用戶名")
+                self.infoImageView.isHidden = true
+            } else {
+                LKProgressHUD.show()
+                profileProvider.fetchUserSelfID(selfID: textField.text ?? "") { result in
+                    LKProgressHUD.dismiss()
+                    switch result {
+                    case .success(let success):
+                        if success {
+                            self.user.userSelfID = textField.text ?? ""
+                            self.infoImageView.isHidden = true
+                        } else {
+                            self.user.userSelfID = ""
+                            self.controller?.presentInputAlert(title: "此用戶名稱已被人使用")
+                            self.infoImageView.isHidden = false
+                        }
+                    case .failure(let error):
+                        print("Error Info: \(error).")
+                    }
+                }
+            }
         }
     }
 }

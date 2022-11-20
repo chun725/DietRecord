@@ -10,8 +10,10 @@ import UIKit
 class ProfileDetailVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var profileDetailTableView: UITableView!
     @IBOutlet weak var responseTextView: UITextView!
+    @IBOutlet weak var userSelfIDLabel: UILabel!
     
     var mealRecord: MealRecord?
+    var nowUserData: User?
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
@@ -66,7 +68,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
                 let mealRecord = mealRecord
             else { fatalError("Could not create the profile detail cell.") }
             cell.controller = self
-            cell.layoutCell(mealRecord: mealRecord)
+            cell.layoutCell(mealRecord: mealRecord, nowUserData: nowUserData)
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(

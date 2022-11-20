@@ -480,9 +480,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="drYellow"/>
                             </view>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_WaterPlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="NDe-9u-lmC">
-                                <rect key="frame" x="0.0" y="374" width="414" height="488"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RS4-Oz-Jbh">
                                 <rect key="frame" x="0.0" y="134" width="414" height="240"/>
                                 <constraints>
@@ -501,30 +498,37 @@
                                     <action selector="goBack:" destination="YEy-fp-1hr" eventType="touchUpInside" id="oKL-mz-FsX"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="AW9-zZ-PCO" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="0.0" y="374" width="414" height="488"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="79611-water-animation"/>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="1mh-r4-E3y"/>
                         <color key="backgroundColor" name="drLightGray"/>
                         <constraints>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="1B8-h3-9P7"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="width" secondItem="Vt8-Tt-zQP" secondAttribute="height" id="1Cu-45-sBx"/>
-                            <constraint firstItem="NDe-9u-lmC" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="4JU-9f-FWt"/>
                             <constraint firstItem="RS4-Oz-Jbh" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="5k6-aj-bJi"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" constant="16" id="9QP-dT-DNt"/>
+                            <constraint firstItem="AW9-zZ-PCO" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="9jF-wQ-Br4"/>
                             <constraint firstItem="RS4-Oz-Jbh" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="CKE-VB-SJQ"/>
                             <constraint firstItem="RS4-Oz-Jbh" firstAttribute="top" secondItem="l8B-q4-eFV" secondAttribute="bottom" constant="50" id="Gzs-oS-QDh"/>
-                            <constraint firstItem="1mh-r4-E3y" firstAttribute="trailing" secondItem="NDe-9u-lmC" secondAttribute="trailing" id="O25-0i-jbI"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="centerY" secondItem="l8B-q4-eFV" secondAttribute="centerY" id="PSk-4p-nMc"/>
+                            <constraint firstItem="1mh-r4-E3y" firstAttribute="trailing" secondItem="AW9-zZ-PCO" secondAttribute="trailing" id="Sz1-VY-hMX"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="XQi-Lv-xZv"/>
-                            <constraint firstItem="1mh-r4-E3y" firstAttribute="bottom" secondItem="NDe-9u-lmC" secondAttribute="bottom" id="Yvc-Uy-GGw"/>
+                            <constraint firstItem="AW9-zZ-PCO" firstAttribute="top" secondItem="RS4-Oz-Jbh" secondAttribute="bottom" id="bAQ-CF-Tg8"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="bBK-rj-7Wg"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="top" secondItem="BZB-rl-CuT" secondAttribute="top" id="cK6-85-moK"/>
-                            <constraint firstItem="NDe-9u-lmC" firstAttribute="top" secondItem="RS4-Oz-Jbh" secondAttribute="bottom" id="jTm-vg-hOV"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="jcY-hz-kzE"/>
+                            <constraint firstItem="1mh-r4-E3y" firstAttribute="bottom" secondItem="AW9-zZ-PCO" secondAttribute="bottom" id="onf-Ty-Dn8"/>
                             <constraint firstItem="1mh-r4-E3y" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="quM-bv-fhc"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="wlY-vN-FiW"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lottieView" destination="AW9-zZ-PCO" id="Rv1-MH-fgL"/>
                         <outlet property="waterHistoryBarChart" destination="RS4-Oz-Jbh" id="nAb-ax-cZa"/>
                     </connections>
                 </viewController>
@@ -538,7 +542,6 @@
         <image name="Image_Edit-1" width="512" height="512"/>
         <image name="Image_Reminder" width="512" height="512"/>
         <image name="Image_Water" width="512" height="512"/>
-        <image name="Image_WaterPlaceholder" width="2999" height="1687"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="drop" catalog="system" width="101" height="128"/>
         <image name="drop.fill" catalog="system" width="101" height="128"/>

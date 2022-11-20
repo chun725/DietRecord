@@ -6,9 +6,11 @@
 //
 
 import UIKit
+import Lottie
 
 class WaterHistoryVC: UIViewController {
     @IBOutlet weak var waterHistoryBarChart: UIView!
+    @IBOutlet weak var lottieView: LottieAnimationView!
     
     let waterRecordProvider = WaterRecordProvider()
     
@@ -16,6 +18,8 @@ class WaterHistoryVC: UIViewController {
         super.viewDidLoad()
         LKProgressHUD.show()
         fetchWaterRecord()
+        lottieView.loopMode = .loop
+        lottieView.play()
     }
     
     func fetchWaterRecord() {

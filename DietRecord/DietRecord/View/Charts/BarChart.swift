@@ -131,10 +131,10 @@ class BarChart: BarChartView, ChartViewDelegate {
         
         configureBarChart(firstDate: firstDate, chartData: chartData)
         
-        guard let maxWaterRecord = waterRecords.map({ $0.water }).max(),
+        guard let maxWaterRecord = waterRecords.map({ $0.water.transformToDouble() }).max(),
             let maxX = dataEntries.last?.x
         else { return }
-        self.leftAxis.axisMaximum = maxWaterRecord.transformToDouble() + 200
+        self.leftAxis.axisMaximum = maxWaterRecord + 200
         self.setVisibleXRangeMaximum(7)
         self.moveViewToX(maxX)
         self.dragEnabled = true // 啟用拖移手勢

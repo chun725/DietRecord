@@ -48,6 +48,7 @@
 		344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7DB29273E3C00D245A2 /* WaterImage.png */; };
 		344DC7E62927422E00D245A2 /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E52927422E00D245A2 /* DietImage.png */; };
 		344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E82927656400D245A2 /* 82624-foodies.json */; };
+		344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
 		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
 		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
@@ -183,6 +184,7 @@
 		344DC7DB29273E3C00D245A2 /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
 		344DC7E52927422E00D245A2 /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
 		344DC7E82927656400D245A2 /* 82624-foodies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "82624-foodies.json"; sourceTree = "<group>"; };
+		344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "79611-water-animation.json"; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
 		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
 		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
@@ -393,6 +395,7 @@
 			isa = PBXGroup;
 			children = (
 				344DC7E82927656400D245A2 /* 82624-foodies.json */,
+				344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -840,6 +843,7 @@
 				34270E67290D529100D5AFFD /* Report.storyboard in Resources */,
 				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
+				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
 				34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */,
 				3464293B290CF79A0070B425 /* Assets.xcassets in Resources */,

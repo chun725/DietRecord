@@ -14,6 +14,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var weightTableView: UITableView!
     @IBOutlet weak var changeGoalButton: UIButton!
     @IBOutlet weak var weightGoalLabel: UILabel!
+    @IBOutlet weak var syncSwitch: UISwitch!
     
     var weightRecord: [WeightData] = [] {
         didSet {
@@ -36,7 +37,9 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         lineChart = LineChart(frame: .zero, superview: weightLineChart)
         weightTableView.dataSource = self
         weightTableView.delegate = self
-        getHealthKitPermission()
+        self.getHealthKitPermission()
+        
+        syncSwitch.addTarget(self, action: #selector(changeSync), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,12 +51,20 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func getHealthKitPermission() {
         healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
+                userDefault.set(true, forKey: weightPermission)
                 self.setWeight()
+                DispatchQueue.main.async {
+                    self.syncSwitch.isOn = true
+                }
             } else {
                 if error != nil, let error = error {
                     print(error)
                 }
+                userDefault.set(false, forKey: weightPermission)
                 self.fetchWeightRecord()
+                DispatchQueue.main.async {
+                    self.syncSwitch.isOn = false
+                }
                 print("Permission denied.")
             }
         }
@@ -76,7 +87,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             for weight in weightDatasInHealth {
                 let weightData = WeightData(
                     date: weight.endDate,
-                    value: weight.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo)))
+                    value: weight.quantity.doubleValue(for: HKUnit.gramUnit(with: .kilo)),
+                    dataSource: WeightDataSource.healthApp.rawValue)
                 weightDatas.append(weightData)
             }
             
@@ -91,9 +103,18 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    @objc func changeSync() {
+        if self.syncSwitch.isOn {
+            userDefault.set(true, forKey: weightPermission)
+        } else {
+            userDefault.set(false, forKey: weightPermission)
+        }
+        fetchWeightRecord()
+    }
+    
     func fetchWeightRecord() {
         LKProgressHUD.show()
-        weightRecordProvider.fetchWeightRecord { result in
+        weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { result in
             switch result {
             case .success(let weightDatas):
                 LKProgressHUD.dismiss()

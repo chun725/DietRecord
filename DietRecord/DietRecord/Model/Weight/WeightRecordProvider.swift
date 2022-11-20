@@ -20,13 +20,22 @@ class WeightRecordProvider {
             updateGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
                 let collectionReference = database.collection(user).document(userID).collection(weight)
-                do {
-                    let dateString = dateFormatter.string(from: weightData.date)
-                    try collectionReference.document(dateString).setData(from: weightData)
-                } catch {
-                    completion(.failure(error))
+                collectionReference.getDocuments { snapshot, error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        guard let snapshot = snapshot else { return }
+                        if snapshot.documents.isEmpty {
+                            do {
+                                let dateString = dateFormatter.string(from: weightData.date)
+                                try collectionReference.document(dateString).setData(from: weightData)
+                            } catch {
+                                completion(.failure(error))
+                            }
+                        }
+                    }
+                    updateGroup.leave()
                 }
-                updateGroup.leave()
             }
             blocks.append(block)
             DispatchQueue.main.async(execute: block)
@@ -36,7 +45,7 @@ class WeightRecordProvider {
         }
     }
     
-    func fetchWeightRecord(completion: @escaping WeightRecordResult) {
+    func fetchWeightRecord(sync: Bool, completion: @escaping WeightRecordResult) {
         let collectionReference = database.collection(user).document(userID).collection(weight)
         collectionReference.getDocuments { snapshot, error in
             if let error = error {
@@ -47,7 +56,13 @@ class WeightRecordProvider {
                 let documents = snapshot.documents
                 for document in documents {
                     guard let weightData = try? document.data(as: WeightData.self) else { return }
-                    weightDatas.append(weightData)
+                    if sync {
+                        weightDatas.append(weightData)
+                    } else {
+                        if weightData.dataSource == WeightDataSource.dietRecord.rawValue {
+                            weightDatas.append(weightData)
+                        }
+                    }
                 }
                 completion(.success(weightDatas))
             }
@@ -59,14 +74,20 @@ class WeightRecordProvider {
         do {
             let dateString = dateFormatter.string(from: weightData.date)
             guard let date = dateFormatter.date(from: dateString) else { return }
-            try collectionReference.document(dateString).setData(from: WeightData(date: date, value: weightData.value))
-            healthManager.saveWeight(weightData: WeightData(date: date, value: weightData.value)) { result in
-                switch result {
-                case .success:
-                    completion(.success(()))
-                case .failure(let error):
-                    completion(.failure(error))
+            try collectionReference.document(dateString).setData(from: WeightData(
+                date: date, value: weightData.value, dataSource: weightData.dataSource))
+            if userDefault.bool(forKey: weightPermission) {
+                healthManager.saveWeight(weightData: WeightData(
+                    date: date, value: weightData.value, dataSource: weightData.dataSource)) { result in
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        completion(.failure(error))
+                    }
                 }
+            } else {
+                completion(.success(()))
             }
         } catch {
             completion(.failure(error))

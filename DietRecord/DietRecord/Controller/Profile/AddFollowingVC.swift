@@ -51,10 +51,13 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
             profileProvider.searchUser(userSelfID: userInput) { result in
                 switch result {
                 case .success(let response):
-                    LKProgressHUD.dismiss()
                     if response as? String == "document不存在" {
                         LKProgressHUD.showFailure(text: "用戶不存在")
+                        self.usernameLabel.isHidden = true
+                        self.userImageView.isHidden = true
+                        self.followButton.isHidden = true
                     } else {
+                        LKProgressHUD.dismiss()
                         let user = response as? User
                         self.userSearchResult = user
                     }
@@ -63,11 +66,6 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                     print("Error Info: \(error).")
                 }
             }
-        } else {
-            let alert = UIAlertController(title: "請輸入用戶名稱", message: nil, preferredStyle: .alert)
-            let action = UIAlertAction(title: "OK", style: .default)
-            alert.addAction(action)
-            self.present(alert, animated: false)
         }
     }
     

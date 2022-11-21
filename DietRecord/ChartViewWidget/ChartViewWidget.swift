@@ -68,7 +68,7 @@ struct ChartViewWidgetEntryView: View {
             Spacer()
             Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill)
             Spacer()
-        }
+        }.background(Color.white)
     }
 }
 

@@ -19,6 +19,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
+    var refreshControl: UIRefreshControl?
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
@@ -31,6 +32,10 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         } else if need == "Following" {
             titleLabel.text = "Following"
         }
+        refreshControl = UIRefreshControl()
+        guard let refreshControl = refreshControl else { return }
+        requestTableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(fetchRequest), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,16 +43,16 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    func fetchRequest() {
-        LKProgressHUD.show()
+    @objc func fetchRequest() {
+        refreshControl?.beginRefreshing()
         var id = userID
         if let otherUserID = otherUserID {
             id = otherUserID
         }
         profileProvider.fetchUsersData(userID: id, need: need) { result in
+            self.refreshControl?.endRefreshing()
             switch result {
             case .success(let users):
-                LKProgressHUD.dismiss()
                 self.requests = users
             case .failure(let error):
                 LKProgressHUD.showFailure(text: "無法獲得資料")

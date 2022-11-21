@@ -502,7 +502,7 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book" translatesAutoresizingMaskIntoConstraints="NO" id="7Jh-Ox-cQN">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Book" translatesAutoresizingMaskIntoConstraints="NO" id="7Jh-Ox-cQN">
                                                     <rect key="frame" x="16" y="13" width="30" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="StD-aP-wsN"/>
@@ -669,9 +669,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image_Book" width="512" height="512"/>
         <image name="Image_Calendar" width="512" height="512"/>
         <image name="Image_Edit-1" width="512" height="512"/>
-        <image name="book" width="512" height="512"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.right.circle" catalog="system" width="128" height="121"/>
         <image name="fork.knife.circle" catalog="system" width="128" height="121"/>

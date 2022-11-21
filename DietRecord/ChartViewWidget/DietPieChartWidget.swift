@@ -60,11 +60,16 @@ struct DietPieChartWidgetEntryView: View {
     var entry: DietProvider.Entry
 
     var body: some View {
-        VStack {
+        HStack {
             Spacer()
-            Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fit)
+            Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill).padding(
+                EdgeInsets(
+                    top: 10,
+                    leading: 10,
+                    bottom: 10,
+                    trailing: 10))
             Spacer()
-        }
+        }.background(Color.white)
     }
 }
 

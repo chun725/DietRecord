@@ -77,8 +77,12 @@ class WeightRecordProvider {
             try collectionReference.document(dateString).setData(from: WeightData(
                 date: date, value: weightData.value, dataSource: weightData.dataSource))
             if userDefault.bool(forKey: weightPermission) {
-                healthManager.saveWeight(weightData: WeightData(
-                    date: date, value: weightData.value, dataSource: weightData.dataSource)) { result in
+                healthManager.saveWeight(
+                    weightData:
+                        WeightData(
+                            date: date,
+                            value: weightData.value,
+                            dataSource: weightData.dataSource)) { result in
                     switch result {
                     case .success:
                         completion(.success(()))

@@ -10,6 +10,7 @@ import UIKit
 class ProfileHomePageVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var homeTableView: UITableView!
     
+    var refreshControl: UIRefreshControl?
     var followingPosts: [MealRecord] = [] {
         didSet {
             homeTableView.reloadData()
@@ -21,20 +22,24 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         homeTableView.dataSource = self
         homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
+        refreshControl = UIRefreshControl()
+        guard let refreshControl = refreshControl else { return }
+        homeTableView.addSubview(refreshControl)
+        refreshControl.addTarget(self, action: #selector(fetchFollowingPost), for: .valueChanged)
+        fetchFollowingPost()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchFollowingPost()
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    func fetchFollowingPost() {
-        LKProgressHUD.show()
+    @objc func fetchFollowingPost() {
+        self.refreshControl?.beginRefreshing()
         profileProvider.fetchFollowingPost { result in
+            self.refreshControl?.endRefreshing()
             switch result {
             case .success(let mealRecords):
-                LKProgressHUD.dismiss()
                 self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
             case .failure(let error):
                 print("Error Info: \(error).")

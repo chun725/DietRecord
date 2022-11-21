@@ -480,7 +480,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="俗名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-KS-pWR">
-                                                    <rect key="frame" x="24" y="16" width="60" height="28"/>
+                                                    <rect key="frame" x="54" y="16" width="60" height="28"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="2TP-lu-3TY"/>
                                                         <constraint firstAttribute="height" constant="28" id="KKd-pX-f7g"/>
@@ -490,7 +490,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-IO-AiJ">
-                                                    <rect key="frame" x="92" y="16" width="20" height="28"/>
+                                                    <rect key="frame" x="122" y="16" width="20" height="28"/>
                                                     <attributedString key="attributedText">
                                                         <fragment content="無">
                                                             <attributes>
@@ -502,15 +502,24 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Book" translatesAutoresizingMaskIntoConstraints="NO" id="7Jh-Ox-cQN">
+                                                    <rect key="frame" x="16" y="13" width="30" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="30" id="StD-aP-wsN"/>
+                                                        <constraint firstAttribute="height" constant="30" id="c3D-6s-MEe"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="wpg-IO-AiJ" secondAttribute="bottom" id="6AM-7b-Q2f"/>
                                                 <constraint firstItem="tPb-KS-pWR" firstAttribute="firstBaseline" secondItem="wpg-IO-AiJ" secondAttribute="firstBaseline" id="ETQ-PX-1oh"/>
+                                                <constraint firstItem="tPb-KS-pWR" firstAttribute="leading" secondItem="7Jh-Ox-cQN" secondAttribute="trailing" constant="8" id="PEP-h9-5dQ"/>
                                                 <constraint firstItem="wpg-IO-AiJ" firstAttribute="leading" secondItem="tPb-KS-pWR" secondAttribute="trailing" constant="8" symbolic="YES" id="RPF-Pc-unL"/>
                                                 <constraint firstItem="wpg-IO-AiJ" firstAttribute="top" secondItem="CQN-hF-Y3w" secondAttribute="top" constant="16" id="beq-0e-Ghk"/>
-                                                <constraint firstItem="tPb-KS-pWR" firstAttribute="leading" secondItem="CQN-hF-Y3w" secondAttribute="leading" constant="24" id="c54-u7-3Cm"/>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wpg-IO-AiJ" secondAttribute="trailing" constant="16" id="lPh-K9-ObC"/>
+                                                <constraint firstItem="7Jh-Ox-cQN" firstAttribute="leading" secondItem="CQN-hF-Y3w" secondAttribute="leading" constant="16" id="ltn-7O-JTn"/>
                                                 <constraint firstItem="wpg-IO-AiJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tPb-KS-pWR" secondAttribute="trailing" constant="8" symbolic="YES" id="qJW-v3-Zkb"/>
+                                                <constraint firstItem="7Jh-Ox-cQN" firstAttribute="centerY" secondItem="tPb-KS-pWR" secondAttribute="centerY" constant="-2" id="s8E-23-9lT"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wpg-IO-AiJ" secondAttribute="trailing" constant="16" id="w9e-yR-ag1"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="drLightGray"/>
@@ -660,6 +669,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Image_Book" width="512" height="512"/>
         <image name="Image_Calendar" width="512" height="512"/>
         <image name="Image_Edit-1" width="512" height="512"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>

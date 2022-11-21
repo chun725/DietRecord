@@ -145,11 +145,7 @@ class LineChart: LineChartView, ChartViewDelegate {
     
     func chartValueSelected(_ chartView: ChartViewBase, entry: ChartDataEntry, highlight: Highlight) {
         // 將選擇的點置中
-//        self.moveViewToAnimated(
-//            xValue: entry.x - 45,
-//            yValue: 0,
-//            axis: .left,
-//            duration: 0.3)
+        // self.moveViewToAnimated(xValue: entry.x - 45, yValue: 0, axis: .left, duration: 0.3)
         let date = Date(timeIntervalSince1970: entry.x * 3600 * 24 + self.referenceTimeInterval)
         let dateString = dateFormatter.string(from: date)
         self.showMarkerView(value: "\(entry.y)", date: dateString)

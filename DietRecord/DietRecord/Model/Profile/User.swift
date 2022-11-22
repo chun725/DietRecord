@@ -12,6 +12,7 @@ struct User: Codable {
     var userSelfID: String
     var following: [String]
     var followers: [String]
+    var blocks: [String]
     var request: [String]
     var userImageURL: String
     var username: String

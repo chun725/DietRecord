@@ -14,7 +14,13 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     @IBOutlet weak var responseButton: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
     
-    var mealRecord: MealRecord?
+    var mealRecord: MealRecord? {
+        didSet {
+            guard let userData = userData else { return }
+            responses = mealRecord?.response.filter { !(userData.blocks.contains($0.person)) } ?? []
+        }
+    }
+    var responses: [Response] = []
     var nowUserData: User?
     let profileProvider = ProfileProvider()
     
@@ -63,10 +69,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let mealRecord = mealRecord else {
-            return section == 0 ? 1 : 0
-        }
-        return section == 0 ? 1 : mealRecord.response.count
+        return section == 0 ? 1 : responses.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -80,10 +83,9 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: ProfileResponseCell.reuseIdentifier, for: indexPath) as? ProfileResponseCell,
-                let mealRecord = mealRecord
+                withIdentifier: ProfileResponseCell.reuseIdentifier, for: indexPath) as? ProfileResponseCell
             else { fatalError("Could not create the profile detail cell.") }
-            let response = mealRecord.response[indexPath.row]
+            let response = responses[indexPath.row]
             cell.controller = self
             cell.layoutCell(response: response)
             return cell
@@ -98,7 +100,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 self?.profileProvider.reportSomething(
                     user: nil,
                     mealRecord: nil,
-                    response: mealRecord.response[indexPath.row]) { result in
+                    response: self?.responses[indexPath.row]) { result in
                     switch result {
                     case .success:
                         print("success report")
@@ -107,18 +109,37 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     }
                 }
             }
-            let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
+            let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
+                guard let self = self else { return }
+                self.profileProvider.changeBlock(blockID: self.responses[indexPath.row].person) { result in
+                    switch result {
+                    case .success:
+                        print("成功封鎖用戶")
+                        if self.mealRecord?.userID == self.responses[indexPath.row].person {
+                            self.navigationController?.popViewController(animated: false)
+                        } else {
+                            self.responses.remove(at: indexPath.row)
+                            self.profileDetailTableView.reloadData()
+                        }
+                    case .failure(let error):
+                        print("Error Info: \(error) in blocking user.")
+                    }
+                }
+                
+            }
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
             let deleteOption = UIAlertAction(title: "刪除回覆", style: .destructive) { [weak self] _ in
                 self?.profileProvider.deletePostOrResponse(
                     mealRecord: mealRecord,
-                    response: mealRecord.response[indexPath.row]) { [weak self] result in
+                    response: self?.responses[indexPath.row]) { [weak self] result in
+                    guard let self = self else { return }
                     switch result {
                     case .success:
                         print("成功刪除回覆")
-                        mealRecord.response.remove(at: indexPath.row)
-                        self?.mealRecord = mealRecord
-                        self?.profileDetailTableView.reloadData()
+                        let index = mealRecord.response.firstIndex(of: self.responses[indexPath.row]) ?? 0
+                        mealRecord.response.remove(at: index)
+                        self.mealRecord = mealRecord
+                        self.profileDetailTableView.reloadData()
                     case .failure(let error):
                         print("Error Info: \(error) in deleting response.")
                     }

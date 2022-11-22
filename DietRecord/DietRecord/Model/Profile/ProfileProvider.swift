@@ -141,7 +141,7 @@ class ProfileProvider {
                 else { return }
                 if isRequest {
                     user.request.removeAll { $0 == userID }
-                } else {
+                } else if !user.blocks.contains(userID) {
                     user.request.append(userID)
                 }
                 do {
@@ -231,6 +231,8 @@ class ProfileProvider {
                     usersID = userData.followers
                 case "Following":
                     usersID = userData.following
+                case "BlockUsers":
+                    usersID = userData.blocks
                 default:
                     usersID = userData.request
                 }
@@ -375,6 +377,72 @@ extension ProfileProvider {
                 }
                 do {
                     let data = FoodDailyInput(mealRecord: olderMealRecords)
+                    try documentRef.setData(from: data)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func changeBlock(blockID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentRef = database.collection(user).document(userID)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    var data = try? document.data(as: User.self)
+                else { return }
+                var isBlock = false
+                if data.blocks.contains(blockID) {
+                    data.blocks.remove(at: data.blocks.firstIndex(of: blockID) ?? 0)
+                } else {
+                    isBlock = true
+                    data.blocks.append(blockID)
+                    if data.following.contains(blockID) {
+                        data.following.remove(at: data.following.firstIndex(of: blockID) ?? 0)
+                    } else if data.followers.contains(blockID) {
+                        data.followers.remove(at: data.followers.firstIndex(of: blockID) ?? 0)
+                    }
+                }
+                do {
+                    try documentRef.setData(from: data)
+                    if isBlock {
+                        self.changeOtherUser(blockID: blockID) { result in
+                            switch result {
+                            case .success:
+                                completion(.success(()))
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
+                    } else {
+                        completion(.success(()))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    private func changeOtherUser(blockID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentRef = database.collection(user).document(blockID)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    var data = try? document.data(as: User.self)
+                else { return }
+                if data.following.contains(userID) {
+                    data.following.remove(at: data.following.firstIndex(of: userID) ?? 0)
+                } else if data.followers.contains(userID) {
+                    data.followers.remove(at: data.followers.firstIndex(of: userID) ?? 0)
+                }
+                do {
                     try documentRef.setData(from: data)
                     completion(.success(()))
                 } catch {

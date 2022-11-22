@@ -31,6 +31,8 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             titleLabel.text = "Followers"
         } else if need == "Following" {
             titleLabel.text = "Following"
+        } else if need == "BlockUsers" {
+            titleLabel.text = "封鎖名單"
         }
         refreshControl = UIRefreshControl()
         guard let refreshControl = refreshControl else { return }
@@ -40,6 +42,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchRequest()
         self.tabBarController?.tabBar.isHidden = true
     }
     
@@ -87,11 +90,34 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
-        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
-            as? ProfileVC {
-            userProfilePage.otherUserID = requests[indexPath.row].userID
-            self.navigationController?.pushViewController(userProfilePage, animated: false)
+        if need != "BlockUsers" {
+            let storyboard = UIStoryboard(name: profile, bundle: nil)
+            if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
+                as? ProfileVC {
+                userProfilePage.otherUserID = requests[indexPath.row].userID
+                self.navigationController?.pushViewController(userProfilePage, animated: false)
+            }
+        } else {
+            let alert = UIAlertController(
+                title: "確定解除對\(requests[indexPath.row].userSelfID)的封鎖？",
+                message: nil,
+                preferredStyle: .alert)
+            let action = UIAlertAction(title: "確定", style: .default) { [weak self] _ in
+                guard let self = self else { return }
+                self.profileProvider.changeBlock(blockID: self.requests[indexPath.row].userID) { result in
+                    switch result {
+                    case .success:
+                        print("成功解除封鎖")
+                        self.fetchRequest()
+                    case .failure(let error):
+                        print("Error Info: \(error) in unblocking user.")
+                    }
+                }
+            }
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            alert.addAction(action)
+            alert.addAction(cancelAction)
+            self.present(alert, animated: false)
         }
     }
 }

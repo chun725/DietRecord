@@ -135,7 +135,23 @@ class ProfileDetailCell: UITableViewCell {
                 }
             }
         }
-        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
+        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
+            guard let mealRecord = self?.mealRecord else { return }
+            self?.profileProvider.changeBlock(blockID: mealRecord.userID) { result in
+                switch result {
+                case .success:
+                    print("成功封鎖用戶")
+                    if let controller = self?.controller as? ProfileDetailVC {
+                        controller.navigationController?.popViewController(animated: true)
+                    } else if let controller = self?.controller as? ProfileHomePageVC {
+                        controller.fetchFollowingPost()
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error) in blocking user.")
+                }
+            }
+            
+        }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(reportAction)
         optionMenu.addAction(blockAction)

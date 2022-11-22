@@ -40,6 +40,12 @@ class ProfileSettingCell: UITableViewCell {
     }
     
     @IBAction func blockUsers(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let blockUsersPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
+            as? CheckRequestVC {
+            blockUsersPage.need = "BlockUsers"
+            controller?.navigationController?.pushViewController(blockUsersPage, animated: false)
+        }
     }
     
     @IBAction func logout(_ sender: Any) {

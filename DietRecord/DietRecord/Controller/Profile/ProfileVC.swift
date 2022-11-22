@@ -133,7 +133,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
     
     @IBAction func goToCheckRequestPage(_ sender: UIButton) {
-        print("fndkjkndfkvn")
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
@@ -183,7 +182,20 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
                 }
             }
         }
-        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
+        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
+            guard let self = self,
+                let otherUserID = self.otherUserID
+            else { return }
+            self.profileProvider.changeBlock(blockID: otherUserID) { result in
+                switch result {
+                case .success:
+                    print("成功封鎖")
+                    self.navigationController?.popViewController(animated: false)
+                case .failure(let error):
+                    print("Error Info: \(error) in blocking someone.")
+                }
+            }
+        }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(reportAction)
         optionMenu.addAction(blockAction)

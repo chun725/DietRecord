@@ -69,7 +69,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEj-1J-uan">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="62"/>
+                        <rect key="frame" x="0.0" y="0.0" width="352" height="62"/>
                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                         <connections>
                             <action selector="goToUserPage:" destination="vnx-kn-mlZ" eventType="touchUpInside" id="kYG-ng-2qw"/>
@@ -132,6 +132,16 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CN5-9v-Cyr">
+                        <rect key="frame" x="368" y="26" width="30" height="9.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="7d0-Ra-47X"/>
+                            <constraint firstAttribute="height" constant="24" id="Fc3-6q-eVy"/>
+                        </constraints>
+                        <color key="tintColor" name="drDarkGray"/>
+                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                        <state key="normal" backgroundImage="ellipsis" catalog="system"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="ZaD-P5-QQs" secondAttribute="trailing" id="0qn-w9-B98"/>
@@ -161,10 +171,11 @@
                     <constraint firstItem="ehg-ue-ACb" firstAttribute="leading" secondItem="nOq-DD-HcU" secondAttribute="trailing" constant="8" id="TPB-rr-iEj"/>
                     <constraint firstItem="e2I-qA-VzI" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="Te1-GO-jje"/>
                     <constraint firstItem="ZaD-P5-QQs" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" id="Wul-0O-hwi"/>
-                    <constraint firstAttribute="trailing" secondItem="AEj-1J-uan" secondAttribute="trailing" id="Y66-FH-hhA"/>
                     <constraint firstItem="e2I-qA-VzI" firstAttribute="top" secondItem="bAC-wz-Paa" secondAttribute="bottom" constant="8" id="ZPN-mK-csj"/>
                     <constraint firstItem="KJT-m6-1fg" firstAttribute="leading" secondItem="3Jv-p5-AIT" secondAttribute="trailing" constant="16" id="bDK-MT-eBO"/>
+                    <constraint firstItem="CN5-9v-Cyr" firstAttribute="leading" secondItem="AEj-1J-uan" secondAttribute="trailing" constant="16" id="byt-Xs-rTg"/>
                     <constraint firstItem="2Km-x2-bct" firstAttribute="width" secondItem="GV5-93-D0C" secondAttribute="width" id="cgb-IU-MDC"/>
+                    <constraint firstItem="CN5-9v-Cyr" firstAttribute="centerY" secondItem="3Jv-p5-AIT" secondAttribute="centerY" id="dGo-xk-vlV"/>
                     <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nOq-DD-HcU" secondAttribute="trailing" constant="8" id="daa-Ct-cns"/>
                     <constraint firstItem="sTW-V6-dOH" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="f5E-kB-FEa"/>
                     <constraint firstItem="sTW-V6-dOH" firstAttribute="trailing" secondItem="ehg-ue-ACb" secondAttribute="trailing" constant="16" id="gkR-56-BUU"/>
@@ -172,6 +183,7 @@
                     <constraint firstItem="ehg-ue-ACb" firstAttribute="centerY" secondItem="nOq-DD-HcU" secondAttribute="centerY" id="it7-nb-Tus"/>
                     <constraint firstItem="R8y-bT-pkf" firstAttribute="leading" secondItem="sTW-V6-dOH" secondAttribute="leading" constant="8" id="nok-K4-u6F"/>
                     <constraint firstItem="nOq-DD-HcU" firstAttribute="centerY" secondItem="QbC-JR-jdv" secondAttribute="centerY" id="uhd-w2-t87"/>
+                    <constraint firstAttribute="trailing" secondItem="CN5-9v-Cyr" secondAttribute="trailing" constant="16" id="waZ-J6-50Q"/>
                     <constraint firstAttribute="bottom" secondItem="e2I-qA-VzI" secondAttribute="bottom" constant="16" id="whl-en-2Gg"/>
                     <constraint firstItem="KJT-m6-1fg" firstAttribute="centerY" secondItem="3Jv-p5-AIT" secondAttribute="centerY" id="yoD-Ed-iYq"/>
                 </constraints>
@@ -184,6 +196,7 @@
                 <outlet property="likedCountLabel" destination="QbC-JR-jdv" id="Wtf-9k-xRY"/>
                 <outlet property="mealCommentLabel" destination="bAC-wz-Paa" id="jAe-9J-DaB"/>
                 <outlet property="mealImageView" destination="2Km-x2-bct" id="NRw-lo-VFP"/>
+                <outlet property="moreButton" destination="CN5-9v-Cyr" id="gnT-QE-oDt"/>
                 <outlet property="responseButton" destination="nOq-DD-HcU" id="1wC-r5-M9B"/>
                 <outlet property="responseCountLabel" destination="ehg-ue-ACb" id="Imq-vH-r90"/>
                 <outlet property="timeLabel" destination="e2I-qA-VzI" id="GNY-qZ-T8s"/>
@@ -197,6 +210,7 @@
     <resources>
         <image name="Image_Placeholder" width="2999" height="1687"/>
         <image name="arrow.forward.circle" catalog="system" width="128" height="121"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="message" catalog="system" width="128" height="113"/>
         <namedColor name="drDarkGray">

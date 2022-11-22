@@ -22,6 +22,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var followersButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     
     var otherUserID: String?
     var otherUserData: User?
@@ -45,7 +46,9 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             self.checkButton.isHidden = true
             self.addButton.isHidden = true
             self.photoCollectionView.isHidden = true
+            self.moreButton.isHidden = false
         } else {
+            self.moreButton.isHidden = true
             self.backButton.isHidden = true
         }
     }
@@ -163,6 +166,29 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             as? ProfileHomePageVC {
             self.navigationController?.pushViewController(homePage, animated: false)
         }
+    }
+    
+    @IBAction func reportOrBlock(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportAction = UIAlertAction(title: "檢舉用戶", style: .destructive) { [weak self] _ in
+            self?.profileProvider.reportSomething(
+                user: self?.otherUserData,
+                mealRecord: nil,
+                response: nil) { result in
+                switch result {
+                case .success:
+                    print("success report")
+                case .failure(let error):
+                    print("Error Info: \(error) in reporting something.")
+                }
+            }
+        }
+        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(reportAction)
+        optionMenu.addAction(blockAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: false)
     }
     
     @objc func requestFollow(sender: UIButton) {

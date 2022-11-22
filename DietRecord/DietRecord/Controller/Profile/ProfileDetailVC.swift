@@ -7,10 +7,12 @@
 
 import UIKit
 
-class ProfileDetailVC: UIViewController, UITableViewDataSource {
+class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var profileDetailTableView: UITableView!
     @IBOutlet weak var responseTextView: UITextView!
     @IBOutlet weak var userSelfIDLabel: UILabel!
+    @IBOutlet weak var responseButton: UIButton!
+    @IBOutlet weak var userImageView: UIImageView!
     
     var mealRecord: MealRecord?
     var nowUserData: User?
@@ -18,9 +20,13 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userImageView.loadImage(userData?.userImageURL)
+        userImageView.layer.cornerRadius = userImageView.bounds.height / 2
         profileDetailTableView.dataSource = self
+        profileDetailTableView.delegate = self
         profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
         self.tabBarController?.tabBar.isHidden = true
+        responseTextView.delegate = self
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -39,13 +45,15 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
             date: mealRecord.date,
             meal: mealRecord.meal,
             response: responseTextView.text) { result in
-            switch result {
-            case .success:
-                self.mealRecord?.response.append(Response(person: userID, response: self.responseTextView.text))
-                self.profileDetailTableView.reloadData()
-                self.responseTextView.text = ""
-            case .failure(let error):
-                print("Error Info: \(error).")
+                switch result {
+                case .success:
+                    self.mealRecord?.response.append(Response(person: userID, response: self.responseTextView.text))
+                    self.profileDetailTableView.reloadData()
+                    self.responseTextView.text = ""
+                    self.responseButton.isEnabled = false
+                    self.responseButton.setTitleColor(.drGray, for: .normal)
+                case .failure(let error):
+                    print("Error Info: \(error).")
             }
         }
     }
@@ -79,6 +87,73 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource {
             cell.controller = self
             cell.layoutCell(response: response)
             return cell
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let optionAction = UIContextualAction(style: .normal, title: "") { _, _, completionHandler in
+            guard var mealRecord = self.mealRecord else { return }
+            let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            let reportAction = UIAlertAction(title: "檢舉回覆", style: .destructive) { [weak self] _ in
+                self?.profileProvider.reportSomething(
+                    user: nil,
+                    mealRecord: nil,
+                    response: mealRecord.response[indexPath.row]) { result in
+                    switch result {
+                    case .success:
+                        print("success report")
+                    case .failure(let error):
+                        print("Error Info: \(error) in reporting something.")
+                    }
+                }
+            }
+            let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
+            let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+            let deleteOption = UIAlertAction(title: "刪除回覆", style: .destructive) { [weak self] _ in
+                self?.profileProvider.deleteResponse(
+                    mealRecord: mealRecord,
+                    response: mealRecord.response[indexPath.row]) { [weak self] result in
+                    switch result {
+                    case .success:
+                        print("成功刪除回覆")
+                        mealRecord.response.remove(at: indexPath.row)
+                        self?.mealRecord = mealRecord
+                        self?.profileDetailTableView.reloadData()
+                    case .failure(let error):
+                        print("Error Info: \(error) in deleting response.")
+                    }
+                }
+            }
+            if mealRecord.userID == userID || mealRecord.response[indexPath.row].person == userID {
+                optionMenu.addAction(deleteOption)
+            }
+            if mealRecord.response[indexPath.row].person != userID {
+                optionMenu.addAction(reportAction)
+                optionMenu.addAction(blockAction)
+            }
+            optionMenu.addAction(cancelAction)
+            self.present(optionMenu, animated: false)
+            completionHandler(true)
+        }
+        optionAction.image = UIImage(systemName: "exclamationmark.bubble")
+        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [optionAction])
+        switch indexPath.section {
+        case 0:
+            return nil
+        default:
+            return trailingSwipeConfiguration
+        }
+    }
+}
+
+extension ProfileDetailVC: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        if textView.text == "" {
+            responseButton.isEnabled = false
+            responseButton.setTitleColor(.drGray, for: .normal)
+        } else {
+            responseButton.isEnabled = true
+            responseButton.setTitleColor(.drDarkGray, for: .normal)
         }
     }
 }

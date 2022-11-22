@@ -16,6 +16,7 @@ class ProfileDetailCell: UITableViewCell {
     @IBOutlet weak var responseButton: UIButton!
     @IBOutlet weak var likedCountLabel: UILabel!
     @IBOutlet weak var checkResponseButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView! {
         didSet {
@@ -111,6 +112,44 @@ class ProfileDetailCell: UITableViewCell {
                 }
             }
         }
+        moreButton.removeTarget(nil, action: nil, for: .touchUpInside)
+        if mealRecord.userID == userID {
+            moreButton.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
+        } else {
+            moreButton.addTarget(self, action: #selector(reportOrBlock), for: .touchUpInside)
+        }
+    }
+    
+    @objc func reportOrBlock() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportAction = UIAlertAction(title: "檢舉貼文", style: .destructive) { [weak self] _ in
+            self?.profileProvider.reportSomething(
+                user: nil,
+                mealRecord: self?.mealRecord,
+                response: nil) { result in
+                switch result {
+                case .success:
+                    print("success report")
+                case .failure(let error):
+                    print("Error Info: \(error) in reporting something.")
+                }
+            }
+        }
+        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(reportAction)
+        optionMenu.addAction(blockAction)
+        optionMenu.addAction(cancelAction)
+        controller?.present(optionMenu, animated: false)
+    }
+    
+    @objc func deletePost() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "刪除貼文", style: .destructive)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+        controller?.present(optionMenu, animated: false)
     }
     
     @objc func addLiked(sender: UIButton) {

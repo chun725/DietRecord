@@ -332,4 +332,50 @@ extension ProfileProvider {
             }
         }
     }
+    
+    func reportSomething(user: User?, mealRecord: MealRecord?, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
+        let uuid = UUID().uuidString
+        let documentReference = database.collection(report).document(uuid)
+        do {
+            if let user = user {
+                try documentReference.setData(from: user)
+            } else if let mealRecord = mealRecord {
+                try documentReference.setData(from: mealRecord)
+            } else if let response = response {
+                try documentReference.setData(from: response)
+            }
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func deleteResponse(mealRecord: MealRecord, response: Response, completion: @escaping (Result<Void, Error>) -> Void) {
+        let id = mealRecord.userID
+        let documentRef = database.collection(user).document(id).collection(diet).document(mealRecord.date)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    var olderMealRecords = try? document.data(as: FoodDailyInput.self).mealRecord
+                else { return }
+                for olderMealRecord in olderMealRecords where olderMealRecord.meal == mealRecord.meal {
+                    var newMealRecord = olderMealRecord
+                    olderMealRecords.remove(at: olderMealRecords.firstIndex(of: olderMealRecord) ?? 0)
+                    guard let index = newMealRecord.response.firstIndex(of: response)
+                    else { return }
+                    newMealRecord.response.remove(at: index)
+                    olderMealRecords.append(newMealRecord)
+                }
+                do {
+                    let data = FoodDailyInput(mealRecord: olderMealRecords)
+                    try documentRef.setData(from: data)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
 }

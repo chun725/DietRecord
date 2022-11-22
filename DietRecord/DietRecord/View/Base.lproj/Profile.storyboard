@@ -28,7 +28,7 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="追蹤用戶後即可觀看其貼文" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mOk-M9-Bk8">
-                                <rect key="frame" x="87" y="428" width="240" height="40"/>
+                                <rect key="frame" x="87" y="422.5" width="240" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="7vu-JT-Hp7"/>
                                 </constraints>
@@ -37,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ubp-ae-ezY">
-                                <rect key="frame" x="0.0" y="398" width="414" height="415"/>
+                                <rect key="frame" x="0.0" y="392.5" width="414" height="420.5"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hCy-6L-Oww">
                                     <size key="itemSize" width="128" height="128"/>
@@ -88,10 +88,7 @@
                                 <color key="backgroundColor" name="drYellow"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1r6-Na-zxT">
-                                <rect key="frame" x="204" y="216" width="6" height="31"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="31" id="VLt-1Q-zad"/>
-                                </constraints>
+                                <rect key="frame" x="204" y="216" width="6" height="25.5"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
@@ -157,7 +154,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8IG-Vw-kJg">
-                                <rect key="frame" x="50" y="334" width="314" height="40"/>
+                                <rect key="frame" x="50" y="328.5" width="314" height="40"/>
                                 <color key="backgroundColor" name="drDarkGray"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="tih-LY-24n"/>
@@ -166,7 +163,7 @@
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             </button>
                             <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yFb-7Y-ML5">
-                                <rect key="frame" x="16" y="263" width="382" height="45"/>
+                                <rect key="frame" x="16" y="257.5" width="382" height="45"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VLV-Cu-RVs">
                                         <rect key="frame" x="0.0" y="0.0" width="122" height="45"/>
@@ -243,17 +240,29 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Ug-uu-raC">
-                                <rect key="frame" x="276" y="263" width="122" height="45"/>
+                                <rect key="frame" x="276" y="257.5" width="122" height="45"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="goToCheckRequestPage:" destination="UXb-N6-1iu" eventType="touchUpInside" id="QJC-tK-Tks"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2Yd-cI-R6f">
-                                <rect key="frame" x="146" y="263" width="122" height="45"/>
+                                <rect key="frame" x="146" y="257.5" width="122" height="45"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="goToCheckRequestPage:" destination="UXb-N6-1iu" eventType="touchUpInside" id="G06-ch-geS"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bsb-Qx-PpA">
+                                <rect key="frame" x="368" y="59" width="30" height="9.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="Pdm-uo-k4L"/>
+                                </constraints>
+                                <color key="tintColor" name="drDarkGray"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" backgroundImage="ellipsis" catalog="system"/>
+                                <connections>
+                                    <action selector="reportOrBlock:" destination="UXb-N6-1iu" eventType="touchUpInside" id="6u5-XM-xag"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -264,6 +273,8 @@
                             <constraint firstItem="8IG-Vw-kJg" firstAttribute="leading" secondItem="PH2-xb-XmN" secondAttribute="leading" constant="50" id="2Lm-fr-Fav"/>
                             <constraint firstItem="2Yd-cI-R6f" firstAttribute="top" secondItem="NuO-9y-U4L" secondAttribute="top" id="4BM-uz-sQW"/>
                             <constraint firstItem="PH2-xb-XmN" firstAttribute="trailing" secondItem="ubp-ae-ezY" secondAttribute="trailing" id="6Fe-de-kJk"/>
+                            <constraint firstItem="bsb-Qx-PpA" firstAttribute="trailing" secondItem="CIN-si-2bU" secondAttribute="trailing" id="6Zl-om-rjr"/>
+                            <constraint firstItem="bsb-Qx-PpA" firstAttribute="leading" secondItem="CIN-si-2bU" secondAttribute="leading" id="7Cq-uG-zo1"/>
                             <constraint firstItem="2Yd-cI-R6f" firstAttribute="bottom" secondItem="NuO-9y-U4L" secondAttribute="bottom" id="9Yb-O3-w8d"/>
                             <constraint firstItem="zoU-Zl-ggW" firstAttribute="width" secondItem="zoU-Zl-ggW" secondAttribute="height" id="AG8-Pu-VyG"/>
                             <constraint firstItem="PH2-xb-XmN" firstAttribute="bottom" secondItem="ubp-ae-ezY" secondAttribute="bottom" id="AeH-bc-L0V"/>
@@ -285,6 +296,7 @@
                             <constraint firstItem="PH2-xb-XmN" firstAttribute="trailing" secondItem="CIN-si-2bU" secondAttribute="trailing" constant="16" id="ckm-0Z-dZu"/>
                             <constraint firstAttribute="trailing" secondItem="yFb-7Y-ML5" secondAttribute="trailing" constant="16" id="cxP-fr-AGx"/>
                             <constraint firstItem="bdH-yX-34L" firstAttribute="top" secondItem="73z-YE-5Hq" secondAttribute="bottom" id="dMl-nU-hVe"/>
+                            <constraint firstItem="bsb-Qx-PpA" firstAttribute="centerY" secondItem="CIN-si-2bU" secondAttribute="centerY" id="dku-iI-4QS"/>
                             <constraint firstItem="yFb-7Y-ML5" firstAttribute="leading" secondItem="hID-EZ-b6e" secondAttribute="leading" constant="16" id="eK1-xG-myV"/>
                             <constraint firstItem="bdH-yX-34L" firstAttribute="leading" secondItem="PH2-xb-XmN" secondAttribute="leading" id="fCp-eZ-g2C"/>
                             <constraint firstItem="1r6-Na-zxT" firstAttribute="top" secondItem="AKq-Sp-0zC" secondAttribute="bottom" constant="8" id="gri-xy-M2o"/>
@@ -316,6 +328,7 @@
                         <outlet property="followingButton" destination="2Ug-uu-raC" id="zHV-16-wYc"/>
                         <outlet property="followingLabel" destination="4XG-RP-Crr" id="hMN-Rk-YCH"/>
                         <outlet property="homeButton" destination="JAe-B5-cfy" id="WvY-sy-RZM"/>
+                        <outlet property="moreButton" destination="bsb-Qx-PpA" id="GIf-9J-KUz"/>
                         <outlet property="photoCollectionView" destination="ubp-ae-ezY" id="23P-Mh-J8E"/>
                         <outlet property="postLabel" destination="mcZ-bh-LUb" id="wzS-CA-NL6"/>
                         <outlet property="titleLabel" destination="bdH-yX-34L" id="vQh-Nz-hfi"/>
@@ -434,7 +447,7 @@
                                             <constraint firstAttribute="height" constant="1" id="yY1-aK-K5u"/>
                                         </constraints>
                                     </view>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KdA-He-5tE">
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="KdA-He-5tE">
                                         <rect key="frame" x="16" y="10.5" width="30" height="29"/>
                                         <color key="tintColor" name="drDarkGray"/>
                                         <constraints>
@@ -451,7 +464,7 @@
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjH-cK-MNb">
+                                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjH-cK-MNb">
                                                 <rect key="frame" x="298" y="2" width="30" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="XzO-AN-f2J"/>
@@ -460,7 +473,7 @@
                                                 <color key="tintColor" name="drDarkGray"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                 <state key="normal" title="發佈">
-                                                    <color key="titleColor" name="drDarkGray"/>
+                                                    <color key="titleColor" name="drGray"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="createResponse:" destination="k1E-Ic-MnN" eventType="touchUpInside" id="NBw-HY-tf6"/>
@@ -517,7 +530,9 @@
                     </view>
                     <connections>
                         <outlet property="profileDetailTableView" destination="cXE-8a-Arz" id="9Ym-nz-X4R"/>
+                        <outlet property="responseButton" destination="rjH-cK-MNb" id="glD-Zt-3Il"/>
                         <outlet property="responseTextView" destination="QD1-L2-hbb" id="r1N-XP-ruS"/>
+                        <outlet property="userImageView" destination="KdA-He-5tE" id="5Ud-Yg-9zF"/>
                         <outlet property="userSelfIDLabel" destination="jjG-LP-TkY" id="53V-nj-JbS"/>
                     </connections>
                 </viewController>
@@ -1704,6 +1719,7 @@
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="drop" catalog="system" width="101" height="128"/>
+        <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="figure.stand" catalog="system" width="77" height="128"/>
         <image name="fork.knife.circle" catalog="system" width="128" height="121"/>

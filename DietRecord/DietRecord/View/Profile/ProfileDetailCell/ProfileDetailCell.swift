@@ -48,7 +48,9 @@ class ProfileDetailCell: UITableViewCell {
         mealImageView.loadImage(mealRecord.imageURL)
         mealCommentLabel.text = mealRecord.comment
         likedCountLabel.text = "\(mealRecord.peopleLiked.count)"
-        responseCountLabel.text = "\(mealRecord.response.count)"
+        guard let userData = userData else { return }
+        let responses = mealRecord.response.filter { !(userData.blocks.contains($0.person)) }
+        responseCountLabel.text = "\(responses.count)"
         likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
         checkResponseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         self.mealRecord = mealRecord
@@ -150,7 +152,6 @@ class ProfileDetailCell: UITableViewCell {
                     print("Error Info: \(error) in blocking user.")
                 }
             }
-            
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(reportAction)
@@ -234,7 +235,7 @@ class ProfileDetailCell: UITableViewCell {
     
     @objc func beginResponse() {
         if let controller = controller as? ProfileDetailVC {
-            controller.responseTextView.becomeFirstResponder()
+            controller.responseTextField.becomeFirstResponder()
         }
     }
 }

@@ -458,12 +458,12 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giQ-Zc-Zpv">
                                         <rect key="frame" x="62" y="10" width="336" height="30"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QD1-L2-hbb">
-                                                <rect key="frame" x="8" y="0.0" width="282" height="30"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="輸入回覆內容" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1ey-V2-rMU">
+                                                <rect key="frame" x="8" y="0.0" width="274" height="30"/>
                                                 <color key="textColor" name="drDarkGray"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                            </textView>
+                                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjH-cK-MNb">
                                                 <rect key="frame" x="298" y="2" width="30" height="26"/>
                                                 <constraints>
@@ -482,12 +482,12 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstItem="rjH-cK-MNb" firstAttribute="leading" secondItem="QD1-L2-hbb" secondAttribute="trailing" constant="8" id="FRI-nE-sC0"/>
-                                            <constraint firstItem="QD1-L2-hbb" firstAttribute="top" secondItem="giQ-Zc-Zpv" secondAttribute="top" id="Qke-Be-W1b"/>
+                                            <constraint firstItem="rjH-cK-MNb" firstAttribute="leading" secondItem="1ey-V2-rMU" secondAttribute="trailing" constant="16" id="AJd-xX-cdE"/>
+                                            <constraint firstItem="1ey-V2-rMU" firstAttribute="leading" secondItem="giQ-Zc-Zpv" secondAttribute="leading" constant="8" id="DMm-U3-FXH"/>
+                                            <constraint firstAttribute="bottom" secondItem="1ey-V2-rMU" secondAttribute="bottom" id="L1z-tL-NB7"/>
                                             <constraint firstAttribute="bottom" secondItem="rjH-cK-MNb" secondAttribute="bottom" constant="2" id="RVk-Wa-7Zb"/>
-                                            <constraint firstAttribute="bottom" secondItem="QD1-L2-hbb" secondAttribute="bottom" id="cez-H6-sL0"/>
+                                            <constraint firstItem="1ey-V2-rMU" firstAttribute="top" secondItem="giQ-Zc-Zpv" secondAttribute="top" id="XZ8-ay-RRh"/>
                                             <constraint firstAttribute="trailing" secondItem="rjH-cK-MNb" secondAttribute="trailing" constant="8" id="eso-oS-18j"/>
-                                            <constraint firstItem="QD1-L2-hbb" firstAttribute="leading" secondItem="giQ-Zc-Zpv" secondAttribute="leading" constant="8" id="f4I-io-JDu"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -530,8 +530,9 @@
                     </view>
                     <connections>
                         <outlet property="profileDetailTableView" destination="cXE-8a-Arz" id="9Ym-nz-X4R"/>
+                        <outlet property="responseBackgroundView" destination="giQ-Zc-Zpv" id="owo-NN-eLs"/>
                         <outlet property="responseButton" destination="rjH-cK-MNb" id="glD-Zt-3Il"/>
-                        <outlet property="responseTextView" destination="QD1-L2-hbb" id="r1N-XP-ruS"/>
+                        <outlet property="responseTextField" destination="1ey-V2-rMU" id="rgn-k3-SgQ"/>
                         <outlet property="userImageView" destination="KdA-He-5tE" id="5Ud-Yg-9zF"/>
                         <outlet property="userSelfIDLabel" destination="jjG-LP-TkY" id="53V-nj-JbS"/>
                     </connections>

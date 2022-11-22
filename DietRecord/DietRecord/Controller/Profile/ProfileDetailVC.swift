@@ -9,10 +9,11 @@ import UIKit
 
 class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var profileDetailTableView: UITableView!
-    @IBOutlet weak var responseTextView: UITextView!
+    @IBOutlet weak var responseTextField: UITextField!
     @IBOutlet weak var userSelfIDLabel: UILabel!
     @IBOutlet weak var responseButton: UIButton!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var responseBackgroundView: UIView!
     
     var mealRecord: MealRecord? {
         didSet {
@@ -32,7 +33,8 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         profileDetailTableView.delegate = self
         profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
         self.tabBarController?.tabBar.isHidden = true
-        responseTextView.delegate = self
+        responseTextField.addTarget(self, action: #selector(changeResponseButton), for: .allEditingEvents)
+        responseBackgroundView.layer.cornerRadius = 10
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,17 +47,19 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     @IBAction func createResponse(_ sender: Any) {
-        guard let mealRecord = mealRecord else { return }
+        guard let mealRecord = mealRecord,
+            let response = responseTextField.text
+        else { return }
         profileProvider.postResponse(
             postUserID: mealRecord.userID,
             date: mealRecord.date,
             meal: mealRecord.meal,
-            response: responseTextView.text) { result in
+            response: response) { result in
                 switch result {
                 case .success:
-                    self.mealRecord?.response.append(Response(person: userID, response: self.responseTextView.text))
+                    self.mealRecord?.response.append(Response(person: userID, response: response))
                     self.profileDetailTableView.reloadData()
-                    self.responseTextView.text = ""
+                    self.responseTextField.text = ""
                     self.responseButton.isEnabled = false
                     self.responseButton.setTitleColor(.drGray, for: .normal)
                 case .failure(let error):
@@ -93,8 +97,10 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let optionAction = UIContextualAction(style: .normal, title: "") { _, _, completionHandler in
-            guard var mealRecord = self.mealRecord else { return }
+        let optionAction = UIContextualAction(style: .normal, title: "") { [weak self] _, _, completionHandler in
+            guard let self = self,
+                var mealRecord = self.mealRecord
+            else { return }
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             let reportAction = UIAlertAction(title: "檢舉回覆", style: .destructive) { [weak self] _ in
                 self?.profileProvider.reportSomething(
@@ -125,7 +131,6 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                         print("Error Info: \(error) in blocking user.")
                     }
                 }
-                
             }
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
             let deleteOption = UIAlertAction(title: "刪除回覆", style: .destructive) { [weak self] _ in
@@ -145,10 +150,10 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     }
                 }
             }
-            if mealRecord.userID == userID || mealRecord.response[indexPath.row].person == userID {
+            if mealRecord.userID == userID || self.responses[indexPath.row].person == userID {
                 optionMenu.addAction(deleteOption)
             }
-            if mealRecord.response[indexPath.row].person != userID {
+            if self.responses[indexPath.row].person != userID {
                 optionMenu.addAction(reportAction)
                 optionMenu.addAction(blockAction)
             }
@@ -167,9 +172,9 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
 }
 
-extension ProfileDetailVC: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        if textView.text == "" {
+extension ProfileDetailVC {
+    @objc func changeResponseButton(sender: UITextField) {
+        if sender.text == "" {
             responseButton.isEnabled = false
             responseButton.setTitleColor(.drGray, for: .normal)
         } else {

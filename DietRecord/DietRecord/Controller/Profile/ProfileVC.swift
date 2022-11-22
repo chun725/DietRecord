@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileVC: UIViewController {
     @IBOutlet weak var photoCollectionView: UICollectionView!
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
@@ -259,7 +259,10 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     @IBAction func goBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
-    
+}
+
+
+extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         mealRecords.count
@@ -289,10 +292,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             self.navigationController?.pushViewController(profileDetailPage, animated: false)
         }
     }
-}
-
-
-extension ProfileVC: UICollectionViewDelegateFlowLayout {
+    
     // MARK: - DelegateFlowLayout -
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (fullScreenSize.width - 10) / 3

@@ -350,7 +350,7 @@ extension ProfileProvider {
         }
     }
     
-    func deleteResponse(mealRecord: MealRecord, response: Response, completion: @escaping (Result<Void, Error>) -> Void) {
+    func deletePostOrResponse(mealRecord: MealRecord, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
         let id = mealRecord.userID
         let documentRef = database.collection(user).document(id).collection(diet).document(mealRecord.date)
         documentRef.getDocument { document, error in
@@ -363,9 +363,14 @@ extension ProfileProvider {
                 for olderMealRecord in olderMealRecords where olderMealRecord.meal == mealRecord.meal {
                     var newMealRecord = olderMealRecord
                     olderMealRecords.remove(at: olderMealRecords.firstIndex(of: olderMealRecord) ?? 0)
-                    guard let index = newMealRecord.response.firstIndex(of: response)
-                    else { return }
-                    newMealRecord.response.remove(at: index)
+                    if response != nil {
+                        guard let response = response,
+                            let index = newMealRecord.response.firstIndex(of: response)
+                        else { return }
+                        newMealRecord.response.remove(at: index)
+                    } else {
+                        newMealRecord.isShared = false
+                    }
                     olderMealRecords.append(newMealRecord)
                 }
                 do {

@@ -145,7 +145,27 @@ class ProfileDetailCell: UITableViewCell {
     
     @objc func deletePost() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        let deleteAction = UIAlertAction(title: "刪除貼文", style: .destructive)
+        let deleteAction = UIAlertAction(title: "刪除貼文", style: .destructive) { [weak self] _ in
+            guard let mealRecord = self?.mealRecord else { return }
+            self?.profileProvider.deletePostOrResponse(mealRecord: mealRecord, response: nil) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    print("成功刪除貼文")
+                    if self.haveResponses {
+                        if let controller = self.controller as? ProfileDetailVC {
+                            controller.navigationController?.popViewController(animated: true)
+                        }
+                    } else {
+                        if let controller = self.controller as? ProfileHomePageVC {
+                            controller.fetchFollowingPost()
+                        }
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error) in deleting post.")
+                }
+            }
+        }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)

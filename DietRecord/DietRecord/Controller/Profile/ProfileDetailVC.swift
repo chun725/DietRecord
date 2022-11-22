@@ -110,7 +110,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive)
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
             let deleteOption = UIAlertAction(title: "刪除回覆", style: .destructive) { [weak self] _ in
-                self?.profileProvider.deleteResponse(
+                self?.profileProvider.deletePostOrResponse(
                     mealRecord: mealRecord,
                     response: mealRecord.response[indexPath.row]) { [weak self] result in
                     switch result {

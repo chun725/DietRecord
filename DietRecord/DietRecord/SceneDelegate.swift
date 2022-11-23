@@ -15,6 +15,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard scene as? UIWindowScene != nil else { return }
+        maybeOpenedFromWidget(urlContexts: connectionOptions.urlContexts)
+    }
+    
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        maybeOpenedFromWidget(urlContexts: URLContexts)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -45,5 +50,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the foreground to the background.
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
+    }
+    
+    private func maybeOpenedFromWidget(urlContexts: Set<UIOpenURLContext>) {
+        if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "Water-Widget" }) {
+            groupUserDefaults?.set(1, forKey: "OpenWithWidget")
+        } else if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "Diet-Widget" }) {
+            groupUserDefaults?.set(2, forKey: "OpenWithWidget")
+        }
+        if let navigationController = window?.rootViewController as? UINavigationController {
+            navigationController.popToRootViewController(animated: false)
+        }
+        print("🚀 Launched from widget")
     }
 }

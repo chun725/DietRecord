@@ -58,6 +58,8 @@ struct DietEntry: TimelineEntry {
 
 struct DietPieChartWidgetEntryView: View {
     var entry: DietProvider.Entry
+    
+    private static let deeplinkURL = URL(string: "Diet-Widget://")!
 
     var body: some View {
         HStack {
@@ -69,7 +71,7 @@ struct DietPieChartWidgetEntryView: View {
                     bottom: 10,
                     trailing: 10))
             Spacer()
-        }.background(Color.white)
+        }.background(Color.white).widgetURL(DietPieChartWidgetEntryView.deeplinkURL)
     }
 }
 

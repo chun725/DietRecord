@@ -7,8 +7,9 @@
 
 import UIKit
 import FirebaseAuth
+import SafariServices
 
-class ProfileSettingCell: UITableViewCell {
+class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     @IBOutlet weak var infoBackgroundView: UIView!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
@@ -49,6 +50,20 @@ class ProfileSettingCell: UITableViewCell {
         }
     }
     
+    @IBAction func goToPrivacyPolicy(_ sender: Any) {
+        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+            let safari = SFSafariViewController(url: url)
+            safari.preferredControlTintColor = .drDarkGray
+            safari.dismissButtonStyle = .close
+            safari.delegate = self
+            controller?.navigationController?.pushViewController(safari, animated: false)
+        }
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        controller.navigationController?.popViewController(animated: false)
+    }
+    
     @IBAction func logout(_ sender: Any) {
         let firebaseAuth = Auth.auth()
         do {
@@ -80,7 +95,10 @@ class ProfileSettingCell: UITableViewCell {
                                 userID = ""
                                 userData = nil
                                 LKProgressHUD.dismiss()
-                                self?.controller?.tabBarController?.navigationController?.popToRootViewController(animated: false)
+                                self?.controller?
+                                    .tabBarController?
+                                    .navigationController?
+                                    .popToRootViewController(animated: false)
                                 print("刪除帳號")
                             case .failure(let error):
                                 print("Error Info: \(error) in deleting account.")

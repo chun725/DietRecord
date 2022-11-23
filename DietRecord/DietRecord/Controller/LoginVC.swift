@@ -10,22 +10,20 @@ import FirebaseAuth
 import AuthenticationServices
 import CryptoKit
 import Lottie
+import SafariServices
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController, SFSafariViewControllerDelegate {
+    @IBOutlet weak var animationView: LottieAnimationView!
+    @IBOutlet weak var privacyPolicyStackView: UIStackView!
+    
     private var currentNonce: String?
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setSignInWithAppleBtn()
-        let animationView = LottieAnimationView(name: "82624-foodies")
-        animationView.frame = CGRect(x: 0, y: 0, width: fullScreenSize.width, height: 350)
-        animationView.center = CGPoint(x: self.view.center.x, y: self.view.bounds.minY + 175)
-        animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.animationSpeed = 1.25
-        
-        view.addSubview(animationView)
         animationView.play()
     }
     
@@ -41,6 +39,27 @@ class LoginVC: UIViewController {
         signInWithAppleBtn.widthAnchor.constraint(equalToConstant: 280).isActive = true
         signInWithAppleBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70).isActive = true
+        setUpPrivacyPolicyStackView(button: signInWithAppleBtn)
+    }
+    
+    @IBAction func goToPrivacyPolicyPage(_ sender: Any) {
+        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+            let safari = SFSafariViewController(url: url)
+            safari.preferredControlTintColor = .drDarkGray
+            safari.dismissButtonStyle = .close
+            safari.delegate = self
+            self.navigationController?.pushViewController(safari, animated: false)
+        }
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        self.navigationController?.popViewController(animated: false)
+    }
+    
+    func setUpPrivacyPolicyStackView(button: ASAuthorizationAppleIDButton) {
+        privacyPolicyStackView.translatesAutoresizingMaskIntoConstraints = false
+        privacyPolicyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        privacyPolicyStackView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10).isActive = true
     }
     
     func chooseAppleButtonStyle() -> ASAuthorizationAppleIDButton.Style {

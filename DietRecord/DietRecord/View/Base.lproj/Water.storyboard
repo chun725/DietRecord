@@ -221,12 +221,12 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJ3-1j-rJd">
                                                     <rect key="frame" x="24" y="8" width="366" height="83"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:20" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-oC-akG">
-                                                            <rect key="frame" x="149.5" y="8" width="67" height="67"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="08:20" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EGr-oC-akG">
+                                                            <rect key="frame" x="62" y="8" width="59" height="67"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="lMe-s2-Mpn"/>
                                                             </constraints>
-                                                            <fontDescription key="fontDescription" name="ChalkboardSE-Bold" family="Chalkboard SE" pointSize="24"/>
+                                                            <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="22"/>
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                             <size key="shadowOffset" width="0.0" height="0.0"/>
@@ -241,14 +241,23 @@
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <state key="normal" backgroundImage="Image_Delete"/>
                                                         </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Sun" translatesAutoresizingMaskIntoConstraints="NO" id="VvP-vI-wR0">
+                                                            <rect key="frame" x="16" y="26.5" width="30" height="30"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="30" id="NU2-LO-Vig"/>
+                                                                <constraint firstAttribute="width" constant="30" id="O5C-I7-Udm"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerX" secondItem="HJ3-1j-rJd" secondAttribute="centerX" id="6yB-hd-I1I"/>
+                                                        <constraint firstItem="h5M-pR-JC9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="EGr-oC-akG" secondAttribute="trailing" constant="16" id="26B-YZ-0R0"/>
+                                                        <constraint firstItem="VvP-vI-wR0" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="Cv5-as-UFB"/>
+                                                        <constraint firstItem="VvP-vI-wR0" firstAttribute="leading" secondItem="HJ3-1j-rJd" secondAttribute="leading" constant="16" id="LCv-55-6Pl"/>
                                                         <constraint firstItem="h5M-pR-JC9" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="SOA-cc-uv4"/>
                                                         <constraint firstItem="EGr-oC-akG" firstAttribute="top" secondItem="HJ3-1j-rJd" secondAttribute="top" constant="8" id="ZHI-Sl-CdD"/>
                                                         <constraint firstAttribute="bottom" secondItem="EGr-oC-akG" secondAttribute="bottom" constant="8" id="a05-P5-CGc"/>
-                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="centerY" secondItem="HJ3-1j-rJd" secondAttribute="centerY" id="nZV-U4-Rkb"/>
+                                                        <constraint firstItem="EGr-oC-akG" firstAttribute="leading" secondItem="VvP-vI-wR0" secondAttribute="trailing" constant="16" id="bYA-2f-fgw"/>
                                                         <constraint firstItem="h5M-pR-JC9" firstAttribute="trailing" secondItem="HJ3-1j-rJd" secondAttribute="trailing" constant="-10" id="u3f-Vb-Rl1"/>
                                                     </constraints>
                                                 </view>
@@ -265,6 +274,7 @@
                                             <outlet property="deleteButton" destination="h5M-pR-JC9" id="Dn5-Rb-sTN"/>
                                             <outlet property="reminderBackgroundView" destination="HJ3-1j-rJd" id="9ct-S2-KF1"/>
                                             <outlet property="reminderTimeLabel" destination="EGr-oC-akG" id="oUd-df-Nqg"/>
+                                            <outlet property="timeImageView" destination="VvP-vI-wR0" id="vGK-Qh-cpz"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -373,14 +383,41 @@
                                             <constraint firstItem="flR-BW-NKJ" firstAttribute="leading" secondItem="xZN-cD-T7a" secondAttribute="trailing" constant="8" id="nsy-Bv-VEe"/>
                                         </constraints>
                                     </view>
-                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" style="compact" translatesAutoresizingMaskIntoConstraints="NO" id="GSf-F7-eoS">
-                                        <rect key="frame" x="75" y="170" width="100" height="30"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kQ-gN-Ynz">
+                                        <rect key="frame" x="45" y="160" width="160" height="50"/>
+                                        <subviews>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seV-z9-VKF">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="dOK-GM-TWU"/>
+                                                    <constraint firstAttribute="width" constant="80" id="klv-qn-9PD"/>
+                                                </constraints>
+                                            </pickerView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XqE-ny-OrE">
+                                                <rect key="frame" x="77.5" y="14.5" width="5" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" name="drDarkGray"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-eR-Taw">
+                                                <rect key="frame" x="80" y="0.0" width="80" height="50"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="50" id="PJg-Pv-7DV"/>
+                                                    <constraint firstAttribute="width" constant="80" id="wBx-ue-V4M"/>
+                                                </constraints>
+                                            </pickerView>
+                                        </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="100" id="Gma-AP-OJc"/>
-                                            <constraint firstAttribute="height" constant="30" id="qPc-Pj-8dQ"/>
+                                            <constraint firstItem="XqE-ny-OrE" firstAttribute="centerX" secondItem="5kQ-gN-Ynz" secondAttribute="centerX" id="ARS-t1-eIx"/>
+                                            <constraint firstItem="seV-z9-VKF" firstAttribute="leading" secondItem="5kQ-gN-Ynz" secondAttribute="leading" id="M7K-Ho-Qbu"/>
+                                            <constraint firstItem="PTl-eR-Taw" firstAttribute="centerY" secondItem="5kQ-gN-Ynz" secondAttribute="centerY" id="Mn1-oK-2jQ"/>
+                                            <constraint firstAttribute="height" constant="50" id="YYg-Cu-rRi"/>
+                                            <constraint firstItem="XqE-ny-OrE" firstAttribute="centerY" secondItem="5kQ-gN-Ynz" secondAttribute="centerY" id="hrE-Hu-XdE"/>
+                                            <constraint firstAttribute="trailing" secondItem="PTl-eR-Taw" secondAttribute="trailing" id="iS0-Z5-IRt"/>
+                                            <constraint firstAttribute="width" constant="160" id="rSY-fw-XD6"/>
+                                            <constraint firstItem="seV-z9-VKF" firstAttribute="centerY" secondItem="5kQ-gN-Ynz" secondAttribute="centerY" id="vDM-6W-anq"/>
                                         </constraints>
-                                        <locale key="locale" localeIdentifier="zh_TW"/>
-                                    </datePicker>
+                                    </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gvb-ll-eci">
                                         <rect key="frame" x="16" y="236" width="101" height="38"/>
                                         <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
@@ -408,8 +445,9 @@
                                     <constraint firstItem="tBg-BD-uJU" firstAttribute="centerX" secondItem="D4t-zR-ilv" secondAttribute="centerX" id="1mO-Kn-HAa"/>
                                     <constraint firstAttribute="trailing" secondItem="rkv-od-JhE" secondAttribute="trailing" id="2o0-Zc-Ea7"/>
                                     <constraint firstItem="Yr5-Zt-3Bd" firstAttribute="top" secondItem="2Ez-M1-1Ph" secondAttribute="bottom" constant="36" id="2tH-Vb-BeY"/>
+                                    <constraint firstItem="5kQ-gN-Ynz" firstAttribute="centerY" secondItem="2Ez-M1-1Ph" secondAttribute="centerY" id="4kK-6Y-erD"/>
+                                    <constraint firstItem="5kQ-gN-Ynz" firstAttribute="centerX" secondItem="2Ez-M1-1Ph" secondAttribute="centerX" id="5DE-ol-6p9"/>
                                     <constraint firstItem="Osk-Wc-TBn" firstAttribute="top" secondItem="D4t-zR-ilv" secondAttribute="top" constant="16" id="71G-n8-bPu"/>
-                                    <constraint firstItem="GSf-F7-eoS" firstAttribute="centerY" secondItem="2Ez-M1-1Ph" secondAttribute="centerY" id="Kdr-BI-0Rq"/>
                                     <constraint firstItem="gvb-ll-eci" firstAttribute="top" secondItem="2Ez-M1-1Ph" secondAttribute="bottom" constant="36" id="MaO-Vc-65W"/>
                                     <constraint firstItem="Yr5-Zt-3Bd" firstAttribute="width" secondItem="gvb-ll-eci" secondAttribute="width" id="O4x-fA-Zm6"/>
                                     <constraint firstItem="ahm-Ad-c8k" firstAttribute="leading" secondItem="D4t-zR-ilv" secondAttribute="leading" id="QtS-nK-lwz"/>
@@ -422,7 +460,6 @@
                                     <constraint firstAttribute="trailing" secondItem="Yr5-Zt-3Bd" secondAttribute="trailing" constant="16" id="cv4-qp-NkF"/>
                                     <constraint firstItem="tBg-BD-uJU" firstAttribute="top" secondItem="Osk-Wc-TBn" secondAttribute="bottom" constant="24" id="dXB-jl-GiM"/>
                                     <constraint firstAttribute="width" constant="250" id="iH4-Wq-SbZ"/>
-                                    <constraint firstItem="GSf-F7-eoS" firstAttribute="centerX" secondItem="D4t-zR-ilv" secondAttribute="centerX" id="j6f-Us-Nds"/>
                                     <constraint firstItem="ahm-Ad-c8k" firstAttribute="top" secondItem="D4t-zR-ilv" secondAttribute="top" id="lLV-eC-18P"/>
                                     <constraint firstItem="2Ez-M1-1Ph" firstAttribute="top" secondItem="tBg-BD-uJU" secondAttribute="bottom" constant="16" id="m9c-JC-ZnV"/>
                                     <constraint firstAttribute="trailing" secondItem="ahm-Ad-c8k" secondAttribute="trailing" id="td2-Vg-QyL"/>
@@ -445,10 +482,12 @@
                     <connections>
                         <outlet property="allBackgroundView" destination="D4t-zR-ilv" id="u6E-N4-e3F"/>
                         <outlet property="grayBackgroundView" destination="ahm-Ad-c8k" id="DK1-3Q-wop"/>
+                        <outlet property="hourPickerView" destination="seV-z9-VKF" id="Ztd-EZ-tnj"/>
                         <outlet property="imageView" destination="tBg-BD-uJU" id="JHW-YC-rJS"/>
                         <outlet property="inputTextField" destination="xZN-cD-T7a" id="L1t-In-2UA"/>
+                        <outlet property="minutePickerView" destination="PTl-eR-Taw" id="6Hz-be-c5E"/>
                         <outlet property="saveButton" destination="Yr5-Zt-3Bd" id="ftr-Ax-ofP"/>
-                        <outlet property="timePicker" destination="GSf-F7-eoS" id="t39-wj-Xwq"/>
+                        <outlet property="timeBackgroundView" destination="5kQ-gN-Ynz" id="BiJ-kc-4sj"/>
                         <outlet property="titleLabel" destination="Osk-Wc-TBn" id="br1-S7-fLY"/>
                         <outlet property="waterInputBackgroundView" destination="2Ez-M1-1Ph" id="jbx-Ac-H1E"/>
                         <outlet property="waterInputView" destination="2Ez-M1-1Ph" id="a3X-AO-yIg"/>
@@ -537,10 +576,14 @@
             <point key="canvasLocation" x="1218.840579710145" y="995.75892857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="AW9-zZ-PCO"/>
+    </designables>
     <resources>
         <image name="Image_Delete" width="512" height="512"/>
         <image name="Image_Edit-1" width="512" height="512"/>
         <image name="Image_Reminder" width="512" height="512"/>
+        <image name="Image_Sun" width="170.5" height="170.5"/>
         <image name="Image_Water" width="512" height="512"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="drop" catalog="system" width="101" height="128"/>

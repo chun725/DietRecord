@@ -8,12 +8,12 @@
 import Foundation
 import FirebaseFirestore
 
-struct Food: Codable {
+struct Food: Codable, Equatable {
     let qty: String
     let foodIngredient: FoodIngredient
 }
 
-struct FoodIngredient: Codable {
+struct FoodIngredient: Codable, Equatable {
     let type: String
     let serialNumber: String
     let name: String
@@ -24,7 +24,7 @@ struct FoodIngredient: Codable {
     let weightPerUnit: String
 }
 
-struct NutrientContent: Codable {
+struct NutrientContent: Codable, Equatable {
     var calories: String
     var water: String
     var protein: String
@@ -39,7 +39,7 @@ struct NutrientContent: Codable {
     var sodium: String
     var potassium: String
 }
-struct MealRecord: Codable {
+struct MealRecord: Codable, Equatable {
     let userID: String
     let meal: Int
     let date: String
@@ -56,7 +56,7 @@ struct FoodDailyInput: Codable {
     var mealRecord: [MealRecord]
 }
 
-struct Response: Codable {
+struct Response: Codable, Equatable {
     let person: String
     let response: String
 }

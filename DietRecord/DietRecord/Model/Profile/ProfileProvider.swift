@@ -141,7 +141,7 @@ class ProfileProvider {
                 else { return }
                 if isRequest {
                     user.request.removeAll { $0 == userID }
-                } else {
+                } else if !user.blocks.contains(userID) {
                     user.request.append(userID)
                 }
                 do {
@@ -151,6 +151,45 @@ class ProfileProvider {
                     completion(.failure(error))
                 }
             }
+        }
+    }
+    
+    func removeFollow(allUsers: [String], completion: @escaping (Result<Void, Error>) -> Void) {
+        let deleteGroup = DispatchGroup()
+        var blocks: [DispatchWorkItem] = []
+        for otherUserID in allUsers {
+            deleteGroup.enter()
+            let block = DispatchWorkItem(flags: .inheritQoS) {
+                let documentRef = database.collection(user).document(otherUserID)
+                documentRef.getDocument { document, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        deleteGroup.leave()
+                    } else {
+                        guard let document = document,
+                            document.exists,
+                            var user = try? document.data(as: User.self)
+                        else { return }
+                        if user.following.contains(userID) {
+                            user.following.remove(at: user.following.firstIndex(of: userID) ?? 0)
+                        }
+                        if user.followers.contains(userID) {
+                            user.followers.remove(at: user.followers.firstIndex(of: userID) ?? 0)
+                        }
+                        do {
+                            try documentRef.setData(from: user)
+                        } catch {
+                            completion(.failure(error))
+                        }
+                        deleteGroup.leave()
+                    }
+                }
+            }
+            blocks.append(block)
+            DispatchQueue.main.async(execute: block)
+        }
+        deleteGroup.notify(queue: DispatchQueue.main) {
+            completion(.success(()))
         }
     }
     
@@ -231,6 +270,8 @@ class ProfileProvider {
                     usersID = userData.followers
                 case "Following":
                     usersID = userData.following
+                case "BlockUsers":
+                    usersID = userData.blocks
                 default:
                     usersID = userData.request
                 }
@@ -330,6 +371,162 @@ extension ProfileProvider {
                     completion(.success(user))
                 }
             }
+        }
+    }
+    
+    func reportSomething(user: User?, mealRecord: MealRecord?, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
+        let uuid = UUID().uuidString
+        let documentReference = database.collection(report).document(uuid)
+        do {
+            if let user = user {
+                try documentReference.setData(from: user)
+            } else if let mealRecord = mealRecord {
+                try documentReference.setData(from: mealRecord)
+            } else if let response = response {
+                try documentReference.setData(from: response)
+            }
+            completion(.success(()))
+        } catch {
+            completion(.failure(error))
+        }
+    }
+    
+    func deletePostOrResponse(mealRecord: MealRecord, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
+        let id = mealRecord.userID
+        let documentRef = database.collection(user).document(id).collection(diet).document(mealRecord.date)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    var olderMealRecords = try? document.data(as: FoodDailyInput.self).mealRecord
+                else { return }
+                for olderMealRecord in olderMealRecords where olderMealRecord.meal == mealRecord.meal {
+                    var newMealRecord = olderMealRecord
+                    olderMealRecords.remove(at: olderMealRecords.firstIndex(of: olderMealRecord) ?? 0)
+                    if response != nil {
+                        guard let response = response,
+                            let index = newMealRecord.response.firstIndex(of: response)
+                        else { return }
+                        newMealRecord.response.remove(at: index)
+                    } else {
+                        newMealRecord.isShared = false
+                    }
+                    olderMealRecords.append(newMealRecord)
+                }
+                do {
+                    let data = FoodDailyInput(mealRecord: olderMealRecords)
+                    try documentRef.setData(from: data)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func changeBlock(blockID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentRef = database.collection(user).document(userID)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    var data = try? document.data(as: User.self)
+                else { return }
+                var isBlock = false
+                if data.blocks.contains(blockID) {
+                    data.blocks.remove(at: data.blocks.firstIndex(of: blockID) ?? 0)
+                } else {
+                    isBlock = true
+                    data.blocks.append(blockID)
+                    if data.following.contains(blockID) {
+                        data.following.remove(at: data.following.firstIndex(of: blockID) ?? 0)
+                    } else if data.followers.contains(blockID) {
+                        data.followers.remove(at: data.followers.firstIndex(of: blockID) ?? 0)
+                    }
+                }
+                do {
+                    try documentRef.setData(from: data)
+                    if isBlock {
+                        self.changeOtherUser(blockID: blockID) { result in
+                            switch result {
+                            case .success:
+                                completion(.success(()))
+                            case .failure(let error):
+                                completion(.failure(error))
+                            }
+                        }
+                    } else {
+                        completion(.success(()))
+                    }
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    private func changeOtherUser(blockID: String, completion: @escaping (Result<Void, Error>) -> Void) {
+        let documentRef = database.collection(user).document(blockID)
+        documentRef.getDocument { document, error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                guard let document = document,
+                    var data = try? document.data(as: User.self)
+                else { return }
+                if data.following.contains(userID) {
+                    data.following.remove(at: data.following.firstIndex(of: userID) ?? 0)
+                } else if data.followers.contains(userID) {
+                    data.followers.remove(at: data.followers.firstIndex(of: userID) ?? 0)
+                }
+                do {
+                    try documentRef.setData(from: data)
+                    completion(.success(()))
+                } catch {
+                    completion(.failure(error))
+                }
+            }
+        }
+    }
+    
+    func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void) {
+        let deleteGroup = DispatchGroup()
+        var blocks: [DispatchWorkItem] = []
+        let collections = [water, weight, diet]
+        for collection in collections {
+            deleteGroup.enter()
+            let block = DispatchWorkItem(flags: .inheritQoS) {
+                database.collection(user).document(userID).collection(collection).getDocuments { snapshot, error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        guard let snapshot = snapshot else { return }
+                        let documents = snapshot.documents
+                        if !documents.isEmpty {
+                            for document in documents {
+                                database.collection(user).document(userID).collection(collection).document(document.documentID).delete()
+                            }
+                        }
+                        deleteGroup.leave()
+                    }
+                }
+            }
+            if collection == collections.last {
+                deleteGroup.enter()
+                let block = DispatchWorkItem(flags: .inheritQoS) {
+                    database.collection(user).document(userID).delete()
+                    deleteGroup.leave()
+                }
+                blocks.append(block)
+                DispatchQueue.main.async(execute: block)
+            }
+            blocks.append(block)
+            DispatchQueue.main.async(execute: block)
+        }
+        deleteGroup.notify(queue: DispatchQueue.main) {
+            completion(.success(()))
         }
     }
 }

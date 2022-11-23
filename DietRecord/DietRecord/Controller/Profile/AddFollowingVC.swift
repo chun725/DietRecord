@@ -45,21 +45,27 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let userInput = userInputTextField.text else { return }
+        guard let userInput = userInputTextField.text,
+            let userData = userData
+        else { return }
         if !userInput.isEmpty {
             LKProgressHUD.show()
             profileProvider.searchUser(userSelfID: userInput) { result in
                 switch result {
                 case .success(let response):
                     if response as? String == "document不存在" {
-                        LKProgressHUD.showFailure(text: "用戶不存在")
+                        LKProgressHUD.showFailure(text: "無此用戶")
                         self.usernameLabel.isHidden = true
                         self.userImageView.isHidden = true
                         self.followButton.isHidden = true
                     } else {
-                        LKProgressHUD.dismiss()
-                        let user = response as? User
-                        self.userSearchResult = user
+                        guard let user = response as? User else { return }
+                        if userData.blocks.contains(user.userID) {
+                            LKProgressHUD.showFailure(text: "無此用戶")
+                        } else {
+                            LKProgressHUD.dismiss()
+                            self.userSearchResult = user
+                        }
                     }
                 case .failure(let error):
                     LKProgressHUD.showFailure(text: "無法查詢用戶")

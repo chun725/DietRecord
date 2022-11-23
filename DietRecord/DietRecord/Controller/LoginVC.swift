@@ -108,6 +108,9 @@ extension LoginVC: ASAuthorizationControllerDelegate {
                 let nonce = currentNonce,
                 let idTokenString = String(data: idToken, encoding: .utf8)
             else { return }
+            if let authorizationCode = credential.authorizationCode {
+                print("=====", String(data: authorizationCode, encoding: .utf8))
+            }
             print("---------\(userId)")
             print("---------\(String(describing: fullname))")
             print("---------\(email ?? "")")

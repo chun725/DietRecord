@@ -19,7 +19,16 @@ class InitialVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getUserData()
+        if userData == nil {
+            getUserData()
+        } else {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let tabbarController = storyboard.instantiateViewController(
+                withIdentifier: "\(TabBarController.self)")
+                as? TabBarController {
+                self.navigationController?.pushViewController(tabbarController, animated: false)
+            }
+        }
     }
     
     func getUserData() {

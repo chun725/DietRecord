@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+class ProfileVC: UIViewController {
     @IBOutlet weak var photoCollectionView: UICollectionView!
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
@@ -22,6 +22,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var followersButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     
     var otherUserID: String?
     var otherUserData: User?
@@ -45,7 +46,9 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             self.checkButton.isHidden = true
             self.addButton.isHidden = true
             self.photoCollectionView.isHidden = true
+            self.moreButton.isHidden = false
         } else {
+            self.moreButton.isHidden = true
             self.backButton.isHidden = true
         }
     }
@@ -130,7 +133,6 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
     
     @IBAction func goToCheckRequestPage(_ sender: UIButton) {
-        print("fndkjkndfkvn")
         let storyboard = UIStoryboard(name: profile, bundle: nil)
         if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
@@ -163,6 +165,42 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             as? ProfileHomePageVC {
             self.navigationController?.pushViewController(homePage, animated: false)
         }
+    }
+    
+    @IBAction func reportOrBlock(_ sender: Any) {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportAction = UIAlertAction(title: "檢舉用戶", style: .destructive) { [weak self] _ in
+            self?.profileProvider.reportSomething(
+                user: self?.otherUserData,
+                mealRecord: nil,
+                response: nil) { result in
+                switch result {
+                case .success:
+                    print("success report")
+                case .failure(let error):
+                    print("Error Info: \(error) in reporting something.")
+                }
+            }
+        }
+        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
+            guard let self = self,
+                let otherUserID = self.otherUserID
+            else { return }
+            self.profileProvider.changeBlock(blockID: otherUserID) { result in
+                switch result {
+                case .success:
+                    print("成功封鎖")
+                    self.navigationController?.popViewController(animated: false)
+                case .failure(let error):
+                    print("Error Info: \(error) in blocking someone.")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(reportAction)
+        optionMenu.addAction(blockAction)
+        optionMenu.addAction(cancelAction)
+        self.present(optionMenu, animated: false)
     }
     
     @objc func requestFollow(sender: UIButton) {
@@ -221,7 +259,10 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     @IBAction func goBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
-    
+}
+
+
+extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         mealRecords.count
@@ -251,10 +292,7 @@ class ProfileVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             self.navigationController?.pushViewController(profileDetailPage, animated: false)
         }
     }
-}
-
-
-extension ProfileVC: UICollectionViewDelegateFlowLayout {
+    
     // MARK: - DelegateFlowLayout -
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (fullScreenSize.width - 10) / 3

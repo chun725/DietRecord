@@ -52,6 +52,7 @@ class ProfileInformationCell: UITableViewCell {
         userSelfID: "",
         following: [],
         followers: [],
+        blocks: [],
         request: [],
         userImageURL: placeholderURL,
         username: "",

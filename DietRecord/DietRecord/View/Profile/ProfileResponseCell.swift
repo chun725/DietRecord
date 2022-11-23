@@ -11,6 +11,7 @@ class ProfileResponseCell: UITableViewCell {
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var goToUserPageButton: UIButton!
     
     var otherUserID: String?
     weak var controller: UIViewController?
@@ -23,10 +24,15 @@ class ProfileResponseCell: UITableViewCell {
         self.otherUserID = response.person
         profileProvider.fetchUserData(userID: response.person) { result in
             switch result {
-            case .success(let user):
-                guard let user = user as? User else { return }
-                self.usernameLabel.text = user.username
-                self.userImageView.loadImage(user.userImageURL)
+            case .success(let result):
+                if result as? String == "document不存在" {
+                    self.usernameLabel.text = "Unknown"
+                    self.goToUserPageButton.isEnabled = false
+                } else if let user = result as? User {
+                    self.goToUserPageButton.isEnabled = true
+                    self.usernameLabel.text = user.username
+                    self.userImageView.loadImage(user.userImageURL)
+                }
             case .failure(let error):
                 print("Error Info: \(error).")
             }

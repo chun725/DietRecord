@@ -17,6 +17,7 @@ class ProfileSettingCell: UITableViewCell {
     @IBOutlet weak var dietGoalLabel: UILabel!
     
     weak var controller: ProfileSettingVC?
+    let profileProvider = ProfileProvider()
     
     func layoutCell() {
         guard let userData = userData else { return }
@@ -40,6 +41,12 @@ class ProfileSettingCell: UITableViewCell {
     }
     
     @IBAction func blockUsers(_ sender: Any) {
+        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        if let blockUsersPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
+            as? CheckRequestVC {
+            blockUsersPage.need = "BlockUsers"
+            controller?.navigationController?.pushViewController(blockUsersPage, animated: false)
+        }
     }
     
     @IBAction func logout(_ sender: Any) {
@@ -55,5 +62,41 @@ class ProfileSettingCell: UITableViewCell {
     }
     
     @IBAction func deleteAccount(_ sender: Any) {
+        let alert = UIAlertController(title: "確定要刪除帳號？", message: "這會刪除所有您App裡的相關資料及記錄", preferredStyle: .alert)
+        let deleteAction = UIAlertAction(title: "確定", style: .destructive) { [weak self] _ in
+            LKProgressHUD.show()
+            let firebaseAuth = Auth.auth()
+            guard let nowUserData = userData else { return }
+            let allUsers = nowUserData.followers + nowUserData.following
+            self?.profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
+                switch result {
+                case .success:
+                    do {
+                        firebaseAuth.currentUser?.delete()
+                        try firebaseAuth.signOut()
+                        self?.profileProvider.deleteAccount { result in
+                            switch result {
+                            case .success:
+                                userID = ""
+                                userData = nil
+                                LKProgressHUD.dismiss()
+                                self?.controller?.tabBarController?.navigationController?.popToRootViewController(animated: false)
+                                print("刪除帳號")
+                            case .failure(let error):
+                                print("Error Info: \(error) in deleting account.")
+                            }
+                        }
+                    } catch let signOutError as NSError {
+                        print("Error signing out: %@", signOutError)
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error) in deleting account.")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        alert.addAction(deleteAction)
+        alert.addAction(cancelAction)
+        controller?.present(alert, animated: false)
     }
 }

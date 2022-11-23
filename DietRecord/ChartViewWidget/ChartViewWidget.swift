@@ -62,13 +62,15 @@ struct SimpleEntry: TimelineEntry {
 
 struct ChartViewWidgetEntryView: View {
     var entry: Provider.Entry
+    
+    private static let deeplinkURL = URL(string: "Water-Widget://")!
 
     var body: some View {
         VStack {
             Spacer()
             Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill)
             Spacer()
-        }.background(Color.white)
+        }.background(Color.white).widgetURL(ChartViewWidgetEntryView.deeplinkURL)
     }
 }
 

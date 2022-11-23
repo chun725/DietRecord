@@ -11,6 +11,20 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = .drDarkGray
-        self.selectedIndex = 2
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let index = groupUserDefaults?.integer(forKey: "OpenWithWidget") {
+            switch index {
+            case 1:
+                self.selectedIndex = 0
+            default:
+                self.selectedIndex = 2
+            }
+            groupUserDefaults?.set(0, forKey: "OpenWithWidget")
+        } else {
+            self.selectedIndex = 2
+        }
     }
 }

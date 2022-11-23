@@ -16,6 +16,7 @@ class ProfileDetailCell: UITableViewCell {
     @IBOutlet weak var responseButton: UIButton!
     @IBOutlet weak var likedCountLabel: UILabel!
     @IBOutlet weak var checkResponseButton: UIButton!
+    @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView! {
         didSet {
@@ -47,7 +48,9 @@ class ProfileDetailCell: UITableViewCell {
         mealImageView.loadImage(mealRecord.imageURL)
         mealCommentLabel.text = mealRecord.comment
         likedCountLabel.text = "\(mealRecord.peopleLiked.count)"
-        responseCountLabel.text = "\(mealRecord.response.count)"
+        guard let userData = userData else { return }
+        let responses = mealRecord.response.filter { !(userData.blocks.contains($0.person)) }
+        responseCountLabel.text = "\(responses.count)"
         likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
         checkResponseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         self.mealRecord = mealRecord
@@ -111,6 +114,79 @@ class ProfileDetailCell: UITableViewCell {
                 }
             }
         }
+        moreButton.removeTarget(nil, action: nil, for: .touchUpInside)
+        if mealRecord.userID == userID {
+            moreButton.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
+        } else {
+            moreButton.addTarget(self, action: #selector(reportOrBlock), for: .touchUpInside)
+        }
+    }
+    
+    @objc func reportOrBlock() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let reportAction = UIAlertAction(title: "檢舉貼文", style: .destructive) { [weak self] _ in
+            self?.profileProvider.reportSomething(
+                user: nil,
+                mealRecord: self?.mealRecord,
+                response: nil) { result in
+                switch result {
+                case .success:
+                    print("success report")
+                case .failure(let error):
+                    print("Error Info: \(error) in reporting something.")
+                }
+            }
+        }
+        let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
+            guard let mealRecord = self?.mealRecord else { return }
+            self?.profileProvider.changeBlock(blockID: mealRecord.userID) { result in
+                switch result {
+                case .success:
+                    print("成功封鎖用戶")
+                    if let controller = self?.controller as? ProfileDetailVC {
+                        controller.navigationController?.popViewController(animated: true)
+                    } else if let controller = self?.controller as? ProfileHomePageVC {
+                        controller.fetchFollowingPost()
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error) in blocking user.")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(reportAction)
+        optionMenu.addAction(blockAction)
+        optionMenu.addAction(cancelAction)
+        controller?.present(optionMenu, animated: false)
+    }
+    
+    @objc func deletePost() {
+        let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let deleteAction = UIAlertAction(title: "刪除貼文", style: .destructive) { [weak self] _ in
+            guard let mealRecord = self?.mealRecord else { return }
+            self?.profileProvider.deletePostOrResponse(mealRecord: mealRecord, response: nil) { [weak self] result in
+                guard let self = self else { return }
+                switch result {
+                case .success:
+                    print("成功刪除貼文")
+                    if self.haveResponses {
+                        if let controller = self.controller as? ProfileDetailVC {
+                            controller.navigationController?.popViewController(animated: true)
+                        }
+                    } else {
+                        if let controller = self.controller as? ProfileHomePageVC {
+                            controller.fetchFollowingPost()
+                        }
+                    }
+                case .failure(let error):
+                    print("Error Info: \(error) in deleting post.")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel)
+        optionMenu.addAction(deleteAction)
+        optionMenu.addAction(cancelAction)
+        controller?.present(optionMenu, animated: false)
     }
     
     @objc func addLiked(sender: UIButton) {
@@ -159,7 +235,7 @@ class ProfileDetailCell: UITableViewCell {
     
     @objc func beginResponse() {
         if let controller = controller as? ProfileDetailVC {
-            controller.responseTextView.becomeFirstResponder()
+            controller.responseTextField.becomeFirstResponder()
         }
     }
 }

@@ -154,6 +154,45 @@ class ProfileProvider {
         }
     }
     
+    func removeFollow(allUsers: [String], completion: @escaping (Result<Void, Error>) -> Void) {
+        let deleteGroup = DispatchGroup()
+        var blocks: [DispatchWorkItem] = []
+        for otherUserID in allUsers {
+            deleteGroup.enter()
+            let block = DispatchWorkItem(flags: .inheritQoS) {
+                let documentRef = database.collection(user).document(otherUserID)
+                documentRef.getDocument { document, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        deleteGroup.leave()
+                    } else {
+                        guard let document = document,
+                            document.exists,
+                            var user = try? document.data(as: User.self)
+                        else { return }
+                        if user.following.contains(userID) {
+                            user.following.remove(at: user.following.firstIndex(of: userID) ?? 0)
+                        }
+                        if user.followers.contains(userID) {
+                            user.followers.remove(at: user.followers.firstIndex(of: userID) ?? 0)
+                        }
+                        do {
+                            try documentRef.setData(from: user)
+                        } catch {
+                            completion(.failure(error))
+                        }
+                        deleteGroup.leave()
+                    }
+                }
+            }
+            blocks.append(block)
+            DispatchQueue.main.async(execute: block)
+        }
+        deleteGroup.notify(queue: DispatchQueue.main) {
+            completion(.success(()))
+        }
+    }
+    
     func changeFollow(isFollowing: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let followDocumentRef = database.collection(user).document(followID)
         followDocumentRef.getDocument { document, error in
@@ -449,6 +488,45 @@ extension ProfileProvider {
                     completion(.failure(error))
                 }
             }
+        }
+    }
+    
+    func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void) {
+        let deleteGroup = DispatchGroup()
+        var blocks: [DispatchWorkItem] = []
+        let collections = [water, weight, diet]
+        for collection in collections {
+            deleteGroup.enter()
+            let block = DispatchWorkItem(flags: .inheritQoS) {
+                database.collection(user).document(userID).collection(collection).getDocuments { snapshot, error in
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        guard let snapshot = snapshot else { return }
+                        let documents = snapshot.documents
+                        if !documents.isEmpty {
+                            for document in documents {
+                                database.collection(user).document(userID).collection(collection).document(document.documentID).delete()
+                            }
+                        }
+                        deleteGroup.leave()
+                    }
+                }
+            }
+            if collection == collections.last {
+                deleteGroup.enter()
+                let block = DispatchWorkItem(flags: .inheritQoS) {
+                    database.collection(user).document(userID).delete()
+                    deleteGroup.leave()
+                }
+                blocks.append(block)
+                DispatchQueue.main.async(execute: block)
+            }
+            blocks.append(block)
+            DispatchQueue.main.async(execute: block)
+        }
+        deleteGroup.notify(queue: DispatchQueue.main) {
+            completion(.success(()))
         }
     }
 }

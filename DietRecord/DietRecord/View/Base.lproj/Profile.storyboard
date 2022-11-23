@@ -430,6 +430,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="goToUserPageButton" destination="d4M-Qn-nkI" id="ZfB-N6-6Sj"/>
                                             <outlet property="responseLabel" destination="My1-7T-jD6" id="jFd-dQ-jDF"/>
                                             <outlet property="userImageView" destination="8ug-8B-IiF" id="Ubu-rY-iey"/>
                                             <outlet property="usernameLabel" destination="fm8-oj-psf" id="tXv-zP-XOY"/>

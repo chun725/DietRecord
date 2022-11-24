@@ -519,11 +519,24 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                 <color key="backgroundColor" name="drYellow"/>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rsj-n6-ncb">
+                                <rect key="frame" x="15" y="129" width="384" height="250"/>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RS4-Oz-Jbh">
-                                <rect key="frame" x="0.0" y="134" width="414" height="240"/>
+                                <rect key="frame" x="20" y="134" width="374" height="240"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="240" id="Jhb-1b-xPY"/>
                                 </constraints>
+                            </view>
+                            <view hidden="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="BFU-97-ZMZ" customClass="LottieAnimationView" customModule="Lottie">
+                                <rect key="frame" x="132" y="204" width="150" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="5Tj-ST-ioY"/>
+                                    <constraint firstAttribute="height" constant="100" id="iRx-B5-Vj4"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="37303-swipe-for-a-toggle-button"/>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vt8-Tt-zQP">
                                 <rect key="frame" x="16" y="49.5" width="30" height="29"/>
@@ -540,7 +553,7 @@
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="AW9-zZ-PCO" customClass="LottieAnimationView" customModule="Lottie">
                                 <rect key="frame" x="0.0" y="374" width="414" height="488"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="79611-water-animation"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="86240-water-droplet-level-1"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
@@ -549,25 +562,33 @@
                         <constraints>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="1B8-h3-9P7"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="width" secondItem="Vt8-Tt-zQP" secondAttribute="height" id="1Cu-45-sBx"/>
-                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="5k6-aj-bJi"/>
+                            <constraint firstItem="BFU-97-ZMZ" firstAttribute="centerX" secondItem="RS4-Oz-Jbh" secondAttribute="centerX" id="2tE-kH-ZDU"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" constant="16" id="9QP-dT-DNt"/>
                             <constraint firstItem="AW9-zZ-PCO" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="9jF-wQ-Br4"/>
-                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="CKE-VB-SJQ"/>
+                            <constraint firstItem="RS4-Oz-Jbh" firstAttribute="leading" secondItem="BZB-rl-CuT" secondAttribute="leading" constant="20" id="DY3-PM-R56"/>
+                            <constraint firstItem="Rsj-n6-ncb" firstAttribute="bottom" secondItem="RS4-Oz-Jbh" secondAttribute="bottom" constant="5" id="GQG-LN-zME"/>
                             <constraint firstItem="RS4-Oz-Jbh" firstAttribute="top" secondItem="l8B-q4-eFV" secondAttribute="bottom" constant="50" id="Gzs-oS-QDh"/>
                             <constraint firstItem="Vt8-Tt-zQP" firstAttribute="centerY" secondItem="l8B-q4-eFV" secondAttribute="centerY" id="PSk-4p-nMc"/>
+                            <constraint firstItem="Rsj-n6-ncb" firstAttribute="trailing" secondItem="RS4-Oz-Jbh" secondAttribute="trailing" constant="5" id="SQF-bN-sJm"/>
                             <constraint firstItem="1mh-r4-E3y" firstAttribute="trailing" secondItem="AW9-zZ-PCO" secondAttribute="trailing" id="Sz1-VY-hMX"/>
+                            <constraint firstItem="BFU-97-ZMZ" firstAttribute="centerY" secondItem="RS4-Oz-Jbh" secondAttribute="centerY" id="U31-te-n0t"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="XQi-Lv-xZv"/>
+                            <constraint firstAttribute="trailing" secondItem="RS4-Oz-Jbh" secondAttribute="trailing" constant="20" symbolic="YES" id="Xo7-Lq-YTB"/>
                             <constraint firstItem="AW9-zZ-PCO" firstAttribute="top" secondItem="RS4-Oz-Jbh" secondAttribute="bottom" id="bAQ-CF-Tg8"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="bBK-rj-7Wg"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="top" secondItem="BZB-rl-CuT" secondAttribute="top" id="cK6-85-moK"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="jcY-hz-kzE"/>
+                            <constraint firstItem="Rsj-n6-ncb" firstAttribute="top" secondItem="RS4-Oz-Jbh" secondAttribute="top" constant="-5" id="maZ-V7-eCf"/>
                             <constraint firstItem="1mh-r4-E3y" firstAttribute="bottom" secondItem="AW9-zZ-PCO" secondAttribute="bottom" id="onf-Ty-Dn8"/>
                             <constraint firstItem="1mh-r4-E3y" firstAttribute="top" secondItem="pRd-9E-tvN" secondAttribute="bottom" id="quM-bv-fhc"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="wlY-vN-FiW"/>
+                            <constraint firstItem="Rsj-n6-ncb" firstAttribute="leading" secondItem="RS4-Oz-Jbh" secondAttribute="leading" constant="-5" id="xmK-WV-I9x"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="barChartBackgroundView" destination="Rsj-n6-ncb" id="c0h-hW-GSr"/>
                         <outlet property="lottieView" destination="AW9-zZ-PCO" id="Rv1-MH-fgL"/>
+                        <outlet property="swipeLottieView" destination="BFU-97-ZMZ" id="f5x-bV-b3l"/>
                         <outlet property="waterHistoryBarChart" destination="RS4-Oz-Jbh" id="nAb-ax-cZa"/>
                     </connections>
                 </viewController>
@@ -578,6 +599,7 @@
     </scenes>
     <designables>
         <designable name="AW9-zZ-PCO"/>
+        <designable name="BFU-97-ZMZ"/>
     </designables>
     <resources>
         <image name="Image_Delete" width="512" height="512"/>

@@ -110,6 +110,8 @@
 		34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */; };
 		34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7424291661DF009F9264 /* ProfileProvider.swift */; };
 		34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7427291683D5009F9264 /* ProfileDetailVC.swift */; };
+		34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */; };
+		34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -255,6 +257,8 @@
 		34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		34CF7424291661DF009F9264 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
 		34CF7427291683D5009F9264 /* ProfileDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailVC.swift; sourceTree = "<group>"; };
+		34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86240-water-droplet-level-1.json"; sourceTree = "<group>"; };
+		34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "37303-swipe-for-a-toggle-button.json"; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -394,6 +398,8 @@
 		344DC7E72927654F00D245A2 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */,
+				34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */,
 				344DC7E82927656400D245A2 /* 82624-foodies.json */,
 				344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */,
 			);
@@ -837,10 +843,12 @@
 				34C000702922494900670CA4 /* FoodCollectionViewCell.xib in Resources */,
 				3469169229127C430021985F /* ReportDetailCell.xib in Resources */,
 				344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */,
+				34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */,
 				34270E83290EB44900D5AFFD /* FoodBaseView.xib in Resources */,
 				34270E61290D51F300D5AFFD /* Weight.storyboard in Resources */,
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
 				34270E67290D529100D5AFFD /* Report.storyboard in Resources */,
+				34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */,
 				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
 				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,

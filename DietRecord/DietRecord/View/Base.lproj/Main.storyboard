@@ -57,23 +57,23 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Eju-Pc-PCy">
-                                <rect key="frame" x="98" y="830.5" width="218" height="31.5"/>
+                                <rect key="frame" x="113" y="826" width="188" height="29"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="繼續進行即表示您同意" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7h-xY-oGV">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="31.5"/>
-                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="29"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
                                         <color key="textColor" name="drDarkGray"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="J5s-Jg-bif">
-                                        <rect key="frame" x="148" y="0.0" width="70" height="31.5"/>
+                                        <rect key="frame" x="128" y="0.0" width="60" height="29"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="隱私權政策">
                                                     <attributes>
                                                         <color key="NSColor" name="drDarkGray"/>
-                                                        <font key="NSFont" size="14" name="PingFangTC-Semibold"/>
+                                                        <font key="NSFont" size="12" name="PingFangTC-Semibold"/>
                                                         <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         <integer key="NSUnderline" value="1"/>
                                                     </attributes>
@@ -86,6 +86,13 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="登入帳號以同步您的飲食、飲水及體重記錄" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Bu-KO-4bq">
+                                <rect key="frame" x="87" y="804" width="240" height="17"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="12"/>
+                                <color key="textColor" name="drDarkGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="oW9-Lp-zhy"/>
                         <color key="backgroundColor" name="drLightGray"/>
@@ -102,6 +109,7 @@
                     <navigationItem key="navigationItem" id="lMq-jB-rtt"/>
                     <connections>
                         <outlet property="animationView" destination="TLb-yj-7M3" id="Swz-U6-Wun"/>
+                        <outlet property="noteLabel" destination="8Bu-KO-4bq" id="wfq-R8-E0C"/>
                         <outlet property="privacyPolicyStackView" destination="Eju-Pc-PCy" id="vUp-aX-vtf"/>
                     </connections>
                 </viewController>

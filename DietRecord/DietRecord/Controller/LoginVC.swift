@@ -13,6 +13,7 @@ import Lottie
 import SafariServices
 
 class LoginVC: UIViewController, SFSafariViewControllerDelegate {
+    @IBOutlet weak var noteLabel: UILabel!
     @IBOutlet weak var animationView: LottieAnimationView!
     @IBOutlet weak var privacyPolicyStackView: UIStackView!
     
@@ -24,6 +25,11 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
         setSignInWithAppleBtn()
         animationView.loopMode = .loop
         animationView.animationSpeed = 1.25
+        animationView.play()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         animationView.play()
     }
     
@@ -42,6 +48,15 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
         setUpPrivacyPolicyStackView(button: signInWithAppleBtn)
     }
     
+    func setUpPrivacyPolicyStackView(button: ASAuthorizationAppleIDButton) {
+        noteLabel.translatesAutoresizingMaskIntoConstraints = false
+        noteLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noteLabel.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10).isActive = true
+        privacyPolicyStackView.translatesAutoresizingMaskIntoConstraints = false
+        privacyPolicyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        privacyPolicyStackView.topAnchor.constraint(equalTo: noteLabel.bottomAnchor).isActive = true
+    }
+    
     @IBAction func goToPrivacyPolicyPage(_ sender: Any) {
         if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
             let safari = SFSafariViewController(url: url)
@@ -54,12 +69,6 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
         self.navigationController?.popViewController(animated: false)
-    }
-    
-    func setUpPrivacyPolicyStackView(button: ASAuthorizationAppleIDButton) {
-        privacyPolicyStackView.translatesAutoresizingMaskIntoConstraints = false
-        privacyPolicyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        privacyPolicyStackView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10).isActive = true
     }
     
     func chooseAppleButtonStyle() -> ASAuthorizationAppleIDButton.Style {

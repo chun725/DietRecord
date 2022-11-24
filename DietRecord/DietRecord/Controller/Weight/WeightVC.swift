@@ -7,7 +7,6 @@
 
 import UIKit
 import HealthKit
-import CoreMIDI
 
 class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var weightLineChart: UIView!
@@ -125,7 +124,6 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     @objc func changeSync() {
-        print("dmscllkvf")
         healthManager.havePermissionOfWrite { bool in
             if bool {
                 if self.syncSwitch.isOn {

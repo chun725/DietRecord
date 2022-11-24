@@ -6,12 +6,14 @@
 //
 
 import UIKit
+import Lottie
 
 class AddFollowingVC: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var userInputTextField: UITextField!
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton!
+    @IBOutlet weak var animationView: LottieAnimationView!
     
     let profileProvider = ProfileProvider()
     var userSearchResult: User? {
@@ -28,9 +30,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 followButton.setTitle("Follow", for: .normal)
                 followButton.backgroundColor = .drDarkGray
             }
-            usernameLabel.isHidden = false
-            userImageView.isHidden = false
-            followButton.isHidden = false
+            self.presentView(views: [usernameLabel, userImageView, followButton])
         }
     }
     
@@ -44,6 +44,8 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        animationView.loopMode = .loop
+        animationView.play()
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -57,16 +59,17 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 case .success(let response):
                     if response as? String == "document不存在" {
                         LKProgressHUD.showFailure(text: "無此用戶")
-                        self.usernameLabel.isHidden = true
-                        self.userImageView.isHidden = true
-                        self.followButton.isHidden = true
+                        self.hiddenView(views: [self.usernameLabel, self.userImageView, self.followButton])
+                        self.animationView.isHidden = false
                     } else {
                         guard let user = response as? User else { return }
                         if userData.blocks.contains(user.userID) {
                             LKProgressHUD.showFailure(text: "無此用戶")
+                            self.animationView.isHidden = false
                         } else {
                             LKProgressHUD.dismiss()
                             self.userSearchResult = user
+                            self.animationView.isHidden = true
                         }
                     }
                 case .failure(let error):

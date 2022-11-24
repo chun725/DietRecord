@@ -47,7 +47,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WAw-ys-ibZ">
                                 <rect key="frame" x="0.0" y="156" width="414" height="200"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="200" id="oEk-Wl-gyR"/>
+                                    <constraint firstAttribute="width" secondItem="WAw-ys-ibZ" secondAttribute="height" multiplier="207:100" id="nPh-A6-VEj"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PI2-Ej-16e">
@@ -165,7 +165,7 @@
                                 </connections>
                             </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="將體重紀錄同步到健康App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5Q-0E-eCg">
-                                <rect key="frame" x="72" y="382" width="243" height="20"/>
+                                <rect key="frame" x="72" y="382" width="261" height="20"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
@@ -203,7 +203,7 @@
                             <constraint firstItem="nBc-Oz-3Co" firstAttribute="trailing" secondItem="WAw-ys-ibZ" secondAttribute="trailing" id="TNQ-FB-Pc2"/>
                             <constraint firstItem="nBc-Oz-3Co" firstAttribute="trailing" secondItem="Njg-fX-dCr" secondAttribute="trailing" constant="16" id="UBH-rM-PNl"/>
                             <constraint firstItem="WAw-ys-ibZ" firstAttribute="width" secondItem="6TT-Y6-pxk" secondAttribute="width" id="WtG-0o-apD"/>
-                            <constraint firstItem="QEL-Os-JpV" firstAttribute="leading" secondItem="P5Q-0E-eCg" secondAttribute="trailing" constant="26" id="YFa-85-S8p"/>
+                            <constraint firstItem="QEL-Os-JpV" firstAttribute="leading" secondItem="P5Q-0E-eCg" secondAttribute="trailing" constant="8" id="YFa-85-S8p"/>
                             <constraint firstItem="P5Q-0E-eCg" firstAttribute="centerY" secondItem="0gj-gt-8TH" secondAttribute="centerY" id="Yum-tb-U3H"/>
                             <constraint firstItem="Jtb-a9-Rec" firstAttribute="centerY" secondItem="ROa-vc-xk6" secondAttribute="centerY" id="a8c-Q9-1lS"/>
                             <constraint firstItem="y27-6w-Etv" firstAttribute="leading" secondItem="nBc-Oz-3Co" secondAttribute="leading" id="beh-PA-tJn"/>

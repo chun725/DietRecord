@@ -154,9 +154,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.weightRecord = weightDatas
                 self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                 self.weightTableView.reloadData()
-                self.healthAppImageView.isHidden = false
-                self.syncLabel.isHidden = false
-                self.syncSwitch.isHidden = false
+                self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
             case .failure(let error):
                 LKProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")
@@ -176,7 +174,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             } else {
                 weightInputPage.closure = { [weak self] _ in
                     self?.fetchWeightRecord()
-            }
+                }
             }
             self.present(weightInputPage, animated: false)
         }
@@ -194,18 +192,13 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         let weightData = weightRecord.reversed()[indexPath.row]
         cell.layoutCell(weightData: weightData)
         if indexPath.row == weightRecord.count - 1 {
-            cell.flatView.isHidden = true
-            cell.increaseView.isHidden = true
-            cell.reduceView.isHidden = true
+            cell.hiddenView(views: [cell.flatView, cell.increaseView, cell.reduceView])
         } else if weightData.value == weightRecord.reversed()[indexPath.row + 1].value {
-            cell.increaseView.isHidden = true
-            cell.reduceView.isHidden = true
+            cell.hiddenView(views: [cell.increaseView, cell.reduceView])
         } else if weightData.value < weightRecord.reversed()[indexPath.row + 1].value {
-            cell.flatView.isHidden = true
-            cell.increaseView.isHidden = true
+            cell.hiddenView(views: [cell.flatView, cell.increaseView])
         } else {
-            cell.flatView.isHidden = true
-            cell.reduceView.isHidden = true
+            cell.hiddenView(views: [cell.flatView, cell.reduceView])
         }
         return cell
     }

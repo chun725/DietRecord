@@ -45,7 +45,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Launch" translatesAutoresizingMaskIntoConstraints="NO" id="pIS-bh-fTh">
-                                <rect key="frame" x="0.0" y="294" width="414" height="448"/>
+                                <rect key="frame" x="0.0" y="294" width="414" height="428"/>
                             </imageView>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="TLb-yj-7M3" customClass="LottieAnimationView" customModule="Lottie">
                                 <rect key="frame" x="0.0" y="94" width="414" height="150"/>
@@ -102,7 +102,7 @@
                             <constraint firstItem="pIS-bh-fTh" firstAttribute="trailing" secondItem="oW9-Lp-zhy" secondAttribute="trailing" id="SdB-MP-aAh"/>
                             <constraint firstItem="oW9-Lp-zhy" firstAttribute="trailing" secondItem="TLb-yj-7M3" secondAttribute="trailing" id="Vjb-tR-9e2"/>
                             <constraint firstItem="pIS-bh-fTh" firstAttribute="top" secondItem="TLb-yj-7M3" secondAttribute="bottom" constant="50" id="gj8-9p-h1t"/>
-                            <constraint firstItem="oW9-Lp-zhy" firstAttribute="bottom" secondItem="pIS-bh-fTh" secondAttribute="bottom" constant="120" id="wiL-C1-dUZ"/>
+                            <constraint firstItem="oW9-Lp-zhy" firstAttribute="bottom" secondItem="pIS-bh-fTh" secondAttribute="bottom" constant="140" id="wiL-C1-dUZ"/>
                             <constraint firstItem="TLb-yj-7M3" firstAttribute="leading" secondItem="oW9-Lp-zhy" secondAttribute="leading" id="zh0-Ge-Iqh"/>
                         </constraints>
                     </view>
@@ -207,8 +207,11 @@
             <point key="canvasLocation" x="-697.10144927536237" y="-681.02678571428567"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="TLb-yj-7M3"/>
+    </designables>
     <resources>
-        <image name="Image_Launch" width="1408" height="1125"/>
+        <image name="Image_Launch" width="469" height="375"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

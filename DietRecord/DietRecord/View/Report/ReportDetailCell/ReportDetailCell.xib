@@ -21,8 +21,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hIZ-2w-uNL">
                         <rect key="frame" x="16" y="16" width="382" height="528"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="卡路里 (kcal)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ue8-Ch-UG2">
-                                <rect key="frame" x="16" y="64" width="83.5" height="30"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="熱量 (kcal)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ue8-Ch-UG2">
+                                <rect key="frame" x="16" y="64" width="69.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="6nN-3O-Zke"/>
                                 </constraints>
@@ -32,7 +32,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNC-Di-qaW">
-                                <rect key="frame" x="264.5" y="64" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="64" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0d0-eU-KdO"/>
                                 </constraints>
@@ -52,7 +52,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="總數" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5oa-ic-bti">
-                                <rect key="frame" x="250" y="16" width="28" height="30"/>
+                                <rect key="frame" x="270" y="16" width="28" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="4Qi-tY-HnI"/>
                                 </constraints>
@@ -179,10 +179,10 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="目標值" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IN-R0-1Cv">
-                                <rect key="frame" x="286" y="16" width="80" height="30"/>
+                                <rect key="frame" x="306" y="16" width="60" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="Ao9-XR-dbb"/>
                                     <constraint firstAttribute="height" constant="30" id="Dq0-N7-bVz"/>
-                                    <constraint firstAttribute="width" constant="80" id="SHn-aI-kDK"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -190,9 +190,9 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12600" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2G6-Xb-scP">
-                                <rect key="frame" x="286" y="64" width="80" height="30"/>
+                                <rect key="frame" x="306" y="64" width="60" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="884-Te-ERF"/>
+                                    <constraint firstAttribute="width" constant="60" id="884-Te-ERF"/>
                                     <constraint firstAttribute="height" constant="30" id="dGv-jo-Sis"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
@@ -201,7 +201,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oAE-9U-vmo">
-                                <rect key="frame" x="264.5" y="102" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="102" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Jr4-aL-6XY"/>
                                 </constraints>
@@ -211,9 +211,9 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="540" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgr-di-SrT">
-                                <rect key="frame" x="286" y="102" width="80" height="30"/>
+                                <rect key="frame" x="306" y="102" width="60" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="GY2-MP-a1t"/>
+                                    <constraint firstAttribute="width" constant="60" id="GY2-MP-a1t"/>
                                     <constraint firstAttribute="height" constant="30" id="VJp-Vc-vmb"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
@@ -222,7 +222,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LyN-E7-J5B">
-                                <rect key="frame" x="264.5" y="140" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="140" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Zxd-DA-oew"/>
                                 </constraints>
@@ -232,10 +232,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yy6-OR-Vx6">
-                                <rect key="frame" x="286" y="140" width="80" height="30"/>
+                                <rect key="frame" x="306" y="140" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="7xU-un-kIE"/>
-                                    <constraint firstAttribute="width" constant="80" id="nhh-H3-q7O"/>
+                                    <constraint firstAttribute="width" constant="60" id="nhh-H3-q7O"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -243,7 +243,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOr-Tw-rW4">
-                                <rect key="frame" x="264.5" y="178" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="178" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="V5O-NN-Dcc"/>
                                 </constraints>
@@ -253,9 +253,9 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sy8-Sz-ynq">
-                                <rect key="frame" x="286" y="178" width="80" height="30"/>
+                                <rect key="frame" x="306" y="178" width="60" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="6cv-gf-Ss2"/>
+                                    <constraint firstAttribute="width" constant="60" id="6cv-gf-Ss2"/>
                                     <constraint firstAttribute="height" constant="30" id="KhK-ej-yEz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
@@ -264,7 +264,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UzK-Tz-Ebs">
-                                <rect key="frame" x="269.5" y="216" width="8.5" height="30"/>
+                                <rect key="frame" x="289.5" y="216" width="8.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="ZOC-qT-z3Q"/>
                                 </constraints>
@@ -274,10 +274,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="540" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cx7-AY-kVr">
-                                <rect key="frame" x="286" y="216" width="80" height="30"/>
+                                <rect key="frame" x="306" y="216" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="2tl-xs-mFC"/>
-                                    <constraint firstAttribute="width" constant="80" id="KTj-nn-kqI"/>
+                                    <constraint firstAttribute="width" constant="60" id="KTj-nn-kqI"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -285,7 +285,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qlb-dN-Vgg">
-                                <rect key="frame" x="264.5" y="254" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="254" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9Oe-B8-h7v"/>
                                 </constraints>
@@ -295,10 +295,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="540" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ep1-cL-sK9">
-                                <rect key="frame" x="286" y="254" width="80" height="30"/>
+                                <rect key="frame" x="306" y="254" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="3hV-ar-Gph"/>
-                                    <constraint firstAttribute="width" constant="80" id="Zyb-1W-QzX"/>
+                                    <constraint firstAttribute="width" constant="60" id="Zyb-1W-QzX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -306,7 +306,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJp-nj-gX5">
-                                <rect key="frame" x="264.5" y="292" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="292" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="U70-i1-tLc"/>
                                 </constraints>
@@ -316,10 +316,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Glb-N6-bKG">
-                                <rect key="frame" x="286" y="292" width="80" height="30"/>
+                                <rect key="frame" x="306" y="292" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="0MC-pg-gVK"/>
-                                    <constraint firstAttribute="width" constant="80" id="MMb-ry-NjU"/>
+                                    <constraint firstAttribute="width" constant="60" id="MMb-ry-NjU"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -327,7 +327,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y3y-og-5Vh">
-                                <rect key="frame" x="264.5" y="330" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="330" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="gv0-mS-5c9"/>
                                 </constraints>
@@ -337,7 +337,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bEb-hp-TKh">
-                                <rect key="frame" x="264.5" y="368" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="368" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="lVx-du-xpm"/>
                                 </constraints>
@@ -347,9 +347,9 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4i-Y0-VP3">
-                                <rect key="frame" x="286" y="368" width="80" height="30"/>
+                                <rect key="frame" x="306" y="368" width="60" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="VKd-jR-1ou"/>
+                                    <constraint firstAttribute="width" constant="60" id="VKd-jR-1ou"/>
                                     <constraint firstAttribute="height" constant="30" id="ueE-Bw-Rfv"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
@@ -358,10 +358,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UDr-UJ-Shd">
-                                <rect key="frame" x="286" y="330" width="80" height="30"/>
+                                <rect key="frame" x="306" y="330" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Y2P-9r-yDL"/>
-                                    <constraint firstAttribute="width" constant="80" id="uNW-48-5Hz"/>
+                                    <constraint firstAttribute="width" constant="60" id="uNW-48-5Hz"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -369,7 +369,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LGJ-OR-c4X">
-                                <rect key="frame" x="264.5" y="444" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="444" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="UNE-Ep-IdP"/>
                                 </constraints>
@@ -379,10 +379,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gck-to-BJl">
-                                <rect key="frame" x="286" y="444" width="80" height="30"/>
+                                <rect key="frame" x="306" y="444" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HSc-bM-Odu"/>
-                                    <constraint firstAttribute="width" constant="80" id="sGJ-2e-QvB"/>
+                                    <constraint firstAttribute="width" constant="60" id="sGJ-2e-QvB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
@@ -390,7 +390,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Pj-7t-TNg">
-                                <rect key="frame" x="264.5" y="406" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="406" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="m3k-0c-tDP"/>
                                 </constraints>
@@ -400,9 +400,9 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IMa-Kx-W6m">
-                                <rect key="frame" x="286" y="406" width="80" height="30"/>
+                                <rect key="frame" x="306" y="406" width="60" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="asv-d9-bHh"/>
+                                    <constraint firstAttribute="width" constant="60" id="asv-d9-bHh"/>
                                     <constraint firstAttribute="height" constant="30" id="wuK-62-kLd"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
@@ -411,7 +411,7 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" -" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tNR-IU-zvE">
-                                <rect key="frame" x="264.5" y="482" width="13.5" height="30"/>
+                                <rect key="frame" x="284.5" y="482" width="13.5" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="UIw-fx-aFc"/>
                                 </constraints>
@@ -421,10 +421,10 @@
                                 <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uhe-UZ-0hW">
-                                <rect key="frame" x="286" y="482" width="80" height="30"/>
+                                <rect key="frame" x="306" y="482" width="60" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="HKR-nj-7rX"/>
-                                    <constraint firstAttribute="width" constant="80" id="sgo-41-fTg"/>
+                                    <constraint firstAttribute="width" constant="60" id="sgo-41-fTg"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>

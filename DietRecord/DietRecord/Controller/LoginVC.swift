@@ -44,14 +44,14 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
         signInWithAppleBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         signInWithAppleBtn.widthAnchor.constraint(equalToConstant: 280).isActive = true
         signInWithAppleBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70).isActive = true
+        signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90).isActive = true
         setUpPrivacyPolicyStackView(button: signInWithAppleBtn)
     }
     
     func setUpPrivacyPolicyStackView(button: ASAuthorizationAppleIDButton) {
         noteLabel.translatesAutoresizingMaskIntoConstraints = false
         noteLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        noteLabel.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 10).isActive = true
+        noteLabel.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 20).isActive = true
         privacyPolicyStackView.translatesAutoresizingMaskIntoConstraints = false
         privacyPolicyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         privacyPolicyStackView.topAnchor.constraint(equalTo: noteLabel.bottomAnchor).isActive = true

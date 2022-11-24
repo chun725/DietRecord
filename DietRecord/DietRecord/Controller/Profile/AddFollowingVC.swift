@@ -20,11 +20,13 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
             usernameLabel.text = userSearchResult?.username
             if userSearchResult?.followers.contains(userID) != false {
                 followButton.setTitle("Following", for: .normal)
+                followButton.backgroundColor = .drDarkGray
             } else if userSearchResult?.request.contains(userID) != false {
                 followButton.setTitle("Requested", for: .normal)
                 followButton.backgroundColor = .drGray
             } else {
                 followButton.setTitle("Follow", for: .normal)
+                followButton.backgroundColor = .drDarkGray
             }
             usernameLabel.isHidden = false
             userImageView.isHidden = false

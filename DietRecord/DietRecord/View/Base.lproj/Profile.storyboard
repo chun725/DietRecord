@@ -379,34 +379,37 @@
                                 <rect key="frame" x="0.0" y="84" width="414" height="728"/>
                                 <color key="backgroundColor" name="drLightGray"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileResponseCell" rowHeight="43" id="WGz-Wd-dPe" customClass="ProfileResponseCell" customModule="DietRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="43"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ProfileResponseCell" rowHeight="82" id="WGz-Wd-dPe" customClass="ProfileResponseCell" customModule="DietRecord" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="82"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WGz-Wd-dPe" id="AJK-Sd-F17">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fm8-oj-psf">
-                                                    <rect key="frame" x="50" y="4" width="0.0" height="34"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" horizontalCompressionResistancePriority="1000" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fm8-oj-psf">
+                                                    <rect key="frame" x="54" y="8" width="344" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="tRg-l6-dZK"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                                     <color key="textColor" name="drDarkGray"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="8ug-8B-IiF">
-                                                    <rect key="frame" x="16" y="8" width="26" height="26"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="8ug-8B-IiF">
+                                                    <rect key="frame" x="16" y="8" width="30" height="30"/>
                                                     <color key="tintColor" name="drDarkGray"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="26" id="Oro-ql-zwd"/>
+                                                        <constraint firstAttribute="height" constant="30" id="Oro-ql-zwd"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="My1-7T-jD6">
-                                                    <rect key="frame" x="58" y="8" width="340" height="27"/>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="My1-7T-jD6">
+                                                    <rect key="frame" x="54" y="28" width="344" height="46"/>
+                                                    <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                                     <color key="textColor" name="drDarkGray"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d4M-Qn-nkI">
-                                                    <rect key="frame" x="16" y="4" width="34" height="34"/>
+                                                    <rect key="frame" x="16" y="8" width="382" height="20"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                     <connections>
                                                         <action selector="goToUserPage:" destination="WGz-Wd-dPe" eventType="touchUpInside" id="HMn-7V-hqt"/>
@@ -417,16 +420,17 @@
                                                 <constraint firstItem="fm8-oj-psf" firstAttribute="bottom" secondItem="d4M-Qn-nkI" secondAttribute="bottom" id="Cd8-KE-lWZ"/>
                                                 <constraint firstItem="fm8-oj-psf" firstAttribute="leading" secondItem="8ug-8B-IiF" secondAttribute="trailing" constant="8" id="EC7-oo-R9r"/>
                                                 <constraint firstAttribute="trailing" secondItem="My1-7T-jD6" secondAttribute="trailing" constant="16" id="EMW-uz-xPL"/>
-                                                <constraint firstItem="fm8-oj-psf" firstAttribute="centerY" secondItem="8ug-8B-IiF" secondAttribute="centerY" id="FU7-u3-UTv"/>
-                                                <constraint firstItem="My1-7T-jD6" firstAttribute="leading" secondItem="fm8-oj-psf" secondAttribute="trailing" constant="8" id="Hz4-nD-QCe"/>
+                                                <constraint firstItem="My1-7T-jD6" firstAttribute="top" secondItem="fm8-oj-psf" secondAttribute="bottom" id="F0k-HO-3zX"/>
                                                 <constraint firstAttribute="bottom" secondItem="My1-7T-jD6" secondAttribute="bottom" constant="8" id="L1s-ti-S3i"/>
                                                 <constraint firstItem="fm8-oj-psf" firstAttribute="trailing" secondItem="d4M-Qn-nkI" secondAttribute="trailing" id="Nek-qA-aQB"/>
                                                 <constraint firstItem="8ug-8B-IiF" firstAttribute="top" secondItem="AJK-Sd-F17" secondAttribute="top" constant="8" id="SFP-Qd-Jkw"/>
                                                 <constraint firstItem="d4M-Qn-nkI" firstAttribute="leading" secondItem="8ug-8B-IiF" secondAttribute="leading" id="SyI-8p-TJT"/>
-                                                <constraint firstItem="My1-7T-jD6" firstAttribute="top" secondItem="AJK-Sd-F17" secondAttribute="top" constant="8" id="f1O-aZ-V9W"/>
+                                                <constraint firstItem="fm8-oj-psf" firstAttribute="top" secondItem="8ug-8B-IiF" secondAttribute="top" id="aop-U8-1p6"/>
                                                 <constraint firstItem="8ug-8B-IiF" firstAttribute="width" secondItem="8ug-8B-IiF" secondAttribute="height" id="gbi-Sm-pz5"/>
                                                 <constraint firstItem="8ug-8B-IiF" firstAttribute="leading" secondItem="AJK-Sd-F17" secondAttribute="leading" constant="16" id="jX5-KK-Qr2"/>
+                                                <constraint firstAttribute="trailing" secondItem="fm8-oj-psf" secondAttribute="trailing" constant="16" id="kJK-rA-jfy"/>
                                                 <constraint firstItem="d4M-Qn-nkI" firstAttribute="top" secondItem="fm8-oj-psf" secondAttribute="top" id="pEA-a5-w6O"/>
+                                                <constraint firstItem="My1-7T-jD6" firstAttribute="leading" secondItem="fm8-oj-psf" secondAttribute="leading" id="v8H-Ox-nnL"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -468,6 +472,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rjH-cK-MNb">
                                                 <rect key="frame" x="298" y="2" width="30" height="26"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="30" id="5gA-cZ-8Mv"/>
                                                     <constraint firstAttribute="height" constant="26" id="XzO-AN-f2J"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
@@ -963,7 +968,7 @@
                                                                 <constraint firstAttribute="width" constant="1" id="dQ2-nH-q2C"/>
                                                             </constraints>
                                                         </view>
-                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入用戶名" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bHz-tU-DE2">
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="請輸入用戶ID" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bHz-tU-DE2">
                                                             <rect key="frame" x="71" y="12" width="247" height="40"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="40" id="kfR-6Y-iol"/>
@@ -1402,14 +1407,13 @@
                                                     <rect key="frame" x="24" y="30" width="366" height="157"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="XZz-oC-Vay">
-                                                            <rect key="frame" x="24" y="16" width="93" height="93"/>
+                                                            <rect key="frame" x="24" y="16" width="100" height="100"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="XZz-oC-Vay" secondAttribute="height" id="EVj-Ca-Y0P"/>
-                                                                <constraint firstAttribute="height" constant="100" id="ZfC-jO-nVf"/>
                                                             </constraints>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L1D-5M-k14">
-                                                            <rect key="frame" x="179" y="24" width="1" height="24"/>
+                                                            <rect key="frame" x="186" y="24" width="1" height="24"/>
                                                             <color key="backgroundColor" name="drGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="ipg-1a-h93"/>
@@ -1417,7 +1421,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUV-Yh-tVM">
-                                                            <rect key="frame" x="179" y="70" width="1" height="24"/>
+                                                            <rect key="frame" x="186" y="70" width="1" height="24"/>
                                                             <color key="backgroundColor" name="drGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="ZxE-pd-hP6"/>
@@ -1425,7 +1429,7 @@
                                                             </constraints>
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lxu-xg-WPa">
-                                                            <rect key="frame" x="172" y="112.5" width="1" height="24"/>
+                                                            <rect key="frame" x="179" y="112.5" width="1" height="24"/>
                                                             <color key="backgroundColor" name="drGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="1" id="VBK-Jm-pm0"/>
@@ -1433,13 +1437,13 @@
                                                             </constraints>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cVB-Fh-DIK">
-                                                            <rect key="frame" x="192" y="70.5" width="166" height="23"/>
+                                                            <rect key="frame" x="199" y="70.5" width="159" height="23"/>
                                                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-Z1-mpT">
-                                                            <rect key="frame" x="141" y="21.5" width="30" height="29"/>
+                                                            <rect key="frame" x="148" y="21.5" width="30" height="29"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="ukt-Z1-mpT" secondAttribute="height" id="K4S-LL-2mR"/>
@@ -1447,13 +1451,13 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a0L-Mk-Qpb">
-                                                            <rect key="frame" x="192" y="24.5" width="166" height="23"/>
+                                                            <rect key="frame" x="199" y="24.5" width="159" height="23"/>
                                                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="figure.stand" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dWc-oP-Mej">
-                                                            <rect key="frame" x="141" y="66" width="30" height="31.5"/>
+                                                            <rect key="frame" x="148" y="66" width="30" height="31.5"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="976-2l-olP"/>
@@ -1461,7 +1465,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aVR-lM-nLL">
-                                                            <rect key="frame" x="141" y="113.5" width="23" height="22"/>
+                                                            <rect key="frame" x="148" y="113.5" width="23" height="22"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Pqy-es-CMY"/>
@@ -1469,7 +1473,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NfN-p5-ak9">
-                                                            <rect key="frame" x="34" y="117" width="73" height="24"/>
+                                                            <rect key="frame" x="37.5" y="124" width="73" height="17"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="24" id="5sg-Mk-DpV"/>
                                                             </constraints>
@@ -1478,7 +1482,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Kk-9h-O89">
-                                                            <rect key="frame" x="185" y="113" width="173" height="23"/>
+                                                            <rect key="frame" x="192" y="113" width="166" height="23"/>
                                                             <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
@@ -1701,6 +1705,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="I2j-iz-8V2" secondAttribute="trailing" constant="24" id="sgm-ir-njT"/>
                                                 <constraint firstAttribute="trailing" secondItem="2aU-kH-v1M" secondAttribute="trailing" constant="24" id="tXK-AG-cuP"/>
                                                 <constraint firstItem="2aU-kH-v1M" firstAttribute="top" secondItem="iGg-dg-aH5" secondAttribute="bottom" constant="16" id="u3P-Tg-kEa"/>
+                                                <constraint firstItem="XZz-oC-Vay" firstAttribute="width" secondItem="sDa-zU-wWc" secondAttribute="width" multiplier="100:414" id="u3X-Ta-D0W"/>
                                                 <constraint firstItem="1jy-rW-MCS" firstAttribute="centerY" secondItem="iGg-dg-aH5" secondAttribute="centerY" id="uhm-rg-wUb"/>
                                                 <constraint firstItem="PqC-xm-ibH" firstAttribute="top" secondItem="icc-g5-Ea7" secondAttribute="bottom" constant="16" id="vLJ-YF-faQ"/>
                                                 <constraint firstItem="c55-mE-W4y" firstAttribute="bottom" secondItem="iGg-dg-aH5" secondAttribute="bottom" constant="16" id="vSn-b9-rlW"/>
@@ -1756,7 +1761,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image_Placeholder" width="2999" height="1687"/>
+        <image name="Image_Placeholder" width="999.5" height="562"/>
         <image name="camera.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>

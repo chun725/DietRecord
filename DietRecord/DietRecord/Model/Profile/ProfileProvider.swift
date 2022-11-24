@@ -506,7 +506,10 @@ extension ProfileProvider {
                         let documents = snapshot.documents
                         if !documents.isEmpty {
                             for document in documents {
-                                database.collection(user).document(userID).collection(collection)
+                                database
+                                    .collection(user)
+                                    .document(userID)
+                                    .collection(collection)
                                     .document(document.documentID).delete()
                             }
                         }

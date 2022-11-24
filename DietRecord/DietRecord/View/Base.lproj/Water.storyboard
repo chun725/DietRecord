@@ -525,7 +525,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RS4-Oz-Jbh">
                                 <rect key="frame" x="20" y="134" width="374" height="240"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="Jhb-1b-xPY"/>
+                                    <constraint firstAttribute="width" secondItem="RS4-Oz-Jbh" secondAttribute="height" multiplier="187:120" id="pxN-4m-M6W"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="BFU-97-ZMZ" customClass="LottieAnimationView" customModule="Lottie">
@@ -573,7 +573,7 @@
                             <constraint firstItem="1mh-r4-E3y" firstAttribute="trailing" secondItem="AW9-zZ-PCO" secondAttribute="trailing" id="Sz1-VY-hMX"/>
                             <constraint firstItem="BFU-97-ZMZ" firstAttribute="centerY" secondItem="RS4-Oz-Jbh" secondAttribute="centerY" id="U31-te-n0t"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="trailing" secondItem="1mh-r4-E3y" secondAttribute="trailing" id="XQi-Lv-xZv"/>
-                            <constraint firstAttribute="trailing" secondItem="RS4-Oz-Jbh" secondAttribute="trailing" constant="20" symbolic="YES" id="Xo7-Lq-YTB"/>
+                            <constraint firstAttribute="trailing" secondItem="RS4-Oz-Jbh" secondAttribute="trailing" constant="20" id="Xo7-Lq-YTB"/>
                             <constraint firstItem="AW9-zZ-PCO" firstAttribute="top" secondItem="RS4-Oz-Jbh" secondAttribute="bottom" id="bAQ-CF-Tg8"/>
                             <constraint firstItem="l8B-q4-eFV" firstAttribute="leading" secondItem="1mh-r4-E3y" secondAttribute="leading" id="bBK-rj-7Wg"/>
                             <constraint firstItem="pRd-9E-tvN" firstAttribute="top" secondItem="BZB-rl-CuT" secondAttribute="top" id="cK6-85-moK"/>

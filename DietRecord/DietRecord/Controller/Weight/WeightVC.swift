@@ -17,12 +17,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var healthAppImageView: UIImageView!
     @IBOutlet weak var syncLabel: UILabel!
     
-    var weightRecord: [WeightData] = [] {
-        didSet {
-            lineChart?.setWeightLineChart(datas: weightRecord, goal: weightGoal)
-            weightTableView.reloadData()
-        }
-    }
+    var weightRecord: [WeightData] = []
     var weightGoal: Double = 0.0 {
         didSet {
             lineChart?.setWeightLineChart(datas: weightRecord, goal: weightGoal)
@@ -157,6 +152,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             case .success(let weightDatas):
                 LKProgressHUD.dismiss()
                 self.weightRecord = weightDatas
+                self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
+                self.weightTableView.reloadData()
                 self.healthAppImageView.isHidden = false
                 self.syncLabel.isHidden = false
                 self.syncSwitch.isHidden = false
@@ -237,6 +234,11 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                     DispatchQueue.main.async {
                         let index = self.weightRecord.count - indexPath.row - 1
                         self.weightRecord.remove(at: index)
+                        UIView.animate(withDuration: 0.5) {
+                            self.weightTableView.beginUpdates()
+                            self.weightTableView.deleteRows(at: [indexPath], with: .fade)
+                            self.weightTableView.endUpdates()
+                        }
                     }
                 case .failure(let error):
                     print("Error Info: \(error).")

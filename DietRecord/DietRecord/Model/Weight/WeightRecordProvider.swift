@@ -111,7 +111,8 @@ class WeightRecordProvider {
                     case .success:
                         completion(.success(()))
                     case .failure(let error):
-                        completion(.failure(error))
+                        print(error)
+                        completion(.success(()))
                     }
                 }
             } else {

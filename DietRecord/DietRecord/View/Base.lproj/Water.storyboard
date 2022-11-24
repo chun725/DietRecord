@@ -602,11 +602,11 @@
         <designable name="BFU-97-ZMZ"/>
     </designables>
     <resources>
-        <image name="Image_Delete" width="512" height="512"/>
-        <image name="Image_Edit-1" width="512" height="512"/>
-        <image name="Image_Reminder" width="512" height="512"/>
+        <image name="Image_Delete" width="170.5" height="170.5"/>
+        <image name="Image_Edit-1" width="170.5" height="170.5"/>
+        <image name="Image_Reminder" width="170.5" height="170.5"/>
         <image name="Image_Sun" width="170.5" height="170.5"/>
-        <image name="Image_Water" width="512" height="512"/>
+        <image name="Image_Water" width="170.5" height="170.5"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="drop" catalog="system" width="101" height="128"/>
         <image name="drop.fill" catalog="system" width="101" height="128"/>

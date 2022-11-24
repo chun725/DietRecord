@@ -15,6 +15,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var changeGoalButton: UIButton!
     @IBOutlet weak var weightGoalLabel: UILabel!
     @IBOutlet weak var syncSwitch: UISwitch!
+    @IBOutlet weak var healthAppImageView: UIImageView!
+    @IBOutlet weak var syncLabel: UILabel!
     
     var weightRecord: [WeightData] = [] {
         didSet {
@@ -37,34 +39,53 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         lineChart = LineChart(frame: .zero, superview: weightLineChart)
         weightTableView.dataSource = self
         weightTableView.delegate = self
-        self.getHealthKitPermission()
-        
+        self.haveGetHealthKitPermission()
         syncSwitch.addTarget(self, action: #selector(changeSync), for: .valueChanged)
+        healthAppImageView.setBorder(width: 0.5, color: .drGray, radius: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchWeightRecord()
         self.weightGoal = userData?.weightGoal.transformToDouble() ?? 0.0
+        healthManager.havePermissionOfWrite { [weak self] bool in
+            if bool {
+                self?.syncSwitch.isOn = true
+            } else {
+                self?.syncSwitch.isOn = false
+            }
+        }
+    }
+    
+    func haveGetHealthKitPermission() {
+        healthManager.haveGetPermission { result in
+            switch result {
+            case .success(let index):
+                if index == 0 {
+                    self.getHealthKitPermission()
+                } else {
+                    self.setWeight()
+                }
+            case .failure(let error):
+                self.fetchWeightRecord()
+                print("Error Info: \(error) in get permission of healthkit.")
+            }
+        }
     }
     
     func getHealthKitPermission() {
         healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
                 userDefault.set(true, forKey: weightPermission)
+                self.syncSwitch.setOn(true, animated: false)
                 self.setWeight()
-                DispatchQueue.main.async {
-                    self.syncSwitch.isOn = true
-                }
             } else {
                 if error != nil, let error = error {
                     print(error)
                 }
                 userDefault.set(false, forKey: weightPermission)
+                self.syncSwitch.setOn(false, animated: false)
                 self.fetchWeightRecord()
-                DispatchQueue.main.async {
-                    self.syncSwitch.isOn = false
-                }
                 print("Permission denied.")
             }
         }
@@ -104,12 +125,31 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     @objc func changeSync() {
-        if self.syncSwitch.isOn {
-            userDefault.set(true, forKey: weightPermission)
-        } else {
-            userDefault.set(false, forKey: weightPermission)
+        print("dmscllkvf")
+        healthManager.havePermissionOfWrite { bool in
+            if bool {
+                if self.syncSwitch.isOn {
+                    userDefault.set(true, forKey: weightPermission)
+                } else {
+                    userDefault.set(false, forKey: weightPermission)
+                }
+                self.fetchWeightRecord()
+            } else {
+                if self.syncSwitch.isOn {
+                    let alert = UIAlertController(
+                        title: "未開啟寫入權限",
+                        message: "請去設定 -> 隱私權與安全性 -> 健康 -> 食話實說，開啟寫入數據的功能",
+                        preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default)
+                    alert.addAction(action)
+                    self.present(alert, animated: true)
+                    self.syncSwitch.isOn = false
+                } else {
+                    self.fetchWeightRecord()
+                }
+                userDefault.set(false, forKey: weightPermission)
+            }
         }
-        fetchWeightRecord()
     }
     
     func fetchWeightRecord() {
@@ -119,6 +159,9 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             case .success(let weightDatas):
                 LKProgressHUD.dismiss()
                 self.weightRecord = weightDatas
+                self.healthAppImageView.isHidden = false
+                self.syncLabel.isHidden = false
+                self.syncSwitch.isHidden = false
             case .failure(let error):
                 LKProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")
@@ -155,13 +198,18 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         else { fatalError("Could not create the weight cell.") }
         let weightData = weightRecord.reversed()[indexPath.row]
         cell.layoutCell(weightData: weightData)
-        if indexPath.row == weightRecord.count - 1 ||
-            weightData.value == weightRecord.reversed()[indexPath.row + 1].value {
+        if indexPath.row == weightRecord.count - 1 {
+            cell.flatView.isHidden = true
+            cell.increaseView.isHidden = true
+            cell.reduceView.isHidden = true
+        } else if weightData.value == weightRecord.reversed()[indexPath.row + 1].value {
             cell.increaseView.isHidden = true
             cell.reduceView.isHidden = true
         } else if weightData.value < weightRecord.reversed()[indexPath.row + 1].value {
+            cell.flatView.isHidden = true
             cell.increaseView.isHidden = true
         } else {
+            cell.flatView.isHidden = true
             cell.reduceView.isHidden = true
         }
         return cell

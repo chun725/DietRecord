@@ -29,9 +29,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Njg-fX-dCr">
-                                <rect key="frame" x="374" y="52.5" width="24" height="23"/>
+                                <rect key="frame" x="368" y="49.5" width="30" height="29"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="UKQ-Xw-mqv"/>
+                                    <constraint firstAttribute="height" constant="30" id="UKQ-Xw-mqv"/>
                                 </constraints>
                                 <color key="tintColor" name="drDarkGray"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -98,19 +98,29 @@
                                                                 <constraint firstAttribute="width" secondItem="xa9-TK-j6e" secondAttribute="height" id="fS9-7C-dpj"/>
                                                             </constraints>
                                                         </imageView>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gwX-Fx-XTP">
+                                                            <rect key="frame" x="327.5" y="26.5" width="19" height="3"/>
+                                                            <color key="backgroundColor" name="drDarkGray"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="3" id="5LL-lj-Qn7"/>
+                                                            </constraints>
+                                                        </view>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="mGB-Hj-QfI" firstAttribute="leading" secondItem="hsY-re-aJr" secondAttribute="trailing" constant="16" id="5Hj-44-YMk"/>
+                                                        <constraint firstItem="gwX-Fx-XTP" firstAttribute="width" secondItem="xa9-TK-j6e" secondAttribute="width" constant="-5" id="5Jl-BP-Fqr"/>
                                                         <constraint firstItem="mGB-Hj-QfI" firstAttribute="centerY" secondItem="hsY-re-aJr" secondAttribute="centerY" id="AvF-E3-aSI"/>
                                                         <constraint firstAttribute="trailing" secondItem="mGB-Hj-QfI" secondAttribute="trailing" constant="16" id="Cnq-Q5-Uhf"/>
                                                         <constraint firstItem="hsY-re-aJr" firstAttribute="centerY" secondItem="Jep-j0-tTf" secondAttribute="centerY" id="Fy1-gb-AJl"/>
                                                         <constraint firstItem="Jep-j0-tTf" firstAttribute="leading" secondItem="FYH-vE-Are" secondAttribute="leading" constant="16" id="Sh2-wp-tqD"/>
                                                         <constraint firstItem="xa9-TK-j6e" firstAttribute="centerX" secondItem="mGB-Hj-QfI" secondAttribute="centerX" id="gTA-f5-uOx"/>
+                                                        <constraint firstItem="gwX-Fx-XTP" firstAttribute="centerX" secondItem="xa9-TK-j6e" secondAttribute="centerX" id="jor-ZL-XAe"/>
                                                         <constraint firstAttribute="bottom" secondItem="Jep-j0-tTf" secondAttribute="bottom" constant="16" id="k01-Wj-lev"/>
                                                         <constraint firstItem="Jep-j0-tTf" firstAttribute="top" secondItem="FYH-vE-Are" secondAttribute="top" constant="16" id="kPc-44-63f"/>
                                                         <constraint firstItem="hsY-re-aJr" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Jep-j0-tTf" secondAttribute="trailing" constant="8" id="nlH-oM-KTL"/>
                                                         <constraint firstItem="xa9-TK-j6e" firstAttribute="centerY" secondItem="mGB-Hj-QfI" secondAttribute="centerY" id="pcq-2J-up5"/>
+                                                        <constraint firstItem="gwX-Fx-XTP" firstAttribute="centerY" secondItem="xa9-TK-j6e" secondAttribute="centerY" id="wwo-MY-hg0"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -123,6 +133,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="dateLabel" destination="Jep-j0-tTf" id="z7y-aY-cd3"/>
+                                            <outlet property="flatView" destination="gwX-Fx-XTP" id="sOx-WV-C7J"/>
                                             <outlet property="increaseView" destination="xa9-TK-j6e" id="XfC-52-G0z"/>
                                             <outlet property="reduceView" destination="mGB-Hj-QfI" id="8Az-TM-KgY"/>
                                             <outlet property="weightLabel" destination="hsY-re-aJr" id="tbQ-20-ZsZ"/>
@@ -153,20 +164,20 @@
                                     <action selector="goToWeightInputVC:" destination="d1s-ZJ-Lrp" eventType="touchUpInside" id="bXc-Pq-MtI"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="與健康app同步體重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5Q-0E-eCg">
-                                <rect key="frame" x="72" y="379.5" width="243" height="25.5"/>
-                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="18"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="將體重紀錄同步到健康App" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5Q-0E-eCg">
+                                <rect key="frame" x="72" y="382" width="243" height="20"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Healthapp" translatesAutoresizingMaskIntoConstraints="NO" id="0gj-gt-8TH">
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Healthapp" translatesAutoresizingMaskIntoConstraints="NO" id="0gj-gt-8TH">
                                 <rect key="frame" x="16" y="372" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="0gj-gt-8TH" secondAttribute="height" id="5DC-GV-T5M"/>
                                     <constraint firstAttribute="height" constant="40" id="bvc-15-BMz"/>
                                 </constraints>
                             </imageView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEL-Os-JpV">
+                            <switch hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEL-Os-JpV">
                                 <rect key="frame" x="341" y="376.5" width="51" height="31"/>
                             </switch>
                         </subviews>
@@ -208,6 +219,8 @@
                     <tabBarItem key="tabBarItem" title="Weight" image="figure.stand" catalog="system" id="9Nd-Hb-ocg"/>
                     <connections>
                         <outlet property="changeGoalButton" destination="Jtb-a9-Rec" id="mH4-Qr-wfP"/>
+                        <outlet property="healthAppImageView" destination="0gj-gt-8TH" id="MNr-cC-7cF"/>
+                        <outlet property="syncLabel" destination="P5Q-0E-eCg" id="R1n-Wb-cAh"/>
                         <outlet property="syncSwitch" destination="QEL-Os-JpV" id="zZa-tg-lyR"/>
                         <outlet property="weightGoalLabel" destination="ROa-vc-xk6" id="UAZ-aO-MXA"/>
                         <outlet property="weightLineChart" destination="WAw-ys-ibZ" id="1Uk-zh-r9J"/>
@@ -245,22 +258,25 @@
                                                         <color key="textColor" name="drDarkGray"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cys-7S-iSf">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Calendar" translatesAutoresizingMaskIntoConstraints="NO" id="2Nb-Lh-9yx">
                                                         <rect key="frame" x="95.5" y="0.0" width="24" height="24"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="24" id="goa-G3-8QS"/>
+                                                            <constraint firstAttribute="height" constant="24" id="1zB-GU-GqO"/>
+                                                            <constraint firstAttribute="width" secondItem="2Nb-Lh-9yx" secondAttribute="height" id="42V-an-8wx"/>
                                                         </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" backgroundImage="Image_Calendar"/>
-                                                        <connections>
-                                                            <action selector="goToChooseDatePage:" destination="5KL-qj-9AB" eventType="touchUpInside" id="gxz-Yv-lnP"/>
-                                                        </connections>
-                                                    </button>
+                                                    </imageView>
                                                 </subviews>
-                                                <constraints>
-                                                    <constraint firstItem="Cys-7S-iSf" firstAttribute="width" secondItem="Cys-7S-iSf" secondAttribute="height" id="KzK-5l-QXQ"/>
-                                                </constraints>
                                             </stackView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cys-7S-iSf">
+                                                <rect key="frame" x="65.5" y="19" width="119.5" height="24"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="24" id="goa-G3-8QS"/>
+                                                </constraints>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <connections>
+                                                    <action selector="goToChooseDatePage:" destination="5KL-qj-9AB" eventType="touchUpInside" id="gxz-Yv-lnP"/>
+                                                </connections>
+                                            </button>
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="設定目標體重" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cta-GB-NLm">
                                                 <rect key="frame" x="77" y="20" width="96" height="22.5"/>
                                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="16"/>
@@ -273,6 +289,10 @@
                                             <constraint firstItem="skH-IB-Gvz" firstAttribute="centerY" secondItem="b4P-eL-o6g" secondAttribute="centerY" id="1Kf-it-OYb"/>
                                             <constraint firstItem="Cta-GB-NLm" firstAttribute="centerX" secondItem="b4P-eL-o6g" secondAttribute="centerX" id="7kn-Lf-3Rk"/>
                                             <constraint firstItem="Cta-GB-NLm" firstAttribute="centerY" secondItem="b4P-eL-o6g" secondAttribute="centerY" id="Dlj-H7-Kid"/>
+                                            <constraint firstItem="Cys-7S-iSf" firstAttribute="leading" secondItem="skH-IB-Gvz" secondAttribute="leading" id="PpS-So-KQK"/>
+                                            <constraint firstItem="Cys-7S-iSf" firstAttribute="trailing" secondItem="skH-IB-Gvz" secondAttribute="trailing" id="Uqm-Ey-bfs"/>
+                                            <constraint firstItem="Cys-7S-iSf" firstAttribute="bottom" secondItem="skH-IB-Gvz" secondAttribute="bottom" id="Ync-au-PGP"/>
+                                            <constraint firstItem="Cys-7S-iSf" firstAttribute="top" secondItem="skH-IB-Gvz" secondAttribute="top" id="lLS-f7-E3t"/>
                                             <constraint firstItem="skH-IB-Gvz" firstAttribute="centerX" secondItem="b4P-eL-o6g" secondAttribute="centerX" id="qdy-Ti-SJM"/>
                                         </constraints>
                                     </view>
@@ -396,6 +416,7 @@
                     </view>
                     <connections>
                         <outlet property="allBackgroundView" destination="1hU-3Z-CXG" id="VCh-L0-CXa"/>
+                        <outlet property="chooseDateButton" destination="Cys-7S-iSf" id="QFS-O9-ZdC"/>
                         <outlet property="dateLabel" destination="Zzs-Sl-RlF" id="rjb-YK-N2m"/>
                         <outlet property="dateStackView" destination="skH-IB-Gvz" id="yf7-Lu-omx"/>
                         <outlet property="grayBackgroundView" destination="b4P-eL-o6g" id="74Z-Tk-H5K"/>
@@ -411,12 +432,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image_Arrowdown" width="512" height="512"/>
-        <image name="Image_Arrowup" width="512" height="512"/>
-        <image name="Image_Calendar" width="512" height="512"/>
-        <image name="Image_Edit-1" width="512" height="512"/>
-        <image name="Image_Healthapp" width="1024" height="1024"/>
-        <image name="Image_Weight" width="512" height="512"/>
+        <image name="Image_Arrowdown" width="170.5" height="170.5"/>
+        <image name="Image_Arrowup" width="170.5" height="170.5"/>
+        <image name="Image_Calendar" width="170.5" height="170.5"/>
+        <image name="Image_Edit-1" width="170.5" height="170.5"/>
+        <image name="Image_Healthapp" width="341" height="341"/>
+        <image name="Image_Weight" width="170.5" height="170.5"/>
         <image name="figure.stand" catalog="system" width="77" height="128"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">

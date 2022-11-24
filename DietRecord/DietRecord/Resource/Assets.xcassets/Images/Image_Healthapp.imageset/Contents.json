@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Image_Healthapp.png",
+      "filename" : "HealthApp.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "HealthApp@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "HealthApp@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

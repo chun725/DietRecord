@@ -510,7 +510,8 @@ extension ProfileProvider {
                                     .collection(user)
                                     .document(userID)
                                     .collection(collection)
-                                    .document(document.documentID).delete()
+                                    .document(document.documentID)
+                                    .delete()
                             }
                         }
                         deleteGroup.leave()
@@ -521,6 +522,7 @@ extension ProfileProvider {
                 deleteGroup.enter()
                 let block = DispatchWorkItem(flags: .inheritQoS) {
                     database.collection(user).document(userID).delete()
+                    self.revokeToken()
                     deleteGroup.leave()
                 }
                 blocks.append(block)
@@ -532,5 +534,31 @@ extension ProfileProvider {
         deleteGroup.notify(queue: DispatchQueue.main) {
             completion(.success(()))
         }
+    }
+    
+    private func revokeToken() {
+        let refreshToken = KeyChainManager.shared.getToken()
+        guard let clientSecret = GenerateJWT.shared.fetchClientSecret(),
+            let url = URL(string: "https://appleid.apple.com/auth/revoke?client_id=com.Chun.DietRecord&client_secret=\(clientSecret)&token=\(refreshToken)&token_type_hint=refresh_token")
+        else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            guard let response = response as? HTTPURLResponse, error == nil else {
+                print("======error", error ?? URLError(.badServerResponse))
+                return
+            }
+            
+            guard (200 ... 299) ~= response.statusCode
+            else {
+                print("=======statusCode should be 2xx, but is \(response.statusCode)")
+                print("response = \(response)")
+                return
+            }
+            print("=========\(response.statusCode)")
+        }
+        task.resume()
     }
 }

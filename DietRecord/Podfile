@@ -18,6 +18,8 @@ pod 'Firebase/Storage'
 pod 'JGProgressHUD'
 pod 'Firebase/Auth'
 pod 'lottie-ios'
+pod 'SwiftJWT'
+pod 'KeychainSwift'
 
 end
 

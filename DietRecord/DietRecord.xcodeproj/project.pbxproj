@@ -115,6 +115,10 @@
 		34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27671292FC2E700750DAF /* 5202-review-id.json */; };
 		34E27674292FC51900750DAF /* 98877-search.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27673292FC51900750DAF /* 98877-search.json */; };
 		34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27675292FC70C00750DAF /* 36538-find-id.json */; };
+		34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27677293066A200750DAF /* SwiftJWTWrapper.swift */; };
+		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
+		34E2767E29308C1D00750DAF /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767D29308C1D00750DAF /* Login.swift */; };
+		34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -265,6 +269,10 @@
 		34E27671292FC2E700750DAF /* 5202-review-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "5202-review-id.json"; sourceTree = "<group>"; };
 		34E27673292FC51900750DAF /* 98877-search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98877-search.json"; sourceTree = "<group>"; };
 		34E27675292FC70C00750DAF /* 36538-find-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "36538-find-id.json"; sourceTree = "<group>"; };
+		34E27677293066A200750DAF /* SwiftJWTWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJWTWrapper.swift; sourceTree = "<group>"; };
+		34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_N2UB2RNM86.p8; sourceTree = "<group>"; };
+		34E2767D29308C1D00750DAF /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainSwiftWrapper.swift; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -298,6 +306,7 @@
 				34CF74132914C0DD009F9264 /* Weight */,
 				34CF740929135B91009F9264 /* Water */,
 				34270E9F290FC4E300D5AFFD /* DietRecord */,
+				34E2767D29308C1D00750DAF /* Login.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -384,6 +393,8 @@
 			children = (
 				343CD69329111C6E0048046E /* KingFisherWrapper.swift */,
 				34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */,
+				34E27677293066A200750DAF /* SwiftJWTWrapper.swift */,
+				34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -512,6 +523,7 @@
 		34642951290D23030070B425 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */,
 				3422702529110680000B4A58 /* FoodIngredient.json */,
 				34642956290D2B2D0070B425 /* DRConstant.swift */,
 				3464293A290CF79A0070B425 /* Assets.xcassets */,
@@ -862,6 +874,7 @@
 				34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */,
 				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
+				34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */,
 				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,
 				34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
@@ -981,6 +994,7 @@
 				349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */,
 				34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */,
 				34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */,
+				34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */,
 				349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */,
 				3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */,
 				3469168C291255860021985F /* ReportBarChartCell.swift in Sources */,
@@ -997,7 +1011,9 @@
 				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
+				34E2767E29308C1D00750DAF /* Login.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
+				34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */,
 				34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,

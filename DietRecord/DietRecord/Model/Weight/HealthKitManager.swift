@@ -43,7 +43,9 @@ class HealthKitManager {
         // State the health data type(s) we want to write from HealthKit.
         let healthDataToWrite: Set<HKSampleType> = Set(arrayLiteral: quantityType)
 
-        healthKitStore.getRequestStatusForAuthorization(toShare: healthDataToWrite, read: healthDataToRead) { success, error -> Void in
+        healthKitStore.getRequestStatusForAuthorization(
+            toShare: healthDataToWrite,
+            read: healthDataToRead) { success, error -> Void in
             if let error = error {
                 completion(.failure(error))
             } else {

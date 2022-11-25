@@ -117,7 +117,7 @@
 		34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27675292FC70C00750DAF /* 36538-find-id.json */; };
 		34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27677293066A200750DAF /* SwiftJWTWrapper.swift */; };
 		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
-		34E2767E29308C1D00750DAF /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767D29308C1D00750DAF /* Login.swift */; };
+		34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767D29308C1D00750DAF /* TokenResponse.swift */; };
 		34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
@@ -271,7 +271,7 @@
 		34E27675292FC70C00750DAF /* 36538-find-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "36538-find-id.json"; sourceTree = "<group>"; };
 		34E27677293066A200750DAF /* SwiftJWTWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJWTWrapper.swift; sourceTree = "<group>"; };
 		34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_N2UB2RNM86.p8; sourceTree = "<group>"; };
-		34E2767D29308C1D00750DAF /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		34E2767D29308C1D00750DAF /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainSwiftWrapper.swift; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -306,7 +306,7 @@
 				34CF74132914C0DD009F9264 /* Weight */,
 				34CF740929135B91009F9264 /* Water */,
 				34270E9F290FC4E300D5AFFD /* DietRecord */,
-				34E2767D29308C1D00750DAF /* Login.swift */,
+				34E2767D29308C1D00750DAF /* TokenResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -791,6 +791,7 @@
 				0C50704D3DF0A17A3ED5D99A /* [CP] Embed Pods Frameworks */,
 				34270E88290F5D2800D5AFFD /* ShellScript */,
 				344DC7CB2926200800D245A2 /* Embed App Extensions */,
+				34E276812930A7B600750DAF /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -921,6 +922,26 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		34E276812930A7B600750DAF /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
+		};
 		6D3F1F307E618FE8EA7156E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1011,7 +1032,7 @@
 				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
-				34E2767E29308C1D00750DAF /* Login.swift in Sources */,
+				34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
 				34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */,
 				34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */,
@@ -1302,6 +1323,7 @@
 				CODE_SIGN_ENTITLEMENTS = DietRecord/DietRecord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
@@ -1312,8 +1334,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1349,8 +1372,9 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

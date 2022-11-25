@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import FirebaseFirestoreSwift
 import FirebaseFirestore
-import SwiftUI
 import FirebaseAuth
 
 var userID = ""

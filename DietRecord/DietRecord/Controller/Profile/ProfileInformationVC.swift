@@ -20,6 +20,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         profileInfoTableView.dataSource = self
         saveButton.addTarget(self, action: #selector(createUserInfo), for: .touchUpInside)
+        saveButton.layer.cornerRadius = 20
         if !isUpdated {
             goBackButton.isHidden = true
         } else {

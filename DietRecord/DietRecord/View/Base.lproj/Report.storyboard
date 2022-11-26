@@ -89,7 +89,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMO-n0-VlG">
                                                     <rect key="frame" x="20" y="50" width="374" height="240"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="240" id="Nyy-eT-9if"/>
+                                                        <constraint firstAttribute="width" secondItem="ZMO-n0-VlG" secondAttribute="height" multiplier="187:120" id="K6h-9Y-ss8"/>
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V5E-dC-eTc">

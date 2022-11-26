@@ -46,6 +46,8 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
         }
         nutritionTableView.dataSource = self
         nutritionTableView.registerCellWithNib(identifier: FoodNutritionCell.reuseIdentifier, bundle: nil)
+        addOrSaveButton.layer.cornerRadius = 10
+        qtyTextFieldBackground.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +55,7 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = true
     }
     
+    // MARK: - Action -
     @IBAction func goBackToFoodSearchVC(_ sender: Any) {
         self.navigationController?.popViewController(animated: false)
     }
@@ -70,6 +73,7 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let food = food else { fatalError("Could not find food.") }
         if food.commonName.isEmpty {

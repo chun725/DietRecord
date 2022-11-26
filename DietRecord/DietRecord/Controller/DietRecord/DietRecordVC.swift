@@ -12,17 +12,16 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var dietRecordTableView: UITableView!
     @IBOutlet weak var createDietRecordButton: UIButton!
     @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var placeholderLabel: UILabel!
     
     var dietPieChartView: PieChart?
     
-    var meals: [MealRecord] = []
+    private var meals: [MealRecord] = []
     
-    var totalFoods: [Food] = []
+    private var totalFoods: [Food] = []
     
-    var isLoading = true // 讓tableView在loading時被清掉
+    private var isLoading = true // 讓tableView在loading時被清掉
     
-    let dietRecordProvider = DietRecordProvider()
+    private let dietRecordProvider = DietRecordProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,7 +79,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 self.isLoading = false
                 if data as? String == "Document doesn't exist." {
                     LKProgressHUD.dismiss()
-                    self.placeholderLabel.isHidden = false
                     self.meals = []
                     self.totalFoods = []
                     self.changeDietImage()
@@ -90,11 +88,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                     self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
                     self.changeDietImage()
                     LKProgressHUD.dismiss()
-                    if self.meals.isEmpty {
-                        self.placeholderLabel.isHidden = false
-                    } else {
-                        self.placeholderLabel.isHidden = true
-                    }
                 }
             case .failure(let error):
                 LKProgressHUD.showFailure(text: "找不到飲食紀錄")

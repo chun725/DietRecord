@@ -247,7 +247,10 @@ class ProfileProvider {
                                 guard let document = document,
                                     document.exists,
                                     let user = try? document.data(as: User.self)
-                                else { return }
+                                else {
+                                    downloadGroup.leave()
+                                    return
+                                }
                                 users.append(user)
                                 downloadGroup.leave()
                             }

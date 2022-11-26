@@ -39,6 +39,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         userInputTextField.delegate = self
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         followButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
+        followButton.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +55,8 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         else { return }
         if !userInput.isEmpty {
             LKProgressHUD.show()
-            profileProvider.searchUser(userSelfID: userInput) { result in
+            profileProvider.searchUser(userSelfID: userInput) { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     if response as? String == "document不存在" {

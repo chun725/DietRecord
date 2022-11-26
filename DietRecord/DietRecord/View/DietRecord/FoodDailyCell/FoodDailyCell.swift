@@ -19,6 +19,7 @@ class FoodDailyCell: UITableViewCell {
     @IBOutlet weak var photoTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var foodsView: UIView!
     @IBOutlet weak var switchButton: UISwitch!
+    @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
     
     weak var controller: DietInputVC?
     var mealRecord: MealRecord?
@@ -41,6 +42,7 @@ class FoodDailyCell: UITableViewCell {
         } else {
             photoTopConstraint.constant = CGFloat(102 + foods.count * 40)
             foodsView.isHidden = false
+            foodStackViewHeightConstraint.constant = CGFloat(foods.count * 40)
         }
         
         let subviews = foodStackView.subviews

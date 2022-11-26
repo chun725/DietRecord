@@ -221,7 +221,7 @@ class ProfileProvider {
                 guard let document = document,
                     document.exists,
                     let userData = try? document.data(as: User.self)
-                else { return }
+                else { fatalError("The data structrue of user is wrong.") }
                 var users: [User] = []
                 let downloadGroup = DispatchGroup()
                 var blocks: [DispatchWorkItem] = []

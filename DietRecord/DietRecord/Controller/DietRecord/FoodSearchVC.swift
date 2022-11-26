@@ -10,12 +10,13 @@ import UIKit
 class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     @IBOutlet weak var foodInputTextField: UITextField!
     @IBOutlet weak var searchResultTableView: UITableView!
+    @IBOutlet weak var saveButton: UIButton!
     
-    let foodListProvider = DietRecordProvider()
+    private let foodListProvider = DietRecordProvider()
     
     var closure: (([Food]) -> Void)?
     
-    var foodSearchResults: [FoodIngredient] = [] {
+    private var foodSearchResults: [FoodIngredient] = [] {
         didSet {
             searchResultTableView.reloadData()
         }
@@ -37,6 +38,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         if !oldfoods.isEmpty {
             chooseFoods = oldfoods
         }
+        saveButton.layer.cornerRadius = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {

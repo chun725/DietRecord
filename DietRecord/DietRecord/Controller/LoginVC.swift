@@ -136,9 +136,6 @@ extension LoginVC: ASAuthorizationControllerDelegate {
                 let nonce = currentNonce,
                 let idTokenString = String(data: idToken, encoding: .utf8)
             else { return }
-            if let authorizationCode = credential.authorizationCode {
-                self.getRefreshToken(authorizationCode: String(data: authorizationCode, encoding: .utf8) ?? "")
-            }
             print("---------\(userId)")
             print("---------\(String(describing: fullname))")
             print("---------\(email ?? "")")
@@ -150,35 +147,9 @@ extension LoginVC: ASAuthorizationControllerDelegate {
         }
     }
     
-    func getRefreshToken(authorizationCode: String) {
-        guard let clientSecret = GenerateJWT.shared.fetchClientSecret(),
-            let url = URL(string: "https://appleid.apple.com/auth/token?client_id=com.Chun.DietRecord&client_secret=\(clientSecret)&code=\(authorizationCode)&grant_type=authorization_code")
-        else { return }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "POST"
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let response = response as? HTTPURLResponse, error == nil else {
-                print("======error", error ?? URLError(.badServerResponse))
-                return
-            }
-            
-            guard (200 ... 299) ~= response.statusCode,
-                let data = data,
-                let refreshToken = try? decoder.decode(TokenResponse.self, from: data).refreshToken
-            else {
-                print("=======statusCode should be 2xx, but is \(response.statusCode)")
-                print("response = \(response)")
-                return
-            }
-            KeyChainManager.shared.setToken(token: refreshToken)
-        }
-        task.resume()
-    }
-    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
+        LKProgressHUD.showFailure(text: "登入失敗")
     }
 }
 

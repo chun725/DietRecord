@@ -62,16 +62,10 @@ struct DietPieChartWidgetEntryView: View {
     private static let deeplinkURL = URL(string: "Diet-Widget://")!
 
     var body: some View {
-        HStack {
-            Spacer()
-            Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill).padding(
-                EdgeInsets(
-                    top: 10,
-                    leading: 10,
-                    bottom: 10,
-                    trailing: 10))
-            Spacer()
-        }.background(Color.white).widgetURL(DietPieChartWidgetEntryView.deeplinkURL)
+        Image(uiImage: UIImage(data: entry.imageData)!)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .widgetURL(DietPieChartWidgetEntryView.deeplinkURL)
     }
 }
 
@@ -81,10 +75,12 @@ struct DietPieChartWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: DietProvider()) { entry in
             DietPieChartWidgetEntryView(entry: entry)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("WidgetBackground"))
         }
         .configurationDisplayName("卡路里攝取")
         .description("當日卡路里攝取一目暸然")
-        .supportedFamilies([.systemSmall])
+        .supportedFamilies([.systemMedium])
     }
 }
 
@@ -93,6 +89,6 @@ struct DietPieChartWidget_Previews: PreviewProvider {
         DietPieChartWidgetEntryView(entry: DietEntry(
             date: Date(),
             imageData: (UIImage(named: "DietImage")?.pngData())!))
-            .previewContext(WidgetPreviewContext(family: .systemSmall))
+            .previewContext(WidgetPreviewContext(family: .systemMedium))
     }
 }

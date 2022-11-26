@@ -27,6 +27,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     private var imageURL: String?
     var closure: ((String) -> Void)?
     var mealRecord: MealRecord?
+    var date: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -162,6 +163,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         else { fatalError("Could not create food daily cell.") }
         if let mealRecord = mealRecord {
             cell.mealRecord = mealRecord
+        } else {
+            cell.dateTextField.text = self.date
         }
         cell.controller = self
         cell.layoutCell(foods: foods)

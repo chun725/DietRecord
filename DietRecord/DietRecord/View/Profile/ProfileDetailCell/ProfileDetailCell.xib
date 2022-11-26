@@ -38,7 +38,7 @@
                         <rect key="frame" x="0.0" y="62" width="414" height="414"/>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAC-wz-Paa">
-                        <rect key="frame" x="16" y="542" width="382" height="48"/>
+                        <rect key="frame" x="16" y="526" width="382" height="64"/>
                         <attributedString key="attributedText">
                             <fragment content="Comment">
                                 <attributes>
@@ -76,10 +76,10 @@
                         </connections>
                     </button>
                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZaD-P5-QQs">
-                        <rect key="frame" x="0.0" y="484" width="414" height="50"/>
+                        <rect key="frame" x="0.0" y="479" width="414" height="42"/>
                         <color key="backgroundColor" name="drLightGray"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="50" id="3qu-df-Jhr"/>
+                            <constraint firstAttribute="height" constant="42" id="3qu-df-Jhr"/>
                         </constraints>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="aCt-dd-Xcf">
                             <size key="itemSize" width="128" height="128"/>
@@ -149,7 +149,7 @@
                     <constraint firstAttribute="trailing" secondItem="bAC-wz-Paa" secondAttribute="trailing" constant="16" id="9iM-AI-gG5"/>
                     <constraint firstItem="WBH-F4-kdE" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="e2I-qA-VzI" secondAttribute="trailing" constant="8" id="BLZ-kZ-Yj5"/>
                     <constraint firstItem="nOq-DD-HcU" firstAttribute="leading" secondItem="QbC-JR-jdv" secondAttribute="trailing" constant="16" id="Ew6-fo-Sg2"/>
-                    <constraint firstItem="bAC-wz-Paa" firstAttribute="top" secondItem="ZaD-P5-QQs" secondAttribute="bottom" constant="8" id="F9U-7P-NAe"/>
+                    <constraint firstItem="bAC-wz-Paa" firstAttribute="top" secondItem="ZaD-P5-QQs" secondAttribute="bottom" constant="5" id="F9U-7P-NAe"/>
                     <constraint firstItem="AEj-1J-uan" firstAttribute="top" secondItem="GV5-93-D0C" secondAttribute="top" id="Fe5-gW-QPv"/>
                     <constraint firstItem="3Jv-p5-AIT" firstAttribute="width" secondItem="3Jv-p5-AIT" secondAttribute="height" id="Fti-nx-myM"/>
                     <constraint firstItem="3Jv-p5-AIT" firstAttribute="leading" secondItem="GV5-93-D0C" secondAttribute="leading" constant="16" id="GK6-ly-cUa"/>
@@ -160,7 +160,7 @@
                     <constraint firstItem="R8y-bT-pkf" firstAttribute="centerY" secondItem="sTW-V6-dOH" secondAttribute="centerY" id="JcU-eo-QZn"/>
                     <constraint firstAttribute="trailing" secondItem="WBH-F4-kdE" secondAttribute="trailing" constant="16" id="L1n-U0-bli"/>
                     <constraint firstItem="2Km-x2-bct" firstAttribute="width" secondItem="2Km-x2-bct" secondAttribute="height" id="MqD-2X-uKm"/>
-                    <constraint firstItem="ZaD-P5-QQs" firstAttribute="top" secondItem="2Km-x2-bct" secondAttribute="bottom" constant="8" id="MqQ-8r-BG4"/>
+                    <constraint firstItem="ZaD-P5-QQs" firstAttribute="top" secondItem="2Km-x2-bct" secondAttribute="bottom" constant="3" id="MqQ-8r-BG4"/>
                     <constraint firstItem="nOq-DD-HcU" firstAttribute="width" secondItem="nOq-DD-HcU" secondAttribute="height" multiplier="1.3:1" id="NkT-LR-hdg"/>
                     <constraint firstItem="2Km-x2-bct" firstAttribute="top" secondItem="3Jv-p5-AIT" secondAttribute="bottom" constant="16" id="Pbr-6L-ftl"/>
                     <constraint firstItem="2Km-x2-bct" firstAttribute="bottom" secondItem="sTW-V6-dOH" secondAttribute="bottom" constant="16" id="QFp-XK-4J3"/>

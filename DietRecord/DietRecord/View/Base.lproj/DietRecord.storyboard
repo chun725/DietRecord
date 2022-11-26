@@ -491,26 +491,16 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CommonNameCell" id="Jtt-Sg-zMm" customClass="CommonNameCell" customModule="DietRecord" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="44.5" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="44.5" width="414" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jtt-Sg-zMm" id="CQN-hF-Y3w">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="俗名：" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tPb-KS-pWR">
-                                                    <rect key="frame" x="54" y="16" width="60" height="28"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="60" id="2TP-lu-3TY"/>
-                                                        <constraint firstAttribute="height" constant="28" id="KKd-pX-f7g"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
-                                                    <color key="textColor" name="drDarkGray"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wpg-IO-AiJ">
-                                                    <rect key="frame" x="122" y="16" width="20" height="28"/>
+                                                    <rect key="frame" x="86" y="16" width="80" height="28"/>
                                                     <attributedString key="attributedText">
-                                                        <fragment content="無">
+                                                        <fragment content="俗名：無">
                                                             <attributes>
                                                                 <color key="NSColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                                                 <font key="NSFont" size="20" name="PingFangTC-Regular"/>
@@ -520,28 +510,29 @@
                                                     </attributedString>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Book" translatesAutoresizingMaskIntoConstraints="NO" id="7Jh-Ox-cQN">
-                                                    <rect key="frame" x="16" y="13" width="30" height="30"/>
+                                                <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="kXE-dh-Swo" customClass="LottieAnimationView" customModule="Lottie">
+                                                    <rect key="frame" x="24" y="5" width="50" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="30" id="StD-aP-wsN"/>
-                                                        <constraint firstAttribute="height" constant="30" id="c3D-6s-MEe"/>
+                                                        <constraint firstAttribute="width" constant="50" id="NZT-Ex-C6g"/>
+                                                        <constraint firstAttribute="width" secondItem="kXE-dh-Swo" secondAttribute="height" id="PRj-cu-RMq"/>
                                                     </constraints>
-                                                </imageView>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="52028-book-review"/>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="wpg-IO-AiJ" secondAttribute="bottom" id="6AM-7b-Q2f"/>
-                                                <constraint firstItem="tPb-KS-pWR" firstAttribute="firstBaseline" secondItem="wpg-IO-AiJ" secondAttribute="firstBaseline" id="ETQ-PX-1oh"/>
-                                                <constraint firstItem="tPb-KS-pWR" firstAttribute="leading" secondItem="7Jh-Ox-cQN" secondAttribute="trailing" constant="8" id="PEP-h9-5dQ"/>
-                                                <constraint firstItem="wpg-IO-AiJ" firstAttribute="leading" secondItem="tPb-KS-pWR" secondAttribute="trailing" constant="8" symbolic="YES" id="RPF-Pc-unL"/>
+                                                <constraint firstItem="wpg-IO-AiJ" firstAttribute="leading" secondItem="kXE-dh-Swo" secondAttribute="trailing" constant="12" id="SVH-7P-lFB"/>
                                                 <constraint firstItem="wpg-IO-AiJ" firstAttribute="top" secondItem="CQN-hF-Y3w" secondAttribute="top" constant="16" id="beq-0e-Ghk"/>
-                                                <constraint firstItem="7Jh-Ox-cQN" firstAttribute="leading" secondItem="CQN-hF-Y3w" secondAttribute="leading" constant="16" id="ltn-7O-JTn"/>
-                                                <constraint firstItem="wpg-IO-AiJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="tPb-KS-pWR" secondAttribute="trailing" constant="8" symbolic="YES" id="qJW-v3-Zkb"/>
-                                                <constraint firstItem="7Jh-Ox-cQN" firstAttribute="centerY" secondItem="tPb-KS-pWR" secondAttribute="centerY" constant="-2" id="s8E-23-9lT"/>
+                                                <constraint firstItem="kXE-dh-Swo" firstAttribute="leading" secondItem="CQN-hF-Y3w" secondAttribute="leading" constant="24" id="jxl-tC-DrT"/>
+                                                <constraint firstAttribute="bottom" secondItem="wpg-IO-AiJ" secondAttribute="bottom" constant="6" id="mMY-At-fiX"/>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="wpg-IO-AiJ" secondAttribute="trailing" constant="16" id="w9e-yR-ag1"/>
+                                                <constraint firstItem="wpg-IO-AiJ" firstAttribute="centerY" secondItem="kXE-dh-Swo" secondAttribute="centerY" id="xWI-jn-YQK"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" name="drLightGray"/>
                                         <connections>
+                                            <outlet property="animationView" destination="kXE-dh-Swo" id="AXw-9C-fES"/>
                                             <outlet property="commonNameLabel" destination="wpg-IO-AiJ" id="son-4x-FEO"/>
                                         </connections>
                                     </tableViewCell>
@@ -699,7 +690,6 @@
     </scenes>
     <resources>
         <image name="Image_Add" width="170.5" height="170.5"/>
-        <image name="Image_Book" width="512" height="512"/>
         <image name="Image_Calendar" width="170.5" height="170.5"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.right.circle" catalog="system" width="128" height="121"/>

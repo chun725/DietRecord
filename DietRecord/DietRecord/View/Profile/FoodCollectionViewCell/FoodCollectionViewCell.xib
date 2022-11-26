@@ -12,21 +12,21 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="FoodCollectionViewCell" customModule="DietRecord" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="122" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="122" height="42"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="122" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="122" height="42"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="efk-Tm-sqe">
-                        <rect key="frame" x="5" y="5" width="112" height="40"/>
+                        <rect key="frame" x="5" y="5" width="112" height="32"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVb-rl-N5I">
-                                <rect key="frame" x="8" y="8" width="96" height="24"/>
+                                <rect key="frame" x="8" y="8" width="96" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="24" id="5yP-uJ-e0I"/>
+                                    <constraint firstAttribute="height" constant="16" id="5yP-uJ-e0I"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>

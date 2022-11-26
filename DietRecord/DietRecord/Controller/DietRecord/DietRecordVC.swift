@@ -44,6 +44,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             as? DietInputVC {
             if sender != createDietRecordButton {
                 dietInputPage.mealRecord = self.meals[sender.tag]
+            } else {
+                dietInputPage.date = self.dateTextField.text
             }
             dietInputPage.closure = { [weak self] date in
                 self?.dateTextField.text = date

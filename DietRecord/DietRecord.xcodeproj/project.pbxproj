@@ -117,10 +117,9 @@
 		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
 		34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767D29308C1D00750DAF /* TokenResponse.swift */; };
 		34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */; };
-		34E276822932149E00750DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464293A290CF79A0070B425 /* Assets.xcassets */; };
-		34E276832932157A00750DAF /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464294F290D1EA20070B425 /* UIColor+Extension.swift */; };
 		34E2768629321BC700750DAF /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E2768429321B6600750DAF /* DietImage.png */; };
 		34E2768829321EF200750DAF /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E2768729321EF200750DAF /* WaterImage.png */; };
+		34E2768A293228C700750DAF /* 52028-book-review.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27689293228C700750DAF /* 52028-book-review.json */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -275,6 +274,7 @@
 		34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainSwiftWrapper.swift; sourceTree = "<group>"; };
 		34E2768429321B6600750DAF /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
 		34E2768729321EF200750DAF /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
+		34E27689293228C700750DAF /* 52028-book-review.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "52028-book-review.json"; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -417,6 +417,7 @@
 		344DC7E72927654F00D245A2 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				34E27689293228C700750DAF /* 52028-book-review.json */,
 				34E27675292FC70C00750DAF /* 36538-find-id.json */,
 				34E27673292FC51900750DAF /* 98877-search.json */,
 				34E27671292FC2E700750DAF /* 5202-review-id.json */,
@@ -850,7 +851,6 @@
 			files = (
 				344DC7C62926200800D245A2 /* Assets.xcassets in Resources */,
 				34E2768629321BC700750DAF /* DietImage.png in Resources */,
-				34E276822932149E00750DAF /* Assets.xcassets in Resources */,
 				34E2768829321EF200750DAF /* WaterImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -876,6 +876,7 @@
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
 				34270E67290D529100D5AFFD /* Report.storyboard in Resources */,
 				34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */,
+				34E2768A293228C700750DAF /* 52028-book-review.json in Resources */,
 				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
 				34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */,
@@ -974,7 +975,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				34E276832932157A00750DAF /* UIColor+Extension.swift in Sources */,
 				344DC7C42926200800D245A2 /* ChartViewWidget.swift in Sources */,
 				344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */,
 			);

@@ -17,6 +17,6 @@ class FoodCollectionViewCell: UICollectionViewCell {
     
     func layoutCell(foodname: String) {
         foodNameLabel.text = foodname
-        borderBackground.setBorder(width: 2, color: .darkGray, radius: 15)
+        borderBackground.setBorder(width: 2, color: .darkGray, radius: 10)
     }
 }

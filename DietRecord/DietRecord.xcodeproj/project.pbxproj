@@ -45,8 +45,6 @@
 		344DC7C62926200800D245A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7C52926200800D245A2 /* Assets.xcassets */; };
 		344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */; };
-		344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7DB29273E3C00D245A2 /* WaterImage.png */; };
-		344DC7E62927422E00D245A2 /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E52927422E00D245A2 /* DietImage.png */; };
 		344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E82927656400D245A2 /* 82624-foodies.json */; };
 		344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
@@ -119,6 +117,10 @@
 		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
 		34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767D29308C1D00750DAF /* TokenResponse.swift */; };
 		34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */; };
+		34E276822932149E00750DAF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3464293A290CF79A0070B425 /* Assets.xcassets */; };
+		34E276832932157A00750DAF /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3464294F290D1EA20070B425 /* UIColor+Extension.swift */; };
+		34E2768629321BC700750DAF /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E2768429321B6600750DAF /* DietImage.png */; };
+		34E2768829321EF200750DAF /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E2768729321EF200750DAF /* WaterImage.png */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -190,8 +192,6 @@
 		344DC7C72926200800D245A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartViewWidgetExtension.entitlements; sourceTree = "<group>"; };
 		344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPieChartWidget.swift; sourceTree = "<group>"; };
-		344DC7DB29273E3C00D245A2 /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
-		344DC7E52927422E00D245A2 /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
 		344DC7E82927656400D245A2 /* 82624-foodies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "82624-foodies.json"; sourceTree = "<group>"; };
 		344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "79611-water-animation.json"; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
@@ -273,6 +273,8 @@
 		34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_N2UB2RNM86.p8; sourceTree = "<group>"; };
 		34E2767D29308C1D00750DAF /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
 		34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainSwiftWrapper.swift; sourceTree = "<group>"; };
+		34E2768429321B6600750DAF /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
+		34E2768729321EF200750DAF /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -402,8 +404,8 @@
 		344DC7C22926200800D245A2 /* ChartViewWidget */ = {
 			isa = PBXGroup;
 			children = (
-				344DC7E52927422E00D245A2 /* DietImage.png */,
-				344DC7DB29273E3C00D245A2 /* WaterImage.png */,
+				34E2768429321B6600750DAF /* DietImage.png */,
+				34E2768729321EF200750DAF /* WaterImage.png */,
 				344DC7C32926200800D245A2 /* ChartViewWidget.swift */,
 				344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */,
 				344DC7C52926200800D245A2 /* Assets.xcassets */,
@@ -847,8 +849,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				344DC7C62926200800D245A2 /* Assets.xcassets in Resources */,
-				344DC7E62927422E00D245A2 /* DietImage.png in Resources */,
-				344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */,
+				34E2768629321BC700750DAF /* DietImage.png in Resources */,
+				34E276822932149E00750DAF /* Assets.xcassets in Resources */,
+				34E2768829321EF200750DAF /* WaterImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -971,6 +974,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34E276832932157A00750DAF /* UIColor+Extension.swift in Sources */,
 				344DC7C42926200800D245A2 /* ChartViewWidget.swift in Sources */,
 				344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */,
 			);

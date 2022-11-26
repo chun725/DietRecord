@@ -70,7 +70,7 @@ struct ChartViewWidgetEntryView: View {
             Spacer()
             Image(uiImage: UIImage(data: entry.imageData)!).resizable().aspectRatio(contentMode: .fill)
             Spacer()
-        }.background(Color.white).widgetURL(ChartViewWidgetEntryView.deeplinkURL)
+        }.background(Color("WidgetBackground")).widgetURL(ChartViewWidgetEntryView.deeplinkURL)
     }
 }
 
@@ -80,6 +80,8 @@ struct ChartViewWidget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             ChartViewWidgetEntryView(entry: entry)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(Color("WidgetBackground"))
         }
         .configurationDisplayName("飲水量攝取")
         .description("當日飲水量攝取一目暸然")

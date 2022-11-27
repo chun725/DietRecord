@@ -55,13 +55,12 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         healthManager.haveGetPermission { result in
             switch result {
             case .success(let index):
-                if index == 0 {
+                if index != 2 {
                     self.getHealthKitPermission()
                 } else {
                     self.setWeight()
                 }
             case .failure(let error):
-                self.fetchWeightRecord()
                 print("Error Info: \(error) in get permission of healthkit.")
             }
         }
@@ -71,8 +70,10 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
                 userDefault.set(true, forKey: weightPermission)
-                self.syncSwitch.setOn(true, animated: false)
                 self.setWeight()
+                DispatchQueue.main.async {
+                    self.syncSwitch.setOn(true, animated: false)
+                }
             } else {
                 if error != nil, let error = error {
                     print(error)

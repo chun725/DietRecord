@@ -154,45 +154,6 @@ class ProfileProvider {
         }
     }
     
-    func removeFollow(allUsers: [String], completion: @escaping (Result<Void, Error>) -> Void) {
-        let deleteGroup = DispatchGroup()
-        var blocks: [DispatchWorkItem] = []
-        for otherUserID in allUsers {
-            deleteGroup.enter()
-            let block = DispatchWorkItem(flags: .inheritQoS) {
-                let documentRef = database.collection(user).document(otherUserID)
-                documentRef.getDocument { document, error in
-                    if let error = error {
-                        completion(.failure(error))
-                        deleteGroup.leave()
-                    } else {
-                        guard let document = document,
-                            document.exists,
-                            var user = try? document.data(as: User.self)
-                        else { return }
-                        if user.following.contains(userID) {
-                            user.following.remove(at: user.following.firstIndex(of: userID) ?? 0)
-                        }
-                        if user.followers.contains(userID) {
-                            user.followers.remove(at: user.followers.firstIndex(of: userID) ?? 0)
-                        }
-                        do {
-                            try documentRef.setData(from: user)
-                        } catch {
-                            completion(.failure(error))
-                        }
-                        deleteGroup.leave()
-                    }
-                }
-            }
-            blocks.append(block)
-            DispatchQueue.main.async(execute: block)
-        }
-        deleteGroup.notify(queue: DispatchQueue.main) {
-            completion(.success(()))
-        }
-    }
-    
     func changeFollow(isFollowing: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
         let followDocumentRef = database.collection(user).document(followID)
         followDocumentRef.getDocument { document, error in
@@ -260,7 +221,7 @@ class ProfileProvider {
                 guard let document = document,
                     document.exists,
                     let userData = try? document.data(as: User.self)
-                else { return }
+                else { fatalError("The data structrue of user is wrong.") }
                 var users: [User] = []
                 let downloadGroup = DispatchGroup()
                 var blocks: [DispatchWorkItem] = []
@@ -286,7 +247,10 @@ class ProfileProvider {
                                 guard let document = document,
                                     document.exists,
                                     let user = try? document.data(as: User.self)
-                                else { return }
+                                else {
+                                    downloadGroup.leave()
+                                    return
+                                }
                                 users.append(user)
                                 downloadGroup.leave()
                             }
@@ -506,7 +470,12 @@ extension ProfileProvider {
                         let documents = snapshot.documents
                         if !documents.isEmpty {
                             for document in documents {
-                                database.collection(user).document(userID).collection(collection).document(document.documentID).delete()
+                                database
+                                    .collection(user)
+                                    .document(userID)
+                                    .collection(collection)
+                                    .document(document.documentID)
+                                    .delete()
                             }
                         }
                         deleteGroup.leave()
@@ -517,10 +486,76 @@ extension ProfileProvider {
                 deleteGroup.enter()
                 let block = DispatchWorkItem(flags: .inheritQoS) {
                     database.collection(user).document(userID).delete()
+                    self.revokeToken()
                     deleteGroup.leave()
                 }
                 blocks.append(block)
                 DispatchQueue.main.async(execute: block)
+            }
+            blocks.append(block)
+            DispatchQueue.main.async(execute: block)
+        }
+        deleteGroup.notify(queue: DispatchQueue.main) {
+            completion(.success(()))
+        }
+    }
+    
+    private func revokeToken() {
+        let refreshToken = KeyChainManager.shared.getToken()
+        guard let clientSecret = GenerateJWT.shared.fetchClientSecret(),
+            let url = URL(string: "https://appleid.apple.com/auth/revoke?client_id=com.Chun.DietRecord&client_secret=\(clientSecret)&token=\(refreshToken)&token_type_hint=refresh_token")
+        else { return }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        
+        let task = URLSession.shared.dataTask(with: request) { _, response, error in
+            guard let response = response as? HTTPURLResponse, error == nil else {
+                print("======error", error ?? URLError(.badServerResponse))
+                return
+            }
+            
+            guard (200 ... 299) ~= response.statusCode
+            else {
+                print("=======statusCode should be 2xx, but is \(response.statusCode)")
+                print("response = \(response)")
+                return
+            }
+            print("=========\(response.statusCode)")
+        }
+        task.resume()
+    }
+    
+    func removeFollow(allUsers: [String], completion: @escaping (Result<Void, Error>) -> Void) {
+        let deleteGroup = DispatchGroup()
+        var blocks: [DispatchWorkItem] = []
+        for otherUserID in allUsers {
+            deleteGroup.enter()
+            let block = DispatchWorkItem(flags: .inheritQoS) {
+                let documentRef = database.collection(user).document(otherUserID)
+                documentRef.getDocument { document, error in
+                    if let error = error {
+                        completion(.failure(error))
+                        deleteGroup.leave()
+                    } else {
+                        guard let document = document,
+                            document.exists,
+                            var user = try? document.data(as: User.self)
+                        else { return }
+                        if user.following.contains(userID) {
+                            user.following.remove(at: user.following.firstIndex(of: userID) ?? 0)
+                        }
+                        if user.followers.contains(userID) {
+                            user.followers.remove(at: user.followers.firstIndex(of: userID) ?? 0)
+                        }
+                        do {
+                            try documentRef.setData(from: user)
+                        } catch {
+                            completion(.failure(error))
+                        }
+                        deleteGroup.leave()
+                    }
+                }
             }
             blocks.append(block)
             DispatchQueue.main.async(execute: block)

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "clock.png",
+      "filename" : "contrast.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "contrast@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "contrast@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

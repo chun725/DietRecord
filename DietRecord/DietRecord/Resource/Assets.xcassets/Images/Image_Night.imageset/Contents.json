@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "stars.png",
+      "filename" : "night-mode.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "night-mode@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "night-mode@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

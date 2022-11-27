@@ -76,22 +76,24 @@ class WeightRecordProvider {
             guard let date = dateFormatter.date(from: dateString) else { return }
             try collectionReference.document(dateString).setData(from: WeightData(
                 date: date, value: weightData.value, dataSource: weightData.dataSource))
-            if userDefault.bool(forKey: weightPermission) {
-                healthManager.saveWeight(
-                    weightData:
-                        WeightData(
-                            date: date,
-                            value: weightData.value,
-                            dataSource: weightData.dataSource)) { result in
-                    switch result {
-                    case .success:
-                        completion(.success(()))
-                    case .failure(let error):
-                        completion(.failure(error))
+            healthManager.havePermissionOfWrite { [weak self] result in
+                if result {
+                    self?.healthManager.saveWeight(
+                        weightData:
+                            WeightData(
+                                date: date,
+                                value: weightData.value,
+                                dataSource: weightData.dataSource)) { result in
+                        switch result {
+                        case .success:
+                            completion(.success(()))
+                        case .failure(let error):
+                            completion(.failure(error))
+                        }
                     }
+                } else {
+                    completion(.success(()))
                 }
-            } else {
-                completion(.success(()))
             }
         } catch {
             completion(.failure(error))
@@ -102,12 +104,19 @@ class WeightRecordProvider {
         let collectionReference = database.collection(user).document(userID).collection(weight)
         let dateString = dateFormatter.string(from: weightData.date)
         collectionReference.document(dateString).delete()
-        healthManager.deleteWeight(weightData: weightData) { result in
-            switch result {
-            case .success:
+        healthManager.havePermissionOfWrite { [weak self] result in
+            if result {
+                self?.healthManager.deleteWeight(weightData: weightData) { result in
+                    switch result {
+                    case .success:
+                        completion(.success(()))
+                    case .failure(let error):
+                        print(error)
+                        completion(.success(()))
+                    }
+                }
+            } else {
                 completion(.success(()))
-            case .failure(let error):
-                completion(.failure(error))
             }
         }
     }

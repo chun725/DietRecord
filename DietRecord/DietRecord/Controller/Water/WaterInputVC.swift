@@ -16,7 +16,19 @@ class WaterInputVC: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var waterInputView: UIView!
-    @IBOutlet weak var timePicker: UIDatePicker!
+    @IBOutlet weak var hourPickerView: UIPickerView! {
+        didSet {
+            hourPickerView.dataSource = self
+            hourPickerView.delegate = self
+        }
+    }
+    @IBOutlet weak var minutePickerView: UIPickerView! {
+        didSet {
+            minutePickerView.dataSource = self
+            minutePickerView.delegate = self
+        }
+    }
+    @IBOutlet weak var timeBackgroundView: UIView!
     
     var waterCurrent: Double?
     var closure: ((Double) -> Void)?
@@ -39,12 +51,19 @@ class WaterInputVC: UIViewController {
                 saveButton.addTarget(self, action: #selector(saveWaterRecord), for: .touchUpInside)
             }
             imageView.image = UIImage(named: "Image_Water")
-            timePicker.isHidden = true
+            timeBackgroundView.isHidden = true
         } else {
             titleLabel.text = "設定喝水提醒"
             imageView.image = UIImage(named: "Image_Reminder")
             waterInputView.isHidden = true
             saveButton.addTarget(self, action: #selector(saveReminder), for: .touchUpInside)
+            timeDateFormatter.dateFormat = "HH:mm"
+            let dateString = timeDateFormatter.string(from: Date())
+            let date = dateString.components(separatedBy: ":")
+            let indexHour = Int(date[0]) ?? 0
+            let indexMinute = Int(date[1]) ?? 0
+            hourPickerView.selectRow(indexHour, inComponent: 0, animated: false)
+            minutePickerView.selectRow(indexMinute, inComponent: 0, animated: false)
         }
     }
     
@@ -84,16 +103,24 @@ class WaterInputVC: UIViewController {
     
     @objc func saveReminder() {
         let content = UNMutableNotificationContent()
-        content.title = "🔔 在忙碌的同時也要記得喝水哦！"
+        content.title = "🔔 喝水時間到！"
+        content.body = "在忙碌的同時也要記得補充水分唷"
         content.badge = 1
         content.sound = UNNotificationSound.default
-        timeDateFormatter.dateFormat = "HH:mm"
-        let timeString = timeDateFormatter.string(from: timePicker.date)
-        let time = timeString.components(separatedBy: ":")
-        guard let hour = Int(time[0]),
-            let minute = Int(time[1])
-        else { return }
-        let dateComponent = DateComponents(timeZone: .current, hour: hour, minute: minute)
+        let hourIndex = hourPickerView.selectedRow(inComponent: 0)
+        let minuteIndex = minutePickerView.selectedRow(inComponent: 0)
+        let timeString: String = {
+            if hourIndex < 10 {
+                if minuteIndex < 10 {
+                    return "0\(hourIndex):0\(minuteIndex)"
+                } else {
+                    return "0\(hourIndex):\(minuteIndex)"
+                }
+            } else {
+                return "\(hourIndex):\(minuteIndex)"
+            }
+        }()
+        let dateComponent = DateComponents(timeZone: .current, hour: hourIndex, minute: minuteIndex)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
         let request = UNNotificationRequest(
             identifier: waterReminderNotification + timeString,
@@ -115,5 +142,26 @@ class WaterInputVC: UIViewController {
     
     @IBAction func goBackToWaterPage(_ sender: Any) {
         self.dismiss(animated: false)
+    }
+}
+
+extension WaterInputVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        pickerView == hourPickerView ? 24 : 60
+    }
+
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        var str = String(row)
+        if row < 10 {
+            str = "0" + String(row)
+        }
+        let font = UIFont.systemFont(ofSize: 14)
+        let color = UIColor.drDarkGray
+        let attributes = [NSAttributedString.Key.foregroundColor: color, NSAttributedString.Key.font: font]
+        return NSAttributedString(string: str, attributes: attributes)
     }
 }

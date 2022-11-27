@@ -23,6 +23,7 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var followersButton: UIButton!
     @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var followStackView: UIStackView!
     
     var otherUserID: String?
     var otherUserData: User?
@@ -51,6 +52,7 @@ class ProfileVC: UIViewController {
             self.moreButton.isHidden = true
             self.backButton.isHidden = true
         }
+        editButton.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -94,7 +96,8 @@ class ProfileVC: UIViewController {
         if let otherUserID = otherUserID {
             id = otherUserID
         }
-        profileProvider.fetchUserData(userID: id) { result in
+        profileProvider.fetchUserData(userID: id) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let user):
                 LKProgressHUD.dismiss()
@@ -104,6 +107,7 @@ class ProfileVC: UIViewController {
                 self.usernameLabel.text = user.username
                 self.userImageView.loadImage(user.userImageURL)
                 self.titleLabel.text = user.userSelfID
+                self.presentView(views: [self.userImageView, self.followStackView, self.editButton])
                 if id == userID {
                     userData = user
                 } else {

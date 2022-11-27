@@ -49,8 +49,9 @@ class WaterVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: - WaterWidget -
     func changeImage() {
-        guard let image = self.pieChartView?.getChartImage(transparent: false),
+        guard let image = self.pieChartView?.takeScreenshot(),
             let imageData = try? encoder.encode(image.pngData())
         else { fatalError("Could not find the image of water pie chart view.") }
         groupUserDefaults?.set(

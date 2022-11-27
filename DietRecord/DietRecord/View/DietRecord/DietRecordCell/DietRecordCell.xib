@@ -92,7 +92,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHo-Qw-PBo">
-                                <rect key="frame" x="16" y="320" width="350" height="12"/>
+                                <rect key="frame" x="16" y="320" width="350" height="20"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" name="drDarkGray"/>
                                 <nil key="highlightedColor"/>
@@ -119,7 +119,7 @@
                             <constraint firstItem="zHo-Qw-PBo" firstAttribute="top" secondItem="An7-yr-1Fd" secondAttribute="top" constant="36" id="p1x-ZC-joB"/>
                             <constraint firstItem="FDi-Cc-7tg" firstAttribute="centerX" secondItem="8hk-5M-gBo" secondAttribute="centerX" id="qzd-oY-RXo"/>
                             <constraint firstItem="An7-yr-1Fd" firstAttribute="top" secondItem="FDi-Cc-7tg" secondAttribute="bottom" constant="8" id="r9X-RK-MVI"/>
-                            <constraint firstAttribute="bottom" secondItem="zHo-Qw-PBo" secondAttribute="bottom" constant="24" id="rr8-X4-fxX"/>
+                            <constraint firstAttribute="bottom" secondItem="zHo-Qw-PBo" secondAttribute="bottom" constant="16" id="rr8-X4-fxX"/>
                             <constraint firstItem="F7x-zd-3CO" firstAttribute="top" secondItem="Whl-Iz-0we" secondAttribute="bottom" constant="8" id="tGT-X6-mnX"/>
                             <constraint firstAttribute="trailing" secondItem="zHo-Qw-PBo" secondAttribute="trailing" constant="16" id="tPo-w6-uGW"/>
                             <constraint firstAttribute="trailing" secondItem="uS4-Jh-vUs" secondAttribute="trailing" constant="16" id="yV5-Jk-dWU"/>
@@ -138,6 +138,7 @@
                 <outlet property="caloriesLabel" destination="VXE-yC-mSV" id="vCv-Rz-QQv"/>
                 <outlet property="commentButtomConstraint" destination="p1x-ZC-joB" id="Vco-5v-ABC"/>
                 <outlet property="commentLabel" destination="zHo-Qw-PBo" id="Zax-gH-wNc"/>
+                <outlet property="commentLabelButtomConstraint" destination="rr8-X4-fxX" id="g4Z-nV-wRd"/>
                 <outlet property="commentTitleLabel" destination="An7-yr-1Fd" id="HxM-ln-fmE"/>
                 <outlet property="commentTopConstraint" destination="c1u-nv-o6N" id="lEJ-MG-ur8"/>
                 <outlet property="editButton" destination="CQ3-BM-sYr" id="TlV-Tf-REY"/>
@@ -152,7 +153,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Image_Edit-1" width="512" height="512"/>
+        <image name="Image_Edit-1" width="170.5" height="170.5"/>
         <namedColor name="LightGray">
             <color red="0.95686274509803926" green="0.95686274509803926" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

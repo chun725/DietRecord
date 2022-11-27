@@ -20,6 +20,18 @@ extension UITableViewCell {
         }
         return  nil
     }
+    
+    func presentView(views: [UIView]) {
+        for view in views {
+            view.isHidden = false
+        }
+    }
+    
+    func hiddenView(views: [UIView]) {
+        for view in views {
+            view.isHidden = true
+        }
+    }
 }
 
 extension UITableView {

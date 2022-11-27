@@ -45,8 +45,6 @@
 		344DC7C62926200800D245A2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7C52926200800D245A2 /* Assets.xcassets */; };
 		344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */; };
-		344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7DB29273E3C00D245A2 /* WaterImage.png */; };
-		344DC7E62927422E00D245A2 /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E52927422E00D245A2 /* DietImage.png */; };
 		344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E82927656400D245A2 /* 82624-foodies.json */; };
 		344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
@@ -110,6 +108,18 @@
 		34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */; };
 		34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7424291661DF009F9264 /* ProfileProvider.swift */; };
 		34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7427291683D5009F9264 /* ProfileDetailVC.swift */; };
+		34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */; };
+		34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */; };
+		34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27671292FC2E700750DAF /* 5202-review-id.json */; };
+		34E27674292FC51900750DAF /* 98877-search.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27673292FC51900750DAF /* 98877-search.json */; };
+		34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27675292FC70C00750DAF /* 36538-find-id.json */; };
+		34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27677293066A200750DAF /* SwiftJWTWrapper.swift */; };
+		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
+		34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767D29308C1D00750DAF /* TokenResponse.swift */; };
+		34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */; };
+		34E2768629321BC700750DAF /* DietImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E2768429321B6600750DAF /* DietImage.png */; };
+		34E2768829321EF200750DAF /* WaterImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 34E2768729321EF200750DAF /* WaterImage.png */; };
+		34E2768A293228C700750DAF /* 52028-book-review.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27689293228C700750DAF /* 52028-book-review.json */; };
 		A3CC9B929204A0FF53BAEF40 /* Pods_DietRecord.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */; };
 /* End PBXBuildFile section */
 
@@ -181,8 +191,6 @@
 		344DC7C72926200800D245A2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartViewWidgetExtension.entitlements; sourceTree = "<group>"; };
 		344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPieChartWidget.swift; sourceTree = "<group>"; };
-		344DC7DB29273E3C00D245A2 /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
-		344DC7E52927422E00D245A2 /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
 		344DC7E82927656400D245A2 /* 82624-foodies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "82624-foodies.json"; sourceTree = "<group>"; };
 		344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "79611-water-animation.json"; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
@@ -255,6 +263,18 @@
 		34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
 		34CF7424291661DF009F9264 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
 		34CF7427291683D5009F9264 /* ProfileDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailVC.swift; sourceTree = "<group>"; };
+		34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86240-water-droplet-level-1.json"; sourceTree = "<group>"; };
+		34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "37303-swipe-for-a-toggle-button.json"; sourceTree = "<group>"; };
+		34E27671292FC2E700750DAF /* 5202-review-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "5202-review-id.json"; sourceTree = "<group>"; };
+		34E27673292FC51900750DAF /* 98877-search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98877-search.json"; sourceTree = "<group>"; };
+		34E27675292FC70C00750DAF /* 36538-find-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "36538-find-id.json"; sourceTree = "<group>"; };
+		34E27677293066A200750DAF /* SwiftJWTWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJWTWrapper.swift; sourceTree = "<group>"; };
+		34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_N2UB2RNM86.p8; sourceTree = "<group>"; };
+		34E2767D29308C1D00750DAF /* TokenResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponse.swift; sourceTree = "<group>"; };
+		34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainSwiftWrapper.swift; sourceTree = "<group>"; };
+		34E2768429321B6600750DAF /* DietImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DietImage.png; sourceTree = "<group>"; };
+		34E2768729321EF200750DAF /* WaterImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = WaterImage.png; sourceTree = "<group>"; };
+		34E27689293228C700750DAF /* 52028-book-review.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "52028-book-review.json"; sourceTree = "<group>"; };
 		6D4D44BAAC8460562389C130 /* Pods_DietRecord.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DietRecord.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -288,6 +308,7 @@
 				34CF74132914C0DD009F9264 /* Weight */,
 				34CF740929135B91009F9264 /* Water */,
 				34270E9F290FC4E300D5AFFD /* DietRecord */,
+				34E2767D29308C1D00750DAF /* TokenResponse.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -374,6 +395,8 @@
 			children = (
 				343CD69329111C6E0048046E /* KingFisherWrapper.swift */,
 				34C00057291C8EAC00670CA4 /* JGProgressHUDWrapper.swift */,
+				34E27677293066A200750DAF /* SwiftJWTWrapper.swift */,
+				34E2767F29309C6400750DAF /* KeyChainSwiftWrapper.swift */,
 			);
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
@@ -381,8 +404,8 @@
 		344DC7C22926200800D245A2 /* ChartViewWidget */ = {
 			isa = PBXGroup;
 			children = (
-				344DC7E52927422E00D245A2 /* DietImage.png */,
-				344DC7DB29273E3C00D245A2 /* WaterImage.png */,
+				34E2768429321B6600750DAF /* DietImage.png */,
+				34E2768729321EF200750DAF /* WaterImage.png */,
 				344DC7C32926200800D245A2 /* ChartViewWidget.swift */,
 				344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */,
 				344DC7C52926200800D245A2 /* Assets.xcassets */,
@@ -394,6 +417,12 @@
 		344DC7E72927654F00D245A2 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				34E27689293228C700750DAF /* 52028-book-review.json */,
+				34E27675292FC70C00750DAF /* 36538-find-id.json */,
+				34E27673292FC51900750DAF /* 98877-search.json */,
+				34E27671292FC2E700750DAF /* 5202-review-id.json */,
+				34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */,
+				34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */,
 				344DC7E82927656400D245A2 /* 82624-foodies.json */,
 				344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */,
 			);
@@ -497,6 +526,7 @@
 		34642951290D23030070B425 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */,
 				3422702529110680000B4A58 /* FoodIngredient.json */,
 				34642956290D2B2D0070B425 /* DRConstant.swift */,
 				3464293A290CF79A0070B425 /* Assets.xcassets */,
@@ -764,6 +794,7 @@
 				0C50704D3DF0A17A3ED5D99A /* [CP] Embed Pods Frameworks */,
 				34270E88290F5D2800D5AFFD /* ShellScript */,
 				344DC7CB2926200800D245A2 /* Embed App Extensions */,
+				34E276812930A7B600750DAF /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -819,8 +850,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				344DC7C62926200800D245A2 /* Assets.xcassets in Resources */,
-				344DC7E62927422E00D245A2 /* DietImage.png in Resources */,
-				344DC7DF29273E4100D245A2 /* WaterImage.png in Resources */,
+				34E2768629321BC700750DAF /* DietImage.png in Resources */,
+				34E2768829321EF200750DAF /* WaterImage.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -831,19 +862,26 @@
 				34270E64290D526500D5AFFD /* DietRecord.storyboard in Resources */,
 				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
+				34E27674292FC51900750DAF /* 98877-search.json in Resources */,
 				34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */,
 				34270E93290F810D00D5AFFD /* FoodDailyCell.xib in Resources */,
 				3422702629110680000B4A58 /* FoodIngredient.json in Resources */,
 				34C000702922494900670CA4 /* FoodCollectionViewCell.xib in Resources */,
+				34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */,
 				3469169229127C430021985F /* ReportDetailCell.xib in Resources */,
 				344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */,
+				34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */,
 				34270E83290EB44900D5AFFD /* FoodBaseView.xib in Resources */,
 				34270E61290D51F300D5AFFD /* Weight.storyboard in Resources */,
 				34642946290D01990070B425 /* GoogleService-Info.plist in Resources */,
 				34270E67290D529100D5AFFD /* Report.storyboard in Resources */,
+				34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */,
+				34E2768A293228C700750DAF /* 52028-book-review.json in Resources */,
 				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
+				34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */,
 				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,
+				34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
 				34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */,
 				3464293B290CF79A0070B425 /* Assets.xcassets in Resources */,
@@ -887,6 +925,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\n\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
+		};
+		34E276812930A7B600750DAF /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 		6D3F1F307E618FE8EA7156E3 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -961,6 +1019,7 @@
 				349B8D96291A215D002EB186 /* CheckRequestVC.swift in Sources */,
 				34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */,
 				34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */,
+				34E2768029309C6400750DAF /* KeyChainSwiftWrapper.swift in Sources */,
 				349B8D98291A22CF002EB186 /* RequestCell.swift in Sources */,
 				3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */,
 				3469168C291255860021985F /* ReportBarChartCell.swift in Sources */,
@@ -977,7 +1036,9 @@
 				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
+				34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
+				34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */,
 				34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
@@ -1266,18 +1327,20 @@
 				CODE_SIGN_ENTITLEMENTS = DietRecord/DietRecord.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說想取用相機權限";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說想取用您健康app內的體重資料";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說想更新您健康app內的體重資料";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說想取用相簿權限";
+				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以在此App中上傳您拍攝的照片";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說欲取用您健康App內的體重記錄，讓您可以在此App內完整查看過去的體重記錄";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說欲將透過App新增的體重記錄同步寫入健康App，讓您可以更完整的保存體重記錄";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說欲取用相簿權限，使您可以將相簿內的照片上傳至此App中";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1306,15 +1369,16 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說想取用相機權限";
-				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說想取用您健康app內的體重資料";
-				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說想更新您健康app內的體重資料";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說想取用相簿權限";
+				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以在此App中上傳您拍攝的照片";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說欲取用您健康App內的體重記錄，讓您可以在此App內完整查看過去的體重記錄";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說欲將透過App新增的體重記錄同步寫入健康App，讓您可以更完整的保存體重記錄";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說欲取用相簿權限，使您可以將相簿內的照片上傳至此App中";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (

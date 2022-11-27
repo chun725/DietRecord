@@ -13,20 +13,21 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodDailyTableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
     
-    var foods: [Food] = [] {
+    private var foods: [Food] = [] {
         didSet {
             foodDailyTableView.reloadData()
         }
     }
-    let dietRecordProvider = DietRecordProvider()
+    private let dietRecordProvider = DietRecordProvider()
     var isShared = true
-    var mealTextField: UITextField?
-    var mealImageView: UIImageView?
-    var dateTextField: UITextField?
-    var commentTextView: UITextView?
-    var imageURL: String?
+    private var mealTextField: UITextField?
+    private var mealImageView: UIImageView?
+    private var dateTextField: UITextField?
+    private var commentTextView: UITextView?
+    private var imageURL: String?
     var closure: ((String) -> Void)?
     var mealRecord: MealRecord?
+    var date: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +36,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         if let mealRecord = mealRecord {
             foods = mealRecord.foods
         }
+        saveButton.layer.cornerRadius = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -161,7 +163,10 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         else { fatalError("Could not create food daily cell.") }
         if let mealRecord = mealRecord {
             cell.mealRecord = mealRecord
+        } else {
+            cell.dateTextField.text = self.date
         }
+        cell.controller = self
         cell.layoutCell(foods: foods)
         cell.editFoodButton.addTarget(self, action: #selector(goToFoodSearchPage), for: .touchUpInside)
         cell.mealChooseButton.addTarget(self, action: #selector(chooseMeal), for: .touchUpInside)
@@ -170,7 +175,6 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         mealImageView = cell.mealImageView
         commentTextView = cell.commentTextView
         dateTextField = cell.dateTextField
-        cell.controller = self
         return cell
     }
 }

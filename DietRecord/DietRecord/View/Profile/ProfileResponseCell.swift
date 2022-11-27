@@ -13,6 +13,13 @@ class ProfileResponseCell: UITableViewCell {
     @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var goToUserPageButton: UIButton!
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.usernameLabel.alpha = 0
+        self.userImageView.alpha = 0
+        self.responseLabel.alpha = 0
+    }
+    
     var otherUserID: String?
     weak var controller: UIViewController?
     let profileProvider = ProfileProvider()
@@ -32,6 +39,11 @@ class ProfileResponseCell: UITableViewCell {
                     self.goToUserPageButton.isEnabled = true
                     self.usernameLabel.text = user.username
                     self.userImageView.loadImage(user.userImageURL)
+                }
+                UIView.animate(withDuration: 0.5) {
+                    self.usernameLabel.alpha = 1
+                    self.userImageView.alpha = 1
+                    self.responseLabel.alpha = 1
                 }
             case .failure(let error):
                 print("Error Info: \(error).")

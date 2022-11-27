@@ -22,7 +22,7 @@ class ProfileInformationCell: UITableViewCell {
     @IBOutlet weak var waterView: UIView!
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var idView: UIView!
-    
+    @IBOutlet weak var checkImageView: UIImageView!
     @IBOutlet weak var infoImageView: UIImageView!
     @IBOutlet weak var dietGoalCollectionView: UICollectionView! {
         didSet {
@@ -80,6 +80,8 @@ class ProfileInformationCell: UITableViewCell {
         usernameTextField.delegate = self
         userSelfIDTextfield.delegate = self
         changeImageButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
+        inputButton.layer.cornerRadius = 10
+        automaticButton.layer.cornerRadius = 10
         if let controller = controller, controller.isUpdated {
             userImageView.loadImage(user.userImageURL)
             usernameTextField.text = user.username
@@ -178,8 +180,10 @@ extension ProfileInformationCell: UITextFieldDelegate {
             if textField.text == "" {
                 self.controller?.presentInputAlert(title: "用戶名不能為空")
                 self.infoImageView.isHidden = false
+                self.checkImageView.isHidden = true
             } else if textField.text == userData?.userSelfID {
                 print("使用舊用戶名")
+                self.checkImageView.isHidden = false
                 self.infoImageView.isHidden = true
             } else {
                 LKProgressHUD.show()
@@ -190,10 +194,12 @@ extension ProfileInformationCell: UITextFieldDelegate {
                         if success {
                             self.user.userSelfID = textField.text ?? ""
                             self.infoImageView.isHidden = true
+                            self.checkImageView.isHidden = false
                         } else {
                             self.user.userSelfID = ""
                             self.controller?.presentInputAlert(title: "此用戶名稱已被人使用")
                             self.infoImageView.isHidden = false
+                            self.checkImageView.isHidden = true
                         }
                     case .failure(let error):
                         print("Error Info: \(error).")

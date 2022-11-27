@@ -20,19 +20,16 @@ class DietRecordCell: UITableViewCell {
     @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var commentTitleLabel: UILabel!
     @IBOutlet weak var photoTitleLabel: UILabel!
+    @IBOutlet weak var commentLabelButtomConstraint: NSLayoutConstraint!
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        foodStackViewHeightConstraint.isActive = false
-        foodStackViewHeightConstraint = foodStackView.heightAnchor.constraint(
-            equalToConstant: CGFloat(0)
-        )
-        foodStackViewHeightConstraint.isActive = true
+        foodStackViewHeightConstraint.constant = 0
         let subviews = foodStackView.arrangedSubviews
         for subview in subviews {
             subview.removeFromSuperview()
         }
-        commentLabel.text = "Comment"
+        commentLabel.text = ""
         caloriesLabel.isHidden = true
         mealImage.image = nil
     }
@@ -51,15 +48,11 @@ class DietRecordCell: UITableViewCell {
                     qty: food.qty,
                     calories: food.foodIngredient.nutrientContent.calories)
             }
-            foodStackViewHeightConstraint.isActive = false
-            foodStackViewHeightConstraint = foodStackView.heightAnchor.constraint(
-                equalToConstant: CGFloat(40 * mealRecord.foods.count)
-            )
-            foodStackViewHeightConstraint.isActive = true
             caloriesLabel.isHidden = false
             caloriesLabel.text = calculateMacroNutrition(
                 foods: mealRecord.foods,
                 nutrient: .calories).format().transform(unit: kcalUnit)
+            foodStackViewHeightConstraint.constant = CGFloat(mealRecord.foods.count * 40)
             if let imageURL = mealRecord.imageURL {
                 mealImage.loadImage(imageURL)
                 commentTopConstraint.constant = 202
@@ -74,10 +67,12 @@ class DietRecordCell: UITableViewCell {
             if !mealRecord.comment.isEmpty {
                 commentLabel.text = mealRecord.comment
                 commentButtomConstraint.constant = 36
+                commentLabelButtomConstraint.constant = 16
                 commentLabel.isHidden = false
                 commentTitleLabel.isHidden = false
             } else {
                 commentButtomConstraint.constant = 0
+                commentLabelButtomConstraint.constant = 0
                 commentLabel.isHidden = true
                 commentTitleLabel.isHidden = true
             }

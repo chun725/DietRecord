@@ -89,7 +89,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMO-n0-VlG">
                                                     <rect key="frame" x="20" y="50" width="374" height="240"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="240" id="Nyy-eT-9if"/>
+                                                        <constraint firstAttribute="width" secondItem="ZMO-n0-VlG" secondAttribute="height" multiplier="187:120" id="K6h-9Y-ss8"/>
                                                     </constraints>
                                                 </view>
                                                 <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="V5E-dC-eTc">
@@ -906,8 +906,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Image_Calendar" width="512" height="512"/>
-        <image name="Image_Target" width="512" height="512"/>
+        <image name="Image_Calendar" width="170.5" height="170.5"/>
+        <image name="Image_Target" width="170.5" height="170.5"/>
         <image name="chart.bar.xaxis" catalog="system" width="128" height="98"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkBlue">

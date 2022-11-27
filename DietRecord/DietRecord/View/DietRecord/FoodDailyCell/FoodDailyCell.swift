@@ -19,17 +19,22 @@ class FoodDailyCell: UITableViewCell {
     @IBOutlet weak var photoTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var foodsView: UIView!
     @IBOutlet weak var switchButton: UISwitch!
+    @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
     
     weak var controller: DietInputVC?
     var mealRecord: MealRecord?
     
     func layoutCell(foods: [Food]) {
+        switchButton.tintColor = .drGray
+        switchButton.onTintColor = .drYellow
+        switchButton.addTarget(self, action: #selector(changeShared), for: .valueChanged)
         if let mealRecord = mealRecord {
             dateTextField.text = mealRecord.date
             mealTextField.text = Meal.allCases[mealRecord.meal].rawValue
             mealImageView.loadImage(mealRecord.imageURL)
             commentTextView.text = mealRecord.comment
-            switchButton.isOn = mealRecord.isShared
+            switchButton.setOn(mealRecord.isShared, animated: false)
+            controller?.isShared = mealRecord.isShared
         }
         if foods.isEmpty {
             photoTopConstraint.constant = 24
@@ -37,6 +42,7 @@ class FoodDailyCell: UITableViewCell {
         } else {
             photoTopConstraint.constant = CGFloat(102 + foods.count * 40)
             foodsView.isHidden = false
+            foodStackViewHeightConstraint.constant = CGFloat(foods.count * 40)
         }
         
         let subviews = foodStackView.subviews
@@ -53,10 +59,6 @@ class FoodDailyCell: UITableViewCell {
                 calories: food.foodIngredient.nutrientContent.calories)
         }
         foodsView.setShadowAndRadius(radius: 10)
-        
-        switchButton.tintColor = .drGray
-        switchButton.onTintColor = .drYellow
-        switchButton.addTarget(self, action: #selector(changeShared), for: .valueChanged)
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {

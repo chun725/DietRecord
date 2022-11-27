@@ -17,6 +17,7 @@ class WeightInputVC: UIViewController {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var setGoalLabel: UILabel!
     @IBOutlet weak var dateStackView: UIStackView!
+    @IBOutlet weak var chooseDateButton: UIButton!
     
     let weightRecordProvider = WeightRecordProvider()
     let healthKitManager = HealthKitManager()
@@ -31,6 +32,7 @@ class WeightInputVC: UIViewController {
         weightInputView.layer.cornerRadius = 10
         dateLabel.text = dateFormatter.string(from: Date())
         setGoalLabel.isHidden = !isSetGoal
+        chooseDateButton.isEnabled = !isSetGoal
         dateStackView.isHidden = isSetGoal
     }
     

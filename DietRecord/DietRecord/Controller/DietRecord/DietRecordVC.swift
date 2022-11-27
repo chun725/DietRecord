@@ -12,17 +12,16 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var dietRecordTableView: UITableView!
     @IBOutlet weak var createDietRecordButton: UIButton!
     @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var placeholderLabel: UILabel!
     
-    var dietPieChartView: PieChart?
+    private var dietContentView: UIView?
     
-    var meals: [MealRecord] = []
+    private var meals: [MealRecord] = []
     
-    var totalFoods: [Food] = []
+    private var totalFoods: [Food] = []
     
-    var isLoading = true // 讓tableView在loading時被清掉
+    private var isLoading = true // 讓tableView在loading時被清掉
     
-    let dietRecordProvider = DietRecordProvider()
+    private let dietRecordProvider = DietRecordProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +44,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             as? DietInputVC {
             if sender != createDietRecordButton {
                 dietInputPage.mealRecord = self.meals[sender.tag]
+            } else {
+                dietInputPage.date = self.dateTextField.text
             }
             dietInputPage.closure = { [weak self] date in
                 self?.dateTextField.text = date
@@ -80,7 +81,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 self.isLoading = false
                 if data as? String == "Document doesn't exist." {
                     LKProgressHUD.dismiss()
-                    self.placeholderLabel.isHidden = false
                     self.meals = []
                     self.totalFoods = []
                     self.changeDietImage()
@@ -90,11 +90,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                     self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
                     self.changeDietImage()
                     LKProgressHUD.dismiss()
-                    if self.meals.isEmpty {
-                        self.placeholderLabel.isHidden = false
-                    } else {
-                        self.placeholderLabel.isHidden = true
-                    }
                 }
             case .failure(let error):
                 LKProgressHUD.showFailure(text: "找不到飲食紀錄")
@@ -103,11 +98,12 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: - DietWidget -
     func changeDietImage() {
         self.dietRecordTableView.reloadData()
         self.dietRecordTableView.layoutIfNeeded()
         if dateTextField.text == dateFormatter.string(from: Date()) {
-            guard let image = self.dietPieChartView?.getChartImage(transparent: false),
+            guard let image = self.dietContentView?.takeScreenshot(),
                 let imageData = try? encoder.encode(image.pngData())
             else { fatalError("Could not find the image of diet pie chart view.") }
             groupUserDefaults?.set(
@@ -140,22 +136,18 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 for: indexPath) as? CaloriesPieChartCell,
                 let userData = userData
             else { fatalError("Could not create calories pie chart cell.") }
-            let calories = calculateMacroNutrition(foods: totalFoods, nutrient: .calories)
             let carbs = calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate)
             let protein = calculateMacroNutrition(foods: totalFoods, nutrient: .protein)
             let fat = calculateMacroNutrition(foods: totalFoods, nutrient: .lipid)
             cell.controller = self
-            cell.layoutCell(
-                calories: "\(calories.format())/\(userData.goal[0]) kcal",
-                carbs: "\(carbs.format())/\(userData.goal[1]) g",
-                protein: "\(protein.format())/\(userData.goal[2]) g",
-                fat: "\(fat.format())/\(userData.goal[3]) g")
+            cell.layoutCell(carbs: carbs, protein: protein, fat: fat)
             cell.setPieChart(
                 breakfast: calculateMacroNutrition(foods: meals.first { $0.meal == 0 }?.foods, nutrient: .calories),
                 lunch: calculateMacroNutrition(foods: meals.first { $0.meal == 1 }?.foods, nutrient: .calories),
                 dinner: calculateMacroNutrition(foods: meals.first { $0.meal == 2 }?.foods, nutrient: .calories),
                 others: calculateMacroNutrition(foods: meals.first { $0.meal == 3 }?.foods, nutrient: .calories),
                 goal: userData.goal[0].transformToDouble())
+            self.dietContentView = cell.contentView
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(

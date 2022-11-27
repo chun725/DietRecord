@@ -31,7 +31,7 @@ class BarChart: BarChartView, ChartViewDelegate {
             self.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             self.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
             self.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 1),
-            self.heightAnchor.constraint(equalToConstant: 240)
+            self.heightAnchor.constraint(equalToConstant: (fullScreenSize.width - 40) / 187 * 120 )
         ])
     }
     

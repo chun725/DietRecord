@@ -58,7 +58,13 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 switch result {
                 case .success:
                     self.mealRecord?.response.append(Response(person: userID, response: response))
-                    self.profileDetailTableView.reloadData()
+                    UIView.animate(withDuration: 0.5) {
+                        self.profileDetailTableView.beginUpdates()
+                        self.profileDetailTableView.insertRows(
+                            at: [IndexPath(row: mealRecord.response.count, section: 1)],
+                            with: .fade)
+                        self.profileDetailTableView.endUpdates()
+                    }
                     self.responseTextField.text = ""
                     self.responseButton.isEnabled = false
                     self.responseButton.setTitleColor(.drGray, for: .normal)
@@ -97,6 +103,18 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let optionAction = self.configureAction(indexPath: indexPath)
+        optionAction.image = UIImage(systemName: "exclamationmark.bubble")
+        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [optionAction])
+        switch indexPath.section {
+        case 0:
+            return nil
+        default:
+            return trailingSwipeConfiguration
+        }
+    }
+    
+    private func configureAction(indexPath: IndexPath) -> UIContextualAction {
         let optionAction = UIContextualAction(style: .normal, title: "") { [weak self] _, _, completionHandler in
             guard let self = self,
                 var mealRecord = self.mealRecord
@@ -144,7 +162,11 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                         let index = mealRecord.response.firstIndex(of: self.responses[indexPath.row]) ?? 0
                         mealRecord.response.remove(at: index)
                         self.mealRecord = mealRecord
-                        self.profileDetailTableView.reloadData()
+                        UIView.animate(withDuration: 0.5) {
+                            self.profileDetailTableView.beginUpdates()
+                            self.profileDetailTableView.deleteRows(at: [indexPath], with: .fade)
+                            self.profileDetailTableView.endUpdates()
+                        }
                     case .failure(let error):
                         print("Error Info: \(error) in deleting response.")
                     }
@@ -161,14 +183,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             self.present(optionMenu, animated: false)
             completionHandler(true)
         }
-        optionAction.image = UIImage(systemName: "exclamationmark.bubble")
-        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [optionAction])
-        switch indexPath.section {
-        case 0:
-            return nil
-        default:
-            return trailingSwipeConfiguration
-        }
+        return optionAction
     }
 }
 

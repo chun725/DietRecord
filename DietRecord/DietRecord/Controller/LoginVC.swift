@@ -10,22 +10,26 @@ import FirebaseAuth
 import AuthenticationServices
 import CryptoKit
 import Lottie
+import SafariServices
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController, SFSafariViewControllerDelegate {
+    @IBOutlet weak var noteLabel: UILabel!
+    @IBOutlet weak var animationView: LottieAnimationView!
+    @IBOutlet weak var privacyPolicyStackView: UIStackView!
+    
     private var currentNonce: String?
     let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setSignInWithAppleBtn()
-        let animationView = LottieAnimationView(name: "82624-foodies")
-        animationView.frame = CGRect(x: 0, y: 0, width: fullScreenSize.width, height: 350)
-        animationView.center = CGPoint(x: self.view.center.x, y: self.view.bounds.minY + 175)
-        animationView.contentMode = .scaleAspectFit
         animationView.loopMode = .loop
         animationView.animationSpeed = 1.25
-        
-        view.addSubview(animationView)
+        animationView.play()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         animationView.play()
     }
     
@@ -40,7 +44,31 @@ class LoginVC: UIViewController {
         signInWithAppleBtn.heightAnchor.constraint(equalToConstant: 50).isActive = true
         signInWithAppleBtn.widthAnchor.constraint(equalToConstant: 280).isActive = true
         signInWithAppleBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -70).isActive = true
+        signInWithAppleBtn.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -90).isActive = true
+        setUpPrivacyPolicyStackView(button: signInWithAppleBtn)
+    }
+    
+    func setUpPrivacyPolicyStackView(button: ASAuthorizationAppleIDButton) {
+        noteLabel.translatesAutoresizingMaskIntoConstraints = false
+        noteLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        noteLabel.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 20).isActive = true
+        privacyPolicyStackView.translatesAutoresizingMaskIntoConstraints = false
+        privacyPolicyStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        privacyPolicyStackView.topAnchor.constraint(equalTo: noteLabel.bottomAnchor).isActive = true
+    }
+    
+    @IBAction func goToPrivacyPolicyPage(_ sender: Any) {
+        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+            let safari = SFSafariViewController(url: url)
+            safari.preferredControlTintColor = .drDarkGray
+            safari.dismissButtonStyle = .close
+            safari.delegate = self
+            self.navigationController?.pushViewController(safari, animated: false)
+        }
+    }
+    
+    func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
+        self.navigationController?.popViewController(animated: false)
     }
     
     func chooseAppleButtonStyle() -> ASAuthorizationAppleIDButton.Style {
@@ -108,21 +136,20 @@ extension LoginVC: ASAuthorizationControllerDelegate {
                 let nonce = currentNonce,
                 let idTokenString = String(data: idToken, encoding: .utf8)
             else { return }
-            if let authorizationCode = credential.authorizationCode {
-                print("=====", String(data: authorizationCode, encoding: .utf8))
-            }
             print("---------\(userId)")
             print("---------\(String(describing: fullname))")
             print("---------\(email ?? "")")
             print("---------\(idToken)")
             print("---------\(idTokenString)")
             let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: idTokenString, rawNonce: nonce)
+
             firebaseSignInWithApple(credential: credential)
         }
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
+        LKProgressHUD.showFailure(text: "登入失敗")
     }
 }
 

@@ -26,12 +26,42 @@ class HealthKitManager {
             print("Can't access HealthKit.")
         }
         
-        // Request authorization to read and/or write the specific data.
         healthKitStore.requestAuthorization(
             toShare: healthDataToWrite,
             read: healthDataToRead) { success, error -> Void in
                 guard let completion = completion else { return }
                 completion(success, error  as NSError?)
+            }
+    }
+    
+    func haveGetPermission(completion: @escaping (Result<Int, Error>) -> Void) {
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
+        else { return }
+
+        // State the health data type(s) we want to read from HealthKit.
+        let healthDataToRead: Set<HKObjectType> = Set(arrayLiteral: quantityType)
+        // State the health data type(s) we want to write from HealthKit.
+        let healthDataToWrite: Set<HKSampleType> = Set(arrayLiteral: quantityType)
+
+        healthKitStore.getRequestStatusForAuthorization(
+            toShare: healthDataToWrite,
+            read: healthDataToRead) { success, error -> Void in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(success.rawValue))
+            }
+        }
+    }
+    
+    func havePermissionOfWrite(completion: @escaping (Bool) -> Void) {
+        guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
+        else { return }
+        let index = healthKitStore.authorizationStatus(for: quantityType).rawValue
+        if index == 2 {
+            completion(true)
+        } else {
+            completion(false)
         }
     }
     

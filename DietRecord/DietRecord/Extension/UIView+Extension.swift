@@ -21,7 +21,7 @@ extension UIView {
     func setShadowAndRadius(radius: Double) {
         self.layer.cornerRadius = radius
         self.layer.shadowOffset = CGSize(width: 0, height: 5)
-        self.layer.shadowRadius = 5
+        self.layer.shadowRadius = 2
         self.layer.shadowColor = UIColor.drDarkGray.cgColor
         self.layer.shadowOpacity = 0.5
     }
@@ -30,5 +30,22 @@ extension UIView {
         self.layer.borderColor = color.cgColor
         self.layer.borderWidth = width
         self.layer.cornerRadius = radius
+    }
+    
+    func takeScreenshot() -> UIImage {
+        // Begin context
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, UIScreen.main.scale)
+        
+        // Draw view in that context
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
+        
+        // And finally, get image
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        if let image = image {
+            return image
+        }
+        return UIImage()
     }
 }

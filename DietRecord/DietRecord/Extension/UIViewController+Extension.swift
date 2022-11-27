@@ -14,4 +14,16 @@ extension UIViewController {
         alert.addAction(action)
         self.present(alert, animated: false)
     }
+    
+    func presentView(views: [UIView]) {
+        for view in views {
+            view.isHidden = false
+        }
+    }
+    
+    func hiddenView(views: [UIView]) {
+        for view in views {
+            view.isHidden = true
+        }
+    }
 }

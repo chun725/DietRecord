@@ -55,7 +55,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     
     @objc func fetchWeeklyDiet(sender: UIRefreshControl?) {
         if sender == nil {
-            LKProgressHUD.show()
+            DRProgressHUD.show()
         }
         isLoading = true
         guard let dateString = dateTextField.text,
@@ -66,11 +66,11 @@ class ReportVC: UIViewController, UITableViewDataSource {
             switch result {
             case .success(let data):
                 self.isLoading = false
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 let weeklyDietRecordData = data as? [FoodDailyInput]
                 self.weeklyDietRecord = weeklyDietRecordData
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "讀取飲食記錄失敗")
+                DRProgressHUD.showFailure(text: "讀取飲食記錄失敗")
                 print("Error Info: \(error).")
             }
         }

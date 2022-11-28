@@ -54,28 +54,28 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
             let userData = userData
         else { return }
         if !userInput.isEmpty {
-            LKProgressHUD.show()
+            DRProgressHUD.show()
             profileProvider.searchUser(userSelfID: userInput) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     if response as? String == "document不存在" {
-                        LKProgressHUD.showFailure(text: "無此用戶")
+                        DRProgressHUD.showFailure(text: "無此用戶")
                         self.hiddenView(views: [self.usernameLabel, self.userImageView, self.followButton])
                         self.animationView.isHidden = false
                     } else {
                         guard let user = response as? User else { return }
                         if userData.blocks.contains(user.userID) {
-                            LKProgressHUD.showFailure(text: "無此用戶")
+                            DRProgressHUD.showFailure(text: "無此用戶")
                             self.animationView.isHidden = false
                         } else {
-                            LKProgressHUD.dismiss()
+                            DRProgressHUD.dismiss()
                             self.userSearchResult = user
                             self.animationView.isHidden = true
                         }
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "無法查詢用戶")
+                    DRProgressHUD.showFailure(text: "無法查詢用戶")
                     print("Error Info: \(error).")
                 }
             }

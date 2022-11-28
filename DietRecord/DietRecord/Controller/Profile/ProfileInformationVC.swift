@@ -40,18 +40,18 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func createUserInfo() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         guard let user = user else { return }
         if user.userSelfID.isEmpty || user.username.isEmpty || user.weightGoal.isEmpty
             || user.waterGoal.isEmpty || user.goal.isEmpty {
-            LKProgressHUD.dismiss()
+            DRProgressHUD.dismiss()
             self.presentInputAlert(title: "請輸入完整資料")
         } else {
             profileProvider.createUserInfo(userData: user) { result in
                 switch result {
                 case .success:
                     userData = user
-                    LKProgressHUD.showSuccess()
+                    DRProgressHUD.showSuccess()
                     if !self.isUpdated {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         if let tabbarController = storyboard.instantiateViewController(
@@ -63,7 +63,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
                         self.navigationController?.popViewController(animated: false)
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存資料失敗")
+                    DRProgressHUD.showFailure(text: "儲存資料失敗")
                     print("Error Info: \(error).")
                 }
             }

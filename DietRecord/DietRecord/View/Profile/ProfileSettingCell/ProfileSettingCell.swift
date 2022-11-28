@@ -94,7 +94,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     }
     
     private func deleteAccount() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         let firebaseAuth = Auth.auth()
         guard let nowUserData = userData else { return }
         let allUsers = nowUserData.followers + nowUserData.following
@@ -109,7 +109,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
                         case .success:
                             userID = ""
                             userData = nil
-                            LKProgressHUD.showSuccess(text: "刪除帳號完成")
+                            DRProgressHUD.showSuccess(text: "刪除帳號完成")
                             sleep(2)
                             self?.controller?
                                 .tabBarController?
@@ -195,7 +195,7 @@ extension ProfileSettingCell: ASAuthorizationControllerDelegate, ASAuthorization
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
-        LKProgressHUD.showFailure(text: "登入失敗")
+        DRProgressHUD.showFailure(text: "登入失敗")
     }
     
     private func getRefreshToken(authorizationCode: String) {

@@ -1422,14 +1422,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="個人資料" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDH-Y9-NlS">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XDH-Y9-NlS">
                                 <rect key="frame" x="0.0" y="44" width="414" height="40"/>
                                 <color key="backgroundColor" name="drYellow"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="WsZ-TG-XCF"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="20"/>
-                                <color key="textColor" name="drDarkGray"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="個人資料">
+                                        <attributes>
+                                            <color key="NSColor" name="drDarkGray"/>
+                                            <font key="NSFont" size="20" name="PingFangTC-Semibold"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vHt-uH-RIn">
@@ -1815,6 +1822,9 @@
             <point key="canvasLocation" x="3353.6231884057975" y="1575.6696428571429"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="dsE-Cf-Q0s"/>
+    </designables>
     <resources>
         <image name="Image_Lock" width="170.5" height="170.5"/>
         <image name="Image_Placeholder" width="999.5" height="562"/>

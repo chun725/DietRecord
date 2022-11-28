@@ -98,7 +98,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 switch result {
                 case .success(let foods):
                     if foods.isEmpty {
-                        LKProgressHUD.showFailure(text: "無此食物")
+                        DRProgressHUD.showFailure(text: "無此食物")
                     } else {
                         self.foodSearchResults = foods
                     }

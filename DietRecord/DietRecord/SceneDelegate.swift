@@ -56,12 +56,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "Water-Widget" }) {
             groupUserDefaults?.set(1, forKey: "OpenWithWidget")
             print("🚀 Launched from water widget")
+            if let navigationController = window?.rootViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: false)
+            }
         } else if let _: UIOpenURLContext = urlContexts.first(where: { $0.url.scheme == "Diet-Widget" }) {
             groupUserDefaults?.set(2, forKey: "OpenWithWidget")
             print("🚀 Launched from diet widget")
-        }
-        if let navigationController = window?.rootViewController as? UINavigationController {
-            navigationController.popToRootViewController(animated: false)
+            if let navigationController = window?.rootViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: false)
+            }
         }
     }
 }

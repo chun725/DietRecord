@@ -57,13 +57,13 @@ class WeightInputVC: UIViewController {
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
-                        LKProgressHUD.showSuccess()
+                        DRProgressHUD.showSuccess()
                         userData?.weightGoal = weight.format()
                         self.closure?(weight)
                         self.dismiss(animated: false)
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存失敗")
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }
@@ -73,12 +73,12 @@ class WeightInputVC: UIViewController {
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
-                        LKProgressHUD.showSuccess()
+                        DRProgressHUD.showSuccess()
                         self.closure?(0.0)
                         self.dismiss(animated: false)
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存失敗")
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }

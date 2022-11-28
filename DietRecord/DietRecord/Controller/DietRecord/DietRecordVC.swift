@@ -71,7 +71,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func changeDate() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         self.isLoading = true
         self.meals = []
         guard let date = dateTextField.text else { return }
@@ -80,7 +80,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             case .success(let data):
                 self.isLoading = false
                 if data as? String == "Document doesn't exist." {
-                    LKProgressHUD.dismiss()
+                    DRProgressHUD.dismiss()
                     self.meals = []
                     self.totalFoods = []
                     self.changeDietImage()
@@ -89,10 +89,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                     self.meals = dietRecordData.mealRecord.sorted { $0.meal < $1.meal }
                     self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
                     self.changeDietImage()
-                    LKProgressHUD.dismiss()
+                    DRProgressHUD.dismiss()
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "找不到飲食紀錄")
+                DRProgressHUD.showFailure(text: "找不到飲食紀錄")
                 print("Error Info: \(error).")
             }
         }

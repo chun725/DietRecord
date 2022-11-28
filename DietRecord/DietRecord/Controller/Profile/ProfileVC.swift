@@ -68,7 +68,7 @@ class ProfileVC: UIViewController {
     }
     
     func fetchDietRecord() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         var id = userID
         if let otherUserID = otherUserID {
             id = otherUserID
@@ -76,7 +76,7 @@ class ProfileVC: UIViewController {
         profileProvider.fetchImage(userID: id) { result in
             switch result {
             case .success(let dietRecords):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 var mealDatas: [MealRecord] = []
                 for dietRecord in dietRecords {
                     let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
@@ -84,14 +84,14 @@ class ProfileVC: UIViewController {
                 }
                 self.mealRecords = mealDatas.reversed()
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取用戶資料")
+                DRProgressHUD.showFailure(text: "無法讀取用戶資料")
                 print("Error Info: \(error).")
             }
         }
     }
     
     func fetchData() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         var id = userID
         if let otherUserID = otherUserID {
             id = otherUserID
@@ -100,7 +100,7 @@ class ProfileVC: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let user):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 guard let user = user as? User else { return }
                 self.followersLabel.text = String(user.followers.count)
                 self.followingLabel.text = String(user.following.count)
@@ -130,7 +130,7 @@ class ProfileVC: UIViewController {
                     self.followingButton.isEnabled = false
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取用戶資料")
+                DRProgressHUD.showFailure(text: "無法讀取用戶資料")
                 print("Error Info: \(error).")
             }
         }

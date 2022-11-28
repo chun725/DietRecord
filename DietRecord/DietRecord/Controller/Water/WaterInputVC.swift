@@ -72,12 +72,12 @@ class WaterInputVC: UIViewController {
         waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
             switch result {
             case .success:
-                LKProgressHUD.showSuccess()
+                DRProgressHUD.showSuccess()
                 self.closure?(waterGoal.transformToDouble())
                 userData?.waterGoal = waterGoal
                 self.dismiss(animated: false)
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "儲存失敗")
+                DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
             }
         }
@@ -91,11 +91,11 @@ class WaterInputVC: UIViewController {
         waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { result in
             switch result {
             case .success:
-                LKProgressHUD.showSuccess()
+                DRProgressHUD.showSuccess()
                 self.closure?(totalWater)
                 self.dismiss(animated: false)
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "儲存失敗")
+                DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
             }
         }
@@ -135,7 +135,7 @@ class WaterInputVC: UIViewController {
             userDefault.set(reminders, forKey: waterReminder)
         }
         UNUserNotificationCenter.current().add(request)
-        LKProgressHUD.showSuccess()
+        DRProgressHUD.showSuccess()
         self.closure?(0.0)
         self.dismiss(animated: false)
     }

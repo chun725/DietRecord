@@ -49,9 +49,9 @@ class DietRecordCell: UITableViewCell {
                     calories: food.foodIngredient.nutrientContent.calories)
             }
             caloriesLabel.isHidden = false
-            caloriesLabel.text = calculateMacroNutrition(
+            caloriesLabel.text = DRConstant.calculateMacroNutrition(
                 foods: mealRecord.foods,
-                nutrient: .calories).format().transform(unit: kcalUnit)
+                nutrient: .calories).format().transform(unit: Units.kcalUnit.rawValue)
             foodStackViewHeightConstraint.constant = CGFloat(mealRecord.foods.count * 40)
             if let imageURL = mealRecord.imageURL {
                 mealImage.loadImage(imageURL)

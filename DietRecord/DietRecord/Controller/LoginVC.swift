@@ -180,24 +180,24 @@ extension LoginVC {
             return
         }
         let uid = user.uid
-        userID = uid
+        DRConstant.userID = uid
         let email = user.email
         print("------\(uid)")
         print("------\(email ?? "")")
         DRProgressHUD.show()
-        profileProvider.fetchUserData(userID: userID) { result in
+        profileProvider.fetchUserData(userID: DRConstant.userID) { result in
             switch result {
             case .success(let result):
                 DRProgressHUD.dismiss()
                 if let result = result as? String, result == "document不存在" {
-                    let storyboard = UIStoryboard(name: profile, bundle: nil)
+                    let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
                     if let profileInfoPage = storyboard.instantiateViewController(
                         withIdentifier: "\(ProfileInformationVC.self)")
                         as? ProfileInformationVC {
                         self.navigationController?.pushViewController(profileInfoPage, animated: false)
                     }
                 } else if let user = result as? User {
-                    userData = user
+                    DRConstant.userData = user
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let tabbarController = storyboard.instantiateViewController(
                         withIdentifier: "\(TabBarController.self)")

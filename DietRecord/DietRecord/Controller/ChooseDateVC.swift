@@ -29,7 +29,7 @@ class ChooseDateVC: UIViewController {
         dateView.layer.cornerRadius = 15
         chooseDateButton.layer.cornerRadius = 10
         if let date = date {
-            datePicker.date = dateFormatter.date(from: date) ?? Date()
+            datePicker.date = DRConstant.dateFormatter.date(from: date) ?? Date()
         }
     }
     
@@ -45,7 +45,7 @@ class ChooseDateVC: UIViewController {
             delay: 0,
             options: .curveEaseOut,
             animations: animations) { _ in
-                self.closure?(dateFormatter.string(from: self.datePicker.date))
+                self.closure?(DRConstant.dateFormatter.string(from: self.datePicker.date))
                 self.dismiss(animated: false)
         }
     }

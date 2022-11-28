@@ -22,10 +22,10 @@ class GoalVC: UIViewController {
         inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         self.tabBarController?.tabBar.isHidden = true
-        caloriesLabel.text = userData?.goal[0].transform(unit: kcalUnit)
-        carbsLabel.text = userData?.goal[1].transform(unit: gUnit)
-        proteinLabel.text = userData?.goal[2].transform(unit: gUnit)
-        fatLabel.text = userData?.goal[3].transform(unit: gUnit)
+        caloriesLabel.text = DRConstant.userData?.goal[0].transform(unit: Units.kcalUnit.rawValue)
+        carbsLabel.text = DRConstant.userData?.goal[1].transform(unit: Units.gUnit.rawValue)
+        proteinLabel.text = DRConstant.userData?.goal[2].transform(unit: Units.gUnit.rawValue)
+        fatLabel.text = DRConstant.userData?.goal[3].transform(unit: Units.gUnit.rawValue)
         whiteBackgroundView.setShadowAndRadius(radius: 10)
     }
     
@@ -40,17 +40,17 @@ class GoalVC: UIViewController {
     }
     
     @objc func goToSetupGoalVC(sender: UIButton) {
-        let storyboard = UIStoryboard(name: report, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.report, bundle: nil)
         if let setupGoalPage = storyboard.instantiateViewController(withIdentifier: "\(SetupGoalVC.self)")
             as? SetupGoalVC {
             if sender == inputButton {
                 setupGoalPage.isAutomatic = false
             }
             setupGoalPage.closure = { [weak self] goal in
-                self?.caloriesLabel.text = goal[0].transform(unit: kcalUnit)
-                self?.carbsLabel.text = goal[1].transform(unit: gUnit)
-                self?.proteinLabel.text = goal[2].transform(unit: gUnit)
-                self?.fatLabel.text = goal[3].transform(unit: gUnit)
+                self?.caloriesLabel.text = goal[0].transform(unit: Units.kcalUnit.rawValue)
+                self?.carbsLabel.text = goal[1].transform(unit: Units.gUnit.rawValue)
+                self?.proteinLabel.text = goal[2].transform(unit: Units.gUnit.rawValue)
+                self?.fatLabel.text = goal[3].transform(unit: Units.gUnit.rawValue)
             }
             self.navigationController?.pushViewController(setupGoalPage, animated: false)
         }

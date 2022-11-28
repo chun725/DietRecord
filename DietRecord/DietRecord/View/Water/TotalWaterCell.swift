@@ -19,7 +19,7 @@ class TotalWaterCell: UITableViewCell {
     weak var controller: WaterVC?
     
     func layoutCell(water: Double, goal: Double) {
-        waterCurrentLabel.text = water.formatNoPoint().transform(unit: mLUnit)
+        waterCurrentLabel.text = water.formatNoPoint().transform(unit: Units.mLUnit.rawValue)
         if goal != 0.0 {
             percentLabel.text = (water / goal * 100).format() + "%"
         }
@@ -32,12 +32,12 @@ class TotalWaterCell: UITableViewCell {
         let pieChart = PieChart(frame: .zero, superview: waterPieChartView)
         pieChart.setWaterPieChart(water: water, goal: goal)
         controller?.pieChartView = pieChart
-        guard let userData = userData else { return }
-        waterGoalLabel.text = "目標飲水量 " + userData.waterGoal.transform(unit: mLUnit)
+        guard let userData = DRConstant.userData else { return }
+        waterGoalLabel.text = "目標飲水量 " + userData.waterGoal.transform(unit: Units.mLUnit.rawValue)
     }
     
     @IBAction func goToChangeGoalPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: water, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
         if let waterInputPage = storyboard.instantiateViewController(withIdentifier: "\(WaterInputVC.self)")
             as? WaterInputVC {
             waterInputPage.isGoalInput = true

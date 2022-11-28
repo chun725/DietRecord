@@ -17,7 +17,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     var mealRecord: MealRecord? {
         didSet {
-            guard let userData = userData else { return }
+            guard let userData = DRConstant.userData else { return }
             responses = mealRecord?.response.filter { !(userData.blocks.contains($0.person)) } ?? []
         }
     }
@@ -27,7 +27,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userImageView.loadImage(userData?.userImageURL)
+        userImageView.loadImage(DRConstant.userData?.userImageURL)
         userImageView.layer.cornerRadius = userImageView.bounds.height / 2
         profileDetailTableView.dataSource = self
         profileDetailTableView.delegate = self
@@ -57,7 +57,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
             response: response) { result in
                 switch result {
                 case .success:
-                    self.mealRecord?.response.append(Response(person: userID, response: response))
+                    self.mealRecord?.response.append(Response(person: DRConstant.userID, response: response))
                     UIView.animate(withDuration: 0.5) {
                         self.profileDetailTableView.beginUpdates()
                         self.profileDetailTableView.insertRows(
@@ -172,10 +172,10 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     }
                 }
             }
-            if mealRecord.userID == userID || self.responses[indexPath.row].person == userID {
+            if mealRecord.userID == DRConstant.userID || self.responses[indexPath.row].person == DRConstant.userID {
                 optionMenu.addAction(deleteOption)
             }
-            if self.responses[indexPath.row].person != userID {
+            if self.responses[indexPath.row].person != DRConstant.userID {
                 optionMenu.addAction(reportAction)
                 optionMenu.addAction(blockAction)
             }

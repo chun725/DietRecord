@@ -10,7 +10,7 @@ import Foundation
 class ProfileProvider {
     func fetchImage(userID: String, completion: @escaping (Result<[FoodDailyInput], Error>) -> Void) {
         var dietRecords: [FoodDailyInput] = []
-        database.collection(user).document(userID).collection(diet).getDocuments { snapshot, error in
+        DRConstant.database.collection(DRConstant.user).document(userID).collection(DRConstant.diet).getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -28,7 +28,7 @@ class ProfileProvider {
     
     func fetchFollowingPost(completion: @escaping (Result<[MealRecord], Error>) -> Void) {
         var mealRecords: [MealRecord] = []
-        database.collection(user).document(userID).getDocument { document, error in
+        DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).getDocument { document, error in
             guard let document = document,
                 document.exists,
                 let userData = try? document.data(as: User.self)
@@ -40,7 +40,7 @@ class ProfileProvider {
             for following in followings {
                 downloadGroup.enter()
                 let block = DispatchWorkItem(flags: .inheritQoS) {
-                    database.collection(user).document(following).collection(diet).getDocuments { snapshot, error in
+                    DRConstant.database.collection(DRConstant.user).document(following).collection(DRConstant.diet).getDocuments { snapshot, error in
                         if let error = error {
                             completion(.failure(error))
                             downloadGroup.leave()
@@ -66,7 +66,7 @@ class ProfileProvider {
     }
     
     func changeLiked(authorID: String, date: String, meal: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(authorID).collection(diet).document(date)
+        let documentReference = DRConstant.database.collection(DRConstant.user).document(authorID).collection(DRConstant.diet).document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
@@ -74,10 +74,10 @@ class ProfileProvider {
             else { return }
             var mealRecords = dietRecord.mealRecord
             guard var mealRecord = mealRecords.first(where: { $0.meal == meal }) else { return }
-            if mealRecord.peopleLiked.contains(userID) {
-                mealRecord.peopleLiked.removeAll { $0 == userID }
+            if mealRecord.peopleLiked.contains(DRConstant.userID) {
+                mealRecord.peopleLiked.removeAll { $0 == DRConstant.userID }
             } else {
-                mealRecord.peopleLiked.append(userID)
+                mealRecord.peopleLiked.append(DRConstant.userID)
             }
             mealRecords.removeAll { $0.meal == meal }
             mealRecords.append(mealRecord)
@@ -92,7 +92,7 @@ class ProfileProvider {
     }
     
     func postResponse(postUserID: String, date: String, meal: Int, response: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(postUserID).collection(diet).document(date)
+        let documentReference = DRConstant.database.collection(DRConstant.user).document(postUserID).collection(DRConstant.diet).document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
@@ -100,7 +100,7 @@ class ProfileProvider {
             else { return }
             var mealRecords = dietRecord.mealRecord
             guard var mealRecord = mealRecords.first(where: { $0.meal == meal }) else { return }
-            let response = Response(person: userID, response: response)
+            let response = Response(person: DRConstant.userID, response: response)
             mealRecord.response.append(response)
             mealRecords.removeAll { $0.meal == meal }
             mealRecords.append(mealRecord)
@@ -115,7 +115,7 @@ class ProfileProvider {
     }
     
     func fetchUserData(userID: String, completion: @escaping (Result<Any, Error>) -> Void) {
-        database.collection(user).document(userID).getDocument { document, error in
+        DRConstant.database.collection(DRConstant.user).document(userID).getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -130,7 +130,7 @@ class ProfileProvider {
     }
     
     func changeRequest(isRequest: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(followID)
+        let documentReference = DRConstant.database.collection(DRConstant.user).document(followID)
         documentReference.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -140,9 +140,9 @@ class ProfileProvider {
                     var user = try? document.data(as: User.self)
                 else { return }
                 if isRequest {
-                    user.request.removeAll { $0 == userID }
-                } else if !user.blocks.contains(userID) {
-                    user.request.append(userID)
+                    user.request.removeAll { $0 == DRConstant.userID }
+                } else if !user.blocks.contains(DRConstant.userID) {
+                    user.request.append(DRConstant.userID)
                 }
                 do {
                     try documentReference.setData(from: user)
@@ -155,7 +155,7 @@ class ProfileProvider {
     }
     
     func changeFollow(isFollowing: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let followDocumentRef = database.collection(user).document(followID)
+        let followDocumentRef = DRConstant.database.collection(DRConstant.user).document(followID)
         followDocumentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -165,9 +165,9 @@ class ProfileProvider {
                     var user = try? document.data(as: User.self)
                 else { return }
                 if isFollowing {
-                    user.followers.removeAll { $0 == userID }
+                    user.followers.removeAll { $0 == DRConstant.userID }
                 } else {
-                    user.following.append(userID)
+                    user.following.append(DRConstant.userID)
                 }
                 do {
                     try followDocumentRef.setData(from: user)
@@ -187,7 +187,7 @@ class ProfileProvider {
     }
     
     private func changeSelf(isFollowing: Bool, followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let selfDocumentRef = database.collection(user).document(userID)
+        let selfDocumentRef = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID)
         selfDocumentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -213,7 +213,7 @@ class ProfileProvider {
     }
     
     func fetchUsersData(userID: String, need: String, completion: @escaping (Result<[User], Error>) -> Void) {
-        let documentRef = database.collection(user).document(userID)
+        let documentRef = DRConstant.database.collection(DRConstant.user).document(userID)
         documentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -239,7 +239,7 @@ class ProfileProvider {
                 for followerID in usersID {
                     downloadGroup.enter()
                     let block = DispatchWorkItem(flags: .inheritQoS) {
-                        database.collection(user).document(followerID).getDocument { document, error in
+                        DRConstant.database.collection(DRConstant.user).document(followerID).getDocument { document, error in
                             if let error = error {
                                 completion(.failure(error))
                                 downloadGroup.leave()
@@ -269,7 +269,7 @@ class ProfileProvider {
 
 extension ProfileProvider {
     func cancelRequest(followID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(userID)
+        let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID)
         documentReference.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -290,7 +290,7 @@ extension ProfileProvider {
     }
     
     func createUserInfo(userData: User, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(userData.userID)
+        let documentReference = DRConstant.database.collection(DRConstant.user).document(userData.userID)
         documentReference.getDocument { _, error in
             if let error = error {
                 completion(.failure(error))
@@ -306,7 +306,7 @@ extension ProfileProvider {
     }
     
     func fetchUserSelfID(selfID: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        database.collection(user).whereField("userSelfID", isEqualTo: selfID).getDocuments { snapshot, error in
+        DRConstant.database.collection(DRConstant.user).whereField("userSelfID", isEqualTo: selfID).getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -321,7 +321,7 @@ extension ProfileProvider {
     }
     
     func searchUser(userSelfID: String, completion: @escaping (Result<Any, Error>) -> Void) {
-        database.collection(user).whereField("userSelfID", isEqualTo: userSelfID).getDocuments { snapshot, error in
+        DRConstant.database.collection(DRConstant.user).whereField("userSelfID", isEqualTo: userSelfID).getDocuments { snapshot, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -340,7 +340,7 @@ extension ProfileProvider {
     
     func reportSomething(user: User?, mealRecord: MealRecord?, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
         let uuid = UUID().uuidString
-        let documentReference = database.collection(report).document(uuid)
+        let documentReference = DRConstant.database.collection(DRConstant.report).document(uuid)
         do {
             if let user = user {
                 try documentReference.setData(from: user)
@@ -357,7 +357,7 @@ extension ProfileProvider {
     
     func deletePostOrResponse(mealRecord: MealRecord, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
         let id = mealRecord.userID
-        let documentRef = database.collection(user).document(id).collection(diet).document(mealRecord.date)
+        let documentRef = DRConstant.database.collection(DRConstant.user).document(id).collection(DRConstant.diet).document(mealRecord.date)
         documentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -390,7 +390,7 @@ extension ProfileProvider {
     }
     
     func changeBlock(blockID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentRef = database.collection(user).document(userID)
+        let documentRef = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID)
         documentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -432,7 +432,7 @@ extension ProfileProvider {
     }
     
     private func changeOtherUser(blockID: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentRef = database.collection(user).document(blockID)
+        let documentRef = DRConstant.database.collection(DRConstant.user).document(blockID)
         documentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -440,10 +440,10 @@ extension ProfileProvider {
                 guard let document = document,
                     var data = try? document.data(as: User.self)
                 else { return }
-                if data.following.contains(userID) {
-                    data.following.remove(at: data.following.firstIndex(of: userID) ?? 0)
-                } else if data.followers.contains(userID) {
-                    data.followers.remove(at: data.followers.firstIndex(of: userID) ?? 0)
+                if data.following.contains(DRConstant.userID) {
+                    data.following.remove(at: data.following.firstIndex(of: DRConstant.userID) ?? 0)
+                } else if data.followers.contains(DRConstant.userID) {
+                    data.followers.remove(at: data.followers.firstIndex(of: DRConstant.userID) ?? 0)
                 }
                 do {
                     try documentRef.setData(from: data)
@@ -458,11 +458,11 @@ extension ProfileProvider {
     func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void) {
         let deleteGroup = DispatchGroup()
         var blocks: [DispatchWorkItem] = []
-        let collections = [water, weight, diet]
+        let collections = [DRConstant.water, DRConstant.weight, DRConstant.diet]
         for collection in collections {
             deleteGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                database.collection(user).document(userID).collection(collection).getDocuments { snapshot, error in
+                DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(collection).getDocuments { snapshot, error in
                     if let error = error {
                         completion(.failure(error))
                     } else {
@@ -470,9 +470,9 @@ extension ProfileProvider {
                         let documents = snapshot.documents
                         if !documents.isEmpty {
                             for document in documents {
-                                database
-                                    .collection(user)
-                                    .document(userID)
+                                DRConstant.database
+                                    .collection(DRConstant.user)
+                                    .document(DRConstant.userID)
                                     .collection(collection)
                                     .document(document.documentID)
                                     .delete()
@@ -485,7 +485,7 @@ extension ProfileProvider {
             if collection == collections.last {
                 deleteGroup.enter()
                 let block = DispatchWorkItem(flags: .inheritQoS) {
-                    database.collection(user).document(userID).delete()
+                    DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).delete()
                     self.revokeToken()
                     deleteGroup.leave()
                 }
@@ -532,7 +532,7 @@ extension ProfileProvider {
         for otherUserID in allUsers {
             deleteGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                let documentRef = database.collection(user).document(otherUserID)
+                let documentRef = DRConstant.database.collection(DRConstant.user).document(otherUserID)
                 documentRef.getDocument { document, error in
                     if let error = error {
                         completion(.failure(error))
@@ -542,11 +542,11 @@ extension ProfileProvider {
                             document.exists,
                             var user = try? document.data(as: User.self)
                         else { return }
-                        if user.following.contains(userID) {
-                            user.following.remove(at: user.following.firstIndex(of: userID) ?? 0)
+                        if user.following.contains(DRConstant.userID) {
+                            user.following.remove(at: user.following.firstIndex(of: DRConstant.userID) ?? 0)
                         }
-                        if user.followers.contains(userID) {
-                            user.followers.remove(at: user.followers.firstIndex(of: userID) ?? 0)
+                        if user.followers.contains(DRConstant.userID) {
+                            user.followers.remove(at: user.followers.firstIndex(of: DRConstant.userID) ?? 0)
                         }
                         do {
                             try documentRef.setData(from: user)

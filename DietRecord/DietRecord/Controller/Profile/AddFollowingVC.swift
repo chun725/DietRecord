@@ -20,10 +20,10 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         didSet {
             userImageView.loadImage(userSearchResult?.userImageURL)
             usernameLabel.text = userSearchResult?.username
-            if userSearchResult?.followers.contains(userID) != false {
+            if userSearchResult?.followers.contains(DRConstant.userID) != false {
                 followButton.setTitle("Following", for: .normal)
                 followButton.backgroundColor = .drDarkGray
-            } else if userSearchResult?.request.contains(userID) != false {
+            } else if userSearchResult?.request.contains(DRConstant.userID) != false {
                 followButton.setTitle("Requested", for: .normal)
                 followButton.backgroundColor = .drGray
             } else {
@@ -51,7 +51,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let userInput = userInputTextField.text,
-            let userData = userData
+            let userData = DRConstant.userData
         else { return }
         if !userInput.isEmpty {
             DRProgressHUD.show()
@@ -131,7 +131,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = self.userSearchResult?.userID

@@ -20,15 +20,8 @@ class DRProgressHUD {
     let hud = JGProgressHUD(style: .dark)
     
     var view: UIView {
-        /*
-        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-            let sceneDelegate = windowScene.delegate as? SceneDelegate,
-            let view = sceneDelegate.window?.rootViewController?.view
-        else { fatalError("Could not find view.") }
-        return view
-         */
         guard let window = UIApplication.shared.windows.first,
-              let view = window.rootViewController?.view
+            let view = window.rootViewController?.view
         else { return UIView() }
         return view
     }

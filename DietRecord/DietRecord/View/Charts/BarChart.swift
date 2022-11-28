@@ -31,12 +31,12 @@ class BarChart: BarChartView, ChartViewDelegate {
             self.centerXAnchor.constraint(equalTo: superview.centerXAnchor),
             self.centerYAnchor.constraint(equalTo: superview.centerYAnchor),
             self.widthAnchor.constraint(equalTo: superview.widthAnchor, multiplier: 1),
-            self.heightAnchor.constraint(equalToConstant: (fullScreenSize.width - 40) / 187 * 120 )
+            self.heightAnchor.constraint(equalToConstant: (DRConstant.fullScreenSize.width - 40) / 187 * 120 )
         ])
     }
     
     func setReportBarChart(date: String, foodDailyInputs: [FoodDailyInput]?, goal: Double) {
-        guard let date = dateFormatter.date(from: date) else { return }
+        guard let date = DRConstant.dateFormatter.date(from: date) else { return }
         let firstDate = date.advanced(by: -60 * 60 * 24 * 6)
         
         self.dragEnabled = false // 關閉拖移手勢
@@ -54,18 +54,18 @@ class BarChart: BarChartView, ChartViewDelegate {
         
         for foodDailyInput in foodDailyInputs {
             let breakfastFoods = foodDailyInput.mealRecord.first { $0.meal == 0 }?.foods
-            let breakfastCalories = calculateMacroNutrition(foods: breakfastFoods, nutrient: .calories)
+            let breakfastCalories = DRConstant.calculateMacroNutrition(foods: breakfastFoods, nutrient: .calories)
             
             let lunchFoods = foodDailyInput.mealRecord.first { $0.meal == 1 }?.foods
-            let lunchCalories = calculateMacroNutrition(foods: lunchFoods, nutrient: .calories)
+            let lunchCalories = DRConstant.calculateMacroNutrition(foods: lunchFoods, nutrient: .calories)
             
             let dinnerFoods = foodDailyInput.mealRecord.first { $0.meal == 2 }?.foods
-            let dinnerCalories = calculateMacroNutrition(foods: dinnerFoods, nutrient: .calories)
+            let dinnerCalories = DRConstant.calculateMacroNutrition(foods: dinnerFoods, nutrient: .calories)
             
             let othersFoods = foodDailyInput.mealRecord.first { $0.meal == 3 }?.foods
-            let othersCalories = calculateMacroNutrition(foods: othersFoods, nutrient: .calories)
+            let othersCalories = DRConstant.calculateMacroNutrition(foods: othersFoods, nutrient: .calories)
             
-            guard let dietDate = dateFormatter.date(from: foodDailyInput.mealRecord[0].date) else { return }
+            guard let dietDate = DRConstant.dateFormatter.date(from: foodDailyInput.mealRecord[0].date) else { return }
             let xValue = Double(firstDate.distance(to: dietDate)) / (60 * 60 * 24)
             let entry = BarChartDataEntry(
                 x: xValue,
@@ -110,11 +110,11 @@ class BarChart: BarChartView, ChartViewDelegate {
     func setWaterBarChart(waterRecords: [WaterRecord]) {
         var dataEntries: [BarChartDataEntry] = []
         guard let dateFirst = waterRecords.first,
-            let firstDate = dateFormatter.date(from: dateFirst.date)
+            let firstDate = DRConstant.dateFormatter.date(from: dateFirst.date)
         else { return }
         
         for waterRecord in waterRecords {
-            guard let waterDate = dateFormatter.date(from: waterRecord.date) else { return }
+            guard let waterDate = DRConstant.dateFormatter.date(from: waterRecord.date) else { return }
             let xValue = Double(firstDate.distance(to: waterDate)) / (60 * 60 * 24)
             let yValue = waterRecord.water.transformToDouble()
             dataEntries.append(BarChartDataEntry(x: xValue, y: yValue))
@@ -146,12 +146,12 @@ class BarChart: BarChartView, ChartViewDelegate {
     
     private func configureBarChart(firstDate: Date, chartData: BarChartData) {
         self.referenceTimeInterval = firstDate.timeIntervalSince1970
-        barChartDateFormatter.dateFormat = "MM/dd"
-        barChartDateFormatter.locale = .current
+                DRConstant.barChartDateFormatter.dateFormat = "MM/dd"
+                DRConstant.barChartDateFormatter.locale = .current
         
         let xValuesNumberFormatter = ChartXAxisFormatter(
             referenceTimeInterval: referenceTimeInterval,
-            dateFormatter: barChartDateFormatter)
+            dateFormatter:         DRConstant.barChartDateFormatter)
         self.xAxis.valueFormatter = xValuesNumberFormatter
         self.data = chartData
         self.drawGridBackgroundEnabled = false // 要不要有背景

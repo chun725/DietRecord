@@ -35,7 +35,7 @@ class CaloriesPieChartCell: UITableViewCell {
     weak var controller: DietRecordVC?
     
     func layoutCell(carbs: Double, protein: Double, fat: Double) {
-        guard let userData = userData else { return }
+        guard let userData = DRConstant.userData else { return }
         let carbsPersent = carbs / userData.goal[1].transformToDouble()
         let proteinPersent = protein / userData.goal[2].transformToDouble()
         let fatPersent = fat / userData.goal[3].transformToDouble()

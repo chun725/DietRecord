@@ -22,6 +22,7 @@ class FoodNutritionCell: UITableViewCell {
     @IBOutlet weak var sodiumLabel: UILabel!
     @IBOutlet weak var potassiumLabel: UILabel!
     @IBOutlet weak var grayBackgroundView: UIView!
+    @IBOutlet weak var nutritionLabel: UILabel!
     
     func layoutCell(food: FoodIngredient) {
         let nutrition = food.nutrientContent
@@ -38,6 +39,7 @@ class FoodNutritionCell: UITableViewCell {
         cholesterolLabel.text = nutrition.cholesterol.transform(unit: Units.mgUnit.rawValue)
         sodiumLabel.text = nutrition.sodium.transform(unit: Units.mgUnit.rawValue)
         potassiumLabel.text = nutrition.potassium.transform(unit: Units.mgUnit.rawValue)
-        grayBackgroundView.setShadowAndRadius(radius: 0)
+        grayBackgroundView.setShadowAndRadius(radius: 10)
+        nutritionLabel.layer.cornerRadius = 10
     }
 }

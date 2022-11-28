@@ -25,7 +25,7 @@ class WeightCell: UITableViewCell {
         flatView.layer.cornerRadius = 2
         dateLabel.text = DRConstant.dateFormatter.string(from: weightData.date)
         weightLabel.text = weightData.value.format().transform(unit: Units.kgUnit.rawValue)
-        whiteBackgroundView.setShadowAndRadius(radius: 20)
+        whiteBackgroundView.setShadowAndRadius(radius: 10)
         self.backgroundColor = .clear
     }
 }

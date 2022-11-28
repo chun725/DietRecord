@@ -27,6 +27,8 @@ class GoalVC: UIViewController {
         proteinLabel.text = DRConstant.userData?.goal[2].transform(unit: Units.gUnit.rawValue)
         fatLabel.text = DRConstant.userData?.goal[3].transform(unit: Units.gUnit.rawValue)
         whiteBackgroundView.setShadowAndRadius(radius: 10)
+        inputButton.layer.cornerRadius = 10
+        automaticButton.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {

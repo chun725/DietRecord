@@ -25,6 +25,8 @@ class FoodDailyCell: UITableViewCell {
     var mealRecord: MealRecord?
     
     func layoutCell(foods: [Food]) {
+        commentTextView.layer.cornerRadius = 10
+        mealImageView.layer.cornerRadius = 10
         switchButton.tintColor = .drGray
         switchButton.onTintColor = .drYellow
         switchButton.addTarget(self, action: #selector(changeShared), for: .valueChanged)

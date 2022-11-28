@@ -35,6 +35,7 @@ class DietRecordCell: UITableViewCell {
     }
     
     func layoutCell(mealRecord: MealRecord?) {
+        mealImage.layer.cornerRadius = 10
         whiteBackgroundView.setShadowAndRadius(radius: 10)
         mealLabel.clipsToBounds = true
         mealLabel.layer.cornerRadius = 10

@@ -58,7 +58,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             case .success(let users):
                 self.requests = users
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法獲得資料")
+                DRProgressHUD.showFailure(text: "無法獲得資料")
                 print("Error Info: \(error).")
             }
         }

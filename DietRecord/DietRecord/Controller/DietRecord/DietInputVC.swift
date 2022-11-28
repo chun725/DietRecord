@@ -122,7 +122,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         } else if imageURL == nil && isShared {
             self.presentInputAlert(title: "若要分享到個人頁面，需新增相片")
         } else {
-            LKProgressHUD.show()
+            DRProgressHUD.show()
             guard let index = Meal.allCases.map({ $0.rawValue }).firstIndex(of: meal) else { return }
             let mealRecord = MealRecord(
                 userID: userID,
@@ -140,11 +140,11 @@ class DietInputVC: UIViewController, UITableViewDataSource {
                 mealRecord: mealRecord) { result in
                 switch result {
                 case .success:
-                    LKProgressHUD.showSuccess(text: "儲存成功")
+                    DRProgressHUD.showSuccess(text: "儲存成功")
                     self.closure?(date)
                     self.navigationController?.popViewController(animated: false)
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存失敗")
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }

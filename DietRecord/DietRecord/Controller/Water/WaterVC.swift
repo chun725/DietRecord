@@ -106,7 +106,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
                     self.waterCurrent = waterRecord.water.transformToDouble()
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取飲水量資料")
+                DRProgressHUD.showFailure(text: "無法讀取飲水量資料")
                 print("Error Info: \(error)")
             }
         }

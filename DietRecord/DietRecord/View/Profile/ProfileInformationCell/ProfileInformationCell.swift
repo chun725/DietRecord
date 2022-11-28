@@ -186,9 +186,9 @@ extension ProfileInformationCell: UITextFieldDelegate {
                 self.checkImageView.isHidden = false
                 self.infoImageView.isHidden = true
             } else {
-                LKProgressHUD.show()
+                DRProgressHUD.show()
                 profileProvider.fetchUserSelfID(selfID: textField.text ?? "") { result in
-                    LKProgressHUD.dismiss()
+                    DRProgressHUD.dismiss()
                     switch result {
                     case .success(let success):
                         if success {

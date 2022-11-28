@@ -147,17 +147,17 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func fetchWeightRecord() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { result in
             switch result {
             case .success(let weightDatas):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 self.weightRecord = weightDatas
                 self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                 self.weightTableView.reloadData()
                 self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取體重資料")
+                DRProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")
             }
         }

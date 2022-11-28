@@ -149,7 +149,7 @@ extension LoginVC: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
-        LKProgressHUD.showFailure(text: "登入失敗")
+        DRProgressHUD.showFailure(text: "登入失敗")
     }
 }
 
@@ -184,11 +184,11 @@ extension LoginVC {
         let email = user.email
         print("------\(uid)")
         print("------\(email ?? "")")
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         profileProvider.fetchUserData(userID: userID) { result in
             switch result {
             case .success(let result):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 if let result = result as? String, result == "document不存在" {
                     let storyboard = UIStoryboard(name: profile, bundle: nil)
                     if let profileInfoPage = storyboard.instantiateViewController(
@@ -206,7 +206,7 @@ extension LoginVC {
                     }
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法登入")
+                DRProgressHUD.showFailure(text: "無法登入")
                 print("Error Info: \(error).")
             }
         }

@@ -48,7 +48,7 @@ class ProfileDetailCell: UITableViewCell {
         mealImageView.loadImage(mealRecord.imageURL)
         mealCommentLabel.text = mealRecord.comment
         likedCountLabel.text = "\(mealRecord.peopleLiked.count)"
-        guard let userData = userData else { return }
+        guard let userData = DRConstant.userData else { return }
         let responses = mealRecord.response.filter { !(userData.blocks.contains($0.person)) }
         responseCountLabel.text = "\(responses.count)"
         likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
@@ -71,10 +71,10 @@ class ProfileDetailCell: UITableViewCell {
             timeLabel.text = mealRecord.date + " " + mealString
             responseButton.addTarget(self, action: #selector(beginResponse), for: .touchUpInside)
         } else {
-            timeLabel.text = dateFormatter.string(from: mealRecord.createdTime)
+            timeLabel.text = DRConstant.dateFormatter.string(from: mealRecord.createdTime)
             responseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         }
-        if mealRecord.peopleLiked.contains(userID) {
+        if mealRecord.peopleLiked.contains(DRConstant.userID) {
             likeButton.setBackgroundImage(
                 UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate),
                 for: .normal)
@@ -115,7 +115,7 @@ class ProfileDetailCell: UITableViewCell {
             }
         }
         moreButton.removeTarget(nil, action: nil, for: .touchUpInside)
-        if mealRecord.userID == userID {
+        if mealRecord.userID == DRConstant.userID {
             moreButton.addTarget(self, action: #selector(deletePost), for: .touchUpInside)
         } else {
             moreButton.addTarget(self, action: #selector(reportOrBlock), for: .touchUpInside)
@@ -216,7 +216,7 @@ class ProfileDetailCell: UITableViewCell {
     }
     
     @objc func goToProfileDetailPage() {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
@@ -225,7 +225,7 @@ class ProfileDetailCell: UITableViewCell {
     }
     
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
@@ -266,7 +266,7 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             guard let food = mealRecord?.foods[indexPath.row] else { return }

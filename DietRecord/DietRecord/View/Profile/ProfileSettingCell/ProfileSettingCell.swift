@@ -24,18 +24,18 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     let profileProvider = ProfileProvider()
     
     func layoutCell() {
-        guard let userData = userData else { return }
+        guard let userData = DRConstant.userData else { return }
         usernameLabel.text = userData.username
-        waterGoalLabel.text = userData.waterGoal.transform(unit: mLUnit)
-        weightGoalLabel.text = userData.weightGoal.transform(unit: kgUnit)
-        dietGoalLabel.text = userData.goal[0].transform(unit: kcalUnit)
+        waterGoalLabel.text = userData.waterGoal.transform(unit: Units.mLUnit.rawValue)
+        weightGoalLabel.text = userData.weightGoal.transform(unit: Units.kgUnit.rawValue)
+        dietGoalLabel.text = userData.goal[0].transform(unit: Units.kcalUnit.rawValue)
         userImageView.loadImage(userData.userImageURL)
-        userImageView.layer.cornerRadius = fullScreenSize.width / 414 * 100 / 2
+        userImageView.layer.cornerRadius = DRConstant.fullScreenSize.width / 414 * 100 / 2
         infoBackgroundView.setShadowAndRadius(radius: 15)
     }
     
     @IBAction func editInfo(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let profileInfoPage = storyboard.instantiateViewController(
             withIdentifier: "\(ProfileInformationVC.self)")
             as? ProfileInformationVC {
@@ -45,7 +45,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     }
     
     @IBAction func blockUsers(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let blockUsersPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
             blockUsersPage.need = "BlockUsers"
@@ -71,8 +71,8 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
-            userID = ""
-            userData = nil
+            DRConstant.userID = ""
+            DRConstant.userData = nil
             controller?.tabBarController?.navigationController?.popToRootViewController(animated: false)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
@@ -94,9 +94,9 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     }
     
     private func deleteAccount() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         let firebaseAuth = Auth.auth()
-        guard let nowUserData = userData else { return }
+        guard let nowUserData = DRConstant.userData else { return }
         let allUsers = nowUserData.followers + nowUserData.following
         profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
             switch result {
@@ -107,9 +107,9 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
                     self?.profileProvider.deleteAccount { result in
                         switch result {
                         case .success:
-                            userID = ""
-                            userData = nil
-                            LKProgressHUD.showSuccess(text: "刪除帳號完成")
+                            DRConstant.userID = ""
+                            DRConstant.userData = nil
+                            DRProgressHUD.showSuccess(text: "刪除帳號完成")
                             sleep(2)
                             self?.controller?
                                 .tabBarController?
@@ -195,7 +195,7 @@ extension ProfileSettingCell: ASAuthorizationControllerDelegate, ASAuthorization
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
-        LKProgressHUD.showFailure(text: "登入失敗")
+        DRProgressHUD.showFailure(text: "登入失敗")
     }
     
     private func getRefreshToken(authorizationCode: String) {
@@ -214,7 +214,7 @@ extension ProfileSettingCell: ASAuthorizationControllerDelegate, ASAuthorization
             
             guard (200 ... 299) ~= response.statusCode,
                 let data = data,
-                let refreshToken = try? decoder.decode(TokenResponse.self, from: data).refreshToken
+                let refreshToken = try? DRConstant.decoder.decode(TokenResponse.self, from: data).refreshToken
             else {
                 print("=======statusCode should be 2xx, but is \(response.statusCode)")
                 print("response = \(response)")

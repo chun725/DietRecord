@@ -18,7 +18,7 @@ class WaterHistoryVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         fetchWaterRecord()
         lottieView.loopMode = .loop
         lottieView.animationSpeed = 0.8
@@ -38,7 +38,7 @@ class WaterHistoryVC: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let waterRecords):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 let barChart = BarChart(frame: .zero, superview: self.waterHistoryBarChart)
                 barChart.setWaterBarChart(waterRecords: waterRecords)
                 if waterRecords.count > 7 {
@@ -50,7 +50,7 @@ class WaterHistoryVC: UIViewController {
                     }
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取飲水量記錄")
+                DRProgressHUD.showFailure(text: "無法讀取飲水量記錄")
                 print("Error Info: \(error).")
             }
         }

@@ -8,20 +8,24 @@
 import WidgetKit
 import SwiftUI
 
-let dateFormatter = DateFormatter()
-let decoder = JSONDecoder()
-let userDefaults = UserDefaults(suiteName: "group.chun.DietRecord")
+struct WidgetConstant {
+    static let dateFormatter = DateFormatter()
+    static let decoder = JSONDecoder()
+    static let userDefaults = UserDefaults(suiteName: "group.chun.DietRecord")
+    static let waterImage = "WaterImage"
+    static let dietImage = "DietImage"
+}
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        guard let imagePath = Bundle.main.url(forResource: "WaterImage", withExtension: ".png"),
+        guard let imagePath = Bundle.main.url(forResource: WidgetConstant.waterImage, withExtension: ".png"),
             let imageData = try? Data(contentsOf: imagePath)
         else { fatalError("Could not find water image.") }
         return SimpleEntry(date: Date(), imageData: imageData)
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SimpleEntry) -> Void) {
-        guard let imagePath = Bundle.main.url(forResource: "WaterImage", withExtension: ".png"),
+        guard let imagePath = Bundle.main.url(forResource: WidgetConstant.waterImage, withExtension: ".png"),
             let imageData = try? Data(contentsOf: imagePath)
         else { fatalError("Could not find water image.") }
         let entry = SimpleEntry(date: Date(), imageData: imageData)
@@ -29,22 +33,22 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> Void) {
-        dateFormatter.locale = .current
-        dateFormatter.dateFormat = "yyyy-MM-dd"
+        WidgetConstant.dateFormatter.locale = .current
+        WidgetConstant.dateFormatter.dateFormat = "yyyy-MM-dd"
         var entries: [SimpleEntry] = []
         let currentDate = Date()
-        let currentDateString = dateFormatter.string(from: currentDate)
-        let refreshDate = dateFormatter.date(from: currentDateString)?.advanced(by: 60 * 60 * 24)
+        let currentDateString = WidgetConstant.dateFormatter.string(from: currentDate)
+        let refreshDate = WidgetConstant.dateFormatter.date(from: currentDateString)?.advanced(by: 60 * 60 * 24)
         
-        let waterReloadDate = userDefaults?.string(forKey: "WaterDate")
+        let waterReloadDate = WidgetConstant.userDefaults?.string(forKey: "WaterDate")
         if currentDateString == waterReloadDate {
-            guard let imageData = userDefaults?.value(forKey: "WaterImage") as? Data,
-                let data = try? decoder.decode(Data.self, from: imageData)
+            guard let imageData = WidgetConstant.userDefaults?.value(forKey: WidgetConstant.waterImage) as? Data,
+                  let data = try? WidgetConstant.decoder.decode(Data.self, from: imageData)
             else { fatalError("Could not find update image.") }
             let entry = SimpleEntry(date: currentDate, imageData: data)
             entries.append(entry)
         } else {
-            guard let imagePath = Bundle.main.url(forResource: "WaterImage", withExtension: ".png"),
+            guard let imagePath = Bundle.main.url(forResource: WidgetConstant.waterImage, withExtension: ".png"),
                 let imageData = try? Data(contentsOf: imagePath)
             else { fatalError("Could not find water image.") }
             let entry = SimpleEntry(date: currentDate, imageData: imageData)
@@ -93,7 +97,7 @@ struct ChartViewWidget_Previews: PreviewProvider {
     static var previews: some View {
         ChartViewWidgetEntryView(entry: SimpleEntry(
             date: Date(),
-            imageData: (UIImage(named: "WaterImage")?.pngData())!))
+            imageData: (UIImage(named: WidgetConstant.waterImage)?.pngData())!))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }

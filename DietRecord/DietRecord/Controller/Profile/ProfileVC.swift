@@ -68,15 +68,15 @@ class ProfileVC: UIViewController {
     }
     
     func fetchDietRecord() {
-        LKProgressHUD.show()
-        var id = userID
+        DRProgressHUD.show()
+        var id = DRConstant.userID
         if let otherUserID = otherUserID {
             id = otherUserID
         }
         profileProvider.fetchImage(userID: id) { result in
             switch result {
             case .success(let dietRecords):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 var mealDatas: [MealRecord] = []
                 for dietRecord in dietRecords {
                     let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
@@ -84,15 +84,15 @@ class ProfileVC: UIViewController {
                 }
                 self.mealRecords = mealDatas.reversed()
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取用戶資料")
+                DRProgressHUD.showFailure(text: "無法讀取用戶資料")
                 print("Error Info: \(error).")
             }
         }
     }
     
     func fetchData() {
-        LKProgressHUD.show()
-        var id = userID
+        DRProgressHUD.show()
+        var id = DRConstant.userID
         if let otherUserID = otherUserID {
             id = otherUserID
         }
@@ -100,7 +100,7 @@ class ProfileVC: UIViewController {
             guard let self = self else { return }
             switch result {
             case .success(let user):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 guard let user = user as? User else { return }
                 self.followersLabel.text = String(user.followers.count)
                 self.followingLabel.text = String(user.following.count)
@@ -108,18 +108,18 @@ class ProfileVC: UIViewController {
                 self.userImageView.loadImage(user.userImageURL)
                 self.titleLabel.text = user.userSelfID
                 self.presentView(views: [self.userImageView, self.followStackView, self.editButton])
-                if id == userID {
-                    userData = user
+                if id == DRConstant.userID {
+                    DRConstant.userData = user
                 } else {
                     self.otherUserData = user
                 }
-                if user.userID == userID {
+                if user.userID == DRConstant.userID {
                     self.photoCollectionView.isHidden = false
                     self.editButton.setTitle("查看個人資料", for: .normal)
-                } else if user.followers.contains(userID) {
+                } else if user.followers.contains(DRConstant.userID) {
                     self.photoCollectionView.isHidden = false
                     self.editButton.setTitle("Following", for: .normal)
-                } else if user.request.contains(userID) {
+                } else if user.request.contains(DRConstant.userID) {
                     self.editButton.setTitle("Requested", for: .normal)
                     self.editButton.backgroundColor = .drGray
                     self.followersButton.isEnabled = false
@@ -130,17 +130,17 @@ class ProfileVC: UIViewController {
                     self.followingButton.isEnabled = false
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取用戶資料")
+                DRProgressHUD.showFailure(text: "無法讀取用戶資料")
                 print("Error Info: \(error).")
             }
         }
     }
     
     @IBAction func goToCheckRequestPage(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
-            var id = userID
+            var id = DRConstant.userID
             if let otherUserID = otherUserID {
                 id = otherUserID
             }
@@ -156,7 +156,7 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func goToAddFollowingPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let addFollowingPage = storyboard.instantiateViewController(withIdentifier: "\(AddFollowingVC.self)")
             as? AddFollowingVC {
             self.navigationController?.pushViewController(addFollowingPage, animated: false)
@@ -164,7 +164,7 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func goToHomePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let homePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileHomePageVC.self)")
             as? ProfileHomePageVC {
             self.navigationController?.pushViewController(homePage, animated: false)
@@ -211,7 +211,7 @@ class ProfileVC: UIViewController {
         guard let otherUserID = otherUserID,
             let otherUserData = otherUserData
         else {
-            let storyboard = UIStoryboard(name: profile, bundle: nil)
+            let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
             if let profileSettingPage = storyboard.instantiateViewController(
                 withIdentifier: "\(ProfileSettingVC.self)")
                 as? ProfileSettingVC {
@@ -284,14 +284,14 @@ extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     // MARK: - CollectionViewDelegate -
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mealRecord = mealRecords[indexPath.row]
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
             if let otherUserData = otherUserData {
                 profileDetailPage.nowUserData = otherUserData
             } else {
-                profileDetailPage.nowUserData = userData
+                profileDetailPage.nowUserData = DRConstant.userData
             }
             self.navigationController?.pushViewController(profileDetailPage, animated: false)
         }
@@ -299,7 +299,7 @@ extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     
     // MARK: - DelegateFlowLayout -
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = (fullScreenSize.width - 10) / 3
+        let width = (DRConstant.fullScreenSize.width - 10) / 3
         let size = CGSize(width: width, height: width)
         return size
     }

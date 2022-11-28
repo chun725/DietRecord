@@ -35,6 +35,7 @@ class DietRecordCell: UITableViewCell {
     }
     
     func layoutCell(mealRecord: MealRecord?) {
+        mealImage.layer.cornerRadius = 10
         whiteBackgroundView.setShadowAndRadius(radius: 10)
         mealLabel.clipsToBounds = true
         mealLabel.layer.cornerRadius = 10
@@ -49,32 +50,35 @@ class DietRecordCell: UITableViewCell {
                     calories: food.foodIngredient.nutrientContent.calories)
             }
             caloriesLabel.isHidden = false
-            caloriesLabel.text = calculateMacroNutrition(
+            caloriesLabel.text = DRConstant.calculateMacroNutrition(
                 foods: mealRecord.foods,
-                nutrient: .calories).format().transform(unit: kcalUnit)
+                nutrient: .calories)
+            .format()
+            .transform(
+                unit: Units.kcalUnit.rawValue)
             foodStackViewHeightConstraint.constant = CGFloat(mealRecord.foods.count * 40)
             if let imageURL = mealRecord.imageURL {
                 mealImage.loadImage(imageURL)
                 commentTopConstraint.constant = 202
-                photoTitleLabel.isHidden = false
-                mealImage.isHidden = false
+                self.presentView(views: [photoTitleLabel, mealImage])
             } else {
                 commentTopConstraint.constant = 8
-                photoTitleLabel.isHidden = true
-                mealImage.isHidden = true
+                self.hiddenView(views: [photoTitleLabel, mealImage])
             }
             
             if !mealRecord.comment.isEmpty {
                 commentLabel.text = mealRecord.comment
                 commentButtomConstraint.constant = 36
                 commentLabelButtomConstraint.constant = 16
-                commentLabel.isHidden = false
-                commentTitleLabel.isHidden = false
+                self.presentView(views: [commentLabel, commentTitleLabel])
+            } else if mealRecord.comment.isEmpty && mealRecord.imageURL != nil {
+                commentButtomConstraint.constant = 0
+                commentLabelButtomConstraint.constant = 16
+                self.hiddenView(views: [commentLabel, commentTitleLabel])
             } else {
                 commentButtomConstraint.constant = 0
                 commentLabelButtomConstraint.constant = 0
-                commentLabel.isHidden = true
-                commentTitleLabel.isHidden = true
+                self.hiddenView(views: [commentLabel, commentTitleLabel])
             }
         }
     }

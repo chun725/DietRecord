@@ -410,6 +410,7 @@
                 <outlet property="fiberLabel" destination="VbS-k1-0s4" id="uUW-h7-9CT"/>
                 <outlet property="grayBackgroundView" destination="cuh-2d-dTD" id="rtG-94-qfW"/>
                 <outlet property="monounsaturatedLabel" destination="FAE-qq-TFA" id="acu-nY-Z3n"/>
+                <outlet property="nutritionLabel" destination="t1T-aa-x6l" id="HD8-SC-RbO"/>
                 <outlet property="polyunsaturatedLabel" destination="Dux-Do-KoE" id="d2p-RS-8tH"/>
                 <outlet property="potassiumLabel" destination="Q06-SC-swA" id="ypZ-F9-HNa"/>
                 <outlet property="proteinLabel" destination="Pur-yu-4ZD" id="uQn-jX-i0x"/>

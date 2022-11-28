@@ -58,7 +58,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func goToFoodNutritionPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             foodNutritionPage.newFood = foodSearchResults[sender.tag]
@@ -70,7 +70,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func modifyQtyOfFood(sender: UIButton) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             foodNutritionPage.chooseFood = chooseFoods[sender.tag]
@@ -98,7 +98,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
                 switch result {
                 case .success(let foods):
                     if foods.isEmpty {
-                        LKProgressHUD.showFailure(text: "無此食物")
+                        DRProgressHUD.showFailure(text: "無此食物")
                     } else {
                         self.foodSearchResults = foods
                     }

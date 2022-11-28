@@ -24,7 +24,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
         if !isUpdated {
             goBackButton.isHidden = true
         } else {
-            self.user = userData
+            self.user = DRConstant.userData
             goBackButton.isHidden = false
             goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         }
@@ -40,18 +40,18 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func createUserInfo() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         guard let user = user else { return }
         if user.userSelfID.isEmpty || user.username.isEmpty || user.weightGoal.isEmpty
             || user.waterGoal.isEmpty || user.goal.isEmpty {
-            LKProgressHUD.dismiss()
+            DRProgressHUD.dismiss()
             self.presentInputAlert(title: "請輸入完整資料")
         } else {
             profileProvider.createUserInfo(userData: user) { result in
                 switch result {
                 case .success:
-                    userData = user
-                    LKProgressHUD.showSuccess()
+                    DRConstant.userData = user
+                    DRProgressHUD.showSuccess()
                     if !self.isUpdated {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         if let tabbarController = storyboard.instantiateViewController(
@@ -63,7 +63,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
                         self.navigationController?.popViewController(animated: false)
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存資料失敗")
+                    DRProgressHUD.showFailure(text: "儲存資料失敗")
                     print("Error Info: \(error).")
                 }
             }
@@ -79,7 +79,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
             withIdentifier: ProfileInformationCell.reuseIdentifier, for: indexPath) as? ProfileInformationCell
         else { fatalError("Could not create the profile information cell.") }
         if isUpdated {
-            guard let userData = userData else { fatalError("Could not find user data.") }
+            guard let userData = DRConstant.userData else { fatalError("Could not find user data.") }
             cell.user = userData
             cell.goal = userData.goal
         }

@@ -15,13 +15,13 @@ class WaterVC: UIViewController, UITableViewDataSource {
     
     var waterCurrent: Double = 0.0
     
-    var waterGoal: Double = userData?.waterGoal.transformToDouble() ?? 0.0 {
+    var waterGoal: Double = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0 {
         didSet {
             waterTableView.reloadData()
         }
     }
     
-    var reminders = userDefault.array(forKey: waterReminder) as? [String] {
+    var reminders =                 DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String] {
         didSet {
             waterTableView.reloadData()
         }
@@ -42,7 +42,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToHistoryPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: water, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
         if let waterHistoryPage = storyboard.instantiateViewController(withIdentifier: "\(WaterHistoryVC.self)")
             as? WaterHistoryVC {
             present(waterHistoryPage, animated: false)
@@ -52,25 +52,25 @@ class WaterVC: UIViewController, UITableViewDataSource {
     // MARK: - WaterWidget -
     func changeImage() {
         guard let image = self.pieChartView?.takeScreenshot(),
-            let imageData = try? encoder.encode(image.pngData())
+            let imageData = try? DRConstant.encoder.encode(image.pngData())
         else { fatalError("Could not find the image of water pie chart view.") }
-        groupUserDefaults?.set(
-            dateFormatter.string(from: Date()),
+            DRConstant.groupUserDefaults?.set(
+            DRConstant.dateFormatter.string(from: Date()),
             forKey: GroupUserDefault.waterDate.rawValue)
-        groupUserDefaults?.set(
+            DRConstant.groupUserDefaults?.set(
             imageData,
             forKey: GroupUserDefault.waterImage.rawValue)
         WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.firstWidgetName.rawValue)
     }
     
     @objc func goToWaterInputVC(sender: UIButton) {
-        let storyboard = UIStoryboard(name: water, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
         if let waterInputPage = storyboard.instantiateViewController(withIdentifier: "\(WaterInputVC.self)")
             as? WaterInputVC {
             if sender.tag == 1 {
                 waterInputPage.isWaterInput = false
                 waterInputPage.closure = { [weak self] _ in
-                    self?.reminders = userDefault.array(forKey: waterReminder) as? [String]
+                    self?.reminders =                 DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
                 }
             } else {
                 waterInputPage.waterCurrent = self.waterCurrent
@@ -89,11 +89,11 @@ class WaterVC: UIViewController, UITableViewDataSource {
         guard var reminders = reminders else { return }
         let time = reminders[sender.tag]
         reminders.remove(at: sender.tag)
-        userDefault.set(reminders, forKey: waterReminder)
-        self.reminders = userDefault.array(forKey: waterReminder) as? [String]
-        print(waterReminderNotification + time)
+                        DRConstant.userDefault.set(reminders, forKey: DRConstant.waterReminder)
+        self.reminders =                 DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
+        print(DRConstant.waterReminderNotification + time)
         UNUserNotificationCenter.current().removePendingNotificationRequests(
-            withIdentifiers: [waterReminderNotification + time])
+            withIdentifiers: [DRConstant.waterReminderNotification + time])
     }
     
     func fetchWaterRecord() {
@@ -101,12 +101,12 @@ class WaterVC: UIViewController, UITableViewDataSource {
             switch result {
             case .success(let data):
                 self.isLoading = false
-                self.waterGoal = userData?.waterGoal.transformToDouble() ?? 0.0
+                self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
                 if let waterRecord = data as? WaterRecord {
                     self.waterCurrent = waterRecord.water.transformToDouble()
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取飲水量資料")
+                DRProgressHUD.showFailure(text: "無法讀取飲水量資料")
                 print("Error Info: \(error)")
             }
         }

@@ -24,7 +24,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Food" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eVb-rl-N5I">
                                 <rect key="frame" x="8" y="8" width="96" height="16"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="16" id="5yP-uJ-e0I"/>
+                                    <constraint firstAttribute="height" constant="16" id="qoj-sR-18F"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="14"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

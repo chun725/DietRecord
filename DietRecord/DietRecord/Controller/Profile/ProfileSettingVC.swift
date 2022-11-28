@@ -13,7 +13,7 @@ class ProfileSettingVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTableView.dataSource = self
-        userSelfIDLabel.text = userData?.userSelfID
+        userSelfIDLabel.text = DRConstant.userData?.userSelfID
     }
     
     override func viewWillAppear(_ animated: Bool) {

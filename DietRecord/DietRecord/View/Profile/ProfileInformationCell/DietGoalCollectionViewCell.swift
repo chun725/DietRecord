@@ -15,9 +15,9 @@ class DietGoalCollectionViewCell: UICollectionViewCell {
     func layoutCell(row: Int, goal: String) {
         titleLabel.text = MacroNutrient.allCases[row].rawValue
         if row == 0 {
-            goalLabel.text = goal.transform(unit: kcalUnit)
+            goalLabel.text = goal.transform(unit: Units.kcalUnit.rawValue)
         } else {
-            goalLabel.text = goal.transform(unit: gUnit)
+            goalLabel.text = goal.transform(unit: Units.gUnit.rawValue)
         }
         grayBackgroundView.setBorder(width: 1, color: .drDarkGray, radius: 5)
     }

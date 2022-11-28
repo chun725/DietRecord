@@ -57,8 +57,8 @@ class WaterInputVC: UIViewController {
             imageView.image = UIImage(named: "Image_Reminder")
             waterInputView.isHidden = true
             saveButton.addTarget(self, action: #selector(saveReminder), for: .touchUpInside)
-            timeDateFormatter.dateFormat = "HH:mm"
-            let dateString = timeDateFormatter.string(from: Date())
+                        DRConstant.timeDateFormatter.dateFormat = "HH:mm"
+            let dateString =             DRConstant.timeDateFormatter.string(from: Date())
             let date = dateString.components(separatedBy: ":")
             let indexHour = Int(date[0]) ?? 0
             let indexMinute = Int(date[1]) ?? 0
@@ -72,12 +72,12 @@ class WaterInputVC: UIViewController {
         waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
             switch result {
             case .success:
-                LKProgressHUD.showSuccess()
+                DRProgressHUD.showSuccess()
                 self.closure?(waterGoal.transformToDouble())
-                userData?.waterGoal = waterGoal
+                DRConstant.userData?.waterGoal = waterGoal
                 self.dismiss(animated: false)
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "儲存失敗")
+                DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
             }
         }
@@ -91,11 +91,11 @@ class WaterInputVC: UIViewController {
         waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { result in
             switch result {
             case .success:
-                LKProgressHUD.showSuccess()
+                DRProgressHUD.showSuccess()
                 self.closure?(totalWater)
                 self.dismiss(animated: false)
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "儲存失敗")
+                DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
             }
         }
@@ -123,19 +123,19 @@ class WaterInputVC: UIViewController {
         let dateComponent = DateComponents(timeZone: .current, hour: hourIndex, minute: minuteIndex)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
         let request = UNNotificationRequest(
-            identifier: waterReminderNotification + timeString,
+            identifier: DRConstant.waterReminderNotification + timeString,
             content: content,
             trigger: trigger)
-        var reminders = userDefault.array(forKey: waterReminder) as? [String]
+        var reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
         if reminders == nil {
-            userDefault.set([timeString], forKey: waterReminder)
+            DRConstant.userDefault.set([timeString], forKey: DRConstant.waterReminder)
         } else {
             reminders?.append(timeString)
             reminders = reminders?.sorted()
-            userDefault.set(reminders, forKey: waterReminder)
+            DRConstant.userDefault.set(reminders, forKey: DRConstant.waterReminder)
         }
         UNUserNotificationCenter.current().add(request)
-        LKProgressHUD.showSuccess()
+        DRProgressHUD.showSuccess()
         self.closure?(0.0)
         self.dismiss(animated: false)
     }

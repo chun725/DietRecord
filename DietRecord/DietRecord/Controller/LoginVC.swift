@@ -149,7 +149,7 @@ extension LoginVC: ASAuthorizationControllerDelegate {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print(error.localizedDescription)
-        LKProgressHUD.showFailure(text: "登入失敗")
+        DRProgressHUD.showFailure(text: "登入失敗")
     }
 }
 
@@ -180,24 +180,24 @@ extension LoginVC {
             return
         }
         let uid = user.uid
-        userID = uid
+        DRConstant.userID = uid
         let email = user.email
         print("------\(uid)")
         print("------\(email ?? "")")
-        LKProgressHUD.show()
-        profileProvider.fetchUserData(userID: userID) { result in
+        DRProgressHUD.show()
+        profileProvider.fetchUserData(userID: DRConstant.userID) { result in
             switch result {
             case .success(let result):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 if let result = result as? String, result == "document不存在" {
-                    let storyboard = UIStoryboard(name: profile, bundle: nil)
+                    let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
                     if let profileInfoPage = storyboard.instantiateViewController(
                         withIdentifier: "\(ProfileInformationVC.self)")
                         as? ProfileInformationVC {
                         self.navigationController?.pushViewController(profileInfoPage, animated: false)
                     }
                 } else if let user = result as? User {
-                    userData = user
+                    DRConstant.userData = user
                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
                     if let tabbarController = storyboard.instantiateViewController(
                         withIdentifier: "\(TabBarController.self)")
@@ -206,7 +206,7 @@ extension LoginVC {
                     }
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法登入")
+                DRProgressHUD.showFailure(text: "無法登入")
                 print("Error Info: \(error).")
             }
         }

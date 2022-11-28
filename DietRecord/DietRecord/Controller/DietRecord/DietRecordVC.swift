@@ -28,7 +28,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         dietRecordTableView.dataSource = self
         dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
         dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
-        dateTextField.text = dateFormatter.string(from: Date())
+        dateTextField.text = DRConstant.dateFormatter.string(from: Date())
         changeDate()
         createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
     }
@@ -39,7 +39,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func goToDietInputPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
             as? DietInputVC {
             if sender != createDietRecordButton {
@@ -56,7 +56,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
             as? ChooseDateVC {
             chooseDatePage.date = self.dateTextField.text
@@ -71,7 +71,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func changeDate() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         self.isLoading = true
         self.meals = []
         guard let date = dateTextField.text else { return }
@@ -80,7 +80,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             case .success(let data):
                 self.isLoading = false
                 if data as? String == "Document doesn't exist." {
-                    LKProgressHUD.dismiss()
+                    DRProgressHUD.dismiss()
                     self.meals = []
                     self.totalFoods = []
                     self.changeDietImage()
@@ -89,10 +89,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                     self.meals = dietRecordData.mealRecord.sorted { $0.meal < $1.meal }
                     self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
                     self.changeDietImage()
-                    LKProgressHUD.dismiss()
+                    DRProgressHUD.dismiss()
                 }
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "找不到飲食紀錄")
+                DRProgressHUD.showFailure(text: "找不到飲食紀錄")
                 print("Error Info: \(error).")
             }
         }
@@ -102,14 +102,14 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     func changeDietImage() {
         self.dietRecordTableView.reloadData()
         self.dietRecordTableView.layoutIfNeeded()
-        if dateTextField.text == dateFormatter.string(from: Date()) {
+        if dateTextField.text == DRConstant.dateFormatter.string(from: Date()) {
             guard let image = self.dietContentView?.takeScreenshot(),
-                let imageData = try? encoder.encode(image.pngData())
+                let imageData = try? DRConstant.encoder.encode(image.pngData())
             else { fatalError("Could not find the image of diet pie chart view.") }
-            groupUserDefaults?.set(
-                dateFormatter.string(from: Date()),
+                DRConstant.groupUserDefaults?.set(
+                DRConstant.dateFormatter.string(from: Date()),
                 forKey: GroupUserDefault.dietDate.rawValue)
-            groupUserDefaults?.set(
+                DRConstant.groupUserDefaults?.set(
                 imageData,
                 forKey: GroupUserDefault.dietImage.rawValue)
             WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.secondWidgetName.rawValue)
@@ -134,18 +134,18 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: CaloriesPieChartCell.reuseIdentifier,
                 for: indexPath) as? CaloriesPieChartCell,
-                let userData = userData
+                let userData = DRConstant.userData
             else { fatalError("Could not create calories pie chart cell.") }
-            let carbs = calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate)
-            let protein = calculateMacroNutrition(foods: totalFoods, nutrient: .protein)
-            let fat = calculateMacroNutrition(foods: totalFoods, nutrient: .lipid)
+            let carbs = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate)
+            let protein = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .protein)
+            let fat = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .lipid)
             cell.controller = self
             cell.layoutCell(carbs: carbs, protein: protein, fat: fat)
             cell.setPieChart(
-                breakfast: calculateMacroNutrition(foods: meals.first { $0.meal == 0 }?.foods, nutrient: .calories),
-                lunch: calculateMacroNutrition(foods: meals.first { $0.meal == 1 }?.foods, nutrient: .calories),
-                dinner: calculateMacroNutrition(foods: meals.first { $0.meal == 2 }?.foods, nutrient: .calories),
-                others: calculateMacroNutrition(foods: meals.first { $0.meal == 3 }?.foods, nutrient: .calories),
+                breakfast: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 0 }?.foods, nutrient: .calories),
+                lunch: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 1 }?.foods, nutrient: .calories),
+                dinner: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 2 }?.foods, nutrient: .calories),
+                others: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 3 }?.foods, nutrient: .calories),
                 goal: userData.goal[0].transformToDouble())
             self.dietContentView = cell.contentView
             return cell

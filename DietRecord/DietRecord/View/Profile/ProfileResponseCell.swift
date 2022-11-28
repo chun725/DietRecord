@@ -52,7 +52,7 @@ class ProfileResponseCell: UITableViewCell {
     }
 
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = otherUserID

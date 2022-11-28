@@ -20,10 +20,10 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         didSet {
             userImageView.loadImage(userSearchResult?.userImageURL)
             usernameLabel.text = userSearchResult?.username
-            if userSearchResult?.followers.contains(userID) != false {
+            if userSearchResult?.followers.contains(DRConstant.userID) != false {
                 followButton.setTitle("Following", for: .normal)
                 followButton.backgroundColor = .drDarkGray
-            } else if userSearchResult?.request.contains(userID) != false {
+            } else if userSearchResult?.request.contains(DRConstant.userID) != false {
                 followButton.setTitle("Requested", for: .normal)
                 followButton.backgroundColor = .drGray
             } else {
@@ -51,31 +51,31 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let userInput = userInputTextField.text,
-            let userData = userData
+            let userData = DRConstant.userData
         else { return }
         if !userInput.isEmpty {
-            LKProgressHUD.show()
+            DRProgressHUD.show()
             profileProvider.searchUser(userSelfID: userInput) { [weak self] result in
                 guard let self = self else { return }
                 switch result {
                 case .success(let response):
                     if response as? String == "document不存在" {
-                        LKProgressHUD.showFailure(text: "無此用戶")
+                        DRProgressHUD.showFailure(text: "無此用戶")
                         self.hiddenView(views: [self.usernameLabel, self.userImageView, self.followButton])
                         self.animationView.isHidden = false
                     } else {
                         guard let user = response as? User else { return }
                         if userData.blocks.contains(user.userID) {
-                            LKProgressHUD.showFailure(text: "無此用戶")
+                            DRProgressHUD.showFailure(text: "無此用戶")
                             self.animationView.isHidden = false
                         } else {
-                            LKProgressHUD.dismiss()
+                            DRProgressHUD.dismiss()
                             self.userSearchResult = user
                             self.animationView.isHidden = true
                         }
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "無法查詢用戶")
+                    DRProgressHUD.showFailure(text: "無法查詢用戶")
                     print("Error Info: \(error).")
                 }
             }
@@ -131,7 +131,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: profile, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = self.userSearchResult?.userID

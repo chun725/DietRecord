@@ -41,7 +41,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchWeightRecord()
-        self.weightGoal = userData?.weightGoal.transformToDouble() ?? 0.0
+        self.weightGoal = DRConstant.userData?.weightGoal.transformToDouble() ?? 0.0
         healthManager.havePermissionOfWrite { [weak self] bool in
             if bool {
                 self?.syncSwitch.isOn = true
@@ -69,7 +69,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func getHealthKitPermission() {
         healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
-                userDefault.set(true, forKey: weightPermission)
+                                DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
                 self.setWeight()
                 DispatchQueue.main.async {
                     self.syncSwitch.setOn(true, animated: false)
@@ -78,7 +78,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 if error != nil, let error = error {
                     print(error)
                 }
-                userDefault.set(false, forKey: weightPermission)
+                                DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
                 self.syncSwitch.setOn(false, animated: false)
                 self.fetchWeightRecord()
                 print("Permission denied.")
@@ -123,9 +123,9 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         healthManager.havePermissionOfWrite { bool in
             if bool {
                 if self.syncSwitch.isOn {
-                    userDefault.set(true, forKey: weightPermission)
+                                    DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
                 } else {
-                    userDefault.set(false, forKey: weightPermission)
+                                    DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
                 }
                 self.fetchWeightRecord()
             } else {
@@ -141,30 +141,30 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 } else {
                     self.fetchWeightRecord()
                 }
-                userDefault.set(false, forKey: weightPermission)
+                                DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
             }
         }
     }
     
     func fetchWeightRecord() {
-        LKProgressHUD.show()
+        DRProgressHUD.show()
         weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { result in
             switch result {
             case .success(let weightDatas):
-                LKProgressHUD.dismiss()
+                DRProgressHUD.dismiss()
                 self.weightRecord = weightDatas
                 self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                 self.weightTableView.reloadData()
                 self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
             case .failure(let error):
-                LKProgressHUD.showFailure(text: "無法讀取體重資料")
+                DRProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")
             }
         }
     }
     
     @IBAction func goToWeightInputVC(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: weight, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
         if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
             as? WeightInputVC {
             if sender == changeGoalButton {

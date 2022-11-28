@@ -11,41 +11,127 @@ import FirebaseFirestoreSwift
 import FirebaseFirestore
 import FirebaseAuth
 
-var userID = ""
-let database = Firestore.firestore()
-let dateFormatter = DateFormatter()
-let barChartDateFormatter = DateFormatter()
-let timeDateFormatter = DateFormatter()
-let decoder = JSONDecoder()
-let encoder = JSONEncoder()
-let userDefault = UserDefaults()
-let groupUserDefaults = UserDefaults(suiteName: "group.chun.DietRecord")
-let waterReminder = "WaterReminder"
-let fontName = "PingFang TC"
-let foodBaseView = "FoodBaseView"
-let dietRecord = "DietRecord"
-let foodIngredient = "FoodIngredient"
-let user = "User"
-let diet = "Diet"
-let water = "Water"
-let weight = "Weight"
-let report = "Report"
-let profile = "Profile"
-let kcalUnit = "kcal"
-let kgUnit = "kg"
-let gUnit = "g"
-let mgUnit = "mg"
-let mLUnit = "mL"
-let waterReminderNotification = "WaterReminderNotification"
-let weightPermission = "WeightPermission"
-var userData: User?
-var foodIngredients: [FoodIngredient]? // 資料庫
-var fullScreenSize = UIScreen.main.bounds.size
-let placeholderURL = "https://firebasestorage.googleapis.com:443/v0/b/dietmanagement-cd871.appspot.com/o/83274520-623A-4C01-9BA5-552A03254CA0.jpg?alt=media&token=d618d6e0-ffd5-4ab6-87b6-83d1c070ff04"
+struct DRConstant {
+    static let database = Firestore.firestore()
+    static let dateFormatter = DateFormatter()
+    static let barChartDateFormatter = DateFormatter()
+    static let timeDateFormatter = DateFormatter()
+    static let decoder = JSONDecoder()
+    static let encoder = JSONEncoder()
+    static let userDefault = UserDefaults()
+    static let groupUserDefaults = UserDefaults(suiteName: "group.chun.DietRecord")
+    static let waterReminder = "WaterReminder"
+    static let fontName = "PingFang TC"
+    static let foodBaseView = "FoodBaseView"
+    static let dietRecord = "DietRecord"
+    static let foodIngredient = "FoodIngredient"
+    static let user = "User"
+    static let diet = "Diet"
+    static let water = "Water"
+    static let weight = "Weight"
+    static let report = "Report"
+    static let profile = "Profile"
+    static let waterReminderNotification = "WaterReminderNotification"
+    static let weightPermission = "WeightPermission"
+    static var userID = ""
+    static var userData: User?
+    static var foodIngredients: [FoodIngredient]? // 資料庫
+    static var fullScreenSize = UIScreen.main.bounds.size
+    static let placeholderURL = "https://firebasestorage.googleapis.com:443/v0/b/dietmanagement-cd871.appspot.com/o/83274520-623A-4C01-9BA5-552A03254CA0.jpg?alt=media&token=d618d6e0-ffd5-4ab6-87b6-83d1c070ff04"
+    
+    static func configureDateformatter() {
+        dateFormatter.locale = .current
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+    }
+    
+    static func calculateMacroNutrition(foods: [Food]?, nutrient: MacroNutrient) -> Double {
+        guard let foods = foods else { return 0.0 }
+        var nutritentContent: [Double] = []
+        switch nutrient {
+        case .calories:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.calories.transformToDouble()
+            }
+        case .water:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.water.transformToDouble()
+            }
+        case .protein:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.protein.transformToDouble()
+            }
+        case .carbohydrate:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.carbohydrate.transformToDouble()
+            }
+        case .dietaryFiber:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.dietaryFiber.transformToDouble()
+            }
+        case .sugar:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.sugar.transformToDouble()
+            }
+        case .lipid:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.lipid.transformToDouble()
+            }
+        }
+        return nutritentContent.reduce(0.0) { $0 + $1 }
+    }
+    
+    static func calculateMicroNutrition(foods: [Food]?, nutrient: MicroNutrient) -> Double {
+        guard let foods = foods else { return 0.0 }
+        var nutritentContent: [Double] = []
+        switch nutrient {
+        case .saturatedLipid:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.saturatedLipid.transformToDouble()
+            }
+        case .polyunsaturatedLipid:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.polyunsaturatedLipid.transformToDouble()
+            }
+        case .monounsaturatedLipid:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.monounsaturatedLipid.transformToDouble()
+            }
+        case .cholesterol:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.cholesterol.transformToDouble()
+            }
+        case .sodium:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.sodium.transformToDouble()
+            }
+        case .potassium:
+            nutritentContent = foods.compactMap {
+                $0.qty.transformToDouble() / 100 *
+                $0.foodIngredient.nutrientContent.potassium.transformToDouble()
+            }
+        }
+        return nutritentContent.reduce(0.0) { $0 + $1 }
+    }
+}
 
-func configureDateformatter() {
-    dateFormatter.locale = .current
-    dateFormatter.dateFormat = "yyyy-MM-dd"
+enum Units: String {
+    case kcalUnit = "kcal"
+    case kgUnit = "kg"
+    case gUnit = "g"
+    case mgUnit = "mg"
+    case mLUnit = "mL"
 }
 
 enum Meal: String, CaseIterable {
@@ -78,87 +164,6 @@ enum MicroNutrient: String {
     case cholesterol
     case sodium
     case potassium
-}
-
-func calculateMacroNutrition(foods: [Food]?, nutrient: MacroNutrient) -> Double {
-    guard let foods = foods else { return 0.0 }
-    var nutritentContent: [Double] = []
-    switch nutrient {
-    case .calories:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.calories.transformToDouble()
-        }
-    case .water:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.water.transformToDouble()
-        }
-    case .protein:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.protein.transformToDouble()
-        }
-    case .carbohydrate:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.carbohydrate.transformToDouble()
-        }
-    case .dietaryFiber:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.dietaryFiber.transformToDouble()
-        }
-    case .sugar:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.sugar.transformToDouble()
-        }
-    case .lipid:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.lipid.transformToDouble()
-        }
-    }
-    return nutritentContent.reduce(0.0) { $0 + $1 }
-}
-
-func calculateMicroNutrition(foods: [Food]?, nutrient: MicroNutrient) -> Double {
-    guard let foods = foods else { return 0.0 }
-    var nutritentContent: [Double] = []
-    switch nutrient {
-    case .saturatedLipid:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.saturatedLipid.transformToDouble()
-        }
-    case .polyunsaturatedLipid:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.polyunsaturatedLipid.transformToDouble()
-        }
-    case .monounsaturatedLipid:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.monounsaturatedLipid.transformToDouble()
-        }
-    case .cholesterol:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.cholesterol.transformToDouble()
-        }
-    case .sodium:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.sodium.transformToDouble()
-        }
-    case .potassium:
-        nutritentContent = foods.compactMap {
-            $0.qty.transformToDouble() / 100 *
-            $0.foodIngredient.nutrientContent.potassium.transformToDouble()
-        }
-    }
-    return nutritentContent.reduce(0.0) { $0 + $1 }
 }
 
 enum Gender: String, CaseIterable {

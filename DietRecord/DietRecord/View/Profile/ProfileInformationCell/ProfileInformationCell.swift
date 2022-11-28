@@ -34,7 +34,7 @@ class ProfileInformationCell: UITableViewCell {
     
     let profileProvider = ProfileProvider()
     let dietRecordProvider = DietRecordProvider()
-    var imageURL = placeholderURL {
+    var imageURL = DRConstant.placeholderURL {
         didSet {
             user.userImageURL = imageURL
         }
@@ -48,13 +48,13 @@ class ProfileInformationCell: UITableViewCell {
     }
     
     var user = User(
-        userID: userID,
+        userID: DRConstant.userID,
         userSelfID: "",
         following: [],
         followers: [],
         blocks: [],
         request: [],
-        userImageURL: placeholderURL,
+        userImageURL: DRConstant.placeholderURL,
         username: "",
         goal: [],
         waterGoal: "",
@@ -85,8 +85,8 @@ class ProfileInformationCell: UITableViewCell {
         if let controller = controller, controller.isUpdated {
             userImageView.loadImage(user.userImageURL)
             usernameTextField.text = user.username
-            waterGoalTextField.text = user.waterGoal.transform(unit: mLUnit)
-            weightGoalTextField.text = user.weightGoal.transform(unit: kgUnit)
+            waterGoalTextField.text = user.waterGoal.transform(unit: Units.mLUnit.rawValue)
+            weightGoalTextField.text = user.weightGoal.transform(unit: Units.kgUnit.rawValue)
             userSelfIDTextfield.text = user.userSelfID
         }
     }
@@ -107,7 +107,7 @@ class ProfileInformationCell: UITableViewCell {
     }
     
     @objc func goToSetupGoalVC(sender: UIButton) {
-        let storyboard = UIStoryboard(name: report, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.report, bundle: nil)
         if let setupGoalPage = storyboard.instantiateViewController(withIdentifier: "\(SetupGoalVC.self)")
             as? SetupGoalVC {
             if sender == inputButton {
@@ -170,10 +170,10 @@ extension ProfileInformationCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == waterGoalTextField && textField.text?.isEmpty == false {
             user.waterGoal = textField.text ?? ""
-            textField.text = textField.text?.transform(unit: mLUnit)
+            textField.text = textField.text?.transform(unit: Units.mLUnit.rawValue)
         } else if textField == weightGoalTextField && textField.text?.isEmpty == false {
             user.weightGoal = textField.text ?? ""
-            textField.text = textField.text?.transform(unit: kgUnit)
+            textField.text = textField.text?.transform(unit: Units.kgUnit.rawValue)
         } else if textField == usernameTextField {
             user.username = textField.text ?? ""
         } else if textField == userSelfIDTextfield {
@@ -181,14 +181,14 @@ extension ProfileInformationCell: UITextFieldDelegate {
                 self.controller?.presentInputAlert(title: "用戶名不能為空")
                 self.infoImageView.isHidden = false
                 self.checkImageView.isHidden = true
-            } else if textField.text == userData?.userSelfID {
+            } else if textField.text == DRConstant.userData?.userSelfID {
                 print("使用舊用戶名")
                 self.checkImageView.isHidden = false
                 self.infoImageView.isHidden = true
             } else {
-                LKProgressHUD.show()
+                DRProgressHUD.show()
                 profileProvider.fetchUserSelfID(selfID: textField.text ?? "") { result in
-                    LKProgressHUD.dismiss()
+                    DRProgressHUD.dismiss()
                     switch result {
                     case .success(let success):
                         if success {

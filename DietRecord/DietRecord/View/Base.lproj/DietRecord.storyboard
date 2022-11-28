@@ -45,7 +45,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2022-11-10" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vZ2-AO-3cD">
-                                <rect key="frame" x="157" y="47" width="100" height="34"/>
+                                <rect key="frame" x="141" y="47" width="100" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="XfF-vO-lik"/>
                                 </constraints>
@@ -54,14 +54,14 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hDz-sW-Ps9">
-                                <rect key="frame" x="157" y="47" width="132" height="34"/>
+                                <rect key="frame" x="141" y="47" width="132" height="34"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="goToChooseDatePage:" destination="3zY-ln-cus" eventType="touchUpInside" id="9sv-sw-9gw"/>
                                 </connections>
                             </button>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Calendar" translatesAutoresizingMaskIntoConstraints="NO" id="Hlw-xO-JYw">
-                                <rect key="frame" x="265" y="52" width="24" height="24"/>
+                                <rect key="frame" x="249" y="52" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="tz0-ZO-7mc"/>
                                     <constraint firstAttribute="width" secondItem="Hlw-xO-JYw" secondAttribute="height" id="u2B-rh-eLz"/>
@@ -80,6 +80,7 @@
                             <constraint firstItem="hDz-sW-Ps9" firstAttribute="leading" secondItem="vZ2-AO-3cD" secondAttribute="leading" id="VBw-7h-WaF"/>
                             <constraint firstItem="BBL-ml-AV7" firstAttribute="top" secondItem="TGN-nq-h8Z" secondAttribute="bottom" id="VSh-yY-DMp"/>
                             <constraint firstItem="Hlw-xO-JYw" firstAttribute="leading" secondItem="vZ2-AO-3cD" secondAttribute="trailing" constant="8" id="Z5c-J7-08v"/>
+                            <constraint firstItem="hDz-sW-Ps9" firstAttribute="centerX" secondItem="Q69-tX-WNr" secondAttribute="centerX" id="axA-hK-ddF"/>
                             <constraint firstItem="8fh-M8-AWa" firstAttribute="top" secondItem="Q69-tX-WNr" secondAttribute="top" id="coc-lm-pTs"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="top" secondItem="8fh-M8-AWa" secondAttribute="bottom" id="cso-jI-qOi"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="trailing" secondItem="8fh-M8-AWa" secondAttribute="trailing" id="geH-Me-wOy"/>
@@ -89,7 +90,6 @@
                             <constraint firstItem="YQe-X7-twB" firstAttribute="centerY" secondItem="TGN-nq-h8Z" secondAttribute="centerY" id="nlD-Ad-BrV"/>
                             <constraint firstItem="hDz-sW-Ps9" firstAttribute="top" secondItem="vZ2-AO-3cD" secondAttribute="top" id="oJM-BW-jHv"/>
                             <constraint firstItem="Hlw-xO-JYw" firstAttribute="centerY" secondItem="vZ2-AO-3cD" secondAttribute="centerY" id="oPz-A9-4mz"/>
-                            <constraint firstItem="vZ2-AO-3cD" firstAttribute="centerX" secondItem="TGN-nq-h8Z" secondAttribute="centerX" id="qyx-Ob-bNy"/>
                             <constraint firstItem="TGN-nq-h8Z" firstAttribute="centerX" secondItem="Q69-tX-WNr" secondAttribute="centerX" id="sUV-Qr-UkF"/>
                             <constraint firstItem="sn1-xz-SBu" firstAttribute="top" secondItem="8fh-M8-AWa" secondAttribute="bottom" id="t4b-R5-lSl"/>
                             <constraint firstItem="YQe-X7-twB" firstAttribute="trailing" secondItem="TGN-nq-h8Z" secondAttribute="trailing" constant="-16" id="vbS-y0-k3W"/>
@@ -688,6 +688,9 @@
             <point key="canvasLocation" x="2063.768115942029" y="1767.8571428571429"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="kXE-dh-Swo"/>
+    </designables>
     <resources>
         <image name="Image_Add" width="170.5" height="170.5"/>
         <image name="Image_Calendar" width="170.5" height="170.5"/>

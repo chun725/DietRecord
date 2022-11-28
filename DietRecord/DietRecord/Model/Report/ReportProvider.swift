@@ -14,7 +14,7 @@ class ReportProvider {
         var dates: [String] = []
         for index in 0..<7 {
             let lastDate = date.advanced(by: -60 * 60 * 24 * Double(index))
-            dates.append(dateFormatter.string(from: lastDate))
+            dates.append(DRConstant.dateFormatter.string(from: lastDate))
         }
         var weeklyDietRecord: [FoodDailyInput] = []
         let downloadGroup = DispatchGroup()
@@ -22,7 +22,7 @@ class ReportProvider {
         for date in dates {
             downloadGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                let documentReference = database.collection(user).document(userID).collection(diet).document(date)
+                let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.diet).document(date)
                 documentReference.getDocument { document, error in
                     if let error = error {
                         completion(.failure(error))
@@ -49,7 +49,7 @@ class ReportProvider {
     }
     
     func changeGoal(goal: [String], completion: @escaping (Result<Void, Error>) -> Void ) {
-        database.collection(user).document(userID).getDocument { document, error in
+        DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
             } else {
@@ -59,7 +59,7 @@ class ReportProvider {
                 else { return }
                 userData.goal = goal
                 do {
-                    try database.collection(user).document(userID).setData(from: userData)
+                    try DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).setData(from: userData)
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))

@@ -30,14 +30,14 @@ class WeightInputVC: UIViewController {
         saveButton.layer.cornerRadius = 20
         allBackgroundView.layer.cornerRadius = 20
         weightInputView.layer.cornerRadius = 10
-        dateLabel.text = dateFormatter.string(from: Date())
+        dateLabel.text = DRConstant.dateFormatter.string(from: Date())
         setGoalLabel.isHidden = !isSetGoal
         chooseDateButton.isEnabled = !isSetGoal
         dateStackView.isHidden = isSetGoal
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
             as? ChooseDateVC {
             chooseDatePage.closure = { [weak self] date in
@@ -50,20 +50,20 @@ class WeightInputVC: UIViewController {
     @IBAction func saveWeightRecord(_ sender: Any) {
         guard let weight = weightInputTextField.text?.transformToDouble(),
             let dateString = dateLabel.text,
-            let date = dateFormatter.date(from: dateString)
+            let date = DRConstant.dateFormatter.date(from: dateString)
         else { return }
         if isSetGoal {
             weightRecordProvider.updateWeightGoal(weightGoal: weight.format()) { result in
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
-                        LKProgressHUD.showSuccess()
-                        userData?.weightGoal = weight.format()
+                        DRProgressHUD.showSuccess()
+                        DRConstant.userData?.weightGoal = weight.format()
                         self.closure?(weight)
                         self.dismiss(animated: false)
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存失敗")
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }
@@ -73,12 +73,12 @@ class WeightInputVC: UIViewController {
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
-                        LKProgressHUD.showSuccess()
+                        DRProgressHUD.showSuccess()
                         self.closure?(0.0)
                         self.dismiss(animated: false)
                     }
                 case .failure(let error):
-                    LKProgressHUD.showFailure(text: "儲存失敗")
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }

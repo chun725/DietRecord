@@ -21,9 +21,9 @@ class FoodSearchResultCell: UITableViewCell {
     
     func layoutChooseCell(food: Food) {
         foodNameLabel.text = food.foodIngredient.name
-        qtyLabel.text = food.qty.transform(unit: gUnit)
+        qtyLabel.text = food.qty.transform(unit: Units.gUnit.rawValue)
         let calories = food.qty.transformToDouble() / 100 *
         food.foodIngredient.nutrientContent.calories.transformToDouble()
-        caloriesLabel.text = calories.format().transform(unit: kcalUnit)
+        caloriesLabel.text = calories.format().transform(unit: Units.kcalUnit.rawValue)
     }
 }

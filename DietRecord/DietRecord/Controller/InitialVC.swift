@@ -13,13 +13,13 @@ class InitialVC: UIViewController {
     let profileProvider = ProfileProvider()
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureDateformatter()
+        DRConstant.configureDateformatter()
         fetchFoodIngredient()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if userData == nil {
+        if DRConstant.userData == nil {
             getUserData()
         } else {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -33,12 +33,12 @@ class InitialVC: UIViewController {
     
     func getUserData() {
         if let id = Auth.auth().currentUser?.uid {
-            userID = id
+            DRConstant.userID = id
             profileProvider.fetchUserData(userID: id) { result in
                 switch result {
                 case .success(let result):
                     if let user = result as? User {
-                        userData = user
+                        DRConstant.userData = user
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
                         if let tabbarController = storyboard.instantiateViewController(
                             withIdentifier: "\(TabBarController.self)")
@@ -46,7 +46,7 @@ class InitialVC: UIViewController {
                             self.navigationController?.pushViewController(tabbarController, animated: false)
                         }
                     } else {
-                        let storyboard = UIStoryboard(name: profile, bundle: nil)
+                        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
                         if let profileInfoPage = storyboard.instantiateViewController(
                             withIdentifier: "\(ProfileInformationVC.self)")
                             as? ProfileInformationVC {
@@ -69,11 +69,10 @@ class InitialVC: UIViewController {
     
     func fetchFoodIngredient() {
         do {
-            guard let url = Bundle.main.url(forResource: foodIngredient, withExtension: "json")
+            guard let url = Bundle.main.url(forResource: DRConstant.foodIngredient, withExtension: "json")
             else { fatalError("Could not create the food ingredient database.") }
-            let jsonDecoder = JSONDecoder()
             let savedJSONData = try Data(contentsOf: url)
-            foodIngredients = try jsonDecoder.decode([FoodIngredient].self, from: savedJSONData)
+            DRConstant.foodIngredients = try DRConstant.decoder.decode([FoodIngredient].self, from: savedJSONData)
         } catch {
             print("Error Info: \(error).")
         }

@@ -19,7 +19,7 @@ class WeightRecordProvider {
         for weightData in weightDatas {
             updateGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                let collectionReference = database.collection(user).document(userID).collection(weight)
+                let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
                 collectionReference.getDocuments { snapshot, error in
                     if let error = error {
                         completion(.failure(error))
@@ -27,7 +27,7 @@ class WeightRecordProvider {
                         guard let snapshot = snapshot else { return }
                         if snapshot.documents.isEmpty {
                             do {
-                                let dateString = dateFormatter.string(from: weightData.date)
+                                let dateString = DRConstant.dateFormatter.string(from: weightData.date)
                                 try collectionReference.document(dateString).setData(from: weightData)
                             } catch {
                                 completion(.failure(error))
@@ -46,7 +46,7 @@ class WeightRecordProvider {
     }
     
     func fetchWeightRecord(sync: Bool, completion: @escaping WeightRecordResult) {
-        let collectionReference = database.collection(user).document(userID).collection(weight)
+        let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
         collectionReference.getDocuments { snapshot, error in
             if let error = error {
                 print("Error Info: \(error).")
@@ -70,10 +70,10 @@ class WeightRecordProvider {
     }
     
     func createWeightRecord(weightData: WeightData, completion: @escaping (Result<Void, Error>) -> Void) {
-        let collectionReference = database.collection(user).document(userID).collection(weight)
+        let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
         do {
-            let dateString = dateFormatter.string(from: weightData.date)
-            guard let date = dateFormatter.date(from: dateString) else { return }
+            let dateString = DRConstant.dateFormatter.string(from: weightData.date)
+            guard let date = DRConstant.dateFormatter.date(from: dateString) else { return }
             try collectionReference.document(dateString).setData(from: WeightData(
                 date: date, value: weightData.value, dataSource: weightData.dataSource))
             healthManager.havePermissionOfWrite { [weak self] result in
@@ -101,8 +101,8 @@ class WeightRecordProvider {
     }
     
     func deleteWeightRecord(weightData: WeightData, completion: @escaping (Result<Void, Error>) -> Void) {
-        let collectionReference = database.collection(user).document(userID).collection(weight)
-        let dateString = dateFormatter.string(from: weightData.date)
+        let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
+        let dateString = DRConstant.dateFormatter.string(from: weightData.date)
         collectionReference.document(dateString).delete()
         healthManager.havePermissionOfWrite { [weak self] result in
             if result {
@@ -122,7 +122,7 @@ class WeightRecordProvider {
     }
     
     func updateWeightGoal(weightGoal: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = database.collection(user).document(userID)
+        let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID)
         documentReference.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))

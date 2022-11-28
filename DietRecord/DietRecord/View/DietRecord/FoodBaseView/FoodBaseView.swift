@@ -24,14 +24,14 @@ class FoodBaseView: UIView {
     }
     
     private func initView() {
-        Bundle.main.loadNibNamed(foodBaseView, owner: self)
+        Bundle.main.loadNibNamed(DRConstant.foodBaseView, owner: self)
         stickSubview(contentView)
     }
     
     func layoutView(name: String, qty: String, calories: String) {
-        foodqtyLabel.text = qty.transform(unit: gUnit)
+        foodqtyLabel.text = qty.transform(unit: Units.gUnit.rawValue)
         foodNameLabel.text = name
         let calories = qty.transformToDouble() / 100 * calories.transformToDouble()
-        foodCaloriesLabel.text = calories.format().transform(unit: kcalUnit)
+        foodCaloriesLabel.text = calories.format().transform(unit: Units.kcalUnit.rawValue)
     }
 }

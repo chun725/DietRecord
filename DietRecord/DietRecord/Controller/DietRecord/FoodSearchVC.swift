@@ -58,7 +58,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func goToFoodNutritionPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             foodNutritionPage.newFood = foodSearchResults[sender.tag]
@@ -70,7 +70,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func modifyQtyOfFood(sender: UIButton) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
             foodNutritionPage.chooseFood = chooseFoods[sender.tag]

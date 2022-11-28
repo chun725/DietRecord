@@ -40,23 +40,23 @@ class ReportDetailCell: UITableViewCell {
         grayBackgroundView.setShadowAndRadius(radius: 10)
         guard let foodDailyInputs = foodDailyInputs else { return }
         let totalFoods = foodDailyInputs.flatMap { $0.mealRecord }.flatMap { $0.foods }
-        self.caloriesCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .calories).format()
-        self.carbsCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate).format()
-        self.fiberCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .dietaryFiber).format()
-        self.sugarCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .sugar).format()
-        self.proteinCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .protein).format()
-        self.fatCurrentLabel.text = calculateMacroNutrition(foods: totalFoods, nutrient: .lipid).format()
-        self.saturatedFatCurrentLabel.text = calculateMicroNutrition(
+        self.caloriesCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .calories).format()
+        self.carbsCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate).format()
+        self.fiberCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .dietaryFiber).format()
+        self.sugarCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .sugar).format()
+        self.proteinCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .protein).format()
+        self.fatCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .lipid).format()
+        self.saturatedFatCurrentLabel.text = DRConstant.calculateMicroNutrition(
             foods: totalFoods, nutrient: .saturatedLipid).format()
-        self.monounsaturatedFatCurrentLabel.text = (calculateMicroNutrition(
+        self.monounsaturatedFatCurrentLabel.text = (DRConstant.calculateMicroNutrition(
             foods: totalFoods, nutrient: .monounsaturatedLipid) / 1000).format()
-        self.polyunsaturatedFatCurrentLabel.text = (calculateMicroNutrition(
+        self.polyunsaturatedFatCurrentLabel.text = (DRConstant.calculateMicroNutrition(
             foods: totalFoods, nutrient: .polyunsaturatedLipid) / 1000).format()
-        self.cholesterolCurrentLabel.text = (calculateMicroNutrition(
+        self.cholesterolCurrentLabel.text = (DRConstant.calculateMicroNutrition(
             foods: totalFoods, nutrient: .cholesterol) / 1000).format()
-        self.sodiumCurrentLabel.text = (calculateMicroNutrition(
+        self.sodiumCurrentLabel.text = (DRConstant.calculateMicroNutrition(
             foods: totalFoods, nutrient: .sodium) / 1000).format()
-        self.potassiumCurrentLabel.text = (calculateMicroNutrition(
+        self.potassiumCurrentLabel.text = (DRConstant.calculateMicroNutrition(
             foods: totalFoods, nutrient: .potassium) / 1000).format()
     }
     

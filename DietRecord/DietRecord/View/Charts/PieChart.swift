@@ -53,7 +53,7 @@ class PieChart: PieChartView {
         let consumed = (goal - gap) / goal * 100
         configurePieChart(set: set, consumed: consumed)
         
-        guard let font = UIFont(name: fontName, size: 8) else { return }
+        guard let font = UIFont(name: DRConstant.fontName, size: 8) else { return }
         self.legend.font = font
     }
     
@@ -72,7 +72,7 @@ class PieChart: PieChartView {
         let consumed = water / goal * 100
         configurePieChart(set: set, consumed: consumed)
         
-        guard let font = UIFont(name: fontName, size: 12) else { return }
+        guard let font = UIFont(name: DRConstant.fontName, size: 12) else { return }
         self.legend.font = font
     }
     

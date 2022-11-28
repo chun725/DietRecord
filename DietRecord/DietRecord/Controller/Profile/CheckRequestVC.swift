@@ -48,7 +48,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @objc func fetchRequest() {
         refreshControl?.beginRefreshing()
-        var id = userID
+        var id = DRConstant.userID
         if let otherUserID = otherUserID {
             id = otherUserID
         }
@@ -91,7 +91,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if need != "BlockUsers" {
-            let storyboard = UIStoryboard(name: profile, bundle: nil)
+            let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
             if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
                 as? ProfileVC {
                 userProfilePage.otherUserID = requests[indexPath.row].userID

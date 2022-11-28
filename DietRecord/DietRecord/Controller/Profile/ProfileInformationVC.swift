@@ -24,7 +24,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
         if !isUpdated {
             goBackButton.isHidden = true
         } else {
-            self.user = userData
+            self.user = DRConstant.userData
             goBackButton.isHidden = false
             goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         }
@@ -50,7 +50,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
             profileProvider.createUserInfo(userData: user) { result in
                 switch result {
                 case .success:
-                    userData = user
+                    DRConstant.userData = user
                     DRProgressHUD.showSuccess()
                     if !self.isUpdated {
                         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -79,7 +79,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
             withIdentifier: ProfileInformationCell.reuseIdentifier, for: indexPath) as? ProfileInformationCell
         else { fatalError("Could not create the profile information cell.") }
         if isUpdated {
-            guard let userData = userData else { fatalError("Could not find user data.") }
+            guard let userData = DRConstant.userData else { fatalError("Could not find user data.") }
             cell.user = userData
             cell.goal = userData.goal
         }

@@ -83,18 +83,18 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
             }
         }
         self.closure?(goal)
-        if userData == nil {
+        if DRConstant.userData == nil {
             self.navigationController?.popViewController(animated: false)
         } else {
             reportProvider.changeGoal(goal: goal) { result in
                 switch result {
                 case .success:
                     let profileProvider = ProfileProvider()
-                    profileProvider.fetchUserData(userID: userID) { result in
+                    profileProvider.fetchUserData(userID: DRConstant.userID) { result in
                         switch result {
                         case .success(let user):
                             let user = user as? User
-                            userData = user
+                            DRConstant.userData = user
                             self.navigationController?.popViewController(animated: false)
                         case .failure(let error):
                             print("Error Info: \(error).")

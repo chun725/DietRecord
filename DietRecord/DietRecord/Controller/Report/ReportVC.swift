@@ -23,7 +23,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateTextField.text = dateFormatter.string(from: Date())
+        dateTextField.text = DRConstant.dateFormatter.string(from: Date())
         fetchWeeklyDiet(sender: nil)
         reportTableView.dataSource = self
         reportTableView.registerCellWithNib(identifier: ReportDetailCell.reuseIdentifier, bundle: nil)
@@ -39,7 +39,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
             as? ChooseDateVC {
             chooseDatePage.date = self.dateTextField.text
@@ -59,7 +59,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
         }
         isLoading = true
         guard let dateString = dateTextField.text,
-            let date = dateFormatter.date(from: dateString)
+            let date = DRConstant.dateFormatter.date(from: dateString)
         else { return }
         reportProvider.fetchWeeklyDietRecord(date: date) { result in
             self.refreshControl?.endRefreshing()
@@ -77,7 +77,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToGoalPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: report, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.report, bundle: nil)
         if let goalPage = storyboard.instantiateViewController(withIdentifier: "\(GoalVC.self)")
             as? GoalVC {
             self.navigationController?.pushViewController(goalPage, animated: false)
@@ -96,7 +96,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
         if indexPath.row == 0 {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: ReportBarChartCell.reuseIdentifier, for: indexPath) as? ReportBarChartCell,
-                let goal = userData?.goal[0],
+                let goal = DRConstant.userData?.goal[0],
                 let date = dateTextField.text
             else { fatalError("Could not create report bar chart cell.") }
             cell.setBarChart(date: date, foodDailyInputs: weeklyDietRecord, goal: goal.transformToDouble())
@@ -104,7 +104,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
         } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: ReportDetailCell.reuseIdentifier, for: indexPath) as? ReportDetailCell,
-                let userData = userData
+                let userData = DRConstant.userData
             else { fatalError("Could not create report detail cell.") }
             cell.layoutCell(foodDailyInputs: weeklyDietRecord)
             let goal = userData.goal

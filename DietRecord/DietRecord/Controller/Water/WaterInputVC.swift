@@ -57,8 +57,8 @@ class WaterInputVC: UIViewController {
             imageView.image = UIImage(named: "Image_Reminder")
             waterInputView.isHidden = true
             saveButton.addTarget(self, action: #selector(saveReminder), for: .touchUpInside)
-            timeDateFormatter.dateFormat = "HH:mm"
-            let dateString = timeDateFormatter.string(from: Date())
+                        DRConstant.timeDateFormatter.dateFormat = "HH:mm"
+            let dateString =             DRConstant.timeDateFormatter.string(from: Date())
             let date = dateString.components(separatedBy: ":")
             let indexHour = Int(date[0]) ?? 0
             let indexMinute = Int(date[1]) ?? 0
@@ -74,7 +74,7 @@ class WaterInputVC: UIViewController {
             case .success:
                 DRProgressHUD.showSuccess()
                 self.closure?(waterGoal.transformToDouble())
-                userData?.waterGoal = waterGoal
+                DRConstant.userData?.waterGoal = waterGoal
                 self.dismiss(animated: false)
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "儲存失敗")
@@ -123,16 +123,16 @@ class WaterInputVC: UIViewController {
         let dateComponent = DateComponents(timeZone: .current, hour: hourIndex, minute: minuteIndex)
         let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponent, repeats: true)
         let request = UNNotificationRequest(
-            identifier: waterReminderNotification + timeString,
+            identifier: DRConstant.waterReminderNotification + timeString,
             content: content,
             trigger: trigger)
-        var reminders = userDefault.array(forKey: waterReminder) as? [String]
+        var reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
         if reminders == nil {
-            userDefault.set([timeString], forKey: waterReminder)
+            DRConstant.userDefault.set([timeString], forKey: DRConstant.waterReminder)
         } else {
             reminders?.append(timeString)
             reminders = reminders?.sorted()
-            userDefault.set(reminders, forKey: waterReminder)
+            DRConstant.userDefault.set(reminders, forKey: DRConstant.waterReminder)
         }
         UNUserNotificationCenter.current().add(request)
         DRProgressHUD.showSuccess()

@@ -51,7 +51,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     // MARK: - Action -
     @objc func goToFoodSearchPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
             as? FoodSearchVC {
             foodSearchPage.oldfoods = foods
@@ -125,7 +125,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             DRProgressHUD.show()
             guard let index = Meal.allCases.map({ $0.rawValue }).firstIndex(of: meal) else { return }
             let mealRecord = MealRecord(
-                userID: userID,
+                userID: DRConstant.userID,
                 meal: index,
                 date: date,
                 foods: foods,

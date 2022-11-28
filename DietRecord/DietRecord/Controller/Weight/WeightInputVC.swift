@@ -30,14 +30,14 @@ class WeightInputVC: UIViewController {
         saveButton.layer.cornerRadius = 20
         allBackgroundView.layer.cornerRadius = 20
         weightInputView.layer.cornerRadius = 10
-        dateLabel.text = dateFormatter.string(from: Date())
+        dateLabel.text = DRConstant.dateFormatter.string(from: Date())
         setGoalLabel.isHidden = !isSetGoal
         chooseDateButton.isEnabled = !isSetGoal
         dateStackView.isHidden = isSetGoal
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: dietRecord, bundle: nil)
+        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
             as? ChooseDateVC {
             chooseDatePage.closure = { [weak self] date in
@@ -50,7 +50,7 @@ class WeightInputVC: UIViewController {
     @IBAction func saveWeightRecord(_ sender: Any) {
         guard let weight = weightInputTextField.text?.transformToDouble(),
             let dateString = dateLabel.text,
-            let date = dateFormatter.date(from: dateString)
+            let date = DRConstant.dateFormatter.date(from: dateString)
         else { return }
         if isSetGoal {
             weightRecordProvider.updateWeightGoal(weightGoal: weight.format()) { result in
@@ -58,7 +58,7 @@ class WeightInputVC: UIViewController {
                 case .success:
                     DispatchQueue.main.async {
                         DRProgressHUD.showSuccess()
-                        userData?.weightGoal = weight.format()
+                        DRConstant.userData?.weightGoal = weight.format()
                         self.closure?(weight)
                         self.dismiss(animated: false)
                     }

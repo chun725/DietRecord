@@ -13,13 +13,13 @@ class ProfileSettingVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingTableView.dataSource = self
-        userSelfIDLabel.text = DRConstant.userData?.userSelfID
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         settingTableView.reloadData()
         self.tabBarController?.tabBar.isHidden = true
+        userSelfIDLabel.text = DRConstant.userData?.userSelfID
     }
     
     @IBAction func goBack(_ sender: Any) {

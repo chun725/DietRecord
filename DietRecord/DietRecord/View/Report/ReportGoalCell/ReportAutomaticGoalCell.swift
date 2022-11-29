@@ -162,6 +162,6 @@ class ReportAutomaticGoalCell: UITableViewCell, UIPickerViewDelegate, UIPickerVi
             }
             alert.addAction(action)
         }
-        controller?.present(alert, animated: false)
+        controller?.present(alert, animated: true)
     }
 }

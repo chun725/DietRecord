@@ -43,7 +43,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     
     @IBAction func goBackProfilePage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func createResponse(_ sender: Any) {
@@ -140,7 +140,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     case .success:
                         print("成功封鎖用戶")
                         if self.mealRecord?.userID == self.responses[indexPath.row].person {
-                            self.navigationController?.popViewController(animated: false)
+                            self.navigationController?.popViewController(animated: true)
                         } else {
                             self.responses.remove(at: indexPath.row)
                             self.profileDetailTableView.reloadData()
@@ -180,7 +180,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 optionMenu.addAction(blockAction)
             }
             optionMenu.addAction(cancelAction)
-            self.present(optionMenu, animated: false)
+            self.present(optionMenu, animated: true)
             completionHandler(true)
         }
         return optionAction

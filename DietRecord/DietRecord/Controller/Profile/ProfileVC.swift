@@ -151,7 +151,7 @@ class ProfileVC: UIViewController {
                 checkRequestPage.need = "Followers"
                 checkRequestPage.otherUserID = id
             }
-            self.navigationController?.pushViewController(checkRequestPage, animated: false)
+            self.navigationController?.pushViewController(checkRequestPage, animated: true)
         }
     }
     
@@ -159,7 +159,7 @@ class ProfileVC: UIViewController {
         let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let addFollowingPage = storyboard.instantiateViewController(withIdentifier: "\(AddFollowingVC.self)")
             as? AddFollowingVC {
-            self.navigationController?.pushViewController(addFollowingPage, animated: false)
+            self.navigationController?.pushViewController(addFollowingPage, animated: true)
         }
     }
     
@@ -167,7 +167,7 @@ class ProfileVC: UIViewController {
         let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
         if let homePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileHomePageVC.self)")
             as? ProfileHomePageVC {
-            self.navigationController?.pushViewController(homePage, animated: false)
+            self.navigationController?.pushViewController(homePage, animated: true)
         }
     }
     
@@ -194,7 +194,7 @@ class ProfileVC: UIViewController {
                 switch result {
                 case .success:
                     print("成功封鎖")
-                    self.navigationController?.popViewController(animated: false)
+                    self.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     print("Error Info: \(error) in blocking someone.")
                 }
@@ -204,7 +204,7 @@ class ProfileVC: UIViewController {
         optionMenu.addAction(reportAction)
         optionMenu.addAction(blockAction)
         optionMenu.addAction(cancelAction)
-        self.present(optionMenu, animated: false)
+        self.present(optionMenu, animated: true)
     }
     
     @objc func requestFollow(sender: UIButton) {
@@ -215,7 +215,7 @@ class ProfileVC: UIViewController {
             if let profileSettingPage = storyboard.instantiateViewController(
                 withIdentifier: "\(ProfileSettingVC.self)")
                 as? ProfileSettingVC {
-                self.navigationController?.pushViewController(profileSettingPage, animated: false)
+                self.navigationController?.pushViewController(profileSettingPage, animated: true)
             }
             return }
         if sender.title(for: .normal) == "Follow" {
@@ -256,12 +256,12 @@ class ProfileVC: UIViewController {
             let cancel = UIAlertAction(title: "返回", style: .default)
             alert.addAction(action)
             alert.addAction(cancel)
-            self.present(alert, animated: false)
+            self.present(alert, animated: true)
         }
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -293,7 +293,7 @@ extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICol
             } else {
                 profileDetailPage.nowUserData = DRConstant.userData
             }
-            self.navigationController?.pushViewController(profileDetailPage, animated: false)
+            self.navigationController?.pushViewController(profileDetailPage, animated: true)
         }
     }
     

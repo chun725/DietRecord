@@ -51,7 +51,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
                 self?.dateTextField.text = date
                 self?.changeDate()
             }
-            self.navigationController?.pushViewController(dietInputPage, animated: false)
+            self.navigationController?.pushViewController(dietInputPage, animated: true)
         }
     }
     

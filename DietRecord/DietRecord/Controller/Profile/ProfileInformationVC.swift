@@ -36,7 +36,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func goBack() {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func createUserInfo() {
@@ -57,10 +57,10 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
                         if let tabbarController = storyboard.instantiateViewController(
                             withIdentifier: "\(TabBarController.self)")
                             as? TabBarController {
-                            self.navigationController?.pushViewController(tabbarController, animated: false)
+                            self.navigationController?.pushViewController(tabbarController, animated: true)
                         }
                     } else {
-                        self.navigationController?.popViewController(animated: false)
+                        self.navigationController?.popViewController(animated: true)
                     }
                 case .failure(let error):
                     DRProgressHUD.showFailure(text: "儲存資料失敗")

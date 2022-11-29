@@ -157,7 +157,7 @@ class ProfileDetailCell: UITableViewCell {
         optionMenu.addAction(reportAction)
         optionMenu.addAction(blockAction)
         optionMenu.addAction(cancelAction)
-        controller?.present(optionMenu, animated: false)
+        controller?.present(optionMenu, animated: true)
     }
     
     @objc func deletePost() {
@@ -186,7 +186,7 @@ class ProfileDetailCell: UITableViewCell {
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(deleteAction)
         optionMenu.addAction(cancelAction)
-        controller?.present(optionMenu, animated: false)
+        controller?.present(optionMenu, animated: true)
     }
     
     @objc func addLiked(sender: UIButton) {
@@ -220,7 +220,7 @@ class ProfileDetailCell: UITableViewCell {
         if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
             as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
-            controller?.navigationController?.pushViewController(profileDetailPage, animated: false)
+            controller?.navigationController?.pushViewController(profileDetailPage, animated: true)
         }
     }
     
@@ -229,7 +229,7 @@ class ProfileDetailCell: UITableViewCell {
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
-            controller?.navigationController?.pushViewController(userProfilePage, animated: false)
+            controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }
     }
     
@@ -272,7 +272,7 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
             guard let food = mealRecord?.foods[indexPath.row] else { return }
             foodNutritionPage.food = food.foodIngredient
             foodNutritionPage.isCollectionCell = true
-            controller?.navigationController?.pushViewController(foodNutritionPage, animated: false)
+            controller?.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }
     }
 }

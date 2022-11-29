@@ -56,7 +56,7 @@ class ProfileResponseCell: UITableViewCell {
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
-            controller?.navigationController?.pushViewController(userProfilePage, animated: false)
+            controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }
     }
 }

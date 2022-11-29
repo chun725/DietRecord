@@ -54,11 +54,11 @@ class GoalVC: UIViewController {
                 self?.proteinLabel.text = goal[2].transform(unit: Units.gUnit.rawValue)
                 self?.fatLabel.text = goal[3].transform(unit: Units.gUnit.rawValue)
             }
-            self.navigationController?.pushViewController(setupGoalPage, animated: false)
+            self.navigationController?.pushViewController(setupGoalPage, animated: true)
         }
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
 }

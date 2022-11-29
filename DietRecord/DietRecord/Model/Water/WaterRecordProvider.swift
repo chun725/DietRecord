@@ -14,7 +14,11 @@ class WaterRecordProvider {
     // MARK: - Fetch water record -
     func fetchWaterRecord(completion: @escaping WaterDailyResult) {
         let date = DRConstant.dateFormatter.string(from: Date())
-        let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.water).document(date)
+        let documentReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.water)
+            .document(date)
         documentReference.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -39,7 +43,11 @@ class WaterRecordProvider {
     // MARK: - Update water record -
     func updateWaterRecord(totalWater: String, completion: @escaping UpdateWaterResult) {
         let date = DRConstant.dateFormatter.string(from: Date())
-        let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.water).document(date)
+        let documentReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.water)
+            .document(date)
         let waterRecord = WaterRecord(water: totalWater, date: date)
         do {
             try documentReference.setData(from: waterRecord)
@@ -51,20 +59,24 @@ class WaterRecordProvider {
     // MARK: - Fetch history water record -
     func fetchHistoryWaterRecords(completion: @escaping (Result<[WaterRecord], Error>) -> Void) {
         var waterRecords: [WaterRecord] = []
-        DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.water).getDocuments { snapshot, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                guard let snapshot = snapshot else { return }
-                var documents = snapshot.documents
-                documents = documents.sorted { $0.documentID < $1.documentID }
-                for document in documents {
-                    guard let waterRecord = try? document.data(as: WaterRecord.self) else { return }
-                    waterRecords.append(waterRecord)
+        DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.water)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    guard let snapshot = snapshot else { return }
+                    var documents = snapshot.documents
+                    documents = documents.sorted { $0.documentID < $1.documentID }
+                    for document in documents {
+                        guard let waterRecord = try? document.data(as: WaterRecord.self) else { return }
+                        waterRecords.append(waterRecord)
+                    }
+                    completion(.success(waterRecords))
                 }
-                completion(.success(waterRecords))
             }
-        }
     }
     // MARK: - Update water goal -
     func updateWaterGoal(waterGoal: String, completion: @escaping (Result<Void, Error>) -> Void) {

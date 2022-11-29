@@ -21,7 +21,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    var reminders =                 DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String] {
+    var reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String] {
         didSet {
             waterTableView.reloadData()
         }
@@ -70,7 +70,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
             if sender.tag == 1 {
                 waterInputPage.isWaterInput = false
                 waterInputPage.closure = { [weak self] _ in
-                    self?.reminders =                 DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
+                    self?.reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
                 }
             } else {
                 waterInputPage.waterCurrent = self.waterCurrent
@@ -89,8 +89,8 @@ class WaterVC: UIViewController, UITableViewDataSource {
         guard var reminders = reminders else { return }
         let time = reminders[sender.tag]
         reminders.remove(at: sender.tag)
-                        DRConstant.userDefault.set(reminders, forKey: DRConstant.waterReminder)
-        self.reminders =                 DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
+        DRConstant.userDefault.set(reminders, forKey: DRConstant.waterReminder)
+        self.reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
         print(DRConstant.waterReminderNotification + time)
         UNUserNotificationCenter.current().removePendingNotificationRequests(
             withIdentifiers: [DRConstant.waterReminderNotification + time])

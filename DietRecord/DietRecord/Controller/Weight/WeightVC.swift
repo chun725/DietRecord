@@ -69,7 +69,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func getHealthKitPermission() {
         healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
-                                DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
+                DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
                 self.setWeight()
                 DispatchQueue.main.async {
                     self.syncSwitch.setOn(true, animated: false)
@@ -78,7 +78,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 if error != nil, let error = error {
                     print(error)
                 }
-                                DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
+                DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
                 self.syncSwitch.setOn(false, animated: false)
                 self.fetchWeightRecord()
                 print("Permission denied.")
@@ -123,9 +123,9 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         healthManager.havePermissionOfWrite { bool in
             if bool {
                 if self.syncSwitch.isOn {
-                                    DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
+                    DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
                 } else {
-                                    DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
+                    DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
                 }
                 self.fetchWeightRecord()
             } else {
@@ -141,7 +141,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 } else {
                     self.fetchWeightRecord()
                 }
-                                DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
+                DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
             }
         }
     }

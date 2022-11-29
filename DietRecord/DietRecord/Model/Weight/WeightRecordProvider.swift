@@ -19,7 +19,10 @@ class WeightRecordProvider {
         for weightData in weightDatas {
             updateGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
+                let collectionReference = DRConstant.database
+                    .collection(DRConstant.user)
+                    .document(DRConstant.userID)
+                    .collection(DRConstant.weight)
                 collectionReference.getDocuments { snapshot, error in
                     if let error = error {
                         completion(.failure(error))
@@ -46,7 +49,10 @@ class WeightRecordProvider {
     }
     
     func fetchWeightRecord(sync: Bool, completion: @escaping WeightRecordResult) {
-        let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
+        let collectionReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.weight)
         collectionReference.getDocuments { snapshot, error in
             if let error = error {
                 print("Error Info: \(error).")
@@ -70,7 +76,10 @@ class WeightRecordProvider {
     }
     
     func createWeightRecord(weightData: WeightData, completion: @escaping (Result<Void, Error>) -> Void) {
-        let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
+        let collectionReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.weight)
         do {
             let dateString = DRConstant.dateFormatter.string(from: weightData.date)
             guard let date = DRConstant.dateFormatter.date(from: dateString) else { return }
@@ -101,7 +110,10 @@ class WeightRecordProvider {
     }
     
     func deleteWeightRecord(weightData: WeightData, completion: @escaping (Result<Void, Error>) -> Void) {
-        let collectionReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.weight)
+        let collectionReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.weight)
         let dateString = DRConstant.dateFormatter.string(from: weightData.date)
         collectionReference.document(dateString).delete()
         healthManager.havePermissionOfWrite { [weak self] result in

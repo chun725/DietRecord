@@ -22,7 +22,11 @@ class ReportProvider {
         for date in dates {
             downloadGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.diet).document(date)
+                let documentReference = DRConstant.database
+                    .collection(DRConstant.user)
+                    .document(DRConstant.userID)
+                    .collection(DRConstant.diet)
+                    .document(date)
                 documentReference.getDocument { document, error in
                     if let error = error {
                         completion(.failure(error))
@@ -59,7 +63,10 @@ class ReportProvider {
                 else { return }
                 userData.goal = goal
                 do {
-                    try DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).setData(from: userData)
+                    try DRConstant.database
+                        .collection(DRConstant.user)
+                        .document(DRConstant.userID)
+                        .setData(from: userData)
                     completion(.success(()))
                 } catch {
                     completion(.failure(error))

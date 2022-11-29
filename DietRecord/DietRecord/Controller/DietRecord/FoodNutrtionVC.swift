@@ -57,7 +57,7 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
     
     // MARK: - Action -
     @IBAction func goBackToFoodSearchVC(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func addOrSaveFood(sender: Any) {
@@ -67,7 +67,7 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
         if !qty.isEmpty {
             let food = Food(qty: qty, foodIngredient: food)
             self.closure?(food)
-            self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: true)
         } else {
             self.presentInputAlert(title: "輸入欄位不得為空")
         }

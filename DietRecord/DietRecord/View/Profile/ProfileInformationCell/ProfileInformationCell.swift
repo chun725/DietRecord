@@ -116,7 +116,7 @@ class ProfileInformationCell: UITableViewCell {
             setupGoalPage.closure = { [weak self] goal in
                 self?.goal = goal
             }
-            controller?.navigationController?.pushViewController(setupGoalPage, animated: false)
+            controller?.navigationController?.pushViewController(setupGoalPage, animated: true)
         }
     }
     
@@ -132,7 +132,7 @@ class ProfileInformationCell: UITableViewCell {
         optionMenu.addAction(photoGallery)
         optionMenu.addAction(camera)
         optionMenu.addAction(cancelAction)
-        controller?.present(optionMenu, animated: false)
+        controller?.present(optionMenu, animated: true)
     }
 }
 
@@ -220,11 +220,11 @@ extension ProfileInformationCell:
         configuration.filter = .images
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-        controller?.present(picker, animated: false)
+        controller?.present(picker, animated: true)
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: false)
+        picker.dismiss(animated: true)
         let itemProviders = results.map(\.itemProvider)
         if let itemProvider = itemProviders.first, itemProvider.canLoadObject(ofClass: UIImage.self) {
             let previousImage = self.userImageView.image

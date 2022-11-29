@@ -65,7 +65,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -95,7 +95,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
                 as? ProfileVC {
                 userProfilePage.otherUserID = requests[indexPath.row].userID
-                self.navigationController?.pushViewController(userProfilePage, animated: false)
+                self.navigationController?.pushViewController(userProfilePage, animated: true)
             }
         } else {
             let alert = UIAlertController(
@@ -117,7 +117,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
             alert.addAction(action)
             alert.addAction(cancelAction)
-            self.present(alert, animated: false)
+            self.present(alert, animated: true)
         }
     }
 }

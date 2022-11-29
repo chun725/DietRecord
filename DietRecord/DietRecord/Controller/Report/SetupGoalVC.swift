@@ -36,7 +36,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -84,7 +84,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
         self.closure?(goal)
         if DRConstant.userData == nil {
-            self.navigationController?.popViewController(animated: false)
+            self.navigationController?.popViewController(animated: true)
         } else {
             reportProvider.changeGoal(goal: goal) { result in
                 switch result {
@@ -95,7 +95,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                         case .success(let user):
                             let user = user as? User
                             DRConstant.userData = user
-                            self.navigationController?.popViewController(animated: false)
+                            self.navigationController?.popViewController(animated: true)
                         case .failure(let error):
                             print("Error Info: \(error).")
                         }

@@ -88,6 +88,8 @@ class ProfileInformationCell: UITableViewCell {
             waterGoalTextField.text = user.waterGoal.transform(unit: Units.mLUnit.rawValue)
             weightGoalTextField.text = user.weightGoal.transform(unit: Units.kgUnit.rawValue)
             userSelfIDTextfield.text = user.userSelfID
+        } else {
+            controller?.user = user
         }
     }
     

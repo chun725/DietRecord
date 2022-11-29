@@ -384,25 +384,25 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kQ-gN-Ynz">
-                                        <rect key="frame" x="45" y="160" width="160" height="50"/>
+                                        <rect key="frame" x="45" y="135" width="160" height="100"/>
                                         <subviews>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="seV-z9-VKF">
-                                                <rect key="frame" x="0.0" y="0.0" width="80" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="100"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="dOK-GM-TWU"/>
+                                                    <constraint firstAttribute="height" constant="100" id="dOK-GM-TWU"/>
                                                     <constraint firstAttribute="width" constant="80" id="klv-qn-9PD"/>
                                                 </constraints>
                                             </pickerView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=":" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XqE-ny-OrE">
-                                                <rect key="frame" x="77.5" y="14.5" width="5" height="21"/>
+                                                <rect key="frame" x="77.5" y="39.5" width="5" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <color key="textColor" name="drDarkGray"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PTl-eR-Taw">
-                                                <rect key="frame" x="80" y="0.0" width="80" height="50"/>
+                                                <rect key="frame" x="80" y="0.0" width="80" height="100"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="PJg-Pv-7DV"/>
+                                                    <constraint firstAttribute="height" constant="100" id="PJg-Pv-7DV"/>
                                                     <constraint firstAttribute="width" constant="80" id="wBx-ue-V4M"/>
                                                 </constraints>
                                             </pickerView>
@@ -411,7 +411,7 @@
                                             <constraint firstItem="XqE-ny-OrE" firstAttribute="centerX" secondItem="5kQ-gN-Ynz" secondAttribute="centerX" id="ARS-t1-eIx"/>
                                             <constraint firstItem="seV-z9-VKF" firstAttribute="leading" secondItem="5kQ-gN-Ynz" secondAttribute="leading" id="M7K-Ho-Qbu"/>
                                             <constraint firstItem="PTl-eR-Taw" firstAttribute="centerY" secondItem="5kQ-gN-Ynz" secondAttribute="centerY" id="Mn1-oK-2jQ"/>
-                                            <constraint firstAttribute="height" constant="50" id="YYg-Cu-rRi"/>
+                                            <constraint firstAttribute="height" constant="100" id="YYg-Cu-rRi"/>
                                             <constraint firstItem="XqE-ny-OrE" firstAttribute="centerY" secondItem="5kQ-gN-Ynz" secondAttribute="centerY" id="hrE-Hu-XdE"/>
                                             <constraint firstAttribute="trailing" secondItem="PTl-eR-Taw" secondAttribute="trailing" id="iS0-Z5-IRt"/>
                                             <constraint firstAttribute="width" constant="160" id="rSY-fw-XD6"/>
@@ -597,10 +597,6 @@
             <point key="canvasLocation" x="1218.840579710145" y="995.75892857142856"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="AW9-zZ-PCO"/>
-        <designable name="BFU-97-ZMZ"/>
-    </designables>
     <resources>
         <image name="Image_Delete" width="170.5" height="170.5"/>
         <image name="Image_Edit-1" width="170.5" height="170.5"/>

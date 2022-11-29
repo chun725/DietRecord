@@ -97,7 +97,11 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         DRProgressHUD.show()
         let firebaseAuth = Auth.auth()
         guard let nowUserData = DRConstant.userData else { return }
-        let allUsers = nowUserData.followers + nowUserData.following
+        let users = nowUserData.followers + nowUserData.following
+        var allUsers: [String] = []
+        for user in users where !allUsers.contains(user) {
+            allUsers.append(user)
+        }
         profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
             switch result {
             case .success:

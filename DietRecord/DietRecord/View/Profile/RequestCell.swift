@@ -17,6 +17,12 @@ class RequestCell: UITableViewCell {
     var user: User?
     let profileProvider = ProfileProvider()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        checkButton.isEnabled = true
+        cancelButton.isEnabled = true
+    }
+    
     func layoutCell(user: User) {
         self.backgroundColor = .clear
         usernameLabel.text = user.username
@@ -26,6 +32,8 @@ class RequestCell: UITableViewCell {
     }
     
     @IBAction func checkRequest(_ sender: Any) {
+        checkButton.isEnabled = false
+        cancelButton.isEnabled = false
         guard let user = user else { return }
         profileProvider.changeFollow(isFollowing: false, followID: user.userID) { result in
             switch result {
@@ -38,6 +46,8 @@ class RequestCell: UITableViewCell {
     }
     
     @IBAction func cancelRequest(_ sender: Any) {
+        checkButton.isEnabled = false
+        cancelButton.isEnabled = false
         guard let user = user else { return }
         profileProvider.cancelRequest(followID: user.userID) { result in
             switch result {

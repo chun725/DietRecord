@@ -40,13 +40,12 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func createUserInfo() {
-        DRProgressHUD.show()
         guard let user = user else { return }
         if user.userSelfID.isEmpty || user.username.isEmpty || user.weightGoal.isEmpty
             || user.waterGoal.isEmpty || user.goal.isEmpty {
-            DRProgressHUD.dismiss()
             self.presentInputAlert(title: "請輸入完整資料")
         } else {
+            DRProgressHUD.show()
             profileProvider.createUserInfo(userData: user) { result in
                 switch result {
                 case .success:

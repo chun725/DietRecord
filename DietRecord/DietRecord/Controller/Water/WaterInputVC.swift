@@ -57,8 +57,8 @@ class WaterInputVC: UIViewController {
             imageView.image = UIImage(named: "Image_Reminder")
             waterInputView.isHidden = true
             saveButton.addTarget(self, action: #selector(saveReminder), for: .touchUpInside)
-                        DRConstant.timeDateFormatter.dateFormat = "HH:mm"
-            let dateString =             DRConstant.timeDateFormatter.string(from: Date())
+            DRConstant.timeDateFormatter.dateFormat = "HH:mm"
+            let dateString = DRConstant.timeDateFormatter.string(from: Date())
             let date = dateString.components(separatedBy: ":")
             let indexHour = Int(date[0]) ?? 0
             let indexMinute = Int(date[1]) ?? 0

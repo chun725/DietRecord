@@ -40,24 +40,54 @@ class ReportDetailCell: UITableViewCell {
         grayBackgroundView.setShadowAndRadius(radius: 10)
         guard let foodDailyInputs = foodDailyInputs else { return }
         let totalFoods = foodDailyInputs.flatMap { $0.mealRecord }.flatMap { $0.foods }
-        self.caloriesCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .calories).format()
-        self.carbsCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .carbohydrate).format()
-        self.fiberCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .dietaryFiber).format()
-        self.sugarCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .sugar).format()
-        self.proteinCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .protein).format()
-        self.fatCurrentLabel.text = DRConstant.calculateMacroNutrition(foods: totalFoods, nutrient: .lipid).format()
+        self.caloriesCurrentLabel.text = DRConstant.calculateMacroNutrition(
+            foods: totalFoods,
+            nutrient: .calories)
+        .format()
+        self.carbsCurrentLabel.text = DRConstant.calculateMacroNutrition(
+            foods: totalFoods,
+            nutrient: .carbohydrate)
+        .format()
+        self.fiberCurrentLabel.text = DRConstant.calculateMacroNutrition(
+            foods: totalFoods,
+            nutrient: .dietaryFiber)
+        .format()
+        self.sugarCurrentLabel.text = DRConstant.calculateMacroNutrition(
+            foods: totalFoods,
+            nutrient: .sugar)
+        .format()
+        self.proteinCurrentLabel.text = DRConstant.calculateMacroNutrition(
+            foods: totalFoods,
+            nutrient: .protein)
+        .format()
+        self.fatCurrentLabel.text = DRConstant.calculateMacroNutrition(
+            foods: totalFoods,
+            nutrient: .lipid)
+        .format()
         self.saturatedFatCurrentLabel.text = DRConstant.calculateMicroNutrition(
-            foods: totalFoods, nutrient: .saturatedLipid).format()
+            foods: totalFoods,
+            nutrient: .saturatedLipid)
+        .format()
         self.monounsaturatedFatCurrentLabel.text = (DRConstant.calculateMicroNutrition(
-            foods: totalFoods, nutrient: .monounsaturatedLipid) / 1000).format()
+            foods: totalFoods,
+            nutrient: .monounsaturatedLipid) / 1000)
+        .format()
         self.polyunsaturatedFatCurrentLabel.text = (DRConstant.calculateMicroNutrition(
-            foods: totalFoods, nutrient: .polyunsaturatedLipid) / 1000).format()
+            foods: totalFoods,
+            nutrient: .polyunsaturatedLipid) / 1000)
+        .format()
         self.cholesterolCurrentLabel.text = (DRConstant.calculateMicroNutrition(
-            foods: totalFoods, nutrient: .cholesterol) / 1000).format()
+            foods: totalFoods,
+            nutrient: .cholesterol) / 1000)
+        .format()
         self.sodiumCurrentLabel.text = (DRConstant.calculateMicroNutrition(
-            foods: totalFoods, nutrient: .sodium) / 1000).format()
+            foods: totalFoods,
+            nutrient: .sodium) / 1000)
+        .format()
         self.potassiumCurrentLabel.text = (DRConstant.calculateMicroNutrition(
-            foods: totalFoods, nutrient: .potassium) / 1000).format()
+            foods: totalFoods,
+            nutrient: .potassium) / 1000)
+        .format()
     }
     
     func layoutOfGoal(goal: [String]) {

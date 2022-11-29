@@ -142,10 +142,18 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             cell.controller = self
             cell.layoutCell(carbs: carbs, protein: protein, fat: fat)
             cell.setPieChart(
-                breakfast: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 0 }?.foods, nutrient: .calories),
-                lunch: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 1 }?.foods, nutrient: .calories),
-                dinner: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 2 }?.foods, nutrient: .calories),
-                others: DRConstant.calculateMacroNutrition(foods: meals.first { $0.meal == 3 }?.foods, nutrient: .calories),
+                breakfast: DRConstant.calculateMacroNutrition(
+                    foods: meals.first { $0.meal == 0 }?.foods,
+                    nutrient: .calories),
+                lunch: DRConstant.calculateMacroNutrition(
+                    foods: meals.first { $0.meal == 1 }?.foods,
+                    nutrient: .calories),
+                dinner: DRConstant.calculateMacroNutrition(
+                    foods: meals.first { $0.meal == 2 }?.foods,
+                    nutrient: .calories),
+                others: DRConstant.calculateMacroNutrition(
+                    foods: meals.first { $0.meal == 3 }?.foods,
+                    nutrient: .calories),
                 goal: userData.goal[0].transformToDouble())
             self.dietContentView = cell.contentView
             return cell

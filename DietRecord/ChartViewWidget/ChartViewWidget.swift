@@ -43,7 +43,7 @@ struct Provider: TimelineProvider {
         let waterReloadDate = WidgetConstant.userDefaults?.string(forKey: "WaterDate")
         if currentDateString == waterReloadDate {
             guard let imageData = WidgetConstant.userDefaults?.value(forKey: WidgetConstant.waterImage) as? Data,
-                  let data = try? WidgetConstant.decoder.decode(Data.self, from: imageData)
+                let data = try? WidgetConstant.decoder.decode(Data.self, from: imageData)
             else { fatalError("Could not find update image.") }
             let entry = SimpleEntry(date: currentDate, imageData: data)
             entries.append(entry)

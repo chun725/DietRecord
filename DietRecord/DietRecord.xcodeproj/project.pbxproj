@@ -1161,7 +1161,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord.ChartViewWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1191,7 +1191,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord.ChartViewWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1331,6 +1331,7 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "食話實說";
 				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以在此App中上傳您拍攝的照片";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說欲取用您健康App內的體重記錄，讓您可以在此App內完整查看過去的體重記錄";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說欲將透過App新增的體重記錄同步寫入健康App，讓您可以更完整的保存體重記錄";
@@ -1353,7 +1354,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1370,6 +1371,7 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "食話實說";
 				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以在此App中上傳您拍攝的照片";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說欲取用您健康App內的體重記錄，讓您可以在此App內完整查看過去的體重記錄";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說欲將透過App新增的體重記錄同步寫入健康App，讓您可以更完整的保存體重記錄";
@@ -1392,7 +1394,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

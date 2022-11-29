@@ -574,12 +574,15 @@ extension ProfileProvider {
                         guard let document = document,
                             document.exists,
                             var user = try? document.data(as: User.self)
-                        else { return }
+                        else {
+                            deleteGroup.leave()
+                            return
+                        }
                         if user.following.contains(DRConstant.userID) {
-                            user.following.remove(at: user.following.firstIndex(of: DRConstant.userID) ?? 0)
+                            user.following.removeAll { $0 == DRConstant.userID }
                         }
                         if user.followers.contains(DRConstant.userID) {
-                            user.followers.remove(at: user.followers.firstIndex(of: DRConstant.userID) ?? 0)
+                            user.followers.removeAll { $0 == DRConstant.userID }
                         }
                         do {
                             try documentRef.setData(from: user)

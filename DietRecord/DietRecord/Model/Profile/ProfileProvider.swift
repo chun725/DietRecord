@@ -157,7 +157,7 @@ class ProfileProvider {
                 else { return }
                 if isRequest {
                     user.request.removeAll { $0 == DRConstant.userID }
-                } else if !user.blocks.contains(DRConstant.userID) {
+                } else if !user.blocks.contains(DRConstant.userID) && !user.request.contains(DRConstant.userID) {
                     user.request.append(DRConstant.userID)
                 }
                 do {
@@ -182,7 +182,7 @@ class ProfileProvider {
                 else { return }
                 if isFollowing {
                     user.followers.removeAll { $0 == DRConstant.userID }
-                } else {
+                } else if !user.following.contains(DRConstant.userID) {
                     user.following.append(DRConstant.userID)
                 }
                 do {
@@ -214,7 +214,7 @@ class ProfileProvider {
                 else { return }
                 if isFollowing {
                     user.following.removeAll { $0 == followID }
-                } else {
+                } else if !user.followers.contains(followID) {
                     user.followers.append(followID)
                     user.request.removeAll { $0 == followID }
                 }

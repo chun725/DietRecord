@@ -47,6 +47,9 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         self.tabBarController?.tabBar.isHidden = true
         animationView.loopMode = .loop
         animationView.play()
+        if userSearchResult != nil {
+            textFieldDidEndEditing(userInputTextField)
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {

@@ -247,7 +247,7 @@ extension ProfileInformationCell:
         controller.sourceType = .camera
         controller.allowsEditing = true
         controller.delegate = self
-        self.controller?.present(controller, animated: false)
+        self.controller?.present(controller, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -255,6 +255,6 @@ extension ProfileInformationCell:
             self.userImageView.image = pickedImage
             self.uploadImage()
         }
-        picker.dismiss(animated: false)
+        picker.dismiss(animated: true)
     }
 }

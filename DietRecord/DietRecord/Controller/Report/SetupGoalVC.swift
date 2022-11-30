@@ -10,6 +10,7 @@ import UIKit
 class SetupGoalVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var selfInfoTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
     let reportProvider = ReportProvider()
     var isAutomatic = true
@@ -20,9 +21,12 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         selfInfoTableView.dataSource = self
+        selfInfoTableView.registerCellWithNib(identifier: ReportSetGoalCell.reuseIdentifier, bundle: nil)
+        selfInfoTableView.registerCellWithNib(identifier: ReportAutomaticGoalCell.reuseIdentifier, bundle: nil)
         if !isAutomatic {
             titleLabel.text = "請輸入營養素目標"
         }
+        saveButton.layer.cornerRadius = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,10 +83,6 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         } else {
             guard goal.first(where: { $0.isEmpty }) == nil else {
                 self.presentInputAlert(title: "輸入欄位不得為空")
-                return
-            }
-            guard goal.first(where: { $0.transformToDouble() == 0.0 }) == nil else {
-                self.presentInputAlert(title: "目標不可為0，請重新填寫")
                 return
             }
         }
@@ -150,10 +150,10 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
-        var proportion: [Double] = [55, 20, 25]
+        var proportion: [Double] = [55, 15, 30]
         switch personalInfo.dietPlan {
         case DietPlan.general.rawValue:
-            proportion = [55, 20, 25]
+            proportion = [55, 15, 30]
         case DietPlan.highCarbs.rawValue:
             proportion = [60, 20, 20]
         case DietPlan.highProtein.rawValue:

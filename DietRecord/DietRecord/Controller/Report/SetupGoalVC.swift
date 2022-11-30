@@ -66,6 +66,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func saveInfo(_ sender: Any) {
+        DRProgressHUD.show()
         if isAutomatic {
             guard let personalInfo = personalInfo,
                 !personalInfo.gender.isEmpty,
@@ -88,6 +89,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
         self.closure?(goal)
         if DRConstant.userData == nil {
+            DRProgressHUD.showSuccess()
             self.navigationController?.popViewController(animated: true)
         } else {
             reportProvider.changeGoal(goal: goal) { result in
@@ -99,12 +101,15 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                         case .success(let user):
                             let user = user as? User
                             DRConstant.userData = user
+                            DRProgressHUD.showSuccess()
                             self.navigationController?.popViewController(animated: true)
                         case .failure(let error):
+                            DRProgressHUD.showFailure(text: "儲存失敗")
                             print("Error Info: \(error).")
                         }
                     }
                 case .failure(let error):
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }

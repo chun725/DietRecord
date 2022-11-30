@@ -44,8 +44,8 @@
 /* Class = "UILabel"; text = "g"; ObjectID = "RnV-P2-vkw"; */
 "RnV-P2-vkw.text" = "g";
 
-/* Class = "UIButton"; normalTitle = "輸入個人資訊自動計算"; ObjectID = "TkU-Hm-ErI"; */
-"TkU-Hm-ErI.normalTitle" = "輸入個人資訊自動計算";
+/* Class = "UIButton"; normalTitle = "幫你計算"; ObjectID = "TkU-Hm-ErI"; */
+"TkU-Hm-ErI.normalTitle" = "幫你計算";
 
 /* Class = "UITabBarItem"; title = "Report"; ObjectID = "Zbd-gP-pry"; */
 "Zbd-gP-pry.title" = "Report";
@@ -77,8 +77,8 @@
 /* Class = "UILabel"; text = "kcal"; ObjectID = "g3G-wI-Fj5"; */
 "g3G-wI-Fj5.text" = "kcal";
 
-/* Class = "UILabel"; text = "設定飲食目標"; ObjectID = "g5T-cz-SZw"; */
-"g5T-cz-SZw.text" = "設定飲食目標";
+/* Class = "UILabel"; text = "飲食目標"; ObjectID = "g5T-cz-SZw"; */
+"g5T-cz-SZw.text" = "飲食目標";
 
 /* Class = "UILabel"; text = "活躍程度"; ObjectID = "hFz-Hs-Kqm"; */
 "hFz-Hs-Kqm.text" = "活躍程度";

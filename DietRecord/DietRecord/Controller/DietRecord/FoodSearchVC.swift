@@ -54,7 +54,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     // MARK: - Action -
     @IBAction func saveFoods(_ sender: Any) {
         self.closure?(chooseFoods)
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func goToFoodNutritionPage(sender: UIButton) {
@@ -65,7 +65,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
             }
-            self.navigationController?.pushViewController(foodNutritionPage, animated: false)
+            self.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }
     }
     
@@ -78,12 +78,12 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods[sender.tag] = food
             }
-            self.navigationController?.pushViewController(foodNutritionPage, animated: false)
+            self.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }
     }
     
     @IBAction func goBackToDietInputPage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - TextFieldDelegate -

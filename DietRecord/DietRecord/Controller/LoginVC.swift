@@ -63,12 +63,12 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
             safari.preferredControlTintColor = .drDarkGray
             safari.dismissButtonStyle = .close
             safari.delegate = self
-            self.navigationController?.pushViewController(safari, animated: false)
+            self.navigationController?.pushViewController(safari, animated: true)
         }
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func chooseAppleButtonStyle() -> ASAuthorizationAppleIDButton.Style {
@@ -194,7 +194,7 @@ extension LoginVC {
                     if let profileInfoPage = storyboard.instantiateViewController(
                         withIdentifier: "\(ProfileInformationVC.self)")
                         as? ProfileInformationVC {
-                        self.navigationController?.pushViewController(profileInfoPage, animated: false)
+                        self.navigationController?.pushViewController(profileInfoPage, animated: true)
                     }
                 } else if let user = result as? User {
                     DRConstant.userData = user
@@ -202,7 +202,7 @@ extension LoginVC {
                     if let tabbarController = storyboard.instantiateViewController(
                         withIdentifier: "\(TabBarController.self)")
                         as? TabBarController {
-                        self.navigationController?.pushViewController(tabbarController, animated: false)
+                        self.navigationController?.pushViewController(tabbarController, animated: true)
                     }
                 }
             case .failure(let error):

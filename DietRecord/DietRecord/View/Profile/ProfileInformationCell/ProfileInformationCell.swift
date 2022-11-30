@@ -88,6 +88,8 @@ class ProfileInformationCell: UITableViewCell {
             waterGoalTextField.text = user.waterGoal.transform(unit: Units.mLUnit.rawValue)
             weightGoalTextField.text = user.weightGoal.transform(unit: Units.kgUnit.rawValue)
             userSelfIDTextfield.text = user.userSelfID
+        } else {
+            controller?.user = user
         }
     }
     
@@ -116,7 +118,7 @@ class ProfileInformationCell: UITableViewCell {
             setupGoalPage.closure = { [weak self] goal in
                 self?.goal = goal
             }
-            controller?.navigationController?.pushViewController(setupGoalPage, animated: false)
+            controller?.navigationController?.pushViewController(setupGoalPage, animated: true)
         }
     }
     
@@ -132,7 +134,7 @@ class ProfileInformationCell: UITableViewCell {
         optionMenu.addAction(photoGallery)
         optionMenu.addAction(camera)
         optionMenu.addAction(cancelAction)
-        controller?.present(optionMenu, animated: false)
+        controller?.present(optionMenu, animated: true)
     }
 }
 
@@ -220,11 +222,11 @@ extension ProfileInformationCell:
         configuration.filter = .images
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-        controller?.present(picker, animated: false)
+        controller?.present(picker, animated: true)
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: false)
+        picker.dismiss(animated: true)
         let itemProviders = results.map(\.itemProvider)
         if let itemProvider = itemProviders.first, itemProvider.canLoadObject(ofClass: UIImage.self) {
             let previousImage = self.userImageView.image
@@ -247,7 +249,7 @@ extension ProfileInformationCell:
         controller.sourceType = .camera
         controller.allowsEditing = true
         controller.delegate = self
-        self.controller?.present(controller, animated: false)
+        self.controller?.present(controller, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -255,6 +257,6 @@ extension ProfileInformationCell:
             self.userImageView.image = pickedImage
             self.uploadImage()
         }
-        picker.dismiss(animated: false)
+        picker.dismiss(animated: true)
     }
 }

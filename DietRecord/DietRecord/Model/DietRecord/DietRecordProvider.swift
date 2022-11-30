@@ -15,7 +15,8 @@ typealias FoodDailyResult = (Result<Any, Error>) -> Void
 class DietRecordProvider {
     // MARK: - Search food in database -
     func searchFoods(foodName: String, completion: @escaping FoodSearchResults) {
-        guard let foodIngredients = DRConstant.foodIngredients else { fatalError("Could not find food ingredient database.") }
+        guard let foodIngredients = DRConstant.foodIngredients
+        else { fatalError("Could not find food ingredient database.") }
         let foods: [FoodIngredient] = foodIngredients.filter { foodIngredient in
             if foodIngredient.commonName.contains(foodName) || foodIngredient.name.contains(foodName) {
                 return true
@@ -43,7 +44,11 @@ class DietRecordProvider {
     
     // MARK: - Add food daily record -
     func createFoodDaily(date: String, mealRecord: MealRecord, completion: @escaping CreateFoodDailyResult) {
-        let documentReference = DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.diet).document(date)
+        let documentReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.diet)
+            .document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
@@ -73,19 +78,24 @@ class DietRecordProvider {
     
     // MARK: - Fetch Diet Daily Record -
     func fetchDietRecord(date: String, completion: @escaping FoodDailyResult) {
-        DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.diet).document(date).getDocument { document, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                guard let document = document,
-                    document.exists,
-                    let dietRecordData = try? document.data(as: FoodDailyInput.self)
-                else {
-                    completion(.success("Document doesn't exist."))
-                    return
+        DRConstant.database
+            .collection(DRConstant.user)
+            .document(DRConstant.userID)
+            .collection(DRConstant.diet)
+            .document(date)
+            .getDocument { document, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    guard let document = document,
+                        document.exists,
+                        let dietRecordData = try? document.data(as: FoodDailyInput.self)
+                    else {
+                        completion(.success("Document doesn't exist."))
+                        return
+                    }
+                    completion(.success(dietRecordData))
                 }
-                completion(.success(dietRecordData))
             }
-        }
     }
 }

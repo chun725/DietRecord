@@ -58,7 +58,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             foodSearchPage.closure = { [weak self] foods in
                 self?.foods = foods
             }
-            self.navigationController?.pushViewController(foodSearchPage, animated: false)
+            self.navigationController?.pushViewController(foodSearchPage, animated: true)
         }
     }
     
@@ -72,7 +72,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         }
         let cancel = UIAlertAction(title: "取消", style: .cancel)
         optionMenu.addAction(cancel)
-        self.present(optionMenu, animated: false)
+        self.present(optionMenu, animated: true)
     }
     
     @objc func choosePhotoSource(sender: UIButton) {
@@ -87,11 +87,11 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         optionMenu.addAction(photoGallery)
         optionMenu.addAction(camera)
         optionMenu.addAction(cancelAction)
-        self.present(optionMenu, animated: false)
+        self.present(optionMenu, animated: true)
     }
     
     @IBAction func goBackToDietRecordPage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func uploadImage() {
@@ -142,7 +142,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
                 case .success:
                     DRProgressHUD.showSuccess(text: "儲存成功")
                     self.closure?(date)
-                    self.navigationController?.popViewController(animated: false)
+                    self.navigationController?.popViewController(animated: true)
                 case .failure(let error):
                     DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
@@ -186,11 +186,11 @@ extension DietInputVC: PHPickerViewControllerDelegate, UIImagePickerControllerDe
         configuration.filter = .images
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
-        present(picker, animated: false)
+        present(picker, animated: true)
     }
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: false)
+        picker.dismiss(animated: true)
         let itemProviders = results.map(\.itemProvider)
         if let itemProvider = itemProviders.first, itemProvider.canLoadObject(ofClass: UIImage.self) {
             let previousImage = self.mealImageView?.image
@@ -213,7 +213,7 @@ extension DietInputVC: PHPickerViewControllerDelegate, UIImagePickerControllerDe
         controller.sourceType = .camera
         controller.allowsEditing = true
         controller.delegate = self
-        self.present(controller, animated: false)
+        self.present(controller, animated: true)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -221,6 +221,6 @@ extension DietInputVC: PHPickerViewControllerDelegate, UIImagePickerControllerDe
             self.mealImageView?.image = pickedImage
             self.uploadImage()
         }
-        picker.dismiss(animated: false)
+        picker.dismiss(animated: true)
     }
 }

@@ -37,6 +37,8 @@
 		34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */; };
 		34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA2290FCED100D5AFFD /* String+Extension.swift */; };
 		34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */; };
+		343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486652936FE690054ACDC /* ReportSetGoalCell.xib */; };
+		343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */; };
 		343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD69329111C6E0048046E /* KingFisherWrapper.swift */; };
 		343CD698291223850048046E /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD697291223850048046E /* BarChart.swift */; };
 		344DC7BF2926200800D245A2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344DC7BE2926200800D245A2 /* WidgetKit.framework */; };
@@ -181,6 +183,8 @@
 		34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordProvider.swift; sourceTree = "<group>"; };
 		34270EA2290FCED100D5AFFD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		343486652936FE690054ACDC /* ReportSetGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportSetGoalCell.xib; sourceTree = "<group>"; };
+		343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportAutomaticGoalCell.xib; sourceTree = "<group>"; };
 		343CD69329111C6E0048046E /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		343CD697291223850048046E /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
 		344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChartViewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -390,6 +394,15 @@
 			path = DietRecord;
 			sourceTree = "<group>";
 		};
+		343486642936FE280054ACDC /* ReportSetGoalCell */ = {
+			isa = PBXGroup;
+			children = (
+				3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */,
+				343486652936FE690054ACDC /* ReportSetGoalCell.xib */,
+			);
+			path = ReportSetGoalCell;
+			sourceTree = "<group>";
+		};
 		343CD69229111C500048046E /* Third Party Wrapper */ = {
 			isa = PBXGroup;
 			children = (
@@ -439,13 +452,13 @@
 			path = Report;
 			sourceTree = "<group>";
 		};
-		3460ED78291B7712002ED662 /* ReportGoalCell */ = {
+		3460ED78291B7712002ED662 /* ReportAutomaticGoalCell */ = {
 			isa = PBXGroup;
 			children = (
 				3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */,
-				3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */,
+				343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */,
 			);
-			path = ReportGoalCell;
+			path = ReportAutomaticGoalCell;
 			sourceTree = "<group>";
 		};
 		3460ED7D291B9F9E002ED662 /* Report */ = {
@@ -582,7 +595,8 @@
 		3469168A291255680021985F /* Report */ = {
 			isa = PBXGroup;
 			children = (
-				3460ED78291B7712002ED662 /* ReportGoalCell */,
+				343486642936FE280054ACDC /* ReportSetGoalCell */,
+				3460ED78291B7712002ED662 /* ReportAutomaticGoalCell */,
 				3469169029127C140021985F /* ReportDetailCell */,
 				3469168F29127C040021985F /* ReportBarChartCell */,
 			);
@@ -863,6 +877,7 @@
 				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
 				34E27674292FC51900750DAF /* 98877-search.json in Resources */,
+				343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */,
 				34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */,
 				34270E93290F810D00D5AFFD /* FoodDailyCell.xib in Resources */,
 				3422702629110680000B4A58 /* FoodIngredient.json in Resources */,
@@ -880,6 +895,7 @@
 				349B8D9229193D7B002EB186 /* ProfileDetailCell.xib in Resources */,
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
 				34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */,
+				343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */,
 				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,
 				34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
@@ -1161,7 +1177,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord.ChartViewWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1191,7 +1207,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 1.0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecord.ChartViewWidget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1331,10 +1347,11 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以在此App中上傳您拍攝的照片";
+				INFOPLIST_KEY_CFBundleDisplayName = "食話實說";
+				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以上傳照片至飲食紀錄中";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說欲取用您健康App內的體重記錄，讓您可以在此App內完整查看過去的體重記錄";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說欲將透過App新增的體重記錄同步寫入健康App，讓您可以更完整的保存體重記錄";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說欲取用相簿權限，使您可以將相簿內的照片上傳至此App中";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說欲取用相簿權限，使您可上傳相簿內的圖像";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1353,7 +1370,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1370,10 +1387,11 @@
 				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DietRecord/Info.plist;
-				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以在此App中上傳您拍攝的照片";
+				INFOPLIST_KEY_CFBundleDisplayName = "食話實說";
+				INFOPLIST_KEY_NSCameraUsageDescription = "食話實說欲取用您的相機權限，使您可以上傳照片至飲食紀錄中";
 				INFOPLIST_KEY_NSHealthShareUsageDescription = "食話實說欲取用您健康App內的體重記錄，讓您可以在此App內完整查看過去的體重記錄";
 				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "食話實說欲將透過App新增的體重記錄同步寫入健康App，讓您可以更完整的保存體重記錄";
-				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說欲取用相簿權限，使您可以將相簿內的照片上傳至此App中";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "食話實說欲取用相簿權限，使您可上傳相簿內的圖像";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1392,7 +1410,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

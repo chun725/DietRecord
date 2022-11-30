@@ -12,7 +12,7 @@ extension UIViewController {
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default)
         alert.addAction(action)
-        self.present(alert, animated: false)
+        self.present(alert, animated: true)
     }
     
     func presentView(views: [UIView]) {

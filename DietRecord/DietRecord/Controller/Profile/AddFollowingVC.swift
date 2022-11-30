@@ -47,6 +47,9 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         self.tabBarController?.tabBar.isHidden = true
         animationView.loopMode = .loop
         animationView.play()
+        if userSearchResult != nil {
+            textFieldDidEndEditing(userInputTextField)
+        }
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
@@ -83,7 +86,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func requestFollow(sender: UIButton) {
@@ -126,7 +129,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
             let cancel = UIAlertAction(title: "返回", style: .default)
             alert.addAction(action)
             alert.addAction(cancel)
-            self.present(alert, animated: false)
+            self.present(alert, animated: true)
         }
     }
     
@@ -135,7 +138,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
             as? ProfileVC {
             userProfilePage.otherUserID = self.userSearchResult?.userID
-            self.navigationController?.pushViewController(userProfilePage, animated: false)
+            self.navigationController?.pushViewController(userProfilePage, animated: true)
         }
     }
 }

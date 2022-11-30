@@ -10,20 +10,24 @@ import Foundation
 class ProfileProvider {
     func fetchImage(userID: String, completion: @escaping (Result<[FoodDailyInput], Error>) -> Void) {
         var dietRecords: [FoodDailyInput] = []
-        DRConstant.database.collection(DRConstant.user).document(userID).collection(DRConstant.diet).getDocuments { snapshot, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                guard let snapshot = snapshot else { return }
-                var documents = snapshot.documents
-                documents = documents.sorted { $0.documentID < $1.documentID }
-                for document in documents {
-                    guard let dietRecord = try? document.data(as: FoodDailyInput.self) else { return }
-                    dietRecords.append(dietRecord)
+        DRConstant.database
+            .collection(DRConstant.user)
+            .document(userID)
+            .collection(DRConstant.diet)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    guard let snapshot = snapshot else { return }
+                    var documents = snapshot.documents
+                    documents = documents.sorted { $0.documentID < $1.documentID }
+                    for document in documents {
+                        guard let dietRecord = try? document.data(as: FoodDailyInput.self) else { return }
+                        dietRecords.append(dietRecord)
+                    }
+                    completion(.success(dietRecords))
                 }
-                completion(.success(dietRecords))
             }
-        }
     }
     
     func fetchFollowingPost(completion: @escaping (Result<[MealRecord], Error>) -> Void) {
@@ -40,21 +44,25 @@ class ProfileProvider {
             for following in followings {
                 downloadGroup.enter()
                 let block = DispatchWorkItem(flags: .inheritQoS) {
-                    DRConstant.database.collection(DRConstant.user).document(following).collection(DRConstant.diet).getDocuments { snapshot, error in
-                        if let error = error {
-                            completion(.failure(error))
-                            downloadGroup.leave()
-                        } else {
-                            guard let snapshot = snapshot else { return }
-                            let documents = snapshot.documents
-                            for document in documents {
-                                guard let dietRecord = try? document.data(as: FoodDailyInput.self) else { return }
-                                let mealRecordsData = dietRecord.mealRecord.filter { $0.isShared == true }
-                                mealRecords.append(contentsOf: mealRecordsData)
+                    DRConstant.database
+                        .collection(DRConstant.user)
+                        .document(following)
+                        .collection(DRConstant.diet)
+                        .getDocuments { snapshot, error in
+                            if let error = error {
+                                completion(.failure(error))
+                                downloadGroup.leave()
+                            } else {
+                                guard let snapshot = snapshot else { return }
+                                let documents = snapshot.documents
+                                for document in documents {
+                                    guard let dietRecord = try? document.data(as: FoodDailyInput.self) else { return }
+                                    let mealRecordsData = dietRecord.mealRecord.filter { $0.isShared == true }
+                                    mealRecords.append(contentsOf: mealRecordsData)
+                                }
+                                downloadGroup.leave()
                             }
-                            downloadGroup.leave()
                         }
-                    }
                 }
                 blocks.append(block)
                 DispatchQueue.main.async(execute: block)
@@ -66,7 +74,11 @@ class ProfileProvider {
     }
     
     func changeLiked(authorID: String, date: String, meal: Int, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = DRConstant.database.collection(DRConstant.user).document(authorID).collection(DRConstant.diet).document(date)
+        let documentReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(authorID)
+            .collection(DRConstant.diet)
+            .document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
@@ -92,7 +104,11 @@ class ProfileProvider {
     }
     
     func postResponse(postUserID: String, date: String, meal: Int, response: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        let documentReference = DRConstant.database.collection(DRConstant.user).document(postUserID).collection(DRConstant.diet).document(date)
+        let documentReference = DRConstant.database
+            .collection(DRConstant.user)
+            .document(postUserID)
+            .collection(DRConstant.diet)
+            .document(date)
         documentReference.getDocument { document, error in
             guard let document = document,
                 document.exists,
@@ -141,7 +157,7 @@ class ProfileProvider {
                 else { return }
                 if isRequest {
                     user.request.removeAll { $0 == DRConstant.userID }
-                } else if !user.blocks.contains(DRConstant.userID) {
+                } else if !user.blocks.contains(DRConstant.userID) && !user.request.contains(DRConstant.userID) {
                     user.request.append(DRConstant.userID)
                 }
                 do {
@@ -166,7 +182,7 @@ class ProfileProvider {
                 else { return }
                 if isFollowing {
                     user.followers.removeAll { $0 == DRConstant.userID }
-                } else {
+                } else if !user.following.contains(DRConstant.userID) {
                     user.following.append(DRConstant.userID)
                 }
                 do {
@@ -198,7 +214,7 @@ class ProfileProvider {
                 else { return }
                 if isFollowing {
                     user.following.removeAll { $0 == followID }
-                } else {
+                } else if !user.followers.contains(followID) {
                     user.followers.append(followID)
                     user.request.removeAll { $0 == followID }
                 }
@@ -239,22 +255,25 @@ class ProfileProvider {
                 for followerID in usersID {
                     downloadGroup.enter()
                     let block = DispatchWorkItem(flags: .inheritQoS) {
-                        DRConstant.database.collection(DRConstant.user).document(followerID).getDocument { document, error in
-                            if let error = error {
-                                completion(.failure(error))
-                                downloadGroup.leave()
-                            } else {
-                                guard let document = document,
-                                    document.exists,
-                                    let user = try? document.data(as: User.self)
-                                else {
+                        DRConstant.database
+                            .collection(DRConstant.user)
+                            .document(followerID)
+                            .getDocument { document, error in
+                                if let error = error {
+                                    completion(.failure(error))
                                     downloadGroup.leave()
-                                    return
+                                } else {
+                                    guard let document = document,
+                                        document.exists,
+                                        let user = try? document.data(as: User.self)
+                                    else {
+                                        downloadGroup.leave()
+                                        return
+                                    }
+                                    users.append(user)
+                                    downloadGroup.leave()
                                 }
-                                users.append(user)
-                                downloadGroup.leave()
                             }
-                        }
                     }
                     blocks.append(block)
                     DispatchQueue.main.async(execute: block)
@@ -306,36 +325,42 @@ extension ProfileProvider {
     }
     
     func fetchUserSelfID(selfID: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-        DRConstant.database.collection(DRConstant.user).whereField("userSelfID", isEqualTo: selfID).getDocuments { snapshot, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                guard let snapshot = snapshot else { return }
-                if snapshot.documents.isEmpty {
-                    completion(.success(true))
+        DRConstant.database
+            .collection(DRConstant.user)
+            .whereField("userSelfID", isEqualTo: selfID)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
                 } else {
-                    completion(.success(false))
+                    guard let snapshot = snapshot else { return }
+                    if snapshot.documents.isEmpty {
+                        completion(.success(true))
+                    } else {
+                        completion(.success(false))
+                    }
                 }
             }
-        }
     }
     
     func searchUser(userSelfID: String, completion: @escaping (Result<Any, Error>) -> Void) {
-        DRConstant.database.collection(DRConstant.user).whereField("userSelfID", isEqualTo: userSelfID).getDocuments { snapshot, error in
-            if let error = error {
-                completion(.failure(error))
-            } else {
-                guard let snapshot = snapshot else { return }
-                if snapshot.documents.isEmpty {
-                    completion(.success("document不存在"))
+        DRConstant.database
+            .collection(DRConstant.user)
+            .whereField("userSelfID", isEqualTo: userSelfID)
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    completion(.failure(error))
                 } else {
-                    guard let document = snapshot.documents.first,
-                        let user = try? document.data(as: User.self)
-                    else { return }
-                    completion(.success(user))
+                    guard let snapshot = snapshot else { return }
+                    if snapshot.documents.isEmpty {
+                        completion(.success("document不存在"))
+                    } else {
+                        guard let document = snapshot.documents.first,
+                            let user = try? document.data(as: User.self)
+                        else { return }
+                        completion(.success(user))
+                    }
                 }
             }
-        }
     }
     
     func reportSomething(user: User?, mealRecord: MealRecord?, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
@@ -357,7 +382,11 @@ extension ProfileProvider {
     
     func deletePostOrResponse(mealRecord: MealRecord, response: Response?, completion: @escaping (Result<Void, Error>) -> Void) {
         let id = mealRecord.userID
-        let documentRef = DRConstant.database.collection(DRConstant.user).document(id).collection(DRConstant.diet).document(mealRecord.date)
+        let documentRef = DRConstant.database
+            .collection(DRConstant.user)
+            .document(id)
+            .collection(DRConstant.diet)
+            .document(mealRecord.date)
         documentRef.getDocument { document, error in
             if let error = error {
                 completion(.failure(error))
@@ -462,25 +491,32 @@ extension ProfileProvider {
         for collection in collections {
             deleteGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
-                DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(collection).getDocuments { snapshot, error in
-                    if let error = error {
-                        completion(.failure(error))
-                    } else {
-                        guard let snapshot = snapshot else { return }
-                        let documents = snapshot.documents
-                        if !documents.isEmpty {
-                            for document in documents {
-                                DRConstant.database
-                                    .collection(DRConstant.user)
-                                    .document(DRConstant.userID)
-                                    .collection(collection)
-                                    .document(document.documentID)
-                                    .delete()
+                DRConstant.database
+                    .collection(DRConstant.user)
+                    .document(DRConstant.userID)
+                    .collection(collection)
+                    .getDocuments { snapshot, error in
+                        if let error = error {
+                            completion(.failure(error))
+                        } else {
+                            guard let snapshot = snapshot
+                            else {
+                                deleteGroup.leave()
+                                return }
+                            let documents = snapshot.documents
+                            if !documents.isEmpty {
+                                for document in documents {
+                                    DRConstant.database
+                                        .collection(DRConstant.user)
+                                        .document(DRConstant.userID)
+                                        .collection(collection)
+                                        .document(document.documentID)
+                                        .delete()
+                                }
                             }
+                            deleteGroup.leave()
                         }
-                        deleteGroup.leave()
                     }
-                }
             }
             if collection == collections.last {
                 deleteGroup.enter()
@@ -541,12 +577,15 @@ extension ProfileProvider {
                         guard let document = document,
                             document.exists,
                             var user = try? document.data(as: User.self)
-                        else { return }
+                        else {
+                            deleteGroup.leave()
+                            return
+                        }
                         if user.following.contains(DRConstant.userID) {
-                            user.following.remove(at: user.following.firstIndex(of: DRConstant.userID) ?? 0)
+                            user.following.removeAll { $0 == DRConstant.userID }
                         }
                         if user.followers.contains(DRConstant.userID) {
-                            user.followers.remove(at: user.followers.firstIndex(of: DRConstant.userID) ?? 0)
+                            user.followers.removeAll { $0 == DRConstant.userID }
                         }
                         do {
                             try documentRef.setData(from: user)

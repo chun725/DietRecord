@@ -18,7 +18,6 @@ class GoalVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        whiteBackgroundView.layer.cornerRadius = 20
         inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         self.tabBarController?.tabBar.isHidden = true
@@ -54,11 +53,11 @@ class GoalVC: UIViewController {
                 self?.proteinLabel.text = goal[2].transform(unit: Units.gUnit.rawValue)
                 self?.fatLabel.text = goal[3].transform(unit: Units.gUnit.rawValue)
             }
-            self.navigationController?.pushViewController(setupGoalPage, animated: false)
+            self.navigationController?.pushViewController(setupGoalPage, animated: true)
         }
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
 }

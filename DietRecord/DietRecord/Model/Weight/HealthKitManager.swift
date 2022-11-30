@@ -31,7 +31,7 @@ class HealthKitManager {
             read: healthDataToRead) { success, error -> Void in
                 guard let completion = completion else { return }
                 completion(success, error  as NSError?)
-            }
+        }
     }
     
     func haveGetPermission(completion: @escaping (Result<Int, Error>) -> Void) {

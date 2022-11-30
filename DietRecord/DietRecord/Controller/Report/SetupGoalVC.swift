@@ -10,6 +10,7 @@ import UIKit
 class SetupGoalVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var selfInfoTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var saveButton: UIButton!
     
     let reportProvider = ReportProvider()
     var isAutomatic = true
@@ -20,9 +21,12 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         selfInfoTableView.dataSource = self
+        selfInfoTableView.registerCellWithNib(identifier: ReportSetGoalCell.reuseIdentifier, bundle: nil)
+        selfInfoTableView.registerCellWithNib(identifier: ReportAutomaticGoalCell.reuseIdentifier, bundle: nil)
         if !isAutomatic {
             titleLabel.text = "請輸入營養素目標"
         }
+        saveButton.layer.cornerRadius = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,7 +40,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,6 +66,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func saveInfo(_ sender: Any) {
+        DRProgressHUD.show()
         if isAutomatic {
             guard let personalInfo = personalInfo,
                 !personalInfo.gender.isEmpty,
@@ -84,7 +89,8 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
         self.closure?(goal)
         if DRConstant.userData == nil {
-            self.navigationController?.popViewController(animated: false)
+            DRProgressHUD.showSuccess()
+            self.navigationController?.popViewController(animated: true)
         } else {
             reportProvider.changeGoal(goal: goal) { result in
                 switch result {
@@ -95,12 +101,15 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                         case .success(let user):
                             let user = user as? User
                             DRConstant.userData = user
-                            self.navigationController?.popViewController(animated: false)
+                            DRProgressHUD.showSuccess()
+                            self.navigationController?.popViewController(animated: true)
                         case .failure(let error):
+                            DRProgressHUD.showFailure(text: "儲存失敗")
                             print("Error Info: \(error).")
                         }
                     }
                 case .failure(let error):
+                    DRProgressHUD.showFailure(text: "儲存失敗")
                     print("Error Info: \(error).")
                 }
             }
@@ -146,10 +155,10 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     }
     
     func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
-        var proportion: [Double] = [55, 20, 25]
+        var proportion: [Double] = [55, 15, 30]
         switch personalInfo.dietPlan {
         case DietPlan.general.rawValue:
-            proportion = [55, 20, 25]
+            proportion = [55, 15, 30]
         case DietPlan.highCarbs.rawValue:
             proportion = [60, 20, 20]
         case DietPlan.highProtein.rawValue:

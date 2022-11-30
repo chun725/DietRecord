@@ -40,7 +40,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
             withIdentifier: "\(ProfileInformationVC.self)")
             as? ProfileInformationVC {
             profileInfoPage.isUpdated = true
-            controller?.navigationController?.pushViewController(profileInfoPage, animated: false)
+            controller?.navigationController?.pushViewController(profileInfoPage, animated: true)
         }
     }
     
@@ -49,7 +49,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         if let blockUsersPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
             as? CheckRequestVC {
             blockUsersPage.need = "BlockUsers"
-            controller?.navigationController?.pushViewController(blockUsersPage, animated: false)
+            controller?.navigationController?.pushViewController(blockUsersPage, animated: true)
         }
     }
     
@@ -59,12 +59,12 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
             safari.preferredControlTintColor = .drDarkGray
             safari.dismissButtonStyle = .close
             safari.delegate = self
-            controller?.navigationController?.pushViewController(safari, animated: false)
+            controller?.navigationController?.pushViewController(safari, animated: true)
         }
     }
     
     func safariViewControllerDidFinish(_ controller: SFSafariViewController) {
-        controller.navigationController?.popViewController(animated: false)
+        controller.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func logout(_ sender: Any) {
@@ -73,7 +73,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
             try firebaseAuth.signOut()
             DRConstant.userID = ""
             DRConstant.userData = nil
-            controller?.tabBarController?.navigationController?.popToRootViewController(animated: false)
+            controller?.tabBarController?.navigationController?.popToRootViewController(animated: true)
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
@@ -90,40 +90,41 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
         alert.addAction(deleteAction)
         alert.addAction(cancelAction)
-        controller?.present(alert, animated: false)
+        controller?.present(alert, animated: true)
     }
     
     private func deleteAccount() {
         DRProgressHUD.show()
         let firebaseAuth = Auth.auth()
         guard let nowUserData = DRConstant.userData else { return }
-        let allUsers = nowUserData.followers + nowUserData.following
+        let users = nowUserData.followers + nowUserData.following
+        var allUsers: [String] = []
+        for user in users where !allUsers.contains(user) {
+            allUsers.append(user)
+        }
         profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
             switch result {
             case .success:
-                do {
-                    firebaseAuth.currentUser?.delete()
-                    try firebaseAuth.signOut()
-                    self?.profileProvider.deleteAccount { result in
-                        switch result {
-                        case .success:
-                            DRConstant.userID = ""
-                            DRConstant.userData = nil
-                            DRProgressHUD.showSuccess(text: "刪除帳號完成")
-                            sleep(2)
-                            self?.controller?
-                                .tabBarController?
-                                .navigationController?
-                                .popToRootViewController(animated: false)
-                            print("刪除帳號")
-                        case .failure(let error):
-                            print("Error Info: \(error) in deleting account.")
-                        }
+                self?.profileProvider.deleteAccount { result in
+                    switch result {
+                    case .success:
+                        firebaseAuth.currentUser?.delete()
+                        DRConstant.userID = ""
+                        DRConstant.userData = nil
+                        DRProgressHUD.showSuccess(text: "刪除帳號完成")
+                        sleep(2)
+                        self?.controller?
+                            .tabBarController?
+                            .navigationController?
+                            .popToRootViewController(animated: true)
+                        print("刪除帳號")
+                    case .failure(let error):
+                        DRProgressHUD.showFailure(text: "刪除帳號失敗")
+                        print("Error Info: \(error) in deleting account.")
                     }
-                } catch let signOutError as NSError {
-                    print("Error signing out: %@", signOutError)
                 }
             case .failure(let error):
+                DRProgressHUD.showFailure(text: "刪除帳號失敗")
                 print("Error Info: \(error) in deleting account.")
             }
         }

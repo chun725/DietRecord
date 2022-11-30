@@ -688,9 +688,6 @@
             <point key="canvasLocation" x="2063.768115942029" y="1767.8571428571429"/>
         </scene>
     </scenes>
-    <designables>
-        <designable name="kXE-dh-Swo"/>
-    </designables>
     <resources>
         <image name="Image_Add" width="170.5" height="170.5"/>
         <image name="Image_Calendar" width="170.5" height="170.5"/>

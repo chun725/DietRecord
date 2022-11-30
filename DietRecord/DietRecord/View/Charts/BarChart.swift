@@ -146,12 +146,12 @@ class BarChart: BarChartView, ChartViewDelegate {
     
     private func configureBarChart(firstDate: Date, chartData: BarChartData) {
         self.referenceTimeInterval = firstDate.timeIntervalSince1970
-                DRConstant.barChartDateFormatter.dateFormat = "MM/dd"
-                DRConstant.barChartDateFormatter.locale = .current
+        DRConstant.barChartDateFormatter.dateFormat = "MM/dd"
+        DRConstant.barChartDateFormatter.locale = .current
         
         let xValuesNumberFormatter = ChartXAxisFormatter(
             referenceTimeInterval: referenceTimeInterval,
-            dateFormatter:         DRConstant.barChartDateFormatter)
+            dateFormatter: DRConstant.barChartDateFormatter)
         self.xAxis.valueFormatter = xValuesNumberFormatter
         self.data = chartData
         self.drawGridBackgroundEnabled = false // 要不要有背景

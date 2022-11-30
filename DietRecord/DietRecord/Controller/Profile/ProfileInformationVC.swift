@@ -36,17 +36,16 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func goBack() {
-        self.navigationController?.popViewController(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func createUserInfo() {
-        DRProgressHUD.show()
         guard let user = user else { return }
         if user.userSelfID.isEmpty || user.username.isEmpty || user.weightGoal.isEmpty
             || user.waterGoal.isEmpty || user.goal.isEmpty {
-            DRProgressHUD.dismiss()
             self.presentInputAlert(title: "請輸入完整資料")
         } else {
+            DRProgressHUD.show()
             profileProvider.createUserInfo(userData: user) { result in
                 switch result {
                 case .success:
@@ -57,10 +56,10 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
                         if let tabbarController = storyboard.instantiateViewController(
                             withIdentifier: "\(TabBarController.self)")
                             as? TabBarController {
-                            self.navigationController?.pushViewController(tabbarController, animated: false)
+                            self.navigationController?.pushViewController(tabbarController, animated: true)
                         }
                     } else {
-                        self.navigationController?.popViewController(animated: false)
+                        self.navigationController?.popViewController(animated: true)
                     }
                 case .failure(let error):
                     DRProgressHUD.showFailure(text: "儲存資料失敗")

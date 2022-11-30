@@ -186,11 +186,11 @@ enum DietGoal: String, CaseIterable {
 }
 
 enum DietPlan: String, CaseIterable {
-    case general = "一般飲食(55/20/25)"
-    case highCarbs = "高碳水飲食(60/20/20)"
-    case highProtein = "高蛋白飲食(50/25/25)"
-    case athlete = "運動員飲食(55/20/25)"
-    case lowCarbs = "低碳飲食(35/25/40)"
+    case general = "一般飲食 (55/15/30)"
+    case highCarbs = "高碳水飲食 (60/20/20)"
+    case highProtein = "高蛋白飲食 (50/25/25)"
+    case athlete = "運動員飲食 (55/20/25)"
+    case lowCarbs = "低碳飲食 (35/25/40)"
 }
 
 enum AlertTitle: String {

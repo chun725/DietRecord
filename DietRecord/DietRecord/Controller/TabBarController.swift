@@ -11,10 +11,6 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tabBar.tintColor = .drDarkGray
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         if let index = DRConstant.groupUserDefaults?.integer(forKey: "OpenWithWidget") {
             switch index {
             case 1:

@@ -81,6 +81,10 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                 self.presentInputAlert(title: "輸入欄位不得為空")
                 return
             }
+            guard goal.first(where: { $0.transformToDouble() == 0.0 }) == nil else {
+                self.presentInputAlert(title: "目標不可為0，請重新填寫")
+                return
+            }
         }
         self.closure?(goal)
         if DRConstant.userData == nil {

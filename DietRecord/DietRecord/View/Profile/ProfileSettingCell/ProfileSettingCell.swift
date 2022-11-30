@@ -105,29 +105,26 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
             switch result {
             case .success:
-                do {
-                    firebaseAuth.currentUser?.delete()
-                    try firebaseAuth.signOut()
-                    self?.profileProvider.deleteAccount { result in
-                        switch result {
-                        case .success:
-                            DRConstant.userID = ""
-                            DRConstant.userData = nil
-                            DRProgressHUD.showSuccess(text: "刪除帳號完成")
-                            sleep(2)
-                            self?.controller?
-                                .tabBarController?
-                                .navigationController?
-                                .popToRootViewController(animated: true)
-                            print("刪除帳號")
-                        case .failure(let error):
-                            print("Error Info: \(error) in deleting account.")
-                        }
+                self?.profileProvider.deleteAccount { result in
+                    switch result {
+                    case .success:
+                        firebaseAuth.currentUser?.delete()
+                        DRConstant.userID = ""
+                        DRConstant.userData = nil
+                        DRProgressHUD.showSuccess(text: "刪除帳號完成")
+                        sleep(2)
+                        self?.controller?
+                            .tabBarController?
+                            .navigationController?
+                            .popToRootViewController(animated: true)
+                        print("刪除帳號")
+                    case .failure(let error):
+                        DRProgressHUD.showFailure(text: "刪除帳號失敗")
+                        print("Error Info: \(error) in deleting account.")
                     }
-                } catch let signOutError as NSError {
-                    print("Error signing out: %@", signOutError)
                 }
             case .failure(let error):
+                DRProgressHUD.showFailure(text: "刪除帳號失敗")
                 print("Error Info: \(error) in deleting account.")
             }
         }

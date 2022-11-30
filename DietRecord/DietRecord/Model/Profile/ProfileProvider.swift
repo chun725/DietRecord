@@ -499,7 +499,10 @@ extension ProfileProvider {
                         if let error = error {
                             completion(.failure(error))
                         } else {
-                            guard let snapshot = snapshot else { return }
+                            guard let snapshot = snapshot
+                            else {
+                                deleteGroup.leave()
+                                return }
                             let documents = snapshot.documents
                             if !documents.isEmpty {
                                 for document in documents {

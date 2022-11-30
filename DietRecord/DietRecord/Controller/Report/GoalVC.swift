@@ -18,7 +18,6 @@ class GoalVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        whiteBackgroundView.layer.cornerRadius = 20
         inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
         self.tabBarController?.tabBar.isHidden = true

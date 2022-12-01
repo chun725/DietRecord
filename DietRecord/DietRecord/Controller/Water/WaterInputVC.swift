@@ -117,7 +117,11 @@ class WaterInputVC: UIViewController {
                     return "0\(hourIndex):\(minuteIndex)"
                 }
             } else {
-                return "\(hourIndex):\(minuteIndex)"
+                if minuteIndex < 10 {
+                    return "\(hourIndex):0\(minuteIndex)"
+                } else {
+                    return "\(hourIndex):\(minuteIndex)"
+                }
             }
         }()
         let dateComponent = DateComponents(timeZone: .current, hour: hourIndex, minute: minuteIndex)

@@ -327,6 +327,23 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sBJ-qt-QhB">
+                                <rect key="frame" x="0.0" y="148" width="414" height="641"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="Dkc-Is-iaA">
+                                        <rect key="frame" x="182" y="295.5" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="dj1-B8-ZYc"/>
+                                            <constraint firstAttribute="height" constant="50" id="icS-bP-9w6"/>
+                                        </constraints>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" name="drLightGray"/>
+                                <constraints>
+                                    <constraint firstItem="Dkc-Is-iaA" firstAttribute="centerY" secondItem="sBJ-qt-QhB" secondAttribute="centerY" id="OWB-au-UtW"/>
+                                    <constraint firstItem="Dkc-Is-iaA" firstAttribute="centerX" secondItem="sBJ-qt-QhB" secondAttribute="centerX" id="Sm8-2o-Bk9"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mOU-hG-LZb">
                                 <rect key="frame" x="36" y="108" width="342" height="40"/>
                                 <subviews>
@@ -388,6 +405,7 @@
                             <constraint firstItem="sDl-nU-zpY" firstAttribute="bottom" secondItem="zVX-Ap-PUp" secondAttribute="bottom" constant="16" id="DJ5-h8-daS"/>
                             <constraint firstAttribute="trailing" secondItem="zVX-Ap-PUp" secondAttribute="trailing" constant="16" id="GBX-3E-Jwv"/>
                             <constraint firstItem="4P5-Pg-U8U" firstAttribute="width" secondItem="zYv-a4-vId" secondAttribute="width" id="Jdk-vh-Ao4"/>
+                            <constraint firstItem="sDl-nU-zpY" firstAttribute="trailing" secondItem="sBJ-qt-QhB" secondAttribute="trailing" id="Mef-8p-vxe"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="centerX" secondItem="zYv-a4-vId" secondAttribute="centerX" id="NfW-oJ-NEd"/>
                             <constraint firstItem="sDl-nU-zpY" firstAttribute="top" secondItem="HXV-ey-tGu" secondAttribute="bottom" id="O6d-qZ-oXw"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="trailing" secondItem="sDl-nU-zpY" secondAttribute="trailing" id="Okf-pq-JeO"/>
@@ -396,9 +414,12 @@
                             <constraint firstItem="pSI-nf-ipg" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" constant="16" id="RxP-E1-APy"/>
                             <constraint firstItem="zVX-Ap-PUp" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" constant="16" id="TKn-fj-12n"/>
                             <constraint firstItem="Cu9-QI-7Y8" firstAttribute="top" secondItem="mOU-hG-LZb" secondAttribute="bottom" id="XBa-z3-EFL"/>
+                            <constraint firstItem="4P5-Pg-U8U" firstAttribute="top" secondItem="sBJ-qt-QhB" secondAttribute="bottom" id="XHo-TF-UhN"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="ZiH-6Z-Q7S"/>
                             <constraint firstItem="HXV-ey-tGu" firstAttribute="top" secondItem="zYv-a4-vId" secondAttribute="top" id="aWE-0e-bMS"/>
+                            <constraint firstItem="sBJ-qt-QhB" firstAttribute="top" secondItem="Cu9-QI-7Y8" secondAttribute="top" id="cMe-38-OZH"/>
                             <constraint firstItem="mOU-hG-LZb" firstAttribute="leading" secondItem="zYv-a4-vId" secondAttribute="leading" constant="36" id="cTj-qJ-yhp"/>
+                            <constraint firstItem="sBJ-qt-QhB" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="cnS-5O-lN5"/>
                             <constraint firstItem="pSI-nf-ipg" firstAttribute="centerY" secondItem="O97-zA-OXQ" secondAttribute="centerY" id="k9n-Lp-wm1"/>
                             <constraint firstItem="Cu9-QI-7Y8" firstAttribute="leading" secondItem="sDl-nU-zpY" secondAttribute="leading" id="mI9-hG-vtg"/>
                             <constraint firstItem="sDl-nU-zpY" firstAttribute="trailing" secondItem="Cu9-QI-7Y8" secondAttribute="trailing" id="pvh-dA-pnJ"/>
@@ -410,6 +431,8 @@
                     </view>
                     <connections>
                         <outlet property="foodInputTextField" destination="PJM-Sq-EBV" id="suk-l7-C1i"/>
+                        <outlet property="indicatorView" destination="Dkc-Is-iaA" id="KE0-Vw-BPy"/>
+                        <outlet property="progressView" destination="sBJ-qt-QhB" id="ad0-hh-D8q"/>
                         <outlet property="saveButton" destination="zVX-Ap-PUp" id="zxL-6H-hq9"/>
                         <outlet property="searchResultTableView" destination="Cu9-QI-7Y8" id="a41-2H-DWv"/>
                     </connections>
@@ -688,6 +711,9 @@
             <point key="canvasLocation" x="2063.768115942029" y="1767.8571428571429"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="kXE-dh-Swo"/>
+    </designables>
     <resources>
         <image name="Image_Add" width="170.5" height="170.5"/>
         <image name="Image_Calendar" width="170.5" height="170.5"/>

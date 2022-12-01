@@ -23,8 +23,14 @@ class TabBarController: UITabBarController {
             self.selectedIndex = 2
         }
         
-        if DRConstant.groupUserDefaults?.bool(forKey: "OpenWithWaterReminder") ?? false {
+        if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
             self.selectedIndex = 0
+        } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.report.rawValue) ?? false {
+            self.selectedIndex = 3
+        } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
+            self.selectedIndex = 2
+        } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
+            self.selectedIndex = 1
         }
     }
 }

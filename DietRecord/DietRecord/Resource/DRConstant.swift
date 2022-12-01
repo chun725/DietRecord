@@ -213,3 +213,10 @@ enum WeightDataSource: String {
     case dietRecord = "DietRecord"
     case healthApp = "HealthApp"
 }
+
+enum ShortcutItemType: String {
+    case water = "WaterAction"
+    case weight = "WeightAction"
+    case dietRecord = "DietRecordAction"
+    case report = "ReportAction"
+}

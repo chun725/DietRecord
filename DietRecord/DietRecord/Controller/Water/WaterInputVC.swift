@@ -8,7 +8,7 @@
 import UIKit
 
 class WaterInputVC: UIViewController {
-    @IBOutlet weak var blackBagroundView: UIView!
+    @IBOutlet weak var blackBackgroundView: UIView!
     @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var waterInputBackgroundView: UIView!
     @IBOutlet weak var inputTextField: UITextField!
@@ -71,7 +71,7 @@ class WaterInputVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         UIView.animate(withDuration: 0.5) {
-            self.blackBagroundView.alpha = 0.4
+            self.blackBackgroundView.alpha = 0.4
             self.allBackgroundView.alpha = 1
             for subview in self.allBackgroundView.subviews {
                 subview.alpha = 1
@@ -87,13 +87,14 @@ class WaterInputVC: UIViewController {
                 DRProgressHUD.showSuccess()
                 self.closure?(waterGoal.transformToDouble())
                 DRConstant.userData?.waterGoal = waterGoal
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.blackBagroundView.alpha = 0
+                let animations = {
+                    self.blackBackgroundView.alpha = 0
                     self.allBackgroundView.alpha = 0
                     for subview in self.allBackgroundView.subviews {
                         subview.alpha = 0
                     }
-                }) { _ in
+                }
+                UIView.animate(withDuration: 0.5, animations: animations) { _ in
                     self.dismiss(animated: false)
                 }
             case .failure(let error):
@@ -114,13 +115,14 @@ class WaterInputVC: UIViewController {
             case .success:
                 DRProgressHUD.showSuccess()
                 self.closure?(totalWater)
-                UIView.animate(withDuration: 0.5, animations: {
-                    self.blackBagroundView.alpha = 0
+                let animations = {
+                    self.blackBackgroundView.alpha = 0
                     self.allBackgroundView.alpha = 0
                     for subview in self.allBackgroundView.subviews {
                         subview.alpha = 0
                     }
-                }) { _ in
+                }
+                UIView.animate(withDuration: 0.5, animations: animations) { _ in
                     self.dismiss(animated: false)
                 }
             case .failure(let error):
@@ -170,25 +172,27 @@ class WaterInputVC: UIViewController {
         UNUserNotificationCenter.current().add(request)
         DRProgressHUD.showSuccess()
         self.closure?(0.0)
-        UIView.animate(withDuration: 0.5, animations: {
-            self.blackBagroundView.alpha = 0
+        let animations = {
+            self.blackBackgroundView.alpha = 0
             self.allBackgroundView.alpha = 0
             for subview in self.allBackgroundView.subviews {
                 subview.alpha = 0
             }
-        }) { _ in
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
             self.dismiss(animated: false)
         }
     }
     
     @IBAction func goBackToWaterPage(_ sender: Any) {
-        UIView.animate(withDuration: 0.5, animations: {
-            self.blackBagroundView.alpha = 0
+        let animations = {
+            self.blackBackgroundView.alpha = 0
             self.allBackgroundView.alpha = 0
             for subview in self.allBackgroundView.subviews {
                 subview.alpha = 0
             }
-        }) { _ in
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
             self.dismiss(animated: false)
         }
     }

@@ -481,7 +481,7 @@
                     </view>
                     <connections>
                         <outlet property="allBackgroundView" destination="D4t-zR-ilv" id="u6E-N4-e3F"/>
-                        <outlet property="blackBagroundView" destination="wmM-uE-LeG" id="wVZ-4m-KWv"/>
+                        <outlet property="blackBackgroundView" destination="wmM-uE-LeG" id="wVZ-4m-KWv"/>
                         <outlet property="grayBackgroundView" destination="ahm-Ad-c8k" id="DK1-3Q-wop"/>
                         <outlet property="hourPickerView" destination="seV-z9-VKF" id="Ztd-EZ-tnj"/>
                         <outlet property="imageView" destination="tBg-BD-uJU" id="JHW-YC-rJS"/>

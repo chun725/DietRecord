@@ -9,6 +9,7 @@ import UIKit
 import HealthKit
 
 class WeightInputVC: UIViewController {
+    @IBOutlet weak var blackBackgroundView: UIView!
     @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var grayBackgroundView: UIView!
     @IBOutlet weak var weightInputTextField: UITextField!
@@ -42,6 +43,17 @@ class WeightInputVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.5) {
+            self.blackBackgroundView.alpha = 0.4
+            self.allBackgroundView.alpha = 1
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 1
+            }
+        }
+    }
+    
     @IBAction func goToChooseDatePage(_ sender: Any) {
         let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
@@ -69,7 +81,16 @@ class WeightInputVC: UIViewController {
                         DRProgressHUD.showSuccess()
                         DRConstant.userData?.weightGoal = weight.format()
                         self.closure?(weight)
-                        self.dismiss(animated: false)
+                        let animations = {
+                            self.blackBackgroundView.alpha = 0
+                            self.allBackgroundView.alpha = 0
+                            for subview in self.allBackgroundView.subviews {
+                                subview.alpha = 0
+                            }
+                        }
+                        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+                            self.dismiss(animated: false)
+                        }
                     }
                 case .failure(let error):
                     DRProgressHUD.showFailure(text: "儲存失敗")
@@ -84,7 +105,16 @@ class WeightInputVC: UIViewController {
                     DispatchQueue.main.async {
                         DRProgressHUD.showSuccess()
                         self.closure?(0.0)
-                        self.dismiss(animated: false)
+                        let animations = {
+                            self.blackBackgroundView.alpha = 0
+                            self.allBackgroundView.alpha = 0
+                            for subview in self.allBackgroundView.subviews {
+                                subview.alpha = 0
+                            }
+                        }
+                        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+                            self.dismiss(animated: false)
+                        }
                     }
                 case .failure(let error):
                     DRProgressHUD.showFailure(text: "儲存失敗")
@@ -95,6 +125,15 @@ class WeightInputVC: UIViewController {
     }
     
     @IBAction func goBackToWeightPage(_ sender: Any) {
-        self.dismiss(animated: false)
+        let animations = {
+            self.blackBackgroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+            self.dismiss(animated: false)
+        }
     }
 }

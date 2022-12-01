@@ -80,16 +80,18 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             case .success(let data):
                 self.isLoading = false
                 if data as? String == "Document doesn't exist." {
-                    DRProgressHUD.dismiss()
                     self.meals = []
                     self.totalFoods = []
-                    self.changeDietImage()
                 } else {
                     guard let dietRecordData = data as? FoodDailyInput else { return }
                     self.meals = dietRecordData.mealRecord.sorted { $0.meal < $1.meal }
                     self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
-                    self.changeDietImage()
-                    DRProgressHUD.dismiss()
+                }
+                self.changeDietImage()
+                DRProgressHUD.dismiss()
+                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
+                    self.goToDietInputPage(sender: self.createDietRecordButton)
+                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.dietRecord.rawValue)
                 }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "找不到飲食紀錄")

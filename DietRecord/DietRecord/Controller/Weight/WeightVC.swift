@@ -233,6 +233,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                             self.weightTableView.deleteRows(at: [indexPath], with: .fade)
                             self.weightTableView.endUpdates()
                         }
+                        self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                     }
                 case .failure(let error):
                     print("Error Info: \(error).")
@@ -240,7 +241,22 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             }
             completionHandler(true)
         }
-        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        let editAction = UIContextualAction(style: .normal, title: "編輯") { _, _, completionHandler in
+            let weightData = self.weightRecord.reversed()[indexPath.row]
+            let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
+            if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
+                as? WeightInputVC {
+                weightInputPage.date = DRConstant.dateFormatter.string(from: weightData.date)
+                weightInputPage.weight = weightData.value
+                weightInputPage.closure = { [weak self] _ in
+                    self?.fetchWeightRecord()
+                }
+                self.present(weightInputPage, animated: false)
+            }
+            completionHandler(true)
+        }
+        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return trailingSwipeConfiguration
     }
 }

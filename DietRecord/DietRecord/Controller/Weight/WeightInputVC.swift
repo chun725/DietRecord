@@ -22,6 +22,8 @@ class WeightInputVC: UIViewController {
     let weightRecordProvider = WeightRecordProvider()
     let healthKitManager = HealthKitManager()
     var isSetGoal = false
+    var date: String?
+    var weight: Double?
     var closure: ((Double) -> Void)?
     
     override func viewDidLoad() {
@@ -34,12 +36,19 @@ class WeightInputVC: UIViewController {
         setGoalLabel.isHidden = !isSetGoal
         chooseDateButton.isEnabled = !isSetGoal
         dateStackView.isHidden = isSetGoal
+        if let date = date, let weight = weight {
+            dateLabel.text = date
+            weightInputTextField.text = String(weight)
+        }
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
         let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
             as? ChooseDateVC {
+            if let date = date {
+                chooseDatePage.date = date
+            }
             chooseDatePage.closure = { [weak self] date in
                 self?.dateLabel.text = date
             }

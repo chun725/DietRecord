@@ -58,7 +58,10 @@ class ReportAutomaticGoalCell: UITableViewCell, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard var text = textField.text else { return }
-        if  (textField == ageTextField || textField == heightTextField || textField == weightTextField) && !text.isEmpty {
+        if (textField == ageTextField ||
+            textField == heightTextField ||
+            textField == weightTextField) &&
+            !text.isEmpty {
             text = text.transformToDouble().format()
             if text != "0.0" {
                 textField.text = text

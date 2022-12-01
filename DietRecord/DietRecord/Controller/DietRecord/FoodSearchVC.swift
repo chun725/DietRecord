@@ -102,7 +102,10 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let foodName = textField.text else { return }
+        guard var foodName = textField.text else { return }
+        let substring = foodName.split(separator: " ")
+        foodName = substring.joined(separator: "")
+        textField.text = foodName
         if !foodName.isEmpty {
             foodListProvider.searchFoods(foodName: foodName) { result in
                 switch result {

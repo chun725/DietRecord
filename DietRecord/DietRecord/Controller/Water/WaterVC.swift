@@ -93,10 +93,12 @@ class WaterVC: UIViewController, UITableViewDataSource {
     }
     
     func fetchWaterRecord() {
+        DRProgressHUD.show()
         waterRecordProvider.fetchWaterRecord { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
+                DRProgressHUD.dismiss()
                 self.isLoading = false
                 self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
                 self.waterTableView.reloadData()

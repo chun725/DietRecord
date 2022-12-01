@@ -35,9 +35,9 @@ class LineChart: LineChartView, ChartViewDelegate {
             self.heightAnchor.constraint(equalToConstant: DRConstant.fullScreenSize.width / 207 * 100)
         ])
     }
-
     
     func setWeightLineChart(datas: [WeightData], goal: Double) {
+        chartValueNothingSelected(self)
         self.backgroundColor = UIColor.clear // 背景設為透明
         self.noDataText = "請輸入體重紀錄" // 折線圖無數據時，顯示的提示文字
         self.chartDescription.text = "" // 折線圖描述文字和樣式
@@ -121,11 +121,10 @@ class LineChart: LineChartView, ChartViewDelegate {
         self.leftAxis.drawGridLinesEnabled = false // 不要有每個y值的線
         self.leftAxis.drawLabelsEnabled = false // 不顯示左側y軸文字
         self.leftAxis.drawAxisLineEnabled = false // 不顯示左側y軸線
-        guard let maxWeight = datas.map({ $0.value }).max(),
-            let minWeight = datas.map({ $0.value }).min()
+        guard let maxWeight = datas.map({ $0.value }).max()
         else { return }
-        self.leftAxis.axisMinimum = minWeight - 20 // 最小刻度值
-        self.leftAxis.axisMaximum = maxWeight + 20 // 最大刻度值
+        self.leftAxis.axisMinimum = 0 // 最小刻度值
+        self.leftAxis.axisMaximum = maxWeight + 50 // 最大刻度值
         
         // 設定目標線
         self.leftAxis.removeAllLimitLines()
@@ -139,7 +138,7 @@ class LineChart: LineChartView, ChartViewDelegate {
         limitLine.lineColor = .red // 線條顏色
         limitLine.lineDashLengths = [4, 2] // 設定警戒線為虛線
         
-        self.setVisibleXRangeMaximum(90) // 圖表最多顯示10個點
+        self.setVisibleXRangeMaximum(30) // 圖表最多顯示10個點
         self.moveViewToX(nowXvalue) // 默認顯示最後一個數據
     }
     
@@ -149,6 +148,11 @@ class LineChart: LineChartView, ChartViewDelegate {
         let date = Date(timeIntervalSince1970: entry.x * 3600 * 24 + self.referenceTimeInterval)
         let dateString = DRConstant.dateFormatter.string(from: date)
         self.showMarkerView(value: "\(entry.y)", date: dateString)
+    }
+    
+    func chartValueNothingSelected(_ chartView: ChartViewBase) {
+        // 取消選中
+        self.marker = nil
     }
     
     private func showMarkerView(value: String, date: String) {

@@ -218,6 +218,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Weight" image="figure.stand" catalog="system" id="9Nd-Hb-ocg"/>
                     <connections>
+                        <outlet property="addWeightRecordButton" destination="Njg-fX-dCr" id="ELQ-IJ-UZ7"/>
                         <outlet property="changeGoalButton" destination="Jtb-a9-Rec" id="mH4-Qr-wfP"/>
                         <outlet property="healthAppImageView" destination="0gj-gt-8TH" id="MNr-cC-7cF"/>
                         <outlet property="syncLabel" destination="P5Q-0E-eCg" id="R1n-Wb-cAh"/>
@@ -239,11 +240,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.40000000596046448" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9f-A1-MFW">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z9f-A1-MFW">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hU-3Z-CXG">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1hU-3Z-CXG">
                                 <rect key="frame" x="82" y="299" width="250" height="298"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b4P-eL-o6g">
@@ -416,6 +417,7 @@
                     </view>
                     <connections>
                         <outlet property="allBackgroundView" destination="1hU-3Z-CXG" id="VCh-L0-CXa"/>
+                        <outlet property="blackBackgroundView" destination="z9f-A1-MFW" id="Nvc-Dv-yk0"/>
                         <outlet property="chooseDateButton" destination="Cys-7S-iSf" id="QFS-O9-ZdC"/>
                         <outlet property="dateLabel" destination="Zzs-Sl-RlF" id="rjb-YK-N2m"/>
                         <outlet property="dateStackView" destination="skH-IB-Gvz" id="yf7-Lu-omx"/>

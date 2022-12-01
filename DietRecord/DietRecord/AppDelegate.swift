@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         guard let windowScene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }),
             let sceneDelegate = windowScene.delegate as? SceneDelegate
         else { return }
-        DRConstant.groupUserDefaults?.set(true, forKey: "OpenWithWaterReminder")
+        DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.water.rawValue)
         if let navigationController = sceneDelegate.window?.rootViewController as? UINavigationController {
             navigationController.popToRootViewController(animated: false)
         }

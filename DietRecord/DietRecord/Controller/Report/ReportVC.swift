@@ -36,6 +36,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         reportTableView.reloadData()
+        DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.report.rawValue)
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {

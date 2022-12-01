@@ -105,9 +105,9 @@ class WaterVC: UIViewController, UITableViewDataSource {
                 if let waterRecord = data as? WaterRecord {
                     self.waterCurrent = waterRecord.water.transformToDouble()
                 }
-                if DRConstant.groupUserDefaults?.bool(forKey: "OpenWithWaterReminder") ?? false {
+                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
                     self.goToWaterInputVC(sender: nil)
-                    DRConstant.groupUserDefaults?.set(false, forKey: "OpenWithWaterReminder")
+                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.water.rawValue)
                 }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "無法讀取飲水量資料")

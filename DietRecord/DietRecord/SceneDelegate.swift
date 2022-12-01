@@ -9,6 +9,12 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
+    var savedShortCutItem: UIApplicationShortcutItem?
+    
+    func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        let handled = handleShortCutItem(shortcutItem: shortcutItem)
+        completionHandler(handled)
+    }
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -37,8 +43,31 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
-        // Called when the scene will move from an active state to an inactive state.
-        // This may occur due to temporary interruptions (ex. an incoming phone call).
+        var shortcutItems = UIApplication.shared.shortcutItems ?? []
+        shortcutItems += [
+            UIApplicationShortcutItem(
+                type: ShortcutItemType.water.rawValue,
+                localizedTitle: "新增飲水量",
+                localizedSubtitle: "",
+                icon: UIApplicationShortcutIcon(systemImageName: "drop")),
+            UIApplicationShortcutItem(
+                type: ShortcutItemType.dietRecord.rawValue,
+                localizedTitle: "新增飲食記錄",
+                localizedSubtitle: "",
+                icon: UIApplicationShortcutIcon(systemImageName: "fork.knife.circle")),
+            UIApplicationShortcutItem(
+                type: ShortcutItemType.weight.rawValue,
+                localizedTitle: "新增體重記錄",
+                localizedSubtitle: "",
+                icon: UIApplicationShortcutIcon(systemImageName: "figure.stand")),
+            UIApplicationShortcutItem(
+                type: ShortcutItemType.report.rawValue,
+                localizedTitle: "查看本週數據",
+                localizedSubtitle: "",
+                icon: UIApplicationShortcutIcon(systemImageName: "chart.bar.xaxis"))
+        ]
+        
+        UIApplication.shared.shortcutItems = shortcutItems
     }
 
     func sceneWillEnterForeground(_ scene: UIScene) {
@@ -66,5 +95,24 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 navigationController.popToRootViewController(animated: false)
             }
         }
+    }
+    
+    func handleShortCutItem(shortcutItem: UIApplicationShortcutItem) -> Bool {
+        if let itemType = ShortcutItemType(rawValue: shortcutItem.type) {
+            switch itemType {
+            case .water:
+                DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.water.rawValue)
+            case .weight:
+                DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.weight.rawValue)
+            case .dietRecord:
+                DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.dietRecord.rawValue)
+            case .report:
+                DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.report.rawValue)
+            }
+            if let navigationController = window?.rootViewController as? UINavigationController {
+                navigationController.popToRootViewController(animated: false)
+            }
+        }
+        return true
     }
 }

@@ -9,6 +9,7 @@ import UIKit
 import HealthKit
 
 class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var addWeightRecordButton: UIButton!
     @IBOutlet weak var weightLineChart: UIView!
     @IBOutlet weak var weightTableView: UITableView!
     @IBOutlet weak var changeGoalButton: UIButton!
@@ -148,7 +149,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func fetchWeightRecord() {
         DRProgressHUD.show()
-        weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { result in
+        weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let weightDatas):
                 DRProgressHUD.dismiss()
@@ -156,6 +158,10 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                 self.weightTableView.reloadData()
                 self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
+                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
+                    self.goToWeightInputVC(self.addWeightRecordButton)
+                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.weight.rawValue)
+                }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")

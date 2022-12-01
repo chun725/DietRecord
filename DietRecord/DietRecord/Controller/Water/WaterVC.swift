@@ -10,16 +10,12 @@ import WidgetKit
 
 class WaterVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var waterTableView: UITableView!
-    
+        
     var pieChartView: PieChart?
     
     var waterCurrent: Double = 0.0
     
-    var waterGoal: Double = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0 {
-        didSet {
-            waterTableView.reloadData()
-        }
-    }
+    var waterGoal: Double = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
     
     var reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String] {
         didSet {
@@ -63,11 +59,11 @@ class WaterVC: UIViewController, UITableViewDataSource {
         WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.firstWidgetName.rawValue)
     }
     
-    @objc func goToWaterInputVC(sender: UIButton) {
+    @objc func goToWaterInputVC(sender: UIButton?) {
         let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
         if let waterInputPage = storyboard.instantiateViewController(withIdentifier: "\(WaterInputVC.self)")
             as? WaterInputVC {
-            if sender.tag == 1 {
+            if let sender = sender, sender.tag == 1 {
                 waterInputPage.isWaterInput = false
                 waterInputPage.closure = { [weak self] _ in
                     self?.reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String]
@@ -97,13 +93,19 @@ class WaterVC: UIViewController, UITableViewDataSource {
     }
     
     func fetchWaterRecord() {
-        waterRecordProvider.fetchWaterRecord { result in
+        waterRecordProvider.fetchWaterRecord { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let data):
                 self.isLoading = false
                 self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
+                self.waterTableView.reloadData()
                 if let waterRecord = data as? WaterRecord {
                     self.waterCurrent = waterRecord.water.transformToDouble()
+                }
+                if DRConstant.groupUserDefaults?.bool(forKey: "OpenWithWaterReminder") ?? false {
+                    self.goToWaterInputVC(sender: nil)
+                    DRConstant.groupUserDefaults?.set(false, forKey: "OpenWithWaterReminder")
                 }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "無法讀取飲水量資料")

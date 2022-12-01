@@ -316,11 +316,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.40000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmM-uE-LeG">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wmM-uE-LeG">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4t-zR-ilv">
+                            <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="D4t-zR-ilv">
                                 <rect key="frame" x="82" y="299" width="250" height="298"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ahm-Ad-c8k">
@@ -481,6 +481,7 @@
                     </view>
                     <connections>
                         <outlet property="allBackgroundView" destination="D4t-zR-ilv" id="u6E-N4-e3F"/>
+                        <outlet property="blackBagroundView" destination="wmM-uE-LeG" id="wVZ-4m-KWv"/>
                         <outlet property="grayBackgroundView" destination="ahm-Ad-c8k" id="DK1-3Q-wop"/>
                         <outlet property="hourPickerView" destination="seV-z9-VKF" id="Ztd-EZ-tnj"/>
                         <outlet property="imageView" destination="tBg-BD-uJU" id="JHW-YC-rJS"/>
@@ -597,6 +598,10 @@
             <point key="canvasLocation" x="1218.840579710145" y="995.75892857142856"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="AW9-zZ-PCO"/>
+        <designable name="BFU-97-ZMZ"/>
+    </designables>
     <resources>
         <image name="Image_Delete" width="170.5" height="170.5"/>
         <image name="Image_Edit-1" width="170.5" height="170.5"/>

@@ -8,6 +8,7 @@
 import UIKit
 
 class WaterInputVC: UIViewController {
+    @IBOutlet weak var blackBagroundView: UIView!
     @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var waterInputBackgroundView: UIView!
     @IBOutlet weak var inputTextField: UITextField!
@@ -67,6 +68,17 @@ class WaterInputVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.5) {
+            self.blackBagroundView.alpha = 0.4
+            self.allBackgroundView.alpha = 1
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 1
+            }
+        }
+    }
+    
     @objc func saveWaterGoal() {
         guard let waterGoal = inputTextField.text else { return }
         waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
@@ -75,7 +87,15 @@ class WaterInputVC: UIViewController {
                 DRProgressHUD.showSuccess()
                 self.closure?(waterGoal.transformToDouble())
                 DRConstant.userData?.waterGoal = waterGoal
-                self.dismiss(animated: false)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.blackBagroundView.alpha = 0
+                    self.allBackgroundView.alpha = 0
+                    for subview in self.allBackgroundView.subviews {
+                        subview.alpha = 0
+                    }
+                }) { _ in
+                    self.dismiss(animated: false)
+                }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
@@ -88,12 +108,21 @@ class WaterInputVC: UIViewController {
             let waterCurrent = waterCurrent
         else { return }
         let totalWater = addWater + waterCurrent
-        waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { result in
+        waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success:
                 DRProgressHUD.showSuccess()
                 self.closure?(totalWater)
-                self.dismiss(animated: false)
+                UIView.animate(withDuration: 0.5, animations: {
+                    self.blackBagroundView.alpha = 0
+                    self.allBackgroundView.alpha = 0
+                    for subview in self.allBackgroundView.subviews {
+                        subview.alpha = 0
+                    }
+                }) { _ in
+                    self.dismiss(animated: false)
+                }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
@@ -141,11 +170,27 @@ class WaterInputVC: UIViewController {
         UNUserNotificationCenter.current().add(request)
         DRProgressHUD.showSuccess()
         self.closure?(0.0)
-        self.dismiss(animated: false)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.blackBagroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }) { _ in
+            self.dismiss(animated: false)
+        }
     }
     
     @IBAction func goBackToWaterPage(_ sender: Any) {
-        self.dismiss(animated: false)
+        UIView.animate(withDuration: 0.5, animations: {
+            self.blackBagroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }) { _ in
+            self.dismiss(animated: false)
+        }
     }
 }
 

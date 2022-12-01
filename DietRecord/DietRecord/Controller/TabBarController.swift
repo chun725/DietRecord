@@ -25,7 +25,6 @@ class TabBarController: UITabBarController {
         
         if DRConstant.groupUserDefaults?.bool(forKey: "OpenWithWaterReminder") ?? false {
             self.selectedIndex = 0
-            DRConstant.groupUserDefaults?.set(false, forKey: "OpenWithWaterReminder")
         }
     }
 }

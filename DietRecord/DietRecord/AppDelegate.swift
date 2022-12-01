@@ -55,4 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .badge, .sound])
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+        guard let windowScene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }),
+            let sceneDelegate = windowScene.delegate as? SceneDelegate
+        else { return }
+        DRConstant.groupUserDefaults?.set(true, forKey: "OpenWithWaterReminder")
+        if let navigationController = sceneDelegate.window?.rootViewController as? UINavigationController {
+            navigationController.popToRootViewController(animated: false)
+        }
+    }
 }

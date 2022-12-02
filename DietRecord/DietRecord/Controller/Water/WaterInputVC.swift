@@ -11,6 +11,7 @@ class WaterInputVC: UIViewController {
     @IBOutlet weak var blackBackgroundView: UIView!
     @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var waterInputBackgroundView: UIView!
+    @IBOutlet weak var inputGrayBackgroundView: UIView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var grayBackgroundView: UIView!
@@ -30,6 +31,22 @@ class WaterInputVC: UIViewController {
         }
     }
     @IBOutlet weak var timeBackgroundView: UIView!
+    @IBOutlet weak var plusButton: UIButton! {
+        didSet {
+            plusButton.isHidden = isGoalInput
+            plusButton.addTarget(self, action: #selector(changeWaterCurrent), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var minusButton: UIButton! {
+        didSet {
+            if let waterCurrent = waterCurrent {
+                minusButton.isEnabled = waterCurrent - 100 >= 0 ? true : false
+                minusButton.tintColor = waterCurrent - 100 >= 0 ? .drDarkGray : .drGray
+            }
+            minusButton.isHidden = isGoalInput
+            minusButton.addTarget(self, action: #selector(changeWaterCurrent), for: .touchUpInside)
+        }
+    }
     
     var waterCurrent: Double?
     var closure: ((Double) -> Void)?
@@ -40,7 +57,7 @@ class WaterInputVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         allBackgroundView.layer.cornerRadius = 20
-        waterInputBackgroundView.layer.cornerRadius = 10
+        inputGrayBackgroundView.layer.cornerRadius = 10
         saveButton.layer.cornerRadius = 20
         grayBackgroundView.layer.cornerRadius = 20
         if isWaterInput {
@@ -50,6 +67,7 @@ class WaterInputVC: UIViewController {
             } else {
                 titleLabel.text = "輸入飲水量"
                 saveButton.addTarget(self, action: #selector(saveWaterRecord), for: .touchUpInside)
+                inputTextField.text = waterCurrent?.formatNoPoint()
             }
             imageView.image = UIImage(named: "Image_Water")
             timeBackgroundView.isHidden = true
@@ -85,8 +103,8 @@ class WaterInputVC: UIViewController {
             switch result {
             case .success:
                 DRProgressHUD.showSuccess()
-                self.closure?(waterGoal.transformToDouble())
                 DRConstant.userData?.waterGoal = waterGoal
+                self.closure?(waterGoal.transformToDouble())
                 let animations = {
                     self.blackBackgroundView.alpha = 0
                     self.allBackgroundView.alpha = 0
@@ -105,10 +123,8 @@ class WaterInputVC: UIViewController {
     }
     
     @objc func saveWaterRecord() {
-        guard let addWater = inputTextField.text?.transformToDouble(),
-            let waterCurrent = waterCurrent
+        guard let totalWater = inputTextField.text?.transformToDouble()
         else { return }
-        let totalWater = addWater + waterCurrent
         waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { [weak self] result in
             guard let self = self else { return }
             switch result {
@@ -184,6 +200,18 @@ class WaterInputVC: UIViewController {
         }
     }
     
+    @objc func changeWaterCurrent(sender: UIButton) {
+        guard var totalWater = inputTextField.text?.transformToDouble() else { return }
+        if sender == plusButton {
+            totalWater += 100
+        } else {
+            totalWater -= 100
+        }
+        inputTextField.text = totalWater.formatNoPoint()
+        minusButton.isEnabled = totalWater - 100 >= 0 ? true : false
+        minusButton.tintColor = totalWater - 100 >= 0 ? .drDarkGray : .drGray
+    }
+    
     @IBAction func goBackToWaterPage(_ sender: Any) {
         let animations = {
             self.blackBackgroundView.alpha = 0
@@ -199,6 +227,7 @@ class WaterInputVC: UIViewController {
 }
 
 extension WaterInputVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    // MARK: - PickerViewDataSource -
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -207,6 +236,7 @@ extension WaterInputVC: UIPickerViewDataSource, UIPickerViewDelegate {
         pickerView == hourPickerView ? 24 : 60
     }
 
+    // MARK: - PickerViewDelegate -
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         var str = String(row)
         if row < 10 {

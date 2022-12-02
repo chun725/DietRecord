@@ -33,6 +33,11 @@ class WaterHistoryVC: UIViewController {
 //        barChartBackgroundView.clipsToBounds = true
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
     func fetchWaterRecord() {
         waterRecordProvider.fetchHistoryWaterRecords { [weak self] result in
             guard let self = self else { return }
@@ -57,6 +62,6 @@ class WaterHistoryVC: UIViewController {
     }
     
     @IBAction func goBack(_ sender: Any) {
-        self.dismiss(animated: false)
+        self.navigationController?.popViewController(animated: true)
     }
 }

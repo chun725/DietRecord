@@ -1049,8 +1049,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="il6-d2-bBA">
                                                     <rect key="frame" x="24" y="366" width="366" height="64"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GFf-r2-1M1">
-                                                            <rect key="frame" x="16" y="17.5" width="30" height="29"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_WaterIcon" translatesAutoresizingMaskIntoConstraints="NO" id="GFf-r2-1M1">
+                                                            <rect key="frame" x="16" y="17" width="30" height="30"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="GFf-r2-1M1" secondAttribute="height" id="2kp-Oh-mj8"/>
@@ -1090,8 +1090,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aSg-Xz-DcQ">
                                                     <rect key="frame" x="24" y="446" width="366" height="64"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="figure.stand" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NoH-pk-9dv">
-                                                            <rect key="frame" x="16" y="16" width="30" height="31.5"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_WeightIcon" translatesAutoresizingMaskIntoConstraints="NO" id="NoH-pk-9dv">
+                                                            <rect key="frame" x="16" y="17" width="30" height="30"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="TM7-5X-aWw"/>
@@ -1131,8 +1131,8 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zon-cn-0zO">
                                                     <rect key="frame" x="24" y="526" width="366" height="123"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="OGJ-jb-ybm">
-                                                            <rect key="frame" x="16" y="47" width="30" height="29"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_DietIcon" translatesAutoresizingMaskIntoConstraints="NO" id="OGJ-jb-ybm">
+                                                            <rect key="frame" x="16" y="46.5" width="30" height="30"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="OGJ-jb-ybm" secondAttribute="height" id="R0e-2l-Fty"/>
@@ -1505,8 +1505,8 @@
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-Z1-mpT">
-                                                            <rect key="frame" x="148" y="21.5" width="30" height="29"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_WaterIcon" translatesAutoresizingMaskIntoConstraints="NO" id="ukt-Z1-mpT">
+                                                            <rect key="frame" x="148" y="21" width="30" height="30"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="ukt-Z1-mpT" secondAttribute="height" id="K4S-LL-2mR"/>
@@ -1519,16 +1519,16 @@
                                                             <color key="textColor" name="drDarkGray"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="figure.stand" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="dWc-oP-Mej">
-                                                            <rect key="frame" x="148" y="66" width="30" height="31.5"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_WeightIcon" translatesAutoresizingMaskIntoConstraints="NO" id="dWc-oP-Mej">
+                                                            <rect key="frame" x="148" y="67" width="30" height="30"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="976-2l-olP"/>
                                                                 <constraint firstAttribute="width" secondItem="dWc-oP-Mej" secondAttribute="height" id="IbY-6T-BnS"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fork.knife.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aVR-lM-nLL">
-                                                            <rect key="frame" x="148" y="113.5" width="28" height="27"/>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_DietIcon" translatesAutoresizingMaskIntoConstraints="NO" id="aVR-lM-nLL">
+                                                            <rect key="frame" x="148" y="113" width="28" height="28"/>
                                                             <color key="tintColor" name="drDarkGray"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="30" id="Pqy-es-CMY"/>
@@ -1655,9 +1655,9 @@
                                                     <color key="textColor" name="drDarkGray"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rectangle.portrait.and.arrow.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="QUm-YV-v8E">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Logout" translatesAutoresizingMaskIntoConstraints="NO" id="QUm-YV-v8E">
                                                     <rect key="frame" x="32" y="406" width="30" height="30"/>
-                                                    <color key="tintColor" name="drDarkGray"/>
+                                                    <color key="tintColor" red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="KUa-Wz-jCU"/>
                                                     </constraints>
@@ -1826,16 +1826,17 @@
         <designable name="dsE-Cf-Q0s"/>
     </designables>
     <resources>
+        <image name="Image_DietIcon" width="25" height="25"/>
         <image name="Image_Lock" width="170.5" height="170.5"/>
+        <image name="Image_Logout" width="170.5" height="170.5"/>
         <image name="Image_Placeholder" width="999.5" height="562"/>
+        <image name="Image_WaterIcon" width="25" height="25"/>
+        <image name="Image_WeightIcon" width="25" height="25"/>
         <image name="camera.circle" catalog="system" width="128" height="121"/>
         <image name="checkmark.circle" catalog="system" width="128" height="121"/>
         <image name="chevron.backward.circle" catalog="system" width="128" height="121"/>
-        <image name="drop" catalog="system" width="101" height="128"/>
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
-        <image name="figure.stand" catalog="system" width="77" height="128"/>
-        <image name="fork.knife.circle" catalog="system" width="128" height="121"/>
         <image name="house" catalog="system" width="128" height="106"/>
         <image name="info.circle" catalog="system" width="128" height="121"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
@@ -1845,7 +1846,6 @@
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <image name="person.text.rectangle" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
-        <image name="rectangle.portrait.and.arrow.right" catalog="system" width="128" height="108"/>
         <image name="trash" catalog="system" width="121" height="128"/>
         <image name="xmark.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">

@@ -9,7 +9,7 @@ import UIKit
 import HealthKit
 
 class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var addWeightRecordButton: UIButton!
+    @IBOutlet weak var addWeightRecordButton: UIBarButtonItem!
     @IBOutlet weak var weightLineChart: UIView!
     @IBOutlet weak var weightTableView: UITableView!
     @IBOutlet weak var changeGoalButton: UIButton!
@@ -159,7 +159,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.weightTableView.reloadData()
                 self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
                 if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
-                    self.goToWeightInputVC(self.addWeightRecordButton)
+                    guard let addWeightRecordButton = self.addWeightRecordButton else { return }
+                    self.goToWeightInputVC(addWeightRecordButton)
                     DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.weight.rawValue)
                 }
             case .failure(let error):
@@ -169,11 +170,11 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    @IBAction func goToWeightInputVC(_ sender: UIButton) {
+    @IBAction func goToWeightInputVC(_ sender: Any) {
         let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
         if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
             as? WeightInputVC {
-            if sender == changeGoalButton {
+            if sender as? UIButton == changeGoalButton {
                 weightInputPage.isSetGoal = true
                 weightInputPage.closure = { [weak self] weight in
                     self?.weightGoal = weight

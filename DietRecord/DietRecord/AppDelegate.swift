@@ -58,12 +58,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         completionHandler()
-        guard let windowScene = UIApplication.shared.connectedScenes.first(where: { $0 is UIWindowScene }),
-            let sceneDelegate = windowScene.delegate as? SceneDelegate
-        else { return }
         DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.water.rawValue)
-        if let navigationController = sceneDelegate.window?.rootViewController as? UINavigationController {
-            navigationController.popToRootViewController(animated: false)
-        }
+        guard let window = UIApplication.shared.windows.first,
+            let navigationController = window.rootViewController as? UINavigationController
+        else { return }
+        navigationController.popToRootViewController(animated: false)
     }
 }

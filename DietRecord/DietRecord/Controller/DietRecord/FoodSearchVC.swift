@@ -51,16 +51,6 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         saveButton.layer.cornerRadius = 20
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     // MARK: - Action -
     @IBAction func saveFoods(_ sender: Any) {
         self.closure?(chooseFoods)
@@ -90,10 +80,6 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             }
             self.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }
-    }
-    
-    @IBAction func goBackToDietInputPage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - TextFieldDelegate -

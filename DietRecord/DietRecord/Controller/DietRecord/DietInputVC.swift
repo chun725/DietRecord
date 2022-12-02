@@ -41,12 +41,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Action -
@@ -88,10 +84,6 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         optionMenu.addAction(camera)
         optionMenu.addAction(cancelAction)
         self.present(optionMenu, animated: true)
-    }
-    
-    @IBAction func goBackToDietRecordPage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     func uploadImage() {

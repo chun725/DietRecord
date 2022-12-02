@@ -50,16 +50,7 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
         qtyTextFieldBackground.layer.cornerRadius = 10
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
     // MARK: - Action -
-    @IBAction func goBackToFoodSearchVC(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     @IBAction func addOrSaveFood(sender: Any) {
         guard let food = food,
             let qty = qtyTextField.text

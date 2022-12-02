@@ -10,6 +10,7 @@ import UIKit
 class ReportVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var reportTableView: UITableView!
     @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
     
     var refreshControl: UIRefreshControl?
     let reportProvider = ReportProvider()
@@ -31,12 +32,19 @@ class ReportVC: UIViewController, UITableViewDataSource {
         guard let refreshControl = refreshControl else { return }
         reportTableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(fetchWeeklyDiet), for: .valueChanged)
+        titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
         reportTableView.reloadData()
         DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.report.rawValue)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {

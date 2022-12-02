@@ -33,11 +33,7 @@ class GoalVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @objc func goToSetupGoalVC(sender: UIButton) {
@@ -55,9 +51,5 @@ class GoalVC: UIViewController {
             }
             self.navigationController?.pushViewController(setupGoalPage, animated: true)
         }
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
 }

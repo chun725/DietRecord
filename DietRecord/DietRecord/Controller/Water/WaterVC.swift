@@ -37,11 +37,16 @@ class WaterVC: UIViewController, UITableViewDataSource {
         fetchWaterRecord()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
     @IBAction func goToHistoryPage(_ sender: Any) {
         let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
         if let waterHistoryPage = storyboard.instantiateViewController(withIdentifier: "\(WaterHistoryVC.self)")
             as? WaterHistoryVC {
-            present(waterHistoryPage, animated: false)
+            self.navigationController?.pushViewController(waterHistoryPage, animated: false)
         }
     }
     

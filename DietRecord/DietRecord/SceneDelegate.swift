@@ -22,6 +22,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard scene as? UIWindowScene != nil else { return }
         maybeOpenedFromWidget(urlContexts: connectionOptions.urlContexts)
+        
+        if let shortcutItem = connectionOptions.shortcutItem {
+            savedShortCutItem = shortcutItem
+        }
     }
     
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -40,6 +44,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
         // 讓app的badgeValue變回0
         UIApplication.shared.applicationIconBadgeNumber = 0
+        if let savedShortCutItem = savedShortCutItem {
+            _ = handleShortCutItem(shortcutItem: savedShortCutItem)
+        }
+        savedShortCutItem = nil
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -49,17 +57,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 type: ShortcutItemType.water.rawValue,
                 localizedTitle: "新增飲水量",
                 localizedSubtitle: "",
-                icon: UIApplicationShortcutIcon(systemImageName: "drop")),
-            UIApplicationShortcutItem(
-                type: ShortcutItemType.dietRecord.rawValue,
-                localizedTitle: "新增飲食記錄",
-                localizedSubtitle: "",
-                icon: UIApplicationShortcutIcon(systemImageName: "fork.knife.circle")),
+                icon: UIApplicationShortcutIcon(templateImageName: "Image_WaterIcon")),
             UIApplicationShortcutItem(
                 type: ShortcutItemType.weight.rawValue,
                 localizedTitle: "新增體重記錄",
                 localizedSubtitle: "",
-                icon: UIApplicationShortcutIcon(systemImageName: "figure.stand")),
+                icon: UIApplicationShortcutIcon(templateImageName: "Image_WeightIcon")),
+            UIApplicationShortcutItem(
+                type: ShortcutItemType.dietRecord.rawValue,
+                localizedTitle: "新增飲食記錄",
+                localizedSubtitle: "",
+                icon: UIApplicationShortcutIcon(templateImageName: "Image_DietIcon")),
             UIApplicationShortcutItem(
                 type: ShortcutItemType.report.rawValue,
                 localizedTitle: "查看本週數據",

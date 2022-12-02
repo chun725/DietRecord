@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "edit (1).png",
+      "filename" : "Image_Diet.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "edit (1)@2x.png",
+      "filename" : "Image_Diet@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "edit (1)@3x.png",
+      "filename" : "Image_Diet@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

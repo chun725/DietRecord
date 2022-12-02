@@ -216,7 +216,7 @@
                             <constraint firstItem="PI2-Ej-16e" firstAttribute="top" secondItem="0gj-gt-8TH" secondAttribute="bottom" constant="16" id="rA6-PI-8UK"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Weight" image="figure.stand" catalog="system" id="9Nd-Hb-ocg"/>
+                    <tabBarItem key="tabBarItem" title="Weight" image="Image_WeightIcon" id="9Nd-Hb-ocg"/>
                     <connections>
                         <outlet property="addWeightRecordButton" destination="Njg-fX-dCr" id="ELQ-IJ-UZ7"/>
                         <outlet property="changeGoalButton" destination="Jtb-a9-Rec" id="mH4-Qr-wfP"/>
@@ -440,7 +440,7 @@
         <image name="Image_Edit-1" width="170.5" height="170.5"/>
         <image name="Image_Healthapp" width="341" height="341"/>
         <image name="Image_Weight" width="170.5" height="170.5"/>
-        <image name="figure.stand" catalog="system" width="77" height="128"/>
+        <image name="Image_WeightIcon" width="25" height="25"/>
         <image name="plus.circle" catalog="system" width="128" height="121"/>
         <namedColor name="drDarkGray">
             <color red="0.24705882352941178" green="0.24705882352941178" blue="0.24705882352941178" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

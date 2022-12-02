@@ -9,6 +9,7 @@ import UIKit
 import WidgetKit
 
 class DietRecordVC: UIViewController, UITableViewDataSource {
+    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var dietRecordTableView: UITableView!
     @IBOutlet weak var createDietRecordButton: UIButton!
     @IBOutlet weak var dateTextField: UITextField!
@@ -31,11 +32,18 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         dateTextField.text = DRConstant.dateFormatter.string(from: Date())
         changeDate()
         createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
+        titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = true
         dietRecordTableView.reloadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.tabBarController?.tabBar.isHidden = false
     }
     
     @objc func goToDietInputPage(sender: UIButton) {

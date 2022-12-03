@@ -60,6 +60,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
             safari.dismissButtonStyle = .close
             safari.delegate = self
             controller?.navigationController?.pushViewController(safari, animated: true)
+            safari.navigationController?.navigationBar.isHidden = true
         }
     }
     

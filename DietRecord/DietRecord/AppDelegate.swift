@@ -55,4 +55,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .badge, .sound])
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+        DRConstant.groupUserDefaults?.set(true, forKey: ShortcutItemType.water.rawValue)
+        guard let window = UIApplication.shared.windows.first,
+            let navigationController = window.rootViewController as? UINavigationController
+        else { return }
+        navigationController.popToRootViewController(animated: false)
+    }
 }

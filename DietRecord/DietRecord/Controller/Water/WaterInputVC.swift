@@ -8,8 +8,10 @@
 import UIKit
 
 class WaterInputVC: UIViewController {
+    @IBOutlet weak var blackBackgroundView: UIView!
     @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var waterInputBackgroundView: UIView!
+    @IBOutlet weak var inputGrayBackgroundView: UIView!
     @IBOutlet weak var inputTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var grayBackgroundView: UIView!
@@ -29,6 +31,22 @@ class WaterInputVC: UIViewController {
         }
     }
     @IBOutlet weak var timeBackgroundView: UIView!
+    @IBOutlet weak var plusButton: UIButton! {
+        didSet {
+            plusButton.isHidden = isGoalInput
+            plusButton.addTarget(self, action: #selector(changeWaterCurrent), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var minusButton: UIButton! {
+        didSet {
+            if let waterCurrent = waterCurrent {
+                minusButton.isEnabled = waterCurrent - 100 >= 0 ? true : false
+                minusButton.tintColor = waterCurrent - 100 >= 0 ? .drDarkGray : .drGray
+            }
+            minusButton.isHidden = isGoalInput
+            minusButton.addTarget(self, action: #selector(changeWaterCurrent), for: .touchUpInside)
+        }
+    }
     
     var waterCurrent: Double?
     var closure: ((Double) -> Void)?
@@ -39,7 +57,7 @@ class WaterInputVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         allBackgroundView.layer.cornerRadius = 20
-        waterInputBackgroundView.layer.cornerRadius = 10
+        inputGrayBackgroundView.layer.cornerRadius = 10
         saveButton.layer.cornerRadius = 20
         grayBackgroundView.layer.cornerRadius = 20
         if isWaterInput {
@@ -49,6 +67,7 @@ class WaterInputVC: UIViewController {
             } else {
                 titleLabel.text = "輸入飲水量"
                 saveButton.addTarget(self, action: #selector(saveWaterRecord), for: .touchUpInside)
+                inputTextField.text = waterCurrent?.formatNoPoint()
             }
             imageView.image = UIImage(named: "Image_Water")
             timeBackgroundView.isHidden = true
@@ -67,15 +86,35 @@ class WaterInputVC: UIViewController {
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.5) {
+            self.blackBackgroundView.alpha = 0.4
+            self.allBackgroundView.alpha = 1
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 1
+            }
+        }
+    }
+    
     @objc func saveWaterGoal() {
         guard let waterGoal = inputTextField.text else { return }
         waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
             switch result {
             case .success:
                 DRProgressHUD.showSuccess()
-                self.closure?(waterGoal.transformToDouble())
                 DRConstant.userData?.waterGoal = waterGoal
-                self.dismiss(animated: false)
+                self.closure?(waterGoal.transformToDouble())
+                let animations = {
+                    self.blackBackgroundView.alpha = 0
+                    self.allBackgroundView.alpha = 0
+                    for subview in self.allBackgroundView.subviews {
+                        subview.alpha = 0
+                    }
+                }
+                UIView.animate(withDuration: 0.5, animations: animations) { _ in
+                    self.dismiss(animated: false)
+                }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
@@ -84,16 +123,24 @@ class WaterInputVC: UIViewController {
     }
     
     @objc func saveWaterRecord() {
-        guard let addWater = inputTextField.text?.transformToDouble(),
-            let waterCurrent = waterCurrent
+        guard let totalWater = inputTextField.text?.transformToDouble()
         else { return }
-        let totalWater = addWater + waterCurrent
-        waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { result in
+        waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success:
                 DRProgressHUD.showSuccess()
                 self.closure?(totalWater)
-                self.dismiss(animated: false)
+                let animations = {
+                    self.blackBackgroundView.alpha = 0
+                    self.allBackgroundView.alpha = 0
+                    for subview in self.allBackgroundView.subviews {
+                        subview.alpha = 0
+                    }
+                }
+                UIView.animate(withDuration: 0.5, animations: animations) { _ in
+                    self.dismiss(animated: false)
+                }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "儲存失敗")
                 print("Error Info: \(error).")
@@ -117,7 +164,11 @@ class WaterInputVC: UIViewController {
                     return "0\(hourIndex):\(minuteIndex)"
                 }
             } else {
-                return "\(hourIndex):\(minuteIndex)"
+                if minuteIndex < 10 {
+                    return "\(hourIndex):0\(minuteIndex)"
+                } else {
+                    return "\(hourIndex):\(minuteIndex)"
+                }
             }
         }()
         let dateComponent = DateComponents(timeZone: .current, hour: hourIndex, minute: minuteIndex)
@@ -137,15 +188,46 @@ class WaterInputVC: UIViewController {
         UNUserNotificationCenter.current().add(request)
         DRProgressHUD.showSuccess()
         self.closure?(0.0)
-        self.dismiss(animated: false)
+        let animations = {
+            self.blackBackgroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+            self.dismiss(animated: false)
+        }
+    }
+    
+    @objc func changeWaterCurrent(sender: UIButton) {
+        guard var totalWater = inputTextField.text?.transformToDouble() else { return }
+        if sender == plusButton {
+            totalWater += 100
+        } else {
+            totalWater -= 100
+        }
+        inputTextField.text = totalWater.formatNoPoint()
+        minusButton.isEnabled = totalWater - 100 >= 0 ? true : false
+        minusButton.tintColor = totalWater - 100 >= 0 ? .drDarkGray : .drGray
     }
     
     @IBAction func goBackToWaterPage(_ sender: Any) {
-        self.dismiss(animated: false)
+        let animations = {
+            self.blackBackgroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+            self.dismiss(animated: false)
+        }
     }
 }
 
 extension WaterInputVC: UIPickerViewDataSource, UIPickerViewDelegate {
+    // MARK: - PickerViewDataSource -
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         1
     }
@@ -154,6 +236,7 @@ extension WaterInputVC: UIPickerViewDataSource, UIPickerViewDelegate {
         pickerView == hourPickerView ? 24 : 60
     }
 
+    // MARK: - PickerViewDelegate -
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
         var str = String(row)
         if row < 10 {

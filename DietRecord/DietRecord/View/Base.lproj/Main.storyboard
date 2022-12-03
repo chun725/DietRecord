@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Launch" translatesAutoresizingMaskIntoConstraints="NO" id="c9e-v4-CpV">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                             </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="iJ7-BH-qAL"/>
@@ -46,10 +46,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Launch" translatesAutoresizingMaskIntoConstraints="NO" id="pIS-bh-fTh">
-                                <rect key="frame" x="0.0" y="294" width="414" height="428"/>
+                                <rect key="frame" x="0.0" y="264" width="414" height="458"/>
                             </imageView>
                             <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="TLb-yj-7M3" customClass="LottieAnimationView" customModule="Lottie">
-                                <rect key="frame" x="0.0" y="94" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="5co-XR-Jqt"/>
                                 </constraints>
@@ -99,7 +99,7 @@
                         <color key="backgroundColor" name="drLightGray"/>
                         <constraints>
                             <constraint firstItem="pIS-bh-fTh" firstAttribute="leading" secondItem="oW9-Lp-zhy" secondAttribute="leading" id="6Ic-jJ-fBX"/>
-                            <constraint firstItem="TLb-yj-7M3" firstAttribute="top" secondItem="oW9-Lp-zhy" secondAttribute="top" constant="50" id="IIt-k5-Jum"/>
+                            <constraint firstItem="TLb-yj-7M3" firstAttribute="top" secondItem="oW9-Lp-zhy" secondAttribute="top" constant="20" id="IIt-k5-Jum"/>
                             <constraint firstItem="pIS-bh-fTh" firstAttribute="trailing" secondItem="oW9-Lp-zhy" secondAttribute="trailing" id="SdB-MP-aAh"/>
                             <constraint firstItem="oW9-Lp-zhy" firstAttribute="trailing" secondItem="TLb-yj-7M3" secondAttribute="trailing" id="Vjb-tR-9e2"/>
                             <constraint firstItem="pIS-bh-fTh" firstAttribute="top" secondItem="TLb-yj-7M3" secondAttribute="bottom" constant="50" id="gj8-9p-h1t"/>
@@ -193,9 +193,10 @@
         <!--Navigation Controller-->
         <scene sceneID="sVM-ve-hOm">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="3bH-c7-jB0" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3bH-c7-jB0" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="aZ4-aw-d9Y">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -208,6 +209,7 @@
             <point key="canvasLocation" x="-697.10144927536237" y="-681.02678571428567"/>
         </scene>
     </scenes>
+    <color key="tintColor" name="drDarkGray"/>
     <resources>
         <image name="Image_Launch" width="469" height="375"/>
         <namedColor name="drDarkGray">

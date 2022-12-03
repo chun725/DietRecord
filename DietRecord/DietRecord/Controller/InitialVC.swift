@@ -15,6 +15,7 @@ class InitialVC: UIViewController {
         super.viewDidLoad()
         DRConstant.configureDateformatter()
         fetchFoodIngredient()
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

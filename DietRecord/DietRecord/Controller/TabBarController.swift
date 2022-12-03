@@ -22,5 +22,18 @@ class TabBarController: UITabBarController {
         } else {
             self.selectedIndex = 2
         }
+        
+        if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
+            self.selectedIndex = 0
+        } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.report.rawValue) ?? false {
+            self.selectedIndex = 3
+        } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
+            self.selectedIndex = 2
+        } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
+            self.selectedIndex = 1
+        }
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
     }
 }

@@ -26,6 +26,7 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
         animationView.loopMode = .loop
         animationView.animationSpeed = 1.25
         animationView.play()
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

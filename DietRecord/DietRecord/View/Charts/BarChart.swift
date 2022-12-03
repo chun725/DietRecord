@@ -91,9 +91,9 @@ class BarChart: BarChartView, ChartViewDelegate {
         
         guard let maxDailyCalories = dailyCalories.max() else { return }
         if maxDailyCalories > goal {
-            self.leftAxis.axisMaximum = maxDailyCalories + 200 // 最大刻度值
+            self.leftAxis.axisMaximum = maxDailyCalories + 400 // 最大刻度值
         } else {
-            self.leftAxis.axisMaximum = goal + 200 // 最大刻度值
+            self.leftAxis.axisMaximum = goal + 400 // 最大刻度值
         }
         
         let limitLine = ChartLimitLine(limit: goal, label: "\(goal) kcal") // 設定目標線

@@ -31,6 +31,11 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         self.tabBarController?.tabBar.isHidden = false
     }
     
@@ -45,10 +50,6 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
                 print("Error Info: \(error).")
             }
         }
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

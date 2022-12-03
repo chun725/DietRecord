@@ -9,6 +9,7 @@ import UIKit
 import HealthKit
 
 class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var addWeightRecordButton: UIBarButtonItem!
     @IBOutlet weak var weightLineChart: UIView!
     @IBOutlet weak var weightTableView: UITableView!
     @IBOutlet weak var changeGoalButton: UIButton!
@@ -148,7 +149,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func fetchWeightRecord() {
         DRProgressHUD.show()
-        weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { result in
+        weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let weightDatas):
                 DRProgressHUD.dismiss()
@@ -156,6 +158,11 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                 self.weightTableView.reloadData()
                 self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
+                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
+                    guard let addWeightRecordButton = self.addWeightRecordButton else { return }
+                    self.goToWeightInputVC(addWeightRecordButton)
+                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.weight.rawValue)
+                }
             case .failure(let error):
                 DRProgressHUD.showFailure(text: "無法讀取體重資料")
                 print("Error Info: \(error).")
@@ -163,11 +170,11 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    @IBAction func goToWeightInputVC(_ sender: UIButton) {
+    @IBAction func goToWeightInputVC(_ sender: Any) {
         let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
         if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
             as? WeightInputVC {
-            if sender == changeGoalButton {
+            if sender as? UIButton == changeGoalButton {
                 weightInputPage.isSetGoal = true
                 weightInputPage.closure = { [weak self] weight in
                     self?.weightGoal = weight
@@ -233,6 +240,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                             self.weightTableView.deleteRows(at: [indexPath], with: .fade)
                             self.weightTableView.endUpdates()
                         }
+                        self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
                     }
                 case .failure(let error):
                     print("Error Info: \(error).")
@@ -240,7 +248,22 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             }
             completionHandler(true)
         }
-        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction])
+        
+        let editAction = UIContextualAction(style: .normal, title: "編輯") { _, _, completionHandler in
+            let weightData = self.weightRecord.reversed()[indexPath.row]
+            let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
+            if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
+                as? WeightInputVC {
+                weightInputPage.date = DRConstant.dateFormatter.string(from: weightData.date)
+                weightInputPage.weight = weightData.value
+                weightInputPage.closure = { [weak self] _ in
+                    self?.fetchWeightRecord()
+                }
+                self.present(weightInputPage, animated: false)
+            }
+            completionHandler(true)
+        }
+        let trailingSwipeConfiguration = UISwipeActionsConfiguration(actions: [deleteAction, editAction])
         return trailingSwipeConfiguration
     }
 }

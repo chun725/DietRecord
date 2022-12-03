@@ -11,13 +11,22 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var foodInputTextField: UITextField!
     @IBOutlet weak var searchResultTableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var progressView: UIView!
+    @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
     private let foodListProvider = DietRecordProvider()
+    
+    var pages: Int = 0
+    var lastPageCount: Int = 0
+    var nowPage: Int = 0
     
     var closure: (([Food]) -> Void)?
     
     private var foodSearchResults: [FoodIngredient] = [] {
         didSet {
+            pages = foodSearchResults.count / 10
+            lastPageCount = foodSearchResults.count % 10
+            nowPage = 0
             searchResultTableView.reloadData()
         }
     }
@@ -34,21 +43,12 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         super.viewDidLoad()
         searchResultTableView.dataSource = self
         searchResultTableView.delegate = self
+        searchResultTableView.registerCellWithNib(identifier: FoodSearchPagingCell.reuseIdentifier, bundle: nil)
         foodInputTextField.delegate = self
         if !oldfoods.isEmpty {
             chooseFoods = oldfoods
         }
         saveButton.layer.cornerRadius = 20
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     // MARK: - Action -
@@ -61,7 +61,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
         if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
             as? FoodNutritionVC {
-            foodNutritionPage.newFood = foodSearchResults[sender.tag]
+            foodNutritionPage.newFood = foodSearchResults[nowPage * 10 + sender.tag]
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
             }
@@ -82,17 +82,16 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         }
     }
     
-    @IBAction func goBackToDietInputPage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    
     // MARK: - TextFieldDelegate -
     func textFieldDidBeginEditing(_ textField: UITextField) {
         foodSearchResults = []
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let foodName = textField.text else { return }
+        guard var foodName = textField.text else { return }
+        let substring = foodName.split(separator: " ")
+        foodName = substring.joined(separator: "")
+        textField.text = foodName
         if !foodName.isEmpty {
             foodListProvider.searchFoods(foodName: foodName) { result in
                 switch result {
@@ -115,30 +114,54 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? foodSearchResults.count : chooseFoods.count
+        if section == 0 {
+            if foodSearchResults.count > 10 {
+                if nowPage != pages {
+                    return 11
+                } else {
+                    return lastPageCount + 1
+                }
+            } else {
+                return foodSearchResults.count
+            }
+        } else {
+            return chooseFoods.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: FoodSearchResultCell.reuseIdentifier,
-            for: indexPath) as? FoodSearchResultCell
-        else { fatalError("Could not create food search result cell.") }
-        cell.backgroundColor = .clear
-        cell.detailButton.tag = indexPath.row
-        cell.detailButton.removeTarget(nil, action: nil, for: .touchUpInside)
-        switch indexPath.section {
-        case 0:
-            let food = foodSearchResults[indexPath.row]
-            cell.layoutResultCell(food: food)
-            cell.detailButton.addTarget(self, action: #selector(goToFoodNutritionPage), for: .touchUpInside)
-        case 1:
-            let chooseFood = chooseFoods[indexPath.row]
-            cell.layoutChooseCell(food: chooseFood)
-            cell.detailButton.addTarget(self, action: #selector(modifyQtyOfFood), for: .touchUpInside)
-        default:
-            break
+        if indexPath != IndexPath(row: 10, section: 0) &&
+            !(nowPage == pages && indexPath == IndexPath(row: lastPageCount, section: 0)) {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: FoodSearchResultCell.reuseIdentifier,
+                for: indexPath) as? FoodSearchResultCell
+            else { fatalError("Could not create food search result cell.") }
+            cell.backgroundColor = .clear
+            cell.detailButton.tag = indexPath.row
+            cell.detailButton.removeTarget(nil, action: nil, for: .touchUpInside)
+            switch indexPath.section {
+            case 0:
+                let food = foodSearchResults[nowPage * 10 + indexPath.row]
+                cell.layoutResultCell(food: food)
+                cell.detailButton.addTarget(self, action: #selector(goToFoodNutritionPage), for: .touchUpInside)
+            case 1:
+                let chooseFood = chooseFoods[indexPath.row]
+                cell.layoutChooseCell(food: chooseFood)
+                cell.detailButton.addTarget(self, action: #selector(modifyQtyOfFood), for: .touchUpInside)
+            default:
+                break
+            }
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: FoodSearchPagingCell.reuseIdentifier,
+                for: indexPath) as? FoodSearchPagingCell
+            else { fatalError("Could not create food search paging cell.") }
+            cell.backgroundColor = .clear
+            cell.controller = self
+            cell.layoutCell()
+            return cell
         }
-        return cell
     }
     
     // MARK: - TableViewDelegate -

@@ -43,6 +43,9 @@ class TotalWaterCell: UITableViewCell {
             waterInputPage.isGoalInput = true
             waterInputPage.closure = { [weak self] waterGoal in
                 self?.controller?.waterGoal = waterGoal
+                self?.controller?.waterTableView.reloadData()
+                self?.controller?.waterTableView.layoutIfNeeded()
+                self?.controller?.changeImage()
             }
             controller?.present(waterInputPage, animated: false)
         }

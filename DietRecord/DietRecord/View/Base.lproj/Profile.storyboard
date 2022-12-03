@@ -1805,7 +1805,7 @@
     <color key="tintColor" name="drDarkGray"/>
     <resources>
         <image name="Image_DietIcon" width="25" height="25"/>
-        <image name="Image_IdCard" width="170" height="170"/>
+        <image name="Image_IdCard" width="170.5" height="170.5"/>
         <image name="Image_Lock" width="170.5" height="170.5"/>
         <image name="Image_Logout" width="170.5" height="170.5"/>
         <image name="Image_Placeholder" width="999.5" height="562"/>

@@ -32,18 +32,14 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         profileDetailTableView.dataSource = self
         profileDetailTableView.delegate = self
         profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
-        self.tabBarController?.tabBar.isHidden = true
         responseTextField.addTarget(self, action: #selector(changeResponseButton), for: .allEditingEvents)
         responseBackgroundView.layer.cornerRadius = 10
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
-    @IBAction func goBackProfilePage(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @IBAction func createResponse(_ sender: Any) {

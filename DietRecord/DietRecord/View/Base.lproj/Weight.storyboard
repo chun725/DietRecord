@@ -211,7 +211,7 @@
                                 <constraint firstItem="vGG-Ux-RhB" firstAttribute="centerY" secondItem="ous-TH-RlQ" secondAttribute="centerY" id="wAj-SA-sO9"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="sEx-Xn-lB3">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="sEx-Xn-lB3">
                             <connections>
                                 <action selector="goToWeightInputVC:" destination="d1s-ZJ-Lrp" id="401-on-rbm"/>
                             </connections>

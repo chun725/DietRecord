@@ -19,11 +19,8 @@ class ProfileSettingVC: UIViewController, UITableViewDataSource {
         super.viewWillAppear(animated)
         settingTableView.reloadData()
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
         userSelfIDLabel.text = DRConstant.userData?.userSelfID
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -44,6 +44,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
         animationView.loopMode = .loop
         animationView.play()
@@ -83,10 +84,6 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 }
             }
         }
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
     
     @objc func requestFollow(sender: UIButton) {

@@ -292,7 +292,7 @@
                                 <constraint firstItem="XZs-iu-HZw" firstAttribute="centerX" secondItem="TpY-zi-cj8" secondAttribute="centerX" id="YdU-eK-mKn"/>
                             </constraints>
                         </view>
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="Pxt-WT-O7v">
+                        <barButtonItem key="rightBarButtonItem" id="Pxt-WT-O7v">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mmA-ZR-dJ6">
                                 <rect key="frame" x="364" y="10" width="30" height="24.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

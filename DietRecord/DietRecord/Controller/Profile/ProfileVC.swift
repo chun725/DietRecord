@@ -17,14 +17,14 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
-    @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var followersButton: UIButton!
-    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var followStackView: UIStackView!
-    
+    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var navigationBarTitleLabel: UILabel!
     var otherUserID: String?
     var otherUserData: User?
     var mealRecords: [MealRecord] = [] {
@@ -47,11 +47,9 @@ class ProfileVC: UIViewController {
             self.checkButton.isHidden = true
             self.addButton.isHidden = true
             self.photoCollectionView.isHidden = true
-            self.moreButton.isHidden = false
-        } else {
-            self.moreButton.isHidden = true
-            self.backButton.isHidden = true
         }
+        moreButton.isEnabled = otherUserID == DRConstant.userID ? false : true
+        moreButton.tintColor = otherUserID == DRConstant.userID ? .drGray : .drDarkGray
         editButton.layer.cornerRadius = 10
     }
     
@@ -60,11 +58,22 @@ class ProfileVC: UIViewController {
         fetchDietRecord()
         fetchData()
         if otherUserID == nil {
+            self.navigationController?.navigationBar.isHidden = true
+            titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
+        } else {
+            self.navigationController?.navigationBar.isHidden = false
+            titleLabelHeightConstraint.constant = 0
+        }
+        editButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if otherUserID == nil {
             self.tabBarController?.tabBar.isHidden = false
         } else {
             self.tabBarController?.tabBar.isHidden = true
         }
-        editButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
     }
     
     func fetchDietRecord() {
@@ -107,6 +116,7 @@ class ProfileVC: UIViewController {
                 self.usernameLabel.text = user.username
                 self.userImageView.loadImage(user.userImageURL)
                 self.titleLabel.text = user.userSelfID
+                self.navigationBarTitleLabel.text = user.userSelfID
                 self.presentView(views: [self.userImageView, self.followStackView, self.editButton])
                 if id == DRConstant.userID {
                     DRConstant.userData = user
@@ -258,10 +268,6 @@ class ProfileVC: UIViewController {
             alert.addAction(cancel)
             self.present(alert, animated: true)
         }
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
 }
 

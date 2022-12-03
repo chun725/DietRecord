@@ -10,7 +10,6 @@ import UIKit
 class ProfileInformationVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var profileInfoTableView: UITableView!
     @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var goBackButton: UIButton!
     
     var isUpdated = false
     var user: User?
@@ -21,22 +20,19 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
         profileInfoTableView.dataSource = self
         saveButton.addTarget(self, action: #selector(createUserInfo), for: .touchUpInside)
         saveButton.layer.cornerRadius = 20
-        if !isUpdated {
-            goBackButton.isHidden = true
-        } else {
+        if isUpdated {
             self.user = DRConstant.userData
-            goBackButton.isHidden = false
-            goBackButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
+            print("=====是更新")
+        } else {
+            print("=====不是更新")
+            self.navigationItem.leftBarButtonItem = nil
+            self.navigationItem.hidesBackButton = true
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    
-    @objc func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     @objc func createUserInfo() {
@@ -52,12 +48,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
                     DRConstant.userData = user
                     DRProgressHUD.showSuccess()
                     if !self.isUpdated {
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let tabbarController = storyboard.instantiateViewController(
-                            withIdentifier: "\(TabBarController.self)")
-                            as? TabBarController {
-                            self.navigationController?.pushViewController(tabbarController, animated: true)
-                        }
+                        self.navigationController?.popToRootViewController(animated: true)
                     } else {
                         self.navigationController?.popViewController(animated: true)
                     }

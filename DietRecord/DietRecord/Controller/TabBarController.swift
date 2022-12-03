@@ -32,5 +32,8 @@ class TabBarController: UITabBarController {
         } else if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
             self.selectedIndex = 1
         }
+        self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
     }
 }

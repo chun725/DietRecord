@@ -56,6 +56,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                     self.mealRecord?.response.append(Response(person: DRConstant.userID, response: response))
                     UIView.animate(withDuration: 0.5) {
                         self.profileDetailTableView.beginUpdates()
+                        self.profileDetailTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
                         self.profileDetailTableView.insertRows(
                             at: [IndexPath(row: mealRecord.response.count, section: 1)],
                             with: .fade)
@@ -90,7 +91,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: ProfileResponseCell.reuseIdentifier, for: indexPath) as? ProfileResponseCell
-            else { fatalError("Could not create the profile detail cell.") }
+            else { fatalError("Could not create the profile response cell.") }
             let response = responses[indexPath.row]
             cell.controller = self
             cell.layoutCell(response: response)
@@ -163,6 +164,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                             self.profileDetailTableView.deleteRows(at: [indexPath], with: .fade)
                             self.profileDetailTableView.endUpdates()
                         }
+                        self.profileDetailTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
                     case .failure(let error):
                         print("Error Info: \(error) in deleting response.")
                     }

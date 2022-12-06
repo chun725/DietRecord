@@ -33,14 +33,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1I-Qg-w0b">
-                                <rect key="frame" x="141" y="91" width="132" height="34"/>
+                                <rect key="frame" x="139" y="91" width="136" height="34"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <connections>
                                     <action selector="goToChooseDatePage:" destination="16Q-ZS-Rt7" eventType="touchUpInside" id="Hk6-tF-ARR"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="2022-11-10" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yEX-LV-8Xr">
-                                <rect key="frame" x="141" y="91" width="100" height="34"/>
+                                <rect key="frame" x="139" y="91" width="100" height="34"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="emq-RW-rWa"/>
                                 </constraints>
@@ -166,7 +166,7 @@
                                 </prototypes>
                             </tableView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image_Calendar" translatesAutoresizingMaskIntoConstraints="NO" id="YMO-dx-5Lx">
-                                <rect key="frame" x="249" y="96" width="24" height="24"/>
+                                <rect key="frame" x="251" y="96" width="24" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="24" id="EH0-Ub-uUt"/>
                                     <constraint firstAttribute="width" secondItem="YMO-dx-5Lx" secondAttribute="height" id="mjL-k9-LTq"/>
@@ -185,7 +185,7 @@
                             <constraint firstItem="trT-Ck-G9r" firstAttribute="top" secondItem="xxJ-7e-Nob" secondAttribute="bottom" id="N4J-qA-0a6"/>
                             <constraint firstItem="iTN-9N-6NX" firstAttribute="centerY" secondItem="yEX-LV-8Xr" secondAttribute="centerY" id="Nb2-gc-aUN"/>
                             <constraint firstItem="I1I-Qg-w0b" firstAttribute="centerX" secondItem="Jrk-mg-kG9" secondAttribute="centerX" id="PsL-60-Lxu"/>
-                            <constraint firstItem="YMO-dx-5Lx" firstAttribute="leading" secondItem="yEX-LV-8Xr" secondAttribute="trailing" constant="8" id="Qva-Ys-F3n"/>
+                            <constraint firstItem="YMO-dx-5Lx" firstAttribute="leading" secondItem="yEX-LV-8Xr" secondAttribute="trailing" constant="12" id="Qva-Ys-F3n"/>
                             <constraint firstItem="xxJ-7e-Nob" firstAttribute="leading" secondItem="ZZg-Sk-v24" secondAttribute="leading" id="R9C-yO-Te3"/>
                             <constraint firstItem="I1I-Qg-w0b" firstAttribute="top" secondItem="yEX-LV-8Xr" secondAttribute="top" id="RuP-fQ-we0"/>
                             <constraint firstItem="xxJ-7e-Nob" firstAttribute="trailing" secondItem="ZZg-Sk-v24" secondAttribute="trailing" id="UCM-Am-5bc"/>

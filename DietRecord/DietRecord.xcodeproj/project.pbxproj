@@ -39,6 +39,7 @@
 		34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */; };
 		342DC99F29407FAB00136A31 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC99E29407FAB00136A31 /* FirebaseManager.swift */; };
 		342DC9A1294082B100136A31 /* FirebaseManager+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */; };
+		342DC9A329409DEC00136A31 /* FirebaseManager+Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */; };
 		343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486652936FE690054ACDC /* ReportSetGoalCell.xib */; };
 		343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */; };
 		3434866B2938398F0054ACDC /* FoodSearchPagingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */; };
@@ -101,7 +102,6 @@
 		34C0006F2922494900670CA4 /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0006D2922494900670CA4 /* FoodCollectionViewCell.swift */; };
 		34C000702922494900670CA4 /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C0006E2922494900670CA4 /* FoodCollectionViewCell.xib */; };
 		34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740729135742009F9264 /* TotalWaterCell.swift */; };
-		34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */; };
 		34CF740D29135D02009F9264 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740C29135D02009F9264 /* Water.swift */; };
 		34CF7410291365DF009F9264 /* WaterInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740F291365DF009F9264 /* WaterInputVC.swift */; };
 		34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74112913978D009F9264 /* WaterReminderCell.swift */; };
@@ -188,6 +188,7 @@
 		34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
 		342DC99E29407FAB00136A31 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
 		342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Report.swift"; sourceTree = "<group>"; };
+		342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Water.swift"; sourceTree = "<group>"; };
 		343486652936FE690054ACDC /* ReportSetGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportSetGoalCell.xib; sourceTree = "<group>"; };
 		343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportAutomaticGoalCell.xib; sourceTree = "<group>"; };
 		3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodSearchPagingCell.xib; sourceTree = "<group>"; };
@@ -261,7 +262,6 @@
 		34C0006D2922494900670CA4 /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		34C0006E2922494900670CA4 /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		34CF740729135742009F9264 /* TotalWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterCell.swift; sourceTree = "<group>"; };
-		34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRecordProvider.swift; sourceTree = "<group>"; };
 		34CF740C29135D02009F9264 /* Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
 		34CF740F291365DF009F9264 /* WaterInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterInputVC.swift; sourceTree = "<group>"; };
 		34CF74112913978D009F9264 /* WaterReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterReminderCell.swift; sourceTree = "<group>"; };
@@ -406,6 +406,7 @@
 			children = (
 				342DC99E29407FAB00136A31 /* FirebaseManager.swift */,
 				342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */,
+				342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -703,7 +704,6 @@
 			isa = PBXGroup;
 			children = (
 				34CF740C29135D02009F9264 /* Water.swift */,
-				34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */,
 			);
 			path = Water;
 			sourceTree = "<group>";
@@ -1042,6 +1042,7 @@
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,
 				34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */,
+				342DC9A329409DEC00136A31 /* FirebaseManager+Water.swift in Sources */,
 				3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */,
@@ -1053,7 +1054,6 @@
 				34930BB929238E6F0037A82E /* DietGoalCollectionViewCell.swift in Sources */,
 				34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
-				34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */,
 				34642949290D07B80070B425 /* PieChart.swift in Sources */,
 				3469168E291277A40021985F /* ChartXAxis.swift in Sources */,
 				34CF740D29135D02009F9264 /* Water.swift in Sources */,

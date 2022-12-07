@@ -25,8 +25,6 @@ class WaterVC: UIViewController, UITableViewDataSource {
     
     var isLoading = true
     
-    let waterRecordProvider = WaterRecordProvider()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         waterTableView.dataSource = self
@@ -99,24 +97,16 @@ class WaterVC: UIViewController, UITableViewDataSource {
     
     func fetchWaterRecord() {
         DRProgressHUD.show()
-        waterRecordProvider.fetchWaterRecord { [weak self] result in
+        FirebaseManager.shared.fetchWaterRecord { [weak self] waterRecord in
             guard let self = self else { return }
-            switch result {
-            case .success(let data):
-                DRProgressHUD.dismiss()
-                self.isLoading = false
-                self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
-                self.waterTableView.reloadData()
-                if let waterRecord = data as? WaterRecord {
-                    self.waterCurrent = waterRecord.water.transformToDouble()
-                }
-                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
-                    self.goToWaterInputVC(sender: nil)
-                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.water.rawValue)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "無法讀取飲水量資料")
-                print("Error Info: \(error)")
+            DRProgressHUD.dismiss()
+            self.isLoading = false
+            self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
+            self.waterTableView.reloadData()
+            self.waterCurrent = waterRecord.water.transformToDouble()
+            if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
+                self.goToWaterInputVC(sender: nil)
+                DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.water.rawValue)
             }
         }
     }

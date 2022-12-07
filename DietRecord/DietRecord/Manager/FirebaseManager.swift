@@ -28,12 +28,15 @@ enum FSCollectionEndpoint {
 
 enum FSDocumentEndpoint {
     case userData(String)
+    case water(String)
     case dietRecord(String, String)
     
     var documentRef: DocumentReference {
         switch self {
         case .userData(let id):
             return DRConstant.database.collection(DRConstant.user).document(id)
+        case .water(let date):
+            return DRConstant.database.collection(DRConstant.user).document(DRConstant.userID).collection(DRConstant.water).document(date)
         case .dietRecord(let id, let date):
             return DRConstant.database.collection(DRConstant.user).document(id).collection(DRConstant.diet).document(date)
         }

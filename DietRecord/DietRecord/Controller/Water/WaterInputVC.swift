@@ -52,7 +52,6 @@ class WaterInputVC: UIViewController {
     var closure: ((Double) -> Void)?
     var isWaterInput = true
     var isGoalInput = false
-    let waterRecordProvider = WaterRecordProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -97,54 +96,35 @@ class WaterInputVC: UIViewController {
         }
     }
     
+    private func dismissAnimation() {
+        let animations = {
+            self.blackBackgroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+            self.dismiss(animated: false)
+        }
+    }
+    
     @objc func saveWaterGoal() {
         guard let waterGoal = inputTextField.text else { return }
-        waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
-            switch result {
-            case .success:
-                DRProgressHUD.showSuccess()
-                DRConstant.userData?.waterGoal = waterGoal
-                self.closure?(waterGoal.transformToDouble())
-                let animations = {
-                    self.blackBackgroundView.alpha = 0
-                    self.allBackgroundView.alpha = 0
-                    for subview in self.allBackgroundView.subviews {
-                        subview.alpha = 0
-                    }
-                }
-                UIView.animate(withDuration: 0.5, animations: animations) { _ in
-                    self.dismiss(animated: false)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "儲存失敗")
-                print("Error Info: \(error).")
-            }
+        FirebaseManager.shared.updateWaterGoal(waterGoal: waterGoal) {
+            DRProgressHUD.showSuccess()
+            DRConstant.userData?.waterGoal = waterGoal
+            self.closure?(waterGoal.transformToDouble())
+            self.dismissAnimation()
         }
     }
     
     @objc func saveWaterRecord() {
-        guard let totalWater = inputTextField.text?.transformToDouble()
-        else { return }
-        waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                DRProgressHUD.showSuccess()
-                self.closure?(totalWater)
-                let animations = {
-                    self.blackBackgroundView.alpha = 0
-                    self.allBackgroundView.alpha = 0
-                    for subview in self.allBackgroundView.subviews {
-                        subview.alpha = 0
-                    }
-                }
-                UIView.animate(withDuration: 0.5, animations: animations) { _ in
-                    self.dismiss(animated: false)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "儲存失敗")
-                print("Error Info: \(error).")
-            }
+        guard let totalWater = inputTextField.text?.transformToDouble() else { return }
+        FirebaseManager.shared.updateWaterRecord(totalWater: totalWater.formatNoPoint()) {
+            DRProgressHUD.showSuccess()
+            self.closure?(totalWater)
+            self.dismissAnimation()
         }
     }
     
@@ -188,16 +168,7 @@ class WaterInputVC: UIViewController {
         UNUserNotificationCenter.current().add(request)
         DRProgressHUD.showSuccess()
         self.closure?(0.0)
-        let animations = {
-            self.blackBackgroundView.alpha = 0
-            self.allBackgroundView.alpha = 0
-            for subview in self.allBackgroundView.subviews {
-                subview.alpha = 0
-            }
-        }
-        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-            self.dismiss(animated: false)
-        }
+        self.dismissAnimation()
     }
     
     @objc func changeWaterCurrent(sender: UIButton) {
@@ -213,16 +184,7 @@ class WaterInputVC: UIViewController {
     }
     
     @IBAction func goBackToWaterPage(_ sender: Any) {
-        let animations = {
-            self.blackBackgroundView.alpha = 0
-            self.allBackgroundView.alpha = 0
-            for subview in self.allBackgroundView.subviews {
-                subview.alpha = 0
-            }
-        }
-        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-            self.dismiss(animated: false)
-        }
+        self.dismissAnimation()
     }
 }
 

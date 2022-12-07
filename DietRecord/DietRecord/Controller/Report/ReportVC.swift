@@ -13,7 +13,6 @@ class ReportVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
     
     var refreshControl: UIRefreshControl?
-    let reportProvider = ReportProvider()
     var weeklyDietRecord: [FoodDailyInput]? {
         didSet {
             reportTableView.reloadData()
@@ -67,21 +66,17 @@ class ReportVC: UIViewController, UITableViewDataSource {
             DRProgressHUD.show()
         }
         isLoading = true
+        
         guard let dateString = dateTextField.text,
             let date = DRConstant.dateFormatter.date(from: dateString)
         else { return }
-        reportProvider.fetchWeeklyDietRecord(date: date) { result in
+        
+        FirebaseManager.shared.fetchWeeklyDietRecord(date: date) { [weak self] weeklyDietRecord in
+            guard let self = self else { return }
             self.refreshControl?.endRefreshing()
-            switch result {
-            case .success(let data):
-                self.isLoading = false
-                DRProgressHUD.dismiss()
-                let weeklyDietRecordData = data as? [FoodDailyInput]
-                self.weeklyDietRecord = weeklyDietRecordData
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "讀取飲食記錄失敗")
-                print("Error Info: \(error).")
-            }
+            self.isLoading = false
+            DRProgressHUD.dismiss()
+            self.weeklyDietRecord = weeklyDietRecord
         }
     }
     

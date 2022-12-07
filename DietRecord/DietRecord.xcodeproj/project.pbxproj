@@ -37,6 +37,8 @@
 		34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */; };
 		34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA2290FCED100D5AFFD /* String+Extension.swift */; };
 		34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */; };
+		342DC99F29407FAB00136A31 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC99E29407FAB00136A31 /* FirebaseManager.swift */; };
+		342DC9A1294082B100136A31 /* FirebaseManager+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */; };
 		343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486652936FE690054ACDC /* ReportSetGoalCell.xib */; };
 		343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */; };
 		3434866B2938398F0054ACDC /* FoodSearchPagingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */; };
@@ -55,7 +57,6 @@
 		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
 		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
 		3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7E291B9FAA002ED662 /* Goal.swift */; };
-		3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED80291BB255002ED662 /* ReportProvider.swift */; };
 		3460ED83291BCC66002ED662 /* ReportSetGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
@@ -185,6 +186,8 @@
 		34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordProvider.swift; sourceTree = "<group>"; };
 		34270EA2290FCED100D5AFFD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		342DC99E29407FAB00136A31 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Report.swift"; sourceTree = "<group>"; };
 		343486652936FE690054ACDC /* ReportSetGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportSetGoalCell.xib; sourceTree = "<group>"; };
 		343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportAutomaticGoalCell.xib; sourceTree = "<group>"; };
 		3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodSearchPagingCell.xib; sourceTree = "<group>"; };
@@ -205,7 +208,6 @@
 		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
 		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
 		3460ED7E291B9FAA002ED662 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
-		3460ED80291BB255002ED662 /* ReportProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProvider.swift; sourceTree = "<group>"; };
 		3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSetGoalCell.swift; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -399,6 +401,15 @@
 			path = DietRecord;
 			sourceTree = "<group>";
 		};
+		342DC99D29407F8D00136A31 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				342DC99E29407FAB00136A31 /* FirebaseManager.swift */,
+				342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
 		343486642936FE280054ACDC /* ReportSetGoalCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,7 +490,6 @@
 			isa = PBXGroup;
 			children = (
 				3460ED7E291B9FAA002ED662 /* Goal.swift */,
-				3460ED80291BB255002ED662 /* ReportProvider.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -516,6 +526,7 @@
 				343CD69229111C500048046E /* Third Party Wrapper */,
 				34642951290D23030070B425 /* Resource */,
 				3464294E290D1E8E0070B425 /* Extension */,
+				342DC99D29407F8D00136A31 /* Manager */,
 				34270E76290D576B00D5AFFD /* Model */,
 				34642953290D28500070B425 /* Controller */,
 				34642952290D28340070B425 /* View */,
@@ -1027,7 +1038,6 @@
 				349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */,
 				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
-				3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */,
 				34C0005C291C901600670CA4 /* FoodNutritionCell.swift in Sources */,
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,
@@ -1036,6 +1046,7 @@
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
+				342DC99F29407FAB00136A31 /* FirebaseManager.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
 				34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */,
 				34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */,
@@ -1088,6 +1099,7 @@
 				34C00061291CA43600670CA4 /* UITextField+Extension.swift in Sources */,
 				34C0005F291C958800670CA4 /* CommonNameCell.swift in Sources */,
 				34C00058291C8EAC00670CA4 /* JGProgressHUDWrapper.swift in Sources */,
+				342DC9A1294082B100136A31 /* FirebaseManager+Report.swift in Sources */,
 				34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */,
 				34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */,
 				343CD698291223850048046E /* BarChart.swift in Sources */,

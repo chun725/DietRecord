@@ -12,7 +12,6 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var saveButton: UIButton!
     
-    let reportProvider = ReportProvider()
     var isAutomatic = true
     var personalInfo: PersonalInfo?
     var goal: [String] = ["", "", "", ""]
@@ -53,6 +52,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     
     @IBAction func saveInfo(_ sender: Any) {
         DRProgressHUD.show()
+        
         if isAutomatic {
             guard let personalInfo = personalInfo,
                 !personalInfo.gender.isEmpty,
@@ -74,29 +74,24 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
             }
         }
         self.closure?(goal)
+        
         if DRConstant.userData == nil {
             DRProgressHUD.showSuccess()
             self.navigationController?.popViewController(animated: true)
         } else {
-            reportProvider.changeGoal(goal: goal) { result in
-                switch result {
-                case .success:
-                    let profileProvider = ProfileProvider()
-                    profileProvider.fetchUserData(userID: DRConstant.userID) { result in
-                        switch result {
-                        case .success(let user):
-                            let user = user as? User
-                            DRConstant.userData = user
-                            DRProgressHUD.showSuccess()
-                            self.navigationController?.popViewController(animated: true)
-                        case .failure(let error):
-                            DRProgressHUD.showFailure(text: "儲存失敗")
-                            print("Error Info: \(error).")
-                        }
+            FirebaseManager.shared.changeGoal(goal: goal) {
+                let profileProvider = ProfileProvider()
+                profileProvider.fetchUserData(userID: DRConstant.userID) { result in
+                    switch result {
+                    case .success(let user):
+                        let user = user as? User
+                        DRConstant.userData = user
+                        DRProgressHUD.showSuccess()
+                        self.navigationController?.popViewController(animated: true)
+                    case .failure(let error):
+                        DRProgressHUD.showFailure(text: "儲存失敗")
+                        print("Error Info: \(error).")
                     }
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存失敗")
-                    print("Error Info: \(error).")
                 }
             }
         }

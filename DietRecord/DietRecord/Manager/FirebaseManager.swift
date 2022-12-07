@@ -38,6 +38,7 @@ enum FSCollectionEndpoint {
 enum FSDocumentEndpoint {
     case userData(String)
     case water(String)
+    case weight(String)
     case dietRecord(String, String)
     
     var documentRef: DocumentReference {
@@ -52,6 +53,12 @@ enum FSDocumentEndpoint {
                 .document(DRConstant.userID)
                 .collection(DRConstant.water)
                 .document(date)
+        case .weight(let date):
+            return DRConstant.database
+                .collection(DRConstant.user)
+                .document(DRConstant.userID)
+                .collection(DRConstant.weight)
+                .document(date)
         case let .dietRecord(id, date):
             return DRConstant.database
                 .collection(DRConstant.user)
@@ -64,6 +71,7 @@ enum FSDocumentEndpoint {
 
 class FirebaseManager {
     static let shared = FirebaseManager()
+    let healthManager = HealthKitManager()
     
     func getDocument<T: Decodable>(_ docRef: DocumentReference, completion: @escaping (T?) -> Void) {
         docRef.getDocument { [weak self] snapshot, error in

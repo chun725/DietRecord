@@ -26,8 +26,6 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     var lineChart: LineChart?
-    let healthManager = HealthKitManager()
-    let weightRecordProvider = WeightRecordProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +41,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         super.viewWillAppear(animated)
         self.fetchWeightRecord()
         self.weightGoal = DRConstant.userData?.weightGoal.transformToDouble() ?? 0.0
-        healthManager.havePermissionOfWrite { [weak self] bool in
+        FirebaseManager.shared.healthManager.havePermissionOfWrite { [weak self] bool in
             if bool {
                 self?.syncSwitch.isOn = true
             } else {
@@ -53,7 +51,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func haveGetHealthKitPermission() {
-        healthManager.haveGetPermission { result in
+        FirebaseManager.shared.healthManager.haveGetPermission { result in
             switch result {
             case .success(let index):
                 if index != 2 {
@@ -68,7 +66,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     func getHealthKitPermission() {
-        healthManager.authorizeHealthKit { authorized, error -> Void in
+        FirebaseManager.shared.healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
                 DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
                 self.setWeight()
@@ -92,7 +90,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         else { return }
 
         // Call HealthKitManager's getSample() method to get the user's height.
-        self.healthManager.getWeight(sampleType: weightSample) { userWeight, error -> Void in
+        FirebaseManager.shared.healthManager.getWeight(sampleType: weightSample) { userWeight, error -> Void in
             if let error = error {
                 print("Error: \(error.localizedDescription)")
                 return
@@ -101,6 +99,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
             var weightDatas: [WeightData] = []
             
             guard let weightDatasInHealth = userWeight as? [HKQuantitySample] else { return }
+            
             for weight in weightDatasInHealth {
                 let weightData = WeightData(
                     date: weight.endDate,
@@ -109,19 +108,14 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
                 weightDatas.append(weightData)
             }
             
-            self.weightRecordProvider.updateWeightRecord(weightDatas: weightDatas) { result in
-                switch result {
-                case .success:
-                    self.fetchWeightRecord()
-                case .failure(let error):
-                    print("Error Info: \(error).")
-                }
+            FirebaseManager.shared.updateWeightRecord(weightDatas: weightDatas) {
+                self.fetchWeightRecord()
             }
         }
     }
     
     @objc func changeSync() {
-        healthManager.havePermissionOfWrite { bool in
+        FirebaseManager.shared.healthManager.havePermissionOfWrite { bool in
             if bool {
                 if self.syncSwitch.isOn {
                     DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
@@ -149,23 +143,18 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     func fetchWeightRecord() {
         DRProgressHUD.show()
-        weightRecordProvider.fetchWeightRecord(sync: self.syncSwitch.isOn) { [weak self] result in
+        FirebaseManager.shared.fetchWeightRecord(sync: self.syncSwitch.isOn) { [weak self] weightRecords in
             guard let self = self else { return }
-            switch result {
-            case .success(let weightDatas):
-                DRProgressHUD.dismiss()
-                self.weightRecord = weightDatas
-                self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
-                self.weightTableView.reloadData()
-                self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
-                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
-                    guard let addWeightRecordButton = self.addWeightRecordButton else { return }
-                    self.goToWeightInputVC(addWeightRecordButton)
-                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.weight.rawValue)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "無法讀取體重資料")
-                print("Error Info: \(error).")
+            DRProgressHUD.dismiss()
+            self.weightRecord = weightRecords
+            self.lineChart?.setWeightLineChart(datas: self.weightRecord, goal: self.weightGoal)
+            self.weightTableView.reloadData()
+            self.presentView(views: [self.healthAppImageView, self.syncLabel, self.syncSwitch])
+            
+            if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.weight.rawValue) ?? false {
+                guard let addWeightRecordButton = self.addWeightRecordButton else { return }
+                self.goToWeightInputVC(addWeightRecordButton)
+                DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.weight.rawValue)
             }
         }
     }
@@ -229,7 +218,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: "刪除") { _, _, completionHandler in
             let weightData = self.weightRecord.reversed()[indexPath.row]
-            self.weightRecordProvider.deleteWeightRecord(weightData: weightData) { result in
+            FirebaseManager.shared.deleteWeightRecord(weightData: weightData) { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success:
                     DispatchQueue.main.async {

@@ -33,7 +33,6 @@ class ProfileInformationCell: UITableViewCell {
     }
     
     let profileProvider = ProfileProvider()
-    let dietRecordProvider = DietRecordProvider()
     var imageURL = DRConstant.placeholderURL {
         didSet {
             user.userImageURL = imageURL
@@ -96,7 +95,7 @@ class ProfileInformationCell: UITableViewCell {
     func uploadImage() {
         controller?.saveButton.isEnabled = false
         guard let image = self.userImageView.image else { return }
-        dietRecordProvider.uploadImage(image: image) { result in
+        FirebaseManager.shared.uploadImage(image: image) { result in
             switch result {
             case .success(let url):
                 self.imageURL = url.absoluteString

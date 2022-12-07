@@ -18,7 +18,6 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             foodDailyTableView.reloadData()
         }
     }
-    private let dietRecordProvider = DietRecordProvider()
     var isShared = true
     private var mealTextField: UITextField?
     private var mealImageView: UIImageView?
@@ -89,7 +88,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     func uploadImage() {
         saveButton.isEnabled = false
         guard let image = self.mealImageView?.image else { return }
-        dietRecordProvider.uploadImage(image: image) { result in
+        FirebaseManager.shared.uploadImage(image: image) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let url):
                 self.imageURL = url.absoluteString
@@ -116,6 +116,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         } else {
             DRProgressHUD.show()
             guard let index = Meal.allCases.map({ $0.rawValue }).firstIndex(of: meal) else { return }
+            
             let mealRecord = MealRecord(
                 userID: DRConstant.userID,
                 meal: index,
@@ -127,18 +128,11 @@ class DietInputVC: UIViewController, UITableViewDataSource {
                 createdTime: Date(),
                 peopleLiked: [],
                 response: [])
-            dietRecordProvider.createFoodDaily(
-                date: date,
-                mealRecord: mealRecord) { result in
-                switch result {
-                case .success:
-                    DRProgressHUD.showSuccess(text: "儲存成功")
-                    self.closure?(date)
-                    self.navigationController?.popViewController(animated: true)
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存失敗")
-                    print("Error Info: \(error).")
-                }
+            
+            FirebaseManager.shared.createFoodDaily(date: date, mealRecord: mealRecord) {
+                DRProgressHUD.showSuccess(text: "儲存成功")
+                self.closure?(date)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

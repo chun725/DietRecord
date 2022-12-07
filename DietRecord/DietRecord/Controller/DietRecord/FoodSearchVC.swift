@@ -14,8 +14,6 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     
-    private let foodListProvider = DietRecordProvider()
-    
     var pages: Int = 0
     var lastPageCount: Int = 0
     var nowPage: Int = 0
@@ -93,16 +91,11 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         foodName = substring.joined(separator: "")
         textField.text = foodName
         if !foodName.isEmpty {
-            foodListProvider.searchFoods(foodName: foodName) { result in
-                switch result {
-                case .success(let foods):
-                    if foods.isEmpty {
-                        DRProgressHUD.showFailure(text: "無此食物")
-                    } else {
-                        self.foodSearchResults = foods
-                    }
-                case .failure(let error):
-                    print("Error Info: \(error)")
+            FirebaseManager.shared.searchFoods(foodName: foodName) { foodSearchResults in
+                if foodSearchResults.isEmpty {
+                    DRProgressHUD.showFailure(text: "無此食物")
+                } else {
+                    self.foodSearchResults = foodSearchResults
                 }
             }
         }

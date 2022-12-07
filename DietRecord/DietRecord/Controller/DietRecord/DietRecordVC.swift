@@ -22,8 +22,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     
     private var isLoading = true // 讓tableView在loading時被清掉
     
-    private let dietRecordProvider = DietRecordProvider()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         dietRecordTableView.dataSource = self
@@ -83,27 +81,23 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         self.isLoading = true
         self.meals = []
         guard let date = dateTextField.text else { return }
-        dietRecordProvider.fetchDietRecord(date: date) { result in
-            switch result {
-            case .success(let data):
-                self.isLoading = false
-                if data as? String == "Document doesn't exist." {
-                    self.meals = []
-                    self.totalFoods = []
-                } else {
-                    guard let dietRecordData = data as? FoodDailyInput else { return }
-                    self.meals = dietRecordData.mealRecord.sorted { $0.meal < $1.meal }
-                    self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
-                }
-                self.changeDietImage()
-                DRProgressHUD.dismiss()
-                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
-                    self.goToDietInputPage(sender: self.createDietRecordButton)
-                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.dietRecord.rawValue)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "找不到飲食紀錄")
-                print("Error Info: \(error).")
+        FirebaseManager.shared.fetchDietRecord(date: date) { [weak self] dietRecord in
+            guard let self = self else { return }
+            self.isLoading = false
+            DRProgressHUD.dismiss()
+            
+            if let dietRecord = dietRecord {
+                self.meals = dietRecord.mealRecord.sorted { $0.meal < $1.meal }
+                self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
+            } else {
+                self.meals = []
+                self.totalFoods = []
+            }
+            
+            self.changeDietImage()
+            if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
+                self.goToDietInputPage(sender: self.createDietRecordButton)
+                DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.dietRecord.rawValue)
             }
         }
     }

@@ -16,7 +16,6 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
             homeTableView.reloadData()
         }
     }
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,14 +40,10 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
     
     @objc func fetchFollowingPost() {
         self.refreshControl?.beginRefreshing()
-        profileProvider.fetchFollowingPost { result in
+        FirebaseManager.shared.fetchFollowingPost { [weak self] mealRecords in
+            guard let self = self else { return }
             self.refreshControl?.endRefreshing()
-            switch result {
-            case .success(let mealRecords):
-                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
+            self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
         }
     }
     

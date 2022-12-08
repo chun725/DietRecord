@@ -41,6 +41,7 @@
 		342DC9A329409DEC00136A31 /* FirebaseManager+Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */; };
 		342DC9A52940B55500136A31 /* FirebaseManager+DietRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A42940B55500136A31 /* FirebaseManager+DietRecord.swift */; };
 		342DC9A72940C3DE00136A31 /* FirebaseManager+Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A62940C3DE00136A31 /* FirebaseManager+Weight.swift */; };
+		342DC9A92941775100136A31 /* FirebaseManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A82941775100136A31 /* FirebaseManager+Profile.swift */; };
 		343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486652936FE690054ACDC /* ReportSetGoalCell.xib */; };
 		343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */; };
 		3434866B2938398F0054ACDC /* FoodSearchPagingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */; };
@@ -111,7 +112,6 @@
 		34CF741D2914F2D7009F9264 /* WeightInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF741C2914F2D7009F9264 /* WeightInputVC.swift */; };
 		34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF741F291660AC009F9264 /* ProfileCell.swift */; };
 		34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */; };
-		34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7424291661DF009F9264 /* ProfileProvider.swift */; };
 		34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7427291683D5009F9264 /* ProfileDetailVC.swift */; };
 		34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */; };
 		34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */; };
@@ -190,6 +190,7 @@
 		342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Water.swift"; sourceTree = "<group>"; };
 		342DC9A42940B55500136A31 /* FirebaseManager+DietRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+DietRecord.swift"; sourceTree = "<group>"; };
 		342DC9A62940C3DE00136A31 /* FirebaseManager+Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Weight.swift"; sourceTree = "<group>"; };
+		342DC9A82941775100136A31 /* FirebaseManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Profile.swift"; sourceTree = "<group>"; };
 		343486652936FE690054ACDC /* ReportSetGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportSetGoalCell.xib; sourceTree = "<group>"; };
 		343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportAutomaticGoalCell.xib; sourceTree = "<group>"; };
 		3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodSearchPagingCell.xib; sourceTree = "<group>"; };
@@ -271,7 +272,6 @@
 		34CF741C2914F2D7009F9264 /* WeightInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightInputVC.swift; sourceTree = "<group>"; };
 		34CF741F291660AC009F9264 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
-		34CF7424291661DF009F9264 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
 		34CF7427291683D5009F9264 /* ProfileDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailVC.swift; sourceTree = "<group>"; };
 		34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86240-water-droplet-level-1.json"; sourceTree = "<group>"; };
 		34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "37303-swipe-for-a-toggle-button.json"; sourceTree = "<group>"; };
@@ -408,6 +408,7 @@
 				342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */,
 				342DC9A42940B55500136A31 /* FirebaseManager+DietRecord.swift */,
 				342DC9A62940C3DE00136A31 /* FirebaseManager+Weight.swift */,
+				342DC9A82941775100136A31 /* FirebaseManager+Profile.swift */,
 				34270E77290D578800D5AFFD /* HealthKitManager.swift */,
 			);
 			path = Manager;
@@ -762,7 +763,6 @@
 		34CF7423291661C1009F9264 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				34CF7424291661DF009F9264 /* ProfileProvider.swift */,
 				349B8D8F29193514002EB186 /* User.swift */,
 			);
 			path = Profile;
@@ -1076,7 +1076,6 @@
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
 				34930BC02924932A0037A82E /* ProfileSettingCell.swift in Sources */,
 				34930BBB292470510037A82E /* InitialVC.swift in Sources */,
-				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
 				34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
@@ -1090,6 +1089,7 @@
 				34270E95290F965800D5AFFD /* UIView+Extension.swift in Sources */,
 				34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */,
 				34270E91290F810100D5AFFD /* FoodDailyCell.swift in Sources */,
+				342DC9A92941775100136A31 /* FirebaseManager+Profile.swift in Sources */,
 				34642957290D2B2D0070B425 /* DRConstant.swift in Sources */,
 				34C00067291E1FD600670CA4 /* WaterHistoryVC.swift in Sources */,
 				3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */,

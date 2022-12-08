@@ -22,31 +22,26 @@ class ProfileResponseCell: UITableViewCell {
     
     var otherUserID: String?
     weak var controller: UIViewController?
-    let profileProvider = ProfileProvider()
     
     func layoutCell(response: Response) {
         userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         self.backgroundColor = .clear
         responseLabel.text = response.response
         self.otherUserID = response.person
-        profileProvider.fetchUserData(userID: response.person) { result in
-            switch result {
-            case .success(let result):
-                if result as? String == "document不存在" {
-                    self.usernameLabel.text = "Unknown"
-                    self.goToUserPageButton.isEnabled = false
-                } else if let user = result as? User {
-                    self.goToUserPageButton.isEnabled = true
-                    self.usernameLabel.text = user.username
-                    self.userImageView.loadImage(user.userImageURL)
-                }
-                UIView.animate(withDuration: 0.5) {
-                    self.usernameLabel.alpha = 1
-                    self.userImageView.alpha = 1
-                    self.responseLabel.alpha = 1
-                }
-            case .failure(let error):
-                print("Error Info: \(error).")
+        FirebaseManager.shared.fetchUserData(userID: response.person) { [weak self] userData in
+            guard let self = self else { return }
+            if let userData = userData {
+                self.goToUserPageButton.isEnabled = true
+                self.usernameLabel.text = userData.username
+                self.userImageView.loadImage(userData.userImageURL)
+            } else {
+                self.usernameLabel.text = "Unknown"
+                self.goToUserPageButton.isEnabled = false
+            }
+            UIView.animate(withDuration: 0.5) {
+                self.usernameLabel.alpha = 1
+                self.userImageView.alpha = 1
+                self.responseLabel.alpha = 1
             }
         }
     }

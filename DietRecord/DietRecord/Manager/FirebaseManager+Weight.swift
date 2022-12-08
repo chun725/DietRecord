@@ -94,8 +94,10 @@ extension FirebaseManager {
     
     func updateWeightGoal(weightGoal: String, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.userData(DRConstant.userID).documentRef
-        self.getDocument(documentReference) { (userData: User?) in
-            guard var userData = userData else { return }
+        self.getDocument(documentReference) { [weak self] (userData: User?) in
+            guard let self = self,
+                var userData = userData
+            else { return }
             userData.weightGoal = weightGoal
             self.setData(userData, at: documentReference)
             completion()

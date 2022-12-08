@@ -20,7 +20,6 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     var refreshControl: UIRefreshControl?
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,15 +52,10 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         if let otherUserID = otherUserID {
             id = otherUserID
         }
-        profileProvider.fetchUsersData(userID: id, need: need) { result in
+        FirebaseManager.shared.fetchUsersData(userID: id, need: need) { [weak self] usersData in
+            guard let self = self else { return }
             self.refreshControl?.endRefreshing()
-            switch result {
-            case .success(let users):
-                self.requests = users
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "無法獲得資料")
-                print("Error Info: \(error).")
-            }
+            self.requests = usersData
         }
     }
     
@@ -101,14 +95,9 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "確定", style: .default) { [weak self] _ in
                 guard let self = self else { return }
-                self.profileProvider.changeBlock(blockID: self.requests[indexPath.row].userID) { result in
-                    switch result {
-                    case .success:
-                        print("成功解除封鎖")
-                        self.fetchRequest()
-                    case .failure(let error):
-                        print("Error Info: \(error) in unblocking user.")
-                    }
+                FirebaseManager.shared.changeBlock(blockID: self.requests[indexPath.row].userID) {
+                    print("成功解除封鎖")
+                    self.fetchRequest()
                 }
             }
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)

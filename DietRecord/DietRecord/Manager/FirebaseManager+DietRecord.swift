@@ -11,7 +11,7 @@ import UIKit
 
 typealias FoodSearchResults = ([FoodIngredient]) -> Void
 typealias UploadImageURL = (Result<URL, Error>) -> Void
-typealias FoodDailyResult = (FoodDailyInput?) -> Void
+typealias DietRecordDailyResult = (FoodDailyInput?) -> Void
 
 extension FirebaseManager {
     // MARK: - Search food in database -
@@ -61,7 +61,7 @@ extension FirebaseManager {
     }
     
     // MARK: - Fetch Diet Daily Record -
-    func fetchDietRecord(date: String, completion: @escaping FoodDailyResult) {
+    func fetchDietRecord(date: String, completion: @escaping DietRecordDailyResult) {
         let documentReference = FSDocumentEndpoint.dietRecord(DRConstant.userID, date).documentRef
         self.getDocument(documentReference) { (dietRecord: FoodDailyInput?) in
             completion(dietRecord)

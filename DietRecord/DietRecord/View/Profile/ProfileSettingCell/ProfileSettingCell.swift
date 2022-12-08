@@ -21,7 +21,6 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     
     private var currentNonce: String?
     weak var controller: ProfileSettingVC?
-    let profileProvider = ProfileProvider()
     
     func layoutCell() {
         guard let userData = DRConstant.userData else { return }
@@ -103,30 +102,25 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         for user in users where !allUsers.contains(user) {
             allUsers.append(user)
         }
-        profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
-            switch result {
-            case .success:
-                self?.profileProvider.deleteAccount { result in
-                    switch result {
-                    case .success:
-                        firebaseAuth.currentUser?.delete()
-                        DRConstant.userID = ""
-                        DRConstant.userData = nil
-                        DRProgressHUD.showSuccess(text: "刪除帳號完成")
-                        sleep(2)
-                        self?.controller?
-                            .tabBarController?
-                            .navigationController?
-                            .popToRootViewController(animated: true)
-                        print("刪除帳號")
-                    case .failure(let error):
-                        DRProgressHUD.showFailure(text: "刪除帳號失敗")
-                        print("Error Info: \(error) in deleting account.")
-                    }
+        FirebaseManager.shared.removeFollow(allUsers: allUsers) { [weak self] in
+            guard let self = self else { return }
+            FirebaseManager.shared.deleteAccount { result in
+                switch result {
+                case .success:
+                    firebaseAuth.currentUser?.delete()
+                    DRConstant.userID = ""
+                    DRConstant.userData = nil
+                    DRProgressHUD.showSuccess(text: "刪除帳號完成")
+                    sleep(2)
+                    self.controller?
+                        .tabBarController?
+                        .navigationController?
+                        .popToRootViewController(animated: true)
+                    print("刪除帳號")
+                case .failure(let error):
+                    DRProgressHUD.showFailure(text: "刪除帳號失敗")
+                    print("Error Info: \(error) in deleting account.")
                 }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "刪除帳號失敗")
-                print("Error Info: \(error) in deleting account.")
             }
         }
     }

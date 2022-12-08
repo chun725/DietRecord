@@ -31,7 +31,6 @@ class ProfileDetailCell: UITableViewCell {
     @IBOutlet weak var likeBackground: UIView!
     
     weak var controller: UIViewController?
-    let profileProvider = ProfileProvider()
     var haveResponses = true
     var mealRecord: MealRecord? {
         didSet {
@@ -100,17 +99,14 @@ class ProfileDetailCell: UITableViewCell {
                 controller.userSelfIDLabel.text = nowUserData.userSelfID
             }
         } else {
-            profileProvider.fetchUserData(userID: mealRecord.userID) { result in
-                switch result {
-                case .success(let user):
-                    guard let user = user as? User else { return }
-                    self.usernameLabel.text = user.username
-                    self.userImageView.loadImage(user.userImageURL)
-                    if let controller = self.controller as? ProfileDetailVC {
-                        controller.userSelfIDLabel.text = user.userSelfID
-                    }
-                case .failure(let error):
-                    print("Error Info: \(error).")
+            FirebaseManager.shared.fetchUserData(userID: mealRecord.userID) { [weak self] userData in
+                guard let self = self,
+                    let userData = userData
+                else { return }
+                self.usernameLabel.text = userData.username
+                self.userImageView.loadImage(userData.userImageURL)
+                if let controller = self.controller as? ProfileDetailVC {
+                    controller.userSelfIDLabel.text = userData.userSelfID
                 }
             }
         }
@@ -125,31 +121,21 @@ class ProfileDetailCell: UITableViewCell {
     @objc func reportOrBlock() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let reportAction = UIAlertAction(title: "檢舉貼文", style: .destructive) { [weak self] _ in
-            self?.profileProvider.reportSomething(
-                user: nil,
-                mealRecord: self?.mealRecord,
-                response: nil) { result in
-                switch result {
-                case .success:
-                    print("success report")
-                case .failure(let error):
-                    print("Error Info: \(error) in reporting something.")
-                }
+            guard let self = self else { return }
+            FirebaseManager.shared.reportSomething(user: nil, mealRecord: self.mealRecord, response: nil) {
+                print("成功檢舉")
             }
         }
         let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
-            guard let mealRecord = self?.mealRecord else { return }
-            self?.profileProvider.changeBlock(blockID: mealRecord.userID) { result in
-                switch result {
-                case .success:
-                    print("成功封鎖用戶")
-                    if let controller = self?.controller as? ProfileDetailVC {
-                        controller.navigationController?.popViewController(animated: true)
-                    } else if let controller = self?.controller as? ProfileHomePageVC {
-                        controller.fetchFollowingPost()
-                    }
-                case .failure(let error):
-                    print("Error Info: \(error) in blocking user.")
+            guard let self = self,
+                let mealRecord = self.mealRecord
+            else { return }
+            FirebaseManager.shared.changeBlock(blockID: mealRecord.userID) {
+                print("成功封鎖用戶")
+                if let controller = self.controller as? ProfileDetailVC {
+                    controller.navigationController?.popViewController(animated: true)
+                } else if let controller = self.controller as? ProfileHomePageVC {
+                    controller.fetchFollowingPost()
                 }
             }
         }
@@ -163,23 +149,19 @@ class ProfileDetailCell: UITableViewCell {
     @objc func deletePost() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let deleteAction = UIAlertAction(title: "刪除貼文", style: .destructive) { [weak self] _ in
-            guard let mealRecord = self?.mealRecord else { return }
-            self?.profileProvider.deletePostOrResponse(mealRecord: mealRecord, response: nil) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success:
-                    print("成功刪除貼文")
-                    if self.haveResponses {
-                        if let controller = self.controller as? ProfileDetailVC {
-                            controller.navigationController?.popViewController(animated: true)
-                        }
-                    } else {
-                        if let controller = self.controller as? ProfileHomePageVC {
-                            controller.fetchFollowingPost()
-                        }
+            guard let self = self,
+                let mealRecord = self.mealRecord
+            else { return }
+            FirebaseManager.shared.deletePostOrResponse(mealRecord: mealRecord, response: nil) {
+                print("成功刪除貼文")
+                if self.haveResponses {
+                    if let controller = self.controller as? ProfileDetailVC {
+                        controller.navigationController?.popViewController(animated: true)
                     }
-                case .failure(let error):
-                    print("Error Info: \(error) in deleting post.")
+                } else {
+                    if let controller = self.controller as? ProfileHomePageVC {
+                        controller.fetchFollowingPost()
+                    }
                 }
             }
         }
@@ -202,16 +184,11 @@ class ProfileDetailCell: UITableViewCell {
             likedCountLabel.text = "\(sender.tag)"
         }
         guard let mealRecord = mealRecord else { return }
-        profileProvider.changeLiked(
+        FirebaseManager.shared.changeLiked(
             authorID: mealRecord.userID,
             date: mealRecord.date,
-            meal: mealRecord.meal) { result in
-            switch result {
-            case .success:
-                print("Success")
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
+            meal: mealRecord.meal) {
+            print("成功更改讚數")
         }
     }
     

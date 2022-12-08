@@ -10,12 +10,16 @@ import FirebaseFirestore
 import FirebaseFirestoreSwift
 
 enum FSCollectionEndpoint {
+    case user
     case weight
     case water
-    case dietRecord(String, String)
+    case dietRecord(String)
 
     var collectionRef: CollectionReference {
         switch self {
+        case .user:
+            return DRConstant.database
+                .collection(DRConstant.user)
         case .water:
             return DRConstant.database
                 .collection(DRConstant.user)
@@ -26,11 +30,11 @@ enum FSCollectionEndpoint {
                 .collection(DRConstant.user)
                 .document(DRConstant.userID)
                 .collection(DRConstant.weight)
-        case .dietRecord(let id, _):
+        case .dietRecord(let id):
             return DRConstant.database
                 .collection(DRConstant.user)
                 .document(id)
-                .collection(DRConstant.dietRecord)
+                .collection(DRConstant.diet)
         }
     }
 }
@@ -40,6 +44,7 @@ enum FSDocumentEndpoint {
     case water(String)
     case weight(String)
     case dietRecord(String, String)
+    case report(String)
     
     var documentRef: DocumentReference {
         switch self {
@@ -65,6 +70,10 @@ enum FSDocumentEndpoint {
                 .document(id)
                 .collection(DRConstant.diet)
                 .document(date)
+        case .report(let uuid):
+            return DRConstant.database
+                .collection(DRConstant.report)
+                .document(uuid)
         }
     }
 }

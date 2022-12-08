@@ -15,7 +15,6 @@ class RequestCell: UITableViewCell {
     
     weak var controller: CheckRequestVC?
     var user: User?
-    let profileProvider = ProfileProvider()
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -35,13 +34,9 @@ class RequestCell: UITableViewCell {
         checkButton.isEnabled = false
         cancelButton.isEnabled = false
         guard let user = user else { return }
-        profileProvider.changeFollow(isFollowing: false, followID: user.userID) { result in
-            switch result {
-            case .success:
-                self.controller?.fetchRequest()
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
+        FirebaseManager.shared.changeFollow(isFollowing: false, followID: user.userID) { [weak self] in
+            guard let self = self else { return }
+            self.controller?.fetchRequest()
         }
     }
     
@@ -49,13 +44,9 @@ class RequestCell: UITableViewCell {
         checkButton.isEnabled = false
         cancelButton.isEnabled = false
         guard let user = user else { return }
-        profileProvider.cancelRequest(followID: user.userID) { result in
-            switch result {
-            case .success:
-                self.controller?.fetchRequest()
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
+        FirebaseManager.shared.cancelRequest(followID: user.userID) { [weak self] in
+            guard let self = self else { return }
+            self.controller?.fetchRequest()
         }
     }
 }

@@ -34,8 +34,6 @@ class ProfileVC: UIViewController {
         }
     }
     
-    let profileProvider = ProfileProvider()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         photoCollectionView.dataSource = self
@@ -82,20 +80,15 @@ class ProfileVC: UIViewController {
         if let otherUserID = otherUserID {
             id = otherUserID
         }
-        profileProvider.fetchImage(userID: id) { result in
-            switch result {
-            case .success(let dietRecords):
-                DRProgressHUD.dismiss()
-                var mealDatas: [MealRecord] = []
-                for dietRecord in dietRecords {
-                    let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
-                    mealDatas.append(contentsOf: mealRecords)
-                }
-                self.mealRecords = mealDatas.reversed()
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "無法讀取用戶資料")
-                print("Error Info: \(error).")
+        FirebaseManager.shared.fetchImage(userID: id) { [weak self] dietRecords in
+            guard let self = self else { return }
+            DRProgressHUD.dismiss()
+            var mealDatas: [MealRecord] = []
+            for dietRecord in dietRecords {
+                let mealRecords = dietRecord.mealRecord.sorted { $0.meal < $1.meal }.filter { $0.isShared }
+                mealDatas.append(contentsOf: mealRecords)
             }
+            self.mealRecords = mealDatas.reversed()
         }
     }
     
@@ -105,43 +98,41 @@ class ProfileVC: UIViewController {
         if let otherUserID = otherUserID {
             id = otherUserID
         }
-        profileProvider.fetchUserData(userID: id) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let user):
-                DRProgressHUD.dismiss()
-                guard let user = user as? User else { return }
-                self.followersLabel.text = String(user.followers.count)
-                self.followingLabel.text = String(user.following.count)
-                self.usernameLabel.text = user.username
-                self.userImageView.loadImage(user.userImageURL)
-                self.titleLabel.text = user.userSelfID
-                self.navigationBarTitleLabel.text = user.userSelfID
-                self.presentView(views: [self.userImageView, self.followStackView, self.editButton])
-                if id == DRConstant.userID {
-                    DRConstant.userData = user
-                } else {
-                    self.otherUserData = user
-                }
-                if user.userID == DRConstant.userID {
-                    self.photoCollectionView.isHidden = false
-                    self.editButton.setTitle("查看個人資料", for: .normal)
-                } else if user.followers.contains(DRConstant.userID) {
-                    self.photoCollectionView.isHidden = false
-                    self.editButton.setTitle("Following", for: .normal)
-                } else if user.request.contains(DRConstant.userID) {
-                    self.editButton.setTitle("Requested", for: .normal)
-                    self.editButton.backgroundColor = .drGray
-                    self.followersButton.isEnabled = false
-                    self.followingButton.isEnabled = false
-                } else {
-                    self.editButton.setTitle("Follow", for: .normal)
-                    self.followersButton.isEnabled = false
-                    self.followingButton.isEnabled = false
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "無法讀取用戶資料")
-                print("Error Info: \(error).")
+        FirebaseManager.shared.fetchUserData(userID: id) { [weak self] userData in
+            DRProgressHUD.dismiss()
+            guard let self = self,
+                let userData = userData
+            else { return }
+            
+            self.followersLabel.text = String(userData.followers.count)
+            self.followingLabel.text = String(userData.following.count)
+            self.usernameLabel.text = userData.username
+            self.userImageView.loadImage(userData.userImageURL)
+            self.titleLabel.text = userData.userSelfID
+            self.navigationBarTitleLabel.text = userData.userSelfID
+            self.presentView(views: [self.userImageView, self.followStackView, self.editButton])
+            
+            if id == DRConstant.userID {
+                DRConstant.userData = userData
+            } else {
+                self.otherUserData = userData
+            }
+            
+            if userData.userID == DRConstant.userID {
+                self.photoCollectionView.isHidden = false
+                self.editButton.setTitle("查看個人資料", for: .normal)
+            } else if userData.followers.contains(DRConstant.userID) {
+                self.photoCollectionView.isHidden = false
+                self.editButton.setTitle("Following", for: .normal)
+            } else if userData.request.contains(DRConstant.userID) {
+                self.editButton.setTitle("Requested", for: .normal)
+                self.editButton.backgroundColor = .drGray
+                self.followersButton.isEnabled = false
+                self.followingButton.isEnabled = false
+            } else {
+                self.editButton.setTitle("Follow", for: .normal)
+                self.followersButton.isEnabled = false
+                self.followingButton.isEnabled = false
             }
         }
     }
@@ -184,30 +175,21 @@ class ProfileVC: UIViewController {
     @IBAction func reportOrBlock(_ sender: Any) {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let reportAction = UIAlertAction(title: "檢舉用戶", style: .destructive) { [weak self] _ in
-            self?.profileProvider.reportSomething(
-                user: self?.otherUserData,
+            guard let self = self else { return }
+            FirebaseManager.shared.reportSomething(
+                user: self.otherUserData,
                 mealRecord: nil,
-                response: nil) { result in
-                switch result {
-                case .success:
-                    print("success report")
-                case .failure(let error):
-                    print("Error Info: \(error) in reporting something.")
-                }
+                response: nil) {
+                print("成功檢舉")
             }
         }
         let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
             guard let self = self,
                 let otherUserID = self.otherUserID
             else { return }
-            self.profileProvider.changeBlock(blockID: otherUserID) { result in
-                switch result {
-                case .success:
-                    print("成功封鎖")
-                    self.navigationController?.popViewController(animated: true)
-                case .failure(let error):
-                    print("Error Info: \(error) in blocking someone.")
-                }
+            FirebaseManager.shared.changeBlock(blockID: otherUserID) {
+                self.navigationController?.popViewController(animated: true)
+                print("成功封鎖")
             }
         }
         let cancelAction = UIAlertAction(title: "取消", style: .cancel)
@@ -229,41 +211,26 @@ class ProfileVC: UIViewController {
             }
             return }
         if sender.title(for: .normal) == "Follow" {
-            profileProvider.changeRequest(isRequest: false, followID: otherUserID) { result in
-                switch result {
-                case .success:
-                    sender.setTitle("Requested", for: .normal)
-                    sender.backgroundColor = .drGray
-                case .failure(let error):
-                    print("Error Info: \(error).")
-                }
+            FirebaseManager.shared.changeRequest(isRequest: false, followID: otherUserID) {
+                sender.setTitle("Requested", for: .normal)
+                sender.backgroundColor = .drGray
             }
         } else if sender.title(for: .normal) == "Requested" {
-            profileProvider.changeRequest(isRequest: true, followID: otherUserID) { result in
-                switch result {
-                case .success:
-                    sender.setTitle("Follow", for: .normal)
-                    sender.backgroundColor = .drDarkGray
-                case .failure(let error):
-                    print("Error Info: \(error).")
-                }
+            FirebaseManager.shared.changeRequest(isRequest: true, followID: otherUserID) {
+                sender.setTitle("Follow", for: .normal)
+                sender.backgroundColor = .drDarkGray
             }
         } else {
             let alert = UIAlertController(
-                title: "確定要取消對\(otherUserData.username)的追蹤?",
+                title: "確定要移除對\(otherUserData.username)的追蹤?",
                 message: nil,
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "確定", style: .default) { _ in
-                self.profileProvider.changeFollow(isFollowing: true, followID: otherUserID) { result in
-                    switch result {
-                    case .success:
-                        sender.setTitle("Follow", for: .normal)
-                    case .failure(let error):
-                        print("Error Info: \(error).")
-                    }
+                FirebaseManager.shared.changeFollow(isFollowing: true, followID: otherUserID) {
+                    sender.setTitle("Follow", for: .normal)
                 }
             }
-            let cancel = UIAlertAction(title: "返回", style: .default)
+            let cancel = UIAlertAction(title: "取消", style: .cancel)
             alert.addAction(action)
             alert.addAction(cancel)
             self.present(alert, animated: true)

@@ -10,7 +10,6 @@ import FirebaseAuth
 
 
 class InitialVC: UIViewController {
-    let profileProvider = ProfileProvider()
     override func viewDidLoad() {
         super.viewDidLoad()
         DRConstant.configureDateformatter()
@@ -35,27 +34,23 @@ class InitialVC: UIViewController {
     func getUserData() {
         if let id = Auth.auth().currentUser?.uid {
             DRConstant.userID = id
-            profileProvider.fetchUserData(userID: id) { result in
-                switch result {
-                case .success(let result):
-                    if let user = result as? User {
-                        DRConstant.userData = user
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        if let tabbarController = storyboard.instantiateViewController(
-                            withIdentifier: "\(TabBarController.self)")
-                            as? TabBarController {
-                            self.navigationController?.pushViewController(tabbarController, animated: false)
-                        }
-                    } else {
-                        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-                        if let profileInfoPage = storyboard.instantiateViewController(
-                            withIdentifier: "\(ProfileInformationVC.self)")
-                            as? ProfileInformationVC {
-                            self.navigationController?.pushViewController(profileInfoPage, animated: false)
-                        }
+            FirebaseManager.shared.fetchUserData(userID: id) { [weak self] userData in
+                guard let self = self else { return }
+                if let userData = userData {
+                    DRConstant.userData = userData
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    if let tabbarController = storyboard.instantiateViewController(
+                        withIdentifier: "\(TabBarController.self)")
+                        as? TabBarController {
+                        self.navigationController?.pushViewController(tabbarController, animated: false)
                     }
-                case .failure(let error):
-                    print("Error Info: \(error).")
+                } else {
+                    let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
+                    if let profileInfoPage = storyboard.instantiateViewController(
+                        withIdentifier: "\(ProfileInformationVC.self)")
+                        as? ProfileInformationVC {
+                        self.navigationController?.pushViewController(profileInfoPage, animated: false)
+                    }
                 }
             }
         } else {

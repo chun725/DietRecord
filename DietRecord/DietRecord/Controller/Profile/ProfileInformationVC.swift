@@ -13,7 +13,6 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
     
     var isUpdated = false
     var user: User?
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,19 +41,14 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
             self.presentInputAlert(title: "請輸入完整資料")
         } else {
             DRProgressHUD.show()
-            profileProvider.createUserInfo(userData: user) { result in
-                switch result {
-                case .success:
-                    DRConstant.userData = user
-                    DRProgressHUD.showSuccess()
-                    if !self.isUpdated {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    } else {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存資料失敗")
-                    print("Error Info: \(error).")
+            FirebaseManager.shared.createUserInfo(userData: user) { [weak self] in
+                guard let self = self else { return }
+                DRConstant.userData = user
+                DRProgressHUD.showSuccess()
+                if !self.isUpdated {
+                    self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }

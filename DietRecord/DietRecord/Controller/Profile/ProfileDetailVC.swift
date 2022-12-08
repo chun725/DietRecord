@@ -23,7 +23,6 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     }
     var responses: [Response] = []
     var nowUserData: User?
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,28 +45,24 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         guard let mealRecord = mealRecord,
             let response = responseTextField.text
         else { return }
-        profileProvider.postResponse(
+        FirebaseManager.shared.postResponse(
             postUserID: mealRecord.userID,
             date: mealRecord.date,
             meal: mealRecord.meal,
-            response: response) { result in
-                switch result {
-                case .success:
-                    self.mealRecord?.response.append(Response(person: DRConstant.userID, response: response))
-                    UIView.animate(withDuration: 0.5) {
-                        self.profileDetailTableView.beginUpdates()
-                        self.profileDetailTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-                        self.profileDetailTableView.insertRows(
-                            at: [IndexPath(row: mealRecord.response.count, section: 1)],
-                            with: .fade)
-                        self.profileDetailTableView.endUpdates()
-                    }
-                    self.responseTextField.text = ""
-                    self.responseButton.isEnabled = false
-                    self.responseButton.setTitleColor(.drGray, for: .normal)
-                case .failure(let error):
-                    print("Error Info: \(error).")
-            }
+            response: response) { [weak self] in
+                guard let self = self else { return }
+                self.mealRecord?.response.append(Response(person: DRConstant.userID, response: response))
+                UIView.animate(withDuration: 0.5) {
+                    self.profileDetailTableView.beginUpdates()
+                    self.profileDetailTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+                    self.profileDetailTableView.insertRows(
+                        at: [IndexPath(row: mealRecord.response.count, section: 1)],
+                        with: .fade)
+                    self.profileDetailTableView.endUpdates()
+                }
+                self.responseTextField.text = ""
+                self.responseButton.isEnabled = false
+                self.responseButton.setTitleColor(.drGray, for: .normal)
         }
     }
     
@@ -117,57 +112,40 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
                 var mealRecord = self.mealRecord
             else { return }
             let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            let reportAction = UIAlertAction(title: "檢舉回覆", style: .destructive) { [weak self] _ in
-                self?.profileProvider.reportSomething(
+            let reportAction = UIAlertAction(title: "檢舉回覆", style: .destructive) { _ in
+                FirebaseManager.shared.reportSomething(
                     user: nil,
                     mealRecord: nil,
-                    response: self?.responses[indexPath.row]) { result in
-                    switch result {
-                    case .success:
-                        print("success report")
-                    case .failure(let error):
-                        print("Error Info: \(error) in reporting something.")
-                    }
+                    response: self.responses[indexPath.row]) {
+                    print("成功檢舉")
                 }
             }
-            let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { [weak self] _ in
-                guard let self = self else { return }
-                self.profileProvider.changeBlock(blockID: self.responses[indexPath.row].person) { result in
-                    switch result {
-                    case .success:
-                        print("成功封鎖用戶")
-                        if self.mealRecord?.userID == self.responses[indexPath.row].person {
-                            self.navigationController?.popViewController(animated: true)
-                        } else {
-                            self.responses.remove(at: indexPath.row)
-                            self.profileDetailTableView.reloadData()
-                        }
-                    case .failure(let error):
-                        print("Error Info: \(error) in blocking user.")
+            let blockAction = UIAlertAction(title: "封鎖用戶", style: .destructive) { _ in
+                FirebaseManager.shared.changeBlock(blockID: self.responses[indexPath.row].person) {
+                    print("成功封鎖用戶")
+                    if self.mealRecord?.userID == self.responses[indexPath.row].person {
+                        self.navigationController?.popViewController(animated: true)
+                    } else {
+                        self.responses.remove(at: indexPath.row)
+                        self.profileDetailTableView.reloadData()
                     }
                 }
             }
             let cancelAction = UIAlertAction(title: "取消", style: .cancel)
-            let deleteOption = UIAlertAction(title: "刪除回覆", style: .destructive) { [weak self] _ in
-                self?.profileProvider.deletePostOrResponse(
+            let deleteOption = UIAlertAction(title: "刪除回覆", style: .destructive) { _ in
+                FirebaseManager.shared.deletePostOrResponse(
                     mealRecord: mealRecord,
-                    response: self?.responses[indexPath.row]) { [weak self] result in
-                    guard let self = self else { return }
-                    switch result {
-                    case .success:
-                        print("成功刪除回覆")
-                        let index = mealRecord.response.firstIndex(of: self.responses[indexPath.row]) ?? 0
-                        mealRecord.response.remove(at: index)
-                        self.mealRecord = mealRecord
-                        UIView.animate(withDuration: 0.5) {
-                            self.profileDetailTableView.beginUpdates()
-                            self.profileDetailTableView.deleteRows(at: [indexPath], with: .fade)
-                            self.profileDetailTableView.endUpdates()
-                        }
-                        self.profileDetailTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
-                    case .failure(let error):
-                        print("Error Info: \(error) in deleting response.")
+                    response: self.responses[indexPath.row]) {
+                    print("成功刪除回覆")
+                    let index = mealRecord.response.firstIndex(of: self.responses[indexPath.row]) ?? 0
+                    mealRecord.response.remove(at: index)
+                    self.mealRecord = mealRecord
+                    UIView.animate(withDuration: 0.5) {
+                        self.profileDetailTableView.beginUpdates()
+                        self.profileDetailTableView.deleteRows(at: [indexPath], with: .fade)
+                        self.profileDetailTableView.endUpdates()
                     }
+                    self.profileDetailTableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
                 }
             }
             if mealRecord.userID == DRConstant.userID || self.responses[indexPath.row].person == DRConstant.userID {

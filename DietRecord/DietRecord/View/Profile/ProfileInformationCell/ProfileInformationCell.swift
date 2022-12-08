@@ -32,7 +32,6 @@ class ProfileInformationCell: UITableViewCell {
         }
     }
     
-    let profileProvider = ProfileProvider()
     var imageURL = DRConstant.placeholderURL {
         didSet {
             user.userImageURL = imageURL
@@ -188,22 +187,14 @@ extension ProfileInformationCell: UITextFieldDelegate {
                 self.infoImageView.isHidden = true
             } else {
                 DRProgressHUD.show()
-                profileProvider.fetchUserSelfID(selfID: textField.text ?? "") { result in
+                FirebaseManager.shared.fetchUserSelfID(selfID: textField.text ?? "") { [weak self] isNotUsed in
+                    guard let self = self else { return }
                     DRProgressHUD.dismiss()
-                    switch result {
-                    case .success(let success):
-                        if success {
-                            self.user.userSelfID = textField.text ?? ""
-                            self.infoImageView.isHidden = true
-                            self.checkImageView.isHidden = false
-                        } else {
-                            self.user.userSelfID = ""
-                            self.controller?.presentInputAlert(title: "此用戶名稱已被人使用")
-                            self.infoImageView.isHidden = false
-                            self.checkImageView.isHidden = true
-                        }
-                    case .failure(let error):
-                        print("Error Info: \(error).")
+                    self.infoImageView.isHidden = isNotUsed
+                    self.checkImageView.isHidden = !isNotUsed
+                    self.user.userSelfID = isNotUsed ? textField.text ?? "" : ""
+                    if !isNotUsed {
+                        self.controller?.presentInputAlert(title: "此用戶名稱已被人使用")
                     }
                 }
             }

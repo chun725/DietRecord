@@ -80,18 +80,13 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
             self.navigationController?.popViewController(animated: true)
         } else {
             FirebaseManager.shared.changeGoal(goal: goal) {
-                let profileProvider = ProfileProvider()
-                profileProvider.fetchUserData(userID: DRConstant.userID) { result in
-                    switch result {
-                    case .success(let user):
-                        let user = user as? User
-                        DRConstant.userData = user
-                        DRProgressHUD.showSuccess()
-                        self.navigationController?.popViewController(animated: true)
-                    case .failure(let error):
-                        DRProgressHUD.showFailure(text: "儲存失敗")
-                        print("Error Info: \(error).")
-                    }
+                FirebaseManager.shared.fetchUserData(userID: DRConstant.userID) { [weak self] userData in
+                    guard let self = self,
+                        let userData = userData
+                    else { return }
+                    DRConstant.userData = userData
+                    DRProgressHUD.showSuccess()
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }

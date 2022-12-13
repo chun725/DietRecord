@@ -8,22 +8,26 @@
 import UIKit
 
 class ProfileInformationVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var profileInfoTableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var profileInfoTableView: UITableView! {
+        didSet {
+            profileInfoTableView.dataSource = self
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.addTarget(self, action: #selector(createUserInfo), for: .touchUpInside)
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     
     var isUpdated = false
     var user: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileInfoTableView.dataSource = self
-        saveButton.addTarget(self, action: #selector(createUserInfo), for: .touchUpInside)
-        saveButton.layer.cornerRadius = 20
         if isUpdated {
             self.user = DRConstant.userData
-            print("=====是更新")
         } else {
-            print("=====不是更新")
             self.navigationItem.leftBarButtonItem = nil
             self.navigationItem.hidesBackButton = true
         }
@@ -54,6 +58,7 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }

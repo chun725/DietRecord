@@ -8,26 +8,43 @@
 import UIKit
 
 class GoalVC: UIViewController {
-    @IBOutlet weak var whiteBackgroundView: UIView!
-    @IBOutlet weak var fatLabel: UILabel!
-    @IBOutlet weak var proteinLabel: UILabel!
-    @IBOutlet weak var carbsLabel: UILabel!
-    @IBOutlet weak var caloriesLabel: UILabel!
-    @IBOutlet weak var inputButton: UIButton!
-    @IBOutlet weak var automaticButton: UIButton!
+    @IBOutlet weak var whiteBackgroundView: UIView! {
+        didSet {
+            whiteBackgroundView.setShadowAndRadius(radius: 10)
+        }
+    }
+    @IBOutlet weak var fatLabel: UILabel! {
+        didSet {
+            fatLabel.text = DRConstant.userData?.goal[3].transform(unit: Units.gUnit.rawValue)
+        }
+    }
+    @IBOutlet weak var proteinLabel: UILabel! {
+        didSet {
+            proteinLabel.text = DRConstant.userData?.goal[2].transform(unit: Units.gUnit.rawValue)
+        }
+    }
+    @IBOutlet weak var carbsLabel: UILabel! {
+        didSet {
+            carbsLabel.text = DRConstant.userData?.goal[1].transform(unit: Units.gUnit.rawValue)
+        }
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
-        automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
-        self.tabBarController?.tabBar.isHidden = true
-        caloriesLabel.text = DRConstant.userData?.goal[0].transform(unit: Units.kcalUnit.rawValue)
-        carbsLabel.text = DRConstant.userData?.goal[1].transform(unit: Units.gUnit.rawValue)
-        proteinLabel.text = DRConstant.userData?.goal[2].transform(unit: Units.gUnit.rawValue)
-        fatLabel.text = DRConstant.userData?.goal[3].transform(unit: Units.gUnit.rawValue)
-        whiteBackgroundView.setShadowAndRadius(radius: 10)
-        inputButton.layer.cornerRadius = 10
-        automaticButton.layer.cornerRadius = 10
+    @IBOutlet weak var caloriesLabel: UILabel! {
+        didSet {
+            caloriesLabel.text = DRConstant.userData?.goal[0].transform(unit: Units.kcalUnit.rawValue)
+        }
+    }
+    @IBOutlet weak var inputButton: UIButton! {
+        didSet {
+            inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
+            inputButton.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var automaticButton: UIButton! {
+        didSet {
+            automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
+            automaticButton.layer.cornerRadius = 10
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

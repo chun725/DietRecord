@@ -8,34 +8,27 @@
 import UIKit
 
 class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var requestTableView: UITableView!
+    @IBOutlet weak var requestTableView: UITableView! {
+        didSet {
+            requestTableView.dataSource = self
+            requestTableView.delegate = self
+            requestTableView.addSubview(refreshControl)
+        }
+    }
     @IBOutlet weak var titleLabel: UILabel!
     
+    private var refreshControl = UIRefreshControl()
     var otherUserID: String?
-    var need = "Request"
+    var need = FollowString.request.rawValue
     var requests: [User] = [] {
         didSet {
             requestTableView.reloadData()
         }
     }
     
-    var refreshControl: UIRefreshControl?
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        requestTableView.dataSource = self
-        requestTableView.delegate = self
-        fetchRequest()
-        if need == "Followers" {
-            titleLabel.text = "Followers"
-        } else if need == "Following" {
-            titleLabel.text = "Following"
-        } else if need == "BlockUsers" {
-            titleLabel.text = "封鎖名單"
-        }
-        refreshControl = UIRefreshControl()
-        guard let refreshControl = refreshControl else { return }
-        requestTableView.addSubview(refreshControl)
+        titleLabel.text = need
         refreshControl.addTarget(self, action: #selector(fetchRequest), for: .valueChanged)
     }
     
@@ -47,18 +40,19 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     @objc func fetchRequest() {
-        refreshControl?.beginRefreshing()
+        refreshControl.beginRefreshing()
         var id = DRConstant.userID
         if let otherUserID = otherUserID {
             id = otherUserID
         }
         FirebaseManager.shared.fetchUsersData(userID: id, need: need) { [weak self] usersData in
             guard let self = self else { return }
-            self.refreshControl?.endRefreshing()
+            self.refreshControl.endRefreshing()
             self.requests = usersData
         }
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         requests.count
     }
@@ -68,20 +62,16 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             withIdentifier: RequestCell.reuseIdentifier, for: indexPath) as? RequestCell
         else { fatalError("Could not create the request cell.") }
         let user = requests[indexPath.row]
-        if need != "Request" {
-            cell.checkButton.isHidden = true
-            cell.cancelButton.isHidden = true
-        } else {
-            cell.checkButton.isHidden = false
-            cell.cancelButton.isHidden = false
-        }
+        cell.checkButton.isHidden = !(need == FollowString.request.rawValue)
+        cell.cancelButton.isHidden = !(need == FollowString.request.rawValue)
         cell.controller = self
         cell.layoutCell(user: user)
         return cell
     }
     
+    // MARK: - TableViewDelegate -
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if need != "BlockUsers" {
+        if need != FollowString.blockUsers.rawValue {
             if let userProfilePage = UIStoryboard.profile.instantiateViewController(
                 withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
                 userProfilePage.otherUserID = requests[indexPath.row].userID

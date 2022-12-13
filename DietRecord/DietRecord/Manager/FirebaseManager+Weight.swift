@@ -10,7 +10,7 @@ import Foundation
 typealias WeightRecordResult = ([WeightData]) -> Void
 
 extension FirebaseManager {
-    // MARK: - Update weight record from Health to firebase -
+    // 將健康App裡的體重記錄更新到Firestore裡
     func updateWeightRecord(weightDatas: [WeightData], completion: @escaping () -> Void ) {
         let updateGroup = DispatchGroup()
         var blocks: [DispatchWorkItem] = []
@@ -38,6 +38,7 @@ extension FirebaseManager {
         }
     }
     
+    // 取得體重記錄
     func fetchWeightRecord(sync: Bool, completion: @escaping WeightRecordResult) {
         let collectionReference = FSCollectionEndpoint.weight.collectionRef
         self.getDocuments(collectionReference) { (weightDatas: [WeightData]?) in
@@ -49,6 +50,7 @@ extension FirebaseManager {
         }
     }
     
+    // 新增體重記錄
     func createWeightRecord(weightData: WeightData, completion: @escaping (Result<Void, Error>) -> Void) {
         let collectionReference = FSCollectionEndpoint.weight.collectionRef
         let dateString = DRConstant.dateFormatter.string(from: weightData.date)
@@ -70,6 +72,7 @@ extension FirebaseManager {
         }
     }
     
+    // 刪除體重記錄
     func deleteWeightRecord(weightData: WeightData, completion: @escaping (Result<Void, Error>) -> Void) {
         let collectionReference = FSCollectionEndpoint.weight.collectionRef
         let dateString = DRConstant.dateFormatter.string(from: weightData.date)
@@ -92,6 +95,7 @@ extension FirebaseManager {
         }
     }
     
+    // 更新體重目標
     func updateWeightGoal(weightGoal: String, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.userData(DRConstant.userID).documentRef
         self.getDocument(documentReference) { [weak self] (userData: User?) in

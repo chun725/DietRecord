@@ -8,21 +8,25 @@
 import UIKit
 
 class ProfileSettingVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var userSelfIDLabel: UILabel!
-    @IBOutlet weak var settingTableView: UITableView!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        settingTableView.dataSource = self
+    @IBOutlet weak var userSelfIDLabel: UILabel! {
+        didSet {
+            userSelfIDLabel.text = DRConstant.userData?.userSelfID
+        }
+    }
+    @IBOutlet weak var settingTableView: UITableView! {
+        didSet {
+            settingTableView.dataSource = self
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        settingTableView.reloadData()
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
-        userSelfIDLabel.text = DRConstant.userData?.userSelfID
+        settingTableView.reloadData()
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }

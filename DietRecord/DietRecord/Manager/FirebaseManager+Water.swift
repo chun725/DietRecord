@@ -11,7 +11,7 @@ typealias WaterDailyResult = (WaterRecord) -> Void
 typealias WaterHistoryResult = ([WaterRecord]) -> Void
 
 extension FirebaseManager {
-    // MARK: - Fetch water record -
+    // 取得飲水量記錄
     func fetchWaterRecord(completion: @escaping WaterDailyResult) {
         let date = DRConstant.dateFormatter.string(from: Date())
         let documentReference = FSDocumentEndpoint.water(date).documentRef
@@ -27,7 +27,7 @@ extension FirebaseManager {
         }
     }
     
-    // MARK: - Update water record -
+    // 更新飲水量記錄
     func updateWaterRecord(totalWater: String, completion: @escaping () -> Void) {
         let date = DRConstant.dateFormatter.string(from: Date())
         let documentReference = FSDocumentEndpoint.water(date).documentRef
@@ -36,7 +36,7 @@ extension FirebaseManager {
         completion()
     }
     
-    // MARK: - Fetch history water record -
+    // 取得飲水量歷史記錄
     func fetchHistoryWaterRecords(completion: @escaping WaterHistoryResult) {
         let collectionReference = FSCollectionEndpoint.water.collectionRef
         self.getDocuments(collectionReference) { (waterRecords: [WaterRecord]?) in
@@ -46,7 +46,7 @@ extension FirebaseManager {
         }
     }
     
-    // MARK: - Update water goal -
+    // 更新飲水目標
     func updateWaterGoal(waterGoal: String, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.userData(DRConstant.userID).documentRef
         self.getDocument(documentReference) { (userData: User?) in

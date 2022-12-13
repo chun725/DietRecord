@@ -39,6 +39,7 @@ struct NutrientContent: Codable, Equatable {
     var sodium: String
     var potassium: String
 }
+
 struct MealRecord: Codable, Equatable {
     let userID: String
     let meal: Int

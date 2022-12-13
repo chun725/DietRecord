@@ -8,9 +8,19 @@
 import UIKit
 
 class SetupGoalVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var selfInfoTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var selfInfoTableView: UITableView! {
+        didSet {
+            selfInfoTableView.dataSource = self
+            selfInfoTableView.registerCellWithNib(identifier: ReportSetGoalCell.reuseIdentifier, bundle: nil)
+            selfInfoTableView.registerCellWithNib(identifier: ReportAutomaticGoalCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     
     var isAutomatic = true
     var personalInfo: PersonalInfo?
@@ -19,15 +29,12 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selfInfoTableView.dataSource = self
-        selfInfoTableView.registerCellWithNib(identifier: ReportSetGoalCell.reuseIdentifier, bundle: nil)
-        selfInfoTableView.registerCellWithNib(identifier: ReportAutomaticGoalCell.reuseIdentifier, bundle: nil)
         if !isAutomatic {
             titleLabel.text = "請輸入營養素目標"
         }
-        saveButton.layer.cornerRadius = 20
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -50,6 +57,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: - Action -
     @IBAction func saveInfo(_ sender: Any) {
         DRProgressHUD.show()
         
@@ -92,7 +100,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
+    private func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
         var bmr: Double = 0
         var tdee: Double = 0
         var finalTDEE: Double = 0
@@ -130,8 +138,9 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         return calculateProportion(tdee: finalTDEE, personalInfo: personalInfo)
     }
     
-    func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
+    private func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
         var proportion: [Double] = [55, 15, 30]
+        
         switch personalInfo.dietPlan {
         case DietPlan.general.rawValue:
             proportion = [55, 15, 30]

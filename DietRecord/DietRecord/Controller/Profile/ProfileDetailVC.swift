@@ -8,12 +8,27 @@
 import UIKit
 
 class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    @IBOutlet weak var profileDetailTableView: UITableView!
+    @IBOutlet weak var profileDetailTableView: UITableView! {
+        didSet {
+            profileDetailTableView.dataSource = self
+            profileDetailTableView.delegate = self
+            profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
+        }
+    }
     @IBOutlet weak var responseTextField: UITextField!
     @IBOutlet weak var userSelfIDLabel: UILabel!
     @IBOutlet weak var responseButton: UIButton!
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var responseBackgroundView: UIView!
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.loadImage(DRConstant.userData?.userImageURL)
+            userImageView.layer.cornerRadius = userImageView.bounds.height / 2
+        }
+    }
+    @IBOutlet weak var responseBackgroundView: UIView! {
+        didSet {
+            responseBackgroundView.layer.cornerRadius = 10
+        }
+    }
     
     var mealRecord: MealRecord? {
         didSet {
@@ -26,13 +41,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        userImageView.loadImage(DRConstant.userData?.userImageURL)
-        userImageView.layer.cornerRadius = userImageView.bounds.height / 2
-        profileDetailTableView.dataSource = self
-        profileDetailTableView.delegate = self
-        profileDetailTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
         responseTextField.addTarget(self, action: #selector(changeResponseButton), for: .allEditingEvents)
-        responseBackgroundView.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +50,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         self.navigationController?.navigationBar.isHidden = false
     }
     
+    // MARK: - Action -
     @IBAction func createResponse(_ sender: Any) {
         guard let mealRecord = mealRecord,
             let response = responseTextField.text
@@ -66,6 +76,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
+    // MARK: - TableViewDataSource -
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }
@@ -94,6 +105,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
         }
     }
     
+    // MARK: - TableViewDelegate -
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let optionAction = self.configureAction(indexPath: indexPath)
         optionAction.image = UIImage(systemName: "exclamationmark.bubble")
@@ -165,7 +177,7 @@ class ProfileDetailVC: UIViewController, UITableViewDataSource, UITableViewDeleg
 
 extension ProfileDetailVC {
     @objc func changeResponseButton(sender: UITextField) {
-        if sender.text == "" {
+        if let text = sender.text, text.isEmpty {
             responseButton.isEnabled = false
             responseButton.setTitleColor(.drGray, for: .normal)
         } else {

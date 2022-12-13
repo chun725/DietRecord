@@ -10,6 +10,7 @@ import Foundation
 typealias DietRecordWeeklyResult = ([FoodDailyInput]) -> Void
 
 extension FirebaseManager {
+    // 取得一週的飲食記錄
     func fetchWeeklyDietRecord(date: Date, completion: @escaping DietRecordWeeklyResult) {
         var dates: [String] = []
         for index in 0..<7 {
@@ -42,6 +43,7 @@ extension FirebaseManager {
         }
     }
     
+    // 改變飲食目標
     func changeGoal(goal: [String], completion: @escaping () -> Void ) {
         let documentReference = FSDocumentEndpoint.userData(DRConstant.userID).documentRef
         self.getDocument(documentReference) { [weak self] (userData: User?) in

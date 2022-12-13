@@ -14,7 +14,7 @@ typealias UserDatasResult = ([User]) -> Void
 typealias UserSelfIDIsUsed = (Bool) -> Void
 
 extension FirebaseManager {
-    // Fetch the images of the diet records
+    // 取得飲食記錄的圖片
     func fetchImage(userID: String, completion: @escaping DietRecordHistoryResult) {
         let collectionReference = FSCollectionEndpoint.dietRecord(userID).collectionRef
         self.getDocuments(collectionReference) { (dietRecords: [FoodDailyInput]) in
@@ -23,7 +23,7 @@ extension FirebaseManager {
         }
     }
     
-    // Fetch the posts of the following users' diet records
+    // 取得追蹤中的user的飲食紀錄
     func fetchFollowingPost(completion: @escaping MealRecordsResult) {
         var mealRecords: [MealRecord] = []
         self.fetchUserData(userID: DRConstant.userID) { userData in
@@ -59,7 +59,7 @@ extension FirebaseManager {
         }
     }
     
-    // Change the likes of the meal record
+    // 按讚 or 取消按讚
     func changeLiked(authorID: String, date: String, meal: Int, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.dietRecord(authorID, date).documentRef
         self.getDocument(documentReference) { (dietRecord: FoodDailyInput?) in
@@ -78,7 +78,7 @@ extension FirebaseManager {
         }
     }
     
-    // Post the response in the profile detail page
+    // 對飲食記錄產生回覆
     func postResponse(postUserID: String, date: String, meal: Int, response: String, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.dietRecord(postUserID, date).documentRef
         self.getDocument(documentReference) { (dietRecord: FoodDailyInput?) in
@@ -94,7 +94,7 @@ extension FirebaseManager {
         }
     }
     
-    // Fetch the user data
+    // 取得用戶資訊
     func fetchUserData(userID: String, completion: @escaping UserDataResult) {
         let documentReference = FSDocumentEndpoint.userData(userID).documentRef
         self.getDocument(documentReference) { (userData: User?) in
@@ -164,11 +164,11 @@ extension FirebaseManager {
             var blocks: [DispatchWorkItem] = []
             var usersID: [String] = []
             switch need {
-            case "Followers":
+            case FollowString.followers.rawValue:
                 usersID = userData.followers
-            case "Following":
+            case FollowString.following.rawValue:
                 usersID = userData.following
-            case "BlockUsers":
+            case FollowString.blockUsers.rawValue:
                 usersID = userData.blocks
             default:
                 usersID = userData.request

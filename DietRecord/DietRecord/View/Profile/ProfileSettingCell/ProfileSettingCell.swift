@@ -45,7 +45,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     @IBAction func blockUsers(_ sender: Any) {
         if let blockUsersPage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: CheckRequestVC.reuseIdentifier) as? CheckRequestVC {
-            blockUsersPage.need = "BlockUsers"
+            blockUsersPage.need = FollowString.blockUsers.rawValue
             controller?.navigationController?.pushViewController(blockUsersPage, animated: true)
         }
     }

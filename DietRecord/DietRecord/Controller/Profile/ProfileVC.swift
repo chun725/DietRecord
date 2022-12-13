@@ -8,26 +8,47 @@
 import UIKit
 
 class ProfileVC: UIViewController {
-    @IBOutlet weak var photoCollectionView: UICollectionView!
+    @IBOutlet weak var photoCollectionView: UICollectionView! {
+        didSet {
+            photoCollectionView.dataSource = self
+            photoCollectionView.delegate = self
+            photoCollectionView.collectionViewLayout = configureLayout()
+        }
+    }
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.height / 2
+        }
+    }
+    @IBOutlet weak var editButton: UIButton! {
+        didSet {
+            editButton.layer.cornerRadius = 10
+            editButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var moreButton: UIBarButtonItem! {
+        didSet {
+            moreButton.isEnabled = otherUserID == DRConstant.userID ? false : true
+            moreButton.tintColor = otherUserID == DRConstant.userID ? .drGray : .drDarkGray
+        }
+    }
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var followersLabel: UILabel!
     @IBOutlet weak var followingLabel: UILabel!
-    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var homeButton: UIButton!
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var checkButton: UIButton!
-    @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var followingButton: UIButton!
     @IBOutlet weak var followersButton: UIButton!
-    @IBOutlet weak var moreButton: UIBarButtonItem!
     @IBOutlet weak var followStackView: UIStackView!
     @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var navigationBarTitleLabel: UILabel!
+    
     var otherUserID: String?
-    var otherUserData: User?
-    var mealRecords: [MealRecord] = [] {
+    private var otherUserData: User?
+    private var mealRecords: [MealRecord] = [] {
         didSet {
             photoCollectionView.reloadData()
             postLabel.text = String(mealRecords.count)
@@ -36,19 +57,9 @@ class ProfileVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoCollectionView.dataSource = self
-        photoCollectionView.delegate = self
-        photoCollectionView.collectionViewLayout = configureLayout()
-        userImageView.layer.cornerRadius = userImageView.bounds.height / 2
         if otherUserID != nil {
-            self.homeButton.isHidden = true
-            self.checkButton.isHidden = true
-            self.addButton.isHidden = true
-            self.photoCollectionView.isHidden = true
+            self.hiddenView(views: [homeButton, checkButton, addButton, photoCollectionView])
         }
-        moreButton.isEnabled = otherUserID == DRConstant.userID ? false : true
-        moreButton.tintColor = otherUserID == DRConstant.userID ? .drGray : .drDarkGray
-        editButton.layer.cornerRadius = 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,16 +73,11 @@ class ProfileVC: UIViewController {
             self.navigationController?.navigationBar.isHidden = false
             titleLabelHeightConstraint.constant = 0
         }
-        editButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if otherUserID == nil {
-            self.tabBarController?.tabBar.isHidden = false
-        } else {
-            self.tabBarController?.tabBar.isHidden = true
-        }
+        tabBarController?.tabBar.isHidden = !(otherUserID == nil)
     }
     
     func fetchDietRecord() {
@@ -123,20 +129,21 @@ class ProfileVC: UIViewController {
                 self.editButton.setTitle("查看個人資料", for: .normal)
             } else if userData.followers.contains(DRConstant.userID) {
                 self.photoCollectionView.isHidden = false
-                self.editButton.setTitle("Following", for: .normal)
+                self.editButton.setTitle(FollowString.following.rawValue, for: .normal)
             } else if userData.request.contains(DRConstant.userID) {
-                self.editButton.setTitle("Requested", for: .normal)
+                self.editButton.setTitle(FollowString.requested.rawValue, for: .normal)
                 self.editButton.backgroundColor = .drGray
                 self.followersButton.isEnabled = false
                 self.followingButton.isEnabled = false
             } else {
-                self.editButton.setTitle("Follow", for: .normal)
+                self.editButton.setTitle(FollowString.follow.rawValue, for: .normal)
                 self.followersButton.isEnabled = false
                 self.followingButton.isEnabled = false
             }
         }
     }
     
+    // MARK: - Action -
     @IBAction func goToCheckRequestPage(_ sender: UIButton) {
         if let checkRequestPage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: CheckRequestVC.reuseIdentifier) as? CheckRequestVC {
@@ -145,10 +152,10 @@ class ProfileVC: UIViewController {
                 id = otherUserID
             }
             if sender == followingButton {
-                checkRequestPage.need = "Following"
+                checkRequestPage.need = FollowString.following.rawValue
                 checkRequestPage.otherUserID = id
             } else if sender == followersButton {
-                checkRequestPage.need = "Followers"
+                checkRequestPage.need = FollowString.followers.rawValue
                 checkRequestPage.otherUserID = id
             }
             self.navigationController?.pushViewController(checkRequestPage, animated: true)
@@ -206,14 +213,14 @@ class ProfileVC: UIViewController {
                 self.navigationController?.pushViewController(profileSettingPage, animated: true)
             }
             return }
-        if sender.title(for: .normal) == "Follow" {
+        if sender.title(for: .normal) == FollowString.follow.rawValue {
             FirebaseManager.shared.changeRequest(isRequest: false, followID: otherUserID) {
-                sender.setTitle("Requested", for: .normal)
+                sender.setTitle(FollowString.requested.rawValue, for: .normal)
                 sender.backgroundColor = .drGray
             }
-        } else if sender.title(for: .normal) == "Requested" {
+        } else if sender.title(for: .normal) == FollowString.requested.rawValue {
             FirebaseManager.shared.changeRequest(isRequest: true, followID: otherUserID) {
-                sender.setTitle("Follow", for: .normal)
+                sender.setTitle(FollowString.follow.rawValue, for: .normal)
                 sender.backgroundColor = .drDarkGray
             }
         } else {
@@ -223,7 +230,7 @@ class ProfileVC: UIViewController {
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "確定", style: .default) { _ in
                 FirebaseManager.shared.changeFollow(isFollowing: true, followID: otherUserID) {
-                    sender.setTitle("Follow", for: .normal)
+                    sender.setTitle(FollowString.follow.rawValue, for: .normal)
                 }
             }
             let cancel = UIAlertAction(title: "取消", style: .cancel)

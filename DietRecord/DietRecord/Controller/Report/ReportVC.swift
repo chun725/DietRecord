@@ -8,36 +8,41 @@
 import UIKit
 
 class ReportVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var reportTableView: UITableView!
-    @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var reportTableView: UITableView! {
+        didSet {
+            reportTableView.dataSource = self
+            reportTableView.registerCellWithNib(identifier: ReportDetailCell.reuseIdentifier, bundle: nil)
+            reportTableView.addSubview(refreshControl)
+        }
+    }
+    @IBOutlet weak var dateTextField: UITextField! {
+        didSet {
+            dateTextField.text = DRConstant.dateFormatter.string(from: Date())
+        }
+    }
+    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
+        }
+    }
     
-    var refreshControl: UIRefreshControl?
-    var weeklyDietRecord: [FoodDailyInput]? {
+    private var isLoading = false
+    private var refreshControl = UIRefreshControl()
+    private var weeklyDietRecord: [FoodDailyInput]? {
         didSet {
             reportTableView.reloadData()
         }
     }
     
-    var isLoading = false
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        dateTextField.text = DRConstant.dateFormatter.string(from: Date())
         fetchWeeklyDiet(sender: nil)
-        reportTableView.dataSource = self
-        reportTableView.registerCellWithNib(identifier: ReportDetailCell.reuseIdentifier, bundle: nil)
-        refreshControl = UIRefreshControl()
-        guard let refreshControl = refreshControl else { return }
-        reportTableView.addSubview(refreshControl)
         refreshControl.addTarget(self, action: #selector(fetchWeeklyDiet), for: .valueChanged)
-        titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
-        reportTableView.reloadData()
         DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.report.rawValue)
     }
     
@@ -46,6 +51,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Action -
     @IBAction func goToChooseDatePage(_ sender: Any) {
         if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
             withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
@@ -72,26 +78,23 @@ class ReportVC: UIViewController, UITableViewDataSource {
         
         FirebaseManager.shared.fetchWeeklyDietRecord(date: date) { [weak self] weeklyDietRecord in
             guard let self = self else { return }
-            self.refreshControl?.endRefreshing()
-            self.isLoading = false
             DRProgressHUD.dismiss()
+            self.refreshControl.endRefreshing()
+            self.isLoading = false
             self.weeklyDietRecord = weeklyDietRecord
         }
     }
     
     @IBAction func goToGoalPage(_ sender: Any) {
-        if let goalPage = UIStoryboard.report.instantiateViewController(withIdentifier: GoalVC.reuseIdentifier)
-            as? GoalVC {
+        if let goalPage = UIStoryboard.report.instantiateViewController(
+            withIdentifier: GoalVC.reuseIdentifier) as? GoalVC {
             self.navigationController?.pushViewController(goalPage, animated: false)
         }
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if isLoading {
-            return 0
-        } else {
-            return 2
-        }
+        isLoading ? 0 : 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,8 +112,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
                 let userData = DRConstant.userData
             else { fatalError("Could not create report detail cell.") }
             cell.layoutCell(foodDailyInputs: weeklyDietRecord)
-            let goal = userData.goal
-            cell.layoutOfGoal(goal: goal)
+            cell.layoutOfGoal(goal: userData.goal)
             return cell
         }
     }

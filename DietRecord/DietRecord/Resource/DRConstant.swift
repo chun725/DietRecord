@@ -220,3 +220,12 @@ enum ShortcutItemType: String {
     case dietRecord = "DietRecordAction"
     case report = "ReportAction"
 }
+
+enum FollowString: String {
+    case following = "Following"
+    case requested = "Requested"
+    case follow = "Follow"
+    case followers = "Followers"
+    case blockUsers = "封鎖名單"
+    case request = "追蹤要求"
+}

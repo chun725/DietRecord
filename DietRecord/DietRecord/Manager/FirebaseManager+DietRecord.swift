@@ -14,7 +14,7 @@ typealias UploadImageURL = (Result<URL, Error>) -> Void
 typealias DietRecordDailyResult = (FoodDailyInput?) -> Void
 
 extension FirebaseManager {
-    // MARK: - Search food in database -
+    // 從資料庫搜尋食物
     func searchFoods(foodName: String, completion: @escaping FoodSearchResults) {
         guard let foodIngredients = DRConstant.foodIngredients
         else { fatalError("Could not find food ingredient database.") }
@@ -24,7 +24,7 @@ extension FirebaseManager {
         completion(foods)
     }
     
-    // MARK: - Upload image -
+    // 上傳照片
     func uploadImage(image: UIImage, completion: @escaping UploadImageURL ) {
         let fileReference = Storage.storage().reference().child(UUID().uuidString + ".jpg")
         if let uploadData = image.jpegData(compressionQuality: 0.1) {
@@ -39,7 +39,7 @@ extension FirebaseManager {
         }
     }
     
-    // MARK: - Add food daily record -
+    // 新增飲食記錄
     func createFoodDaily(date: String, mealRecord: MealRecord, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.dietRecord(DRConstant.userID, date).documentRef
         self.getDocument(documentReference) { (foodDailyInput: FoodDailyInput?) in
@@ -60,7 +60,7 @@ extension FirebaseManager {
         }
     }
     
-    // MARK: - Fetch Diet Daily Record -
+    // 取得飲食記錄
     func fetchDietRecord(date: String, completion: @escaping DietRecordDailyResult) {
         let documentReference = FSDocumentEndpoint.dietRecord(DRConstant.userID, date).documentRef
         self.getDocument(documentReference) { (dietRecord: FoodDailyInput?) in

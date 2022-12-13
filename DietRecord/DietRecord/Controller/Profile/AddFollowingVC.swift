@@ -9,44 +9,52 @@ import UIKit
 import Lottie
 
 class AddFollowingVC: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var userInputTextField: UITextField!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userInputTextField: UITextField! {
+        didSet {
+            userInputTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.width / 2
+        }
+    }
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var followButton: UIButton!
-    @IBOutlet weak var animationView: LottieAnimationView!
+    @IBOutlet weak var followButton: UIButton! {
+        didSet {
+            followButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
+            followButton.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var animationView: LottieAnimationView! {
+        didSet {
+            animationView.loopMode = .loop
+            animationView.play()
+        }
+    }
     
     var userSearchResult: User? {
         didSet {
             userImageView.loadImage(userSearchResult?.userImageURL)
             usernameLabel.text = userSearchResult?.username
             if userSearchResult?.followers.contains(DRConstant.userID) != false {
-                followButton.setTitle("Following", for: .normal)
+                followButton.setTitle(FollowString.following.rawValue, for: .normal)
                 followButton.backgroundColor = .drDarkGray
             } else if userSearchResult?.request.contains(DRConstant.userID) != false {
-                followButton.setTitle("Requested", for: .normal)
+                followButton.setTitle(FollowString.requested.rawValue, for: .normal)
                 followButton.backgroundColor = .drGray
             } else {
-                followButton.setTitle("Follow", for: .normal)
+                followButton.setTitle(FollowString.follow.rawValue, for: .normal)
                 followButton.backgroundColor = .drDarkGray
             }
             self.presentView(views: [usernameLabel, userImageView, followButton])
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        userInputTextField.delegate = self
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
-        followButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
-        followButton.layer.cornerRadius = 10
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
-        animationView.loopMode = .loop
-        animationView.play()
         if userSearchResult != nil {
             textFieldDidEndEditing(userInputTextField)
         }
@@ -67,22 +75,24 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 } else {
                     DRProgressHUD.showFailure(text: "無此用戶")
                     self.hiddenView(views: [self.usernameLabel, self.userImageView, self.followButton])
+                    self.animationView.play()
                     self.animationView.isHidden = false
                 }
             }
         }
     }
     
+    // MARK: - Action -
     @objc func requestFollow(sender: UIButton) {
         guard let userSearchResult = userSearchResult else { return }
-        if sender.title(for: .normal) == "Follow" {
+        if sender.title(for: .normal) == FollowString.follow.rawValue {
             FirebaseManager.shared.changeRequest(isRequest: false, followID: userSearchResult.userID) {
-                sender.setTitle("Requested", for: .normal)
+                sender.setTitle(FollowString.requested.rawValue, for: .normal)
                 sender.backgroundColor = .drGray
             }
-        } else if sender.title(for: .normal) == "Requested" {
+        } else if sender.title(for: .normal) == FollowString.requested.rawValue {
             FirebaseManager.shared.changeRequest(isRequest: true, followID: userSearchResult.userID) {
-                sender.setTitle("Follow", for: .normal)
+                sender.setTitle(FollowString.follow.rawValue, for: .normal)
                 sender.backgroundColor = .drDarkGray
             }
         } else {
@@ -92,7 +102,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "確定", style: .default) { _ in
                 FirebaseManager.shared.changeFollow(isFollowing: true, followID: userSearchResult.userID) {
-                    sender.setTitle("Follow", for: .normal)
+                    sender.setTitle(FollowString.follow.rawValue, for: .normal)
                 }
             }
             let cancel = UIAlertAction(title: "取消", style: .cancel)

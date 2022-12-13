@@ -10,7 +10,11 @@ import UIKit
 class ProfileResponseCell: UITableViewCell {
     @IBOutlet weak var responseLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.width / 2
+        }
+    }
     @IBOutlet weak var goToUserPageButton: UIButton!
     
     override func prepareForReuse() {
@@ -24,7 +28,6 @@ class ProfileResponseCell: UITableViewCell {
     weak var controller: UIViewController?
     
     func layoutCell(response: Response) {
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         self.backgroundColor = .clear
         responseLabel.text = response.response
         self.otherUserID = response.person

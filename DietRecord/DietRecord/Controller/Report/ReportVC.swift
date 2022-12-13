@@ -43,6 +43,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        reportTableView.reloadData()
         DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.report.rawValue)
     }
     

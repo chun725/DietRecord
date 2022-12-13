@@ -9,14 +9,13 @@ import UIKit
 
 class FoodCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var foodNameLabel: UILabel!
-    @IBOutlet weak var borderBackground: UIView!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    @IBOutlet weak var borderBackground: UIView! {
+        didSet {
+            borderBackground.setBorder(width: 2, color: .darkGray, radius: 10)
+        }
     }
     
     func layoutCell(foodname: String) {
         foodNameLabel.text = foodname
-        borderBackground.setBorder(width: 2, color: .darkGray, radius: 10)
     }
 }

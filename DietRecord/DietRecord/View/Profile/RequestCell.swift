@@ -8,8 +8,12 @@
 import UIKit
 
 class RequestCell: UITableViewCell {
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.width / 2
+        }
+    }
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userImageView: UIImageView!
     @IBOutlet weak var checkButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     
@@ -26,10 +30,10 @@ class RequestCell: UITableViewCell {
         self.backgroundColor = .clear
         usernameLabel.text = user.username
         userImageView.loadImage(user.userImageURL)
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         self.user = user
     }
     
+    // MARK: - Action -
     @IBAction func checkRequest(_ sender: Any) {
         checkButton.isEnabled = false
         cancelButton.isEnabled = false

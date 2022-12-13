@@ -12,8 +12,16 @@ import CryptoKit
 import AuthenticationServices
 
 class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
-    @IBOutlet weak var infoBackgroundView: UIView!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var infoBackgroundView: UIView! {
+        didSet {
+            infoBackgroundView.setShadowAndRadius(radius: 15)
+        }
+    }
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = DRConstant.fullScreenSize.width / 414 * 100 / 2
+        }
+    }
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var waterGoalLabel: UILabel!
     @IBOutlet weak var weightGoalLabel: UILabel!
@@ -29,10 +37,9 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         weightGoalLabel.text = userData.weightGoal.transform(unit: Units.kgUnit.rawValue)
         dietGoalLabel.text = userData.goal[0].transform(unit: Units.kcalUnit.rawValue)
         userImageView.loadImage(userData.userImageURL)
-        userImageView.layer.cornerRadius = DRConstant.fullScreenSize.width / 414 * 100 / 2
-        infoBackgroundView.setShadowAndRadius(radius: 15)
     }
     
+    // MARK: - Action -
     @IBAction func editInfo(_ sender: Any) {
         if let profileInfoPage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: ProfileInformationVC.reuseIdentifier)

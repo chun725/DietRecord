@@ -10,15 +10,15 @@ import UIKit
 class DietGoalCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var goalLabel: UILabel!
-    @IBOutlet weak var grayBackgroundView: UIView!
+    @IBOutlet weak var grayBackgroundView: UIView! {
+        didSet {
+            grayBackgroundView.setBorder(width: 1, color: .drDarkGray, radius: 5)
+        }
+    }
     
     func layoutCell(row: Int, goal: String) {
         titleLabel.text = MacroNutrient.allCases[row].rawValue
-        if row == 0 {
-            goalLabel.text = goal.transform(unit: Units.kcalUnit.rawValue)
-        } else {
-            goalLabel.text = goal.transform(unit: Units.gUnit.rawValue)
-        }
-        grayBackgroundView.setBorder(width: 1, color: .drDarkGray, radius: 5)
+        let unit = row == 0 ? Units.kcalUnit.rawValue : Units.gUnit.rawValue
+        goalLabel.text = goal.transform(unit: unit)
     }
 }

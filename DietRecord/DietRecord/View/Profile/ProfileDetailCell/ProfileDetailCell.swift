@@ -9,13 +9,25 @@ import UIKit
 
 class ProfileDetailCell: UITableViewCell {
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.width / 2
+        }
+    }
     @IBOutlet weak var mealImageView: UIImageView!
     @IBOutlet weak var mealCommentLabel: UILabel!
-    @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var likeButton: UIButton! {
+        didSet {
+            likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
+        }
+    }
     @IBOutlet weak var responseButton: UIButton!
     @IBOutlet weak var likedCountLabel: UILabel!
-    @IBOutlet weak var checkResponseButton: UIButton!
+    @IBOutlet weak var checkResponseButton: UIButton! {
+        didSet {
+            checkResponseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
+        }
+    }
     @IBOutlet weak var moreButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var foodCollectionView: UICollectionView! {
@@ -28,7 +40,11 @@ class ProfileDetailCell: UITableViewCell {
     }
     @IBOutlet weak var responseCountLabel: UILabel!
     @IBOutlet weak var timeLabelTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var likeBackground: UIView!
+    @IBOutlet weak var likeBackground: UIView! {
+        didSet {
+            likeBackground.layer.cornerRadius = 10
+        }
+    }
     
     weak var controller: UIViewController?
     var haveResponses = true
@@ -40,20 +56,18 @@ class ProfileDetailCell: UITableViewCell {
     var otherUserID: String?
     
     func layoutCell(mealRecord: MealRecord, nowUserData: User?) {
-        configureUserData(mealRecord: mealRecord, nowUserData: nowUserData)
         self.backgroundColor = .clear
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
-        likeBackground.layer.cornerRadius = 10
+        configureUserData(mealRecord: mealRecord, nowUserData: nowUserData)
         mealImageView.loadImage(mealRecord.imageURL)
         mealCommentLabel.text = mealRecord.comment
-        likedCountLabel.text = "\(mealRecord.peopleLiked.count)"
+        likedCountLabel.text = String(mealRecord.peopleLiked.count)
+        
         guard let userData = DRConstant.userData else { return }
         let responses = mealRecord.response.filter { !(userData.blocks.contains($0.person)) }
-        responseCountLabel.text = "\(responses.count)"
-        likeButton.addTarget(self, action: #selector(addLiked), for: .touchUpInside)
-        checkResponseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
+        responseCountLabel.text = String(responses.count)
         self.mealRecord = mealRecord
         otherUserID = mealRecord.userID
+        
         if haveResponses {
             checkResponseButton.isHidden = true
             var mealString = ""
@@ -73,6 +87,7 @@ class ProfileDetailCell: UITableViewCell {
             timeLabel.text = DRConstant.dateFormatter.string(from: mealRecord.createdTime)
             responseButton.addTarget(self, action: #selector(goToProfileDetailPage), for: .touchUpInside)
         }
+        
         if mealRecord.peopleLiked.contains(DRConstant.userID) {
             likeButton.setBackgroundImage(
                 UIImage(systemName: "heart.fill")?.withRenderingMode(.alwaysTemplate),
@@ -86,6 +101,7 @@ class ProfileDetailCell: UITableViewCell {
             likeButton.tintColor = .white
             likeButton.tag = mealRecord.peopleLiked.count
         }
+        
         if mealRecord.comment.isEmpty {
             timeLabelTopConstraint.constant = 0
         }
@@ -118,6 +134,7 @@ class ProfileDetailCell: UITableViewCell {
         }
     }
     
+    // MARK: - Action -
     @objc func reportOrBlock() {
         let optionMenu = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let reportAction = UIAlertAction(title: "檢舉貼文", style: .destructive) { [weak self] _ in
@@ -216,6 +233,7 @@ class ProfileDetailCell: UITableViewCell {
 }
 
 extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegate {
+    // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         mealRecord?.foods.count ?? 0
     }
@@ -230,6 +248,7 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
         return cell
     }
     
+    // MARK: - CollectionViewFlowLayout -
     func configureLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
@@ -240,6 +259,7 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
         return layout
     }
     
+    // MARK: - CollectionViewDelegate -
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let foodNutritionPage = UIStoryboard.dietRecord.instantiateViewController(
             withIdentifier: FoodNutritionVC.reuseIdentifier) as? FoodNutritionVC {

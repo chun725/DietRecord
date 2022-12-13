@@ -8,9 +8,13 @@
 import UIKit
 
 class TotalWaterCell: UITableViewCell {
+    @IBOutlet weak var whiteBackgroundView: UIView! {
+        didSet {
+            whiteBackgroundView.setShadowAndRadius(radius: 10)
+        }
+    }
     @IBOutlet weak var waterCurrentLabel: UILabel!
     @IBOutlet weak var percentLabel: UILabel!
-    @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var addWaterButton: UIButton!
     @IBOutlet weak var waterPieChartView: UIView!
     @IBOutlet weak var waterGoalLabel: UILabel!
@@ -23,7 +27,6 @@ class TotalWaterCell: UITableViewCell {
         if goal != 0.0 {
             percentLabel.text = (water / goal * 100).format() + "%"
         }
-        whiteBackgroundView.setShadowAndRadius(radius: 10)
         self.backgroundColor = .clear
         let subviews = waterPieChartView.subviews
         for subview in subviews {

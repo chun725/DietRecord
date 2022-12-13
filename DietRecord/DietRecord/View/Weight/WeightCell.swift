@@ -8,12 +8,21 @@
 import UIKit
 
 class WeightCell: UITableViewCell {
-    @IBOutlet weak var whiteBackgroundView: UIView!
+    @IBOutlet weak var whiteBackgroundView: UIView! {
+        didSet {
+            whiteBackgroundView.setShadowAndRadius(radius: 10)
+        }
+    }
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var increaseView: UIImageView!
     @IBOutlet weak var reduceView: UIImageView!
-    @IBOutlet weak var flatView: UIView!
+    @IBOutlet weak var flatView: UIView! {
+        didSet {
+            flatView.layer.cornerRadius = 2
+        }
+    }
+    
     override func prepareForReuse() {
         super.prepareForReuse()
         increaseView.isHidden = false
@@ -22,10 +31,8 @@ class WeightCell: UITableViewCell {
     }
     
     func layoutCell(weightData: WeightData) {
-        flatView.layer.cornerRadius = 2
         dateLabel.text = DRConstant.dateFormatter.string(from: weightData.date)
         weightLabel.text = weightData.value.format().transform(unit: Units.kgUnit.rawValue)
-        whiteBackgroundView.setShadowAndRadius(radius: 10)
         self.backgroundColor = .clear
     }
 }

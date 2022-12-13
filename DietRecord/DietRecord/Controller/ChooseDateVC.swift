@@ -46,6 +46,7 @@ class ChooseDateVC: UIViewController {
         }
     }
     
+    // MARK: - Action -
     @IBAction func chooseDate(_ sender: Any) {
         let animations = {
             self.dateView.transform = CGAffineTransform(translationX: 0, y: self.dateView.frame.height)

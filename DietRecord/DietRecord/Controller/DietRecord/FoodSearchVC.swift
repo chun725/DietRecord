@@ -8,17 +8,25 @@
 import UIKit
 
 class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
-    @IBOutlet weak var foodInputTextField: UITextField!
-    @IBOutlet weak var searchResultTableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var foodInputTextField: UITextField! {
+        didSet {
+            foodInputTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var searchResultTableView: UITableView! {
+        didSet {
+            searchResultTableView.dataSource = self
+            searchResultTableView.delegate = self
+            searchResultTableView.registerCellWithNib(identifier: FoodSearchPagingCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    
-    var pages: Int = 0
-    var lastPageCount: Int = 0
-    var nowPage: Int = 0
-    
-    var closure: (([Food]) -> Void)?
     
     private var foodSearchResults: [FoodIngredient] = [] {
         didSet {
@@ -28,9 +36,11 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             searchResultTableView.reloadData()
         }
     }
-    
+    var pages: Int = 0
+    var lastPageCount: Int = 0
+    var nowPage: Int = 0
+    var closure: (([Food]) -> Void)?
     var oldfoods: [Food] = []
-    
     var chooseFoods: [Food] = [] {
         didSet {
             searchResultTableView.reloadData()
@@ -39,14 +49,9 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-        searchResultTableView.registerCellWithNib(identifier: FoodSearchPagingCell.reuseIdentifier, bundle: nil)
-        foodInputTextField.delegate = self
         if !oldfoods.isEmpty {
             chooseFoods = oldfoods
         }
-        saveButton.layer.cornerRadius = 20
     }
     
     // MARK: - Action -

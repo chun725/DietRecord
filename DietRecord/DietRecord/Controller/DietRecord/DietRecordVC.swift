@@ -9,10 +9,29 @@ import UIKit
 import WidgetKit
 
 class DietRecordVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var dietRecordTableView: UITableView!
-    @IBOutlet weak var createDietRecordButton: UIButton!
-    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
+        }
+    }
+    @IBOutlet weak var dietRecordTableView: UITableView! {
+        didSet {
+            dietRecordTableView.dataSource = self
+            dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
+            dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var createDietRecordButton: UIButton! {
+        didSet {
+            createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var dateTextField: UITextField! {
+        didSet {
+            dateTextField.text = DRConstant.dateFormatter.string(from: Date())
+            changeDate()
+        }
+    }
     
     private var dietContentView: UIView?
     
@@ -21,17 +40,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     private var totalFoods: [Food] = []
     
     private var isLoading = true // 讓tableView在loading時被清掉
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dietRecordTableView.dataSource = self
-        dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
-        dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
-        dateTextField.text = DRConstant.dateFormatter.string(from: Date())
-        changeDate()
-        createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
-        titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -44,6 +52,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Action -
     @objc func goToDietInputPage(sender: UIButton) {
         if let dietInputPage = UIStoryboard.dietRecord.instantiateViewController(
             withIdentifier: DietInputVC.reuseIdentifier) as? DietInputVC {
@@ -118,7 +127,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    
+    // MARK: - TableViewDataSource -
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }

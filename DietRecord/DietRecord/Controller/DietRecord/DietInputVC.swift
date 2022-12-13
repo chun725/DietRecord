@@ -10,32 +10,38 @@ import PhotosUI
 import FirebaseFirestore
 
 class DietInputVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var foodDailyTableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var foodDailyTableView: UITableView! {
+        didSet {
+            foodDailyTableView.dataSource = self
+            foodDailyTableView.registerCellWithNib(identifier: FoodDailyCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     
     private var foods: [Food] = [] {
         didSet {
             foodDailyTableView.reloadData()
         }
     }
-    var isShared = true
     private var mealTextField: UITextField?
     private var mealImageView: UIImageView?
     private var dateTextField: UITextField?
     private var commentTextView: UITextView?
     private var imageURL: String?
     var closure: ((String) -> Void)?
+    var isShared = true
     var mealRecord: MealRecord?
     var date: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        foodDailyTableView.dataSource = self
-        foodDailyTableView.registerCellWithNib(identifier: FoodDailyCell.reuseIdentifier, bundle: nil)
         if let mealRecord = mealRecord {
             foods = mealRecord.foods
         }
-        saveButton.layer.cornerRadius = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {

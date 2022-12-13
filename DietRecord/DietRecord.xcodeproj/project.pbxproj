@@ -55,7 +55,6 @@
 		344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */; };
 		344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E82927656400D245A2 /* 82624-foodies.json */; };
-		344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
 		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
 		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
@@ -116,8 +115,6 @@
 		34D1457E29485452004BC4CC /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D1457D29485452004BC4CC /* UIStoryboard+Extension.swift */; };
 		34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */; };
 		34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */; };
-		34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27671292FC2E700750DAF /* 5202-review-id.json */; };
-		34E27674292FC51900750DAF /* 98877-search.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27673292FC51900750DAF /* 98877-search.json */; };
 		34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27675292FC70C00750DAF /* 36538-find-id.json */; };
 		34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27677293066A200750DAF /* SwiftJWTWrapper.swift */; };
 		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
@@ -207,7 +204,6 @@
 		344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartViewWidgetExtension.entitlements; sourceTree = "<group>"; };
 		344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPieChartWidget.swift; sourceTree = "<group>"; };
 		344DC7E82927656400D245A2 /* 82624-foodies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "82624-foodies.json"; sourceTree = "<group>"; };
-		344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "79611-water-animation.json"; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
 		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
 		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
@@ -277,8 +273,6 @@
 		34D1457D29485452004BC4CC /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86240-water-droplet-level-1.json"; sourceTree = "<group>"; };
 		34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "37303-swipe-for-a-toggle-button.json"; sourceTree = "<group>"; };
-		34E27671292FC2E700750DAF /* 5202-review-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "5202-review-id.json"; sourceTree = "<group>"; };
-		34E27673292FC51900750DAF /* 98877-search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98877-search.json"; sourceTree = "<group>"; };
 		34E27675292FC70C00750DAF /* 36538-find-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "36538-find-id.json"; sourceTree = "<group>"; };
 		34E27677293066A200750DAF /* SwiftJWTWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJWTWrapper.swift; sourceTree = "<group>"; };
 		34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_N2UB2RNM86.p8; sourceTree = "<group>"; };
@@ -463,12 +457,9 @@
 			children = (
 				34E27689293228C700750DAF /* 52028-book-review.json */,
 				34E27675292FC70C00750DAF /* 36538-find-id.json */,
-				34E27673292FC51900750DAF /* 98877-search.json */,
-				34E27671292FC2E700750DAF /* 5202-review-id.json */,
 				34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */,
 				34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */,
 				344DC7E82927656400D245A2 /* 82624-foodies.json */,
-				344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -905,13 +896,11 @@
 				3434866B2938398F0054ACDC /* FoodSearchPagingCell.xib in Resources */,
 				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
-				34E27674292FC51900750DAF /* 98877-search.json in Resources */,
 				343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */,
 				34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */,
 				34270E93290F810D00D5AFFD /* FoodDailyCell.xib in Resources */,
 				3422702629110680000B4A58 /* FoodIngredient.json in Resources */,
 				34C000702922494900670CA4 /* FoodCollectionViewCell.xib in Resources */,
-				34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */,
 				3469169229127C430021985F /* ReportDetailCell.xib in Resources */,
 				344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */,
 				34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */,
@@ -925,7 +914,6 @@
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
 				34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */,
 				343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */,
-				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,
 				34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
 				34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */,

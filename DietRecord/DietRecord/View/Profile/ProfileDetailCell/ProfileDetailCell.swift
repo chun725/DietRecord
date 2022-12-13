@@ -193,18 +193,16 @@ class ProfileDetailCell: UITableViewCell {
     }
     
     @objc func goToProfileDetailPage() {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
-            as? ProfileDetailVC {
+        if let profileDetailPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileDetailVC.reuseIdentifier) as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
             controller?.navigationController?.pushViewController(profileDetailPage, animated: true)
         }
     }
     
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
-            as? ProfileVC {
+        if let userProfilePage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
             controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }
@@ -243,9 +241,8 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
-            as? FoodNutritionVC {
+        if let foodNutritionPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodNutritionVC.reuseIdentifier) as? FoodNutritionVC {
             guard let food = mealRecord?.foods[indexPath.row] else { return }
             foodNutritionPage.food = food.foodIngredient
             foodNutritionPage.isCollectionCell = true

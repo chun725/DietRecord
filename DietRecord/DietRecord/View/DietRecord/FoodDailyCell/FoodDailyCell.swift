@@ -64,9 +64,8 @@ class FoodDailyCell: UITableViewCell {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             chooseDatePage.closure = { [weak self] date in
                 self?.dateTextField.text = date
             }

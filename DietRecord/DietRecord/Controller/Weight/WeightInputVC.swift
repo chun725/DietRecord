@@ -67,9 +67,8 @@ class WeightInputVC: UIViewController {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             if let date = date {
                 chooseDatePage.date = date
             }

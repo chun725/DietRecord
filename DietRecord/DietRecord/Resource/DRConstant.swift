@@ -11,7 +11,7 @@ import FirebaseFirestoreSwift
 import FirebaseFirestore
 import FirebaseAuth
 
-struct DRConstant {
+enum DRConstant {
     static let database = Firestore.firestore()
     static let dateFormatter = DateFormatter()
     static let barChartDateFormatter = DateFormatter()
@@ -23,7 +23,6 @@ struct DRConstant {
     static let waterReminder = "WaterReminder"
     static let fontName = "PingFang TC"
     static let foodBaseView = "FoodBaseView"
-    static let dietRecord = "DietRecord"
     static let foodIngredient = "FoodIngredient"
     static let user = "User"
     static let diet = "Diet"
@@ -38,6 +37,7 @@ struct DRConstant {
     static var foodIngredients: [FoodIngredient]? // 資料庫
     static var fullScreenSize = UIScreen.main.bounds.size
     static let placeholderURL = "https://firebasestorage.googleapis.com:443/v0/b/dietmanagement-cd871.appspot.com/o/83274520-623A-4C01-9BA5-552A03254CA0.jpg?alt=media&token=d618d6e0-ffd5-4ab6-87b6-83d1c070ff04"
+    static let privacyPolicyURL = "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555"
     
     static func configureDateformatter() {
         dateFormatter.locale = .current

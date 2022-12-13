@@ -138,9 +138,8 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func goToCheckRequestPage(_ sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let checkRequestPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
-            as? CheckRequestVC {
+        if let checkRequestPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: CheckRequestVC.reuseIdentifier) as? CheckRequestVC {
             var id = DRConstant.userID
             if let otherUserID = otherUserID {
                 id = otherUserID
@@ -157,17 +156,15 @@ class ProfileVC: UIViewController {
     }
     
     @IBAction func goToAddFollowingPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let addFollowingPage = storyboard.instantiateViewController(withIdentifier: "\(AddFollowingVC.self)")
-            as? AddFollowingVC {
+        if let addFollowingPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: AddFollowingVC.reuseIdentifier) as? AddFollowingVC {
             self.navigationController?.pushViewController(addFollowingPage, animated: true)
         }
     }
     
     @IBAction func goToHomePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let homePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileHomePageVC.self)")
-            as? ProfileHomePageVC {
+        if let homePage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileHomePageVC.reuseIdentifier) as? ProfileHomePageVC {
             self.navigationController?.pushViewController(homePage, animated: true)
         }
     }
@@ -203,9 +200,8 @@ class ProfileVC: UIViewController {
         guard let otherUserID = otherUserID,
             let otherUserData = otherUserData
         else {
-            let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-            if let profileSettingPage = storyboard.instantiateViewController(
-                withIdentifier: "\(ProfileSettingVC.self)")
+            if let profileSettingPage = UIStoryboard.profile.instantiateViewController(
+                withIdentifier: ProfileSettingVC.reuseIdentifier)
                 as? ProfileSettingVC {
                 self.navigationController?.pushViewController(profileSettingPage, animated: true)
             }
@@ -257,9 +253,8 @@ extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICol
     // MARK: - CollectionViewDelegate -
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let mealRecord = mealRecords[indexPath.row]
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let profileDetailPage = storyboard.instantiateViewController(withIdentifier: "\(ProfileDetailVC.self)")
-            as? ProfileDetailVC {
+        if let profileDetailPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileDetailVC.reuseIdentifier) as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
             if let otherUserData = otherUserData {
                 profileDetailPage.nowUserData = otherUserData

@@ -56,9 +56,8 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func goToFoodNutritionPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
-            as? FoodNutritionVC {
+        if let foodNutritionPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodNutritionVC.reuseIdentifier) as? FoodNutritionVC {
             foodNutritionPage.newFood = foodSearchResults[nowPage * 10 + sender.tag]
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
@@ -68,9 +67,8 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func modifyQtyOfFood(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
-            as? FoodNutritionVC {
+        if let foodNutritionPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodNutritionVC.reuseIdentifier) as? FoodNutritionVC {
             foodNutritionPage.chooseFood = chooseFoods[sender.tag]
             foodNutritionPage.isModify = true
             foodNutritionPage.closure = { [weak self] (food: Food) in

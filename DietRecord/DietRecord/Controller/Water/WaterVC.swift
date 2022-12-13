@@ -41,9 +41,8 @@ class WaterVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToHistoryPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
-        if let waterHistoryPage = storyboard.instantiateViewController(withIdentifier: "\(WaterHistoryVC.self)")
-            as? WaterHistoryVC {
+        if let waterHistoryPage = UIStoryboard.water.instantiateViewController(
+            withIdentifier: WaterHistoryVC.reuseIdentifier) as? WaterHistoryVC {
             self.navigationController?.pushViewController(waterHistoryPage, animated: false)
         }
     }
@@ -63,9 +62,8 @@ class WaterVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func goToWaterInputVC(sender: UIButton?) {
-        let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
-        if let waterInputPage = storyboard.instantiateViewController(withIdentifier: "\(WaterInputVC.self)")
-            as? WaterInputVC {
+        if let waterInputPage = UIStoryboard.water.instantiateViewController(
+            withIdentifier: WaterInputVC.reuseIdentifier) as? WaterInputVC {
             if let sender = sender, sender.tag == 1 {
                 waterInputPage.isWaterInput = false
                 waterInputPage.closure = { [weak self] _ in

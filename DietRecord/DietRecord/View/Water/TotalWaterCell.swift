@@ -37,9 +37,8 @@ class TotalWaterCell: UITableViewCell {
     }
     
     @IBAction func goToChangeGoalPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.water, bundle: nil)
-        if let waterInputPage = storyboard.instantiateViewController(withIdentifier: "\(WaterInputVC.self)")
-            as? WaterInputVC {
+        if let waterInputPage = UIStoryboard.water.instantiateViewController(
+            withIdentifier: WaterInputVC.reuseIdentifier) as? WaterInputVC {
             waterInputPage.isGoalInput = true
             waterInputPage.closure = { [weak self] waterGoal in
                 self?.controller?.waterGoal = waterGoal

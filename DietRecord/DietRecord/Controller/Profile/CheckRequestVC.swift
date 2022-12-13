@@ -82,9 +82,8 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if need != "BlockUsers" {
-            let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-            if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
-                as? ProfileVC {
+            if let userProfilePage = UIStoryboard.profile.instantiateViewController(
+                withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
                 userProfilePage.otherUserID = requests[indexPath.row].userID
                 self.navigationController?.pushViewController(userProfilePage, animated: true)
             }

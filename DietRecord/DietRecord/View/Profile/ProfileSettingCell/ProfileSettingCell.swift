@@ -34,9 +34,8 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     }
     
     @IBAction func editInfo(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let profileInfoPage = storyboard.instantiateViewController(
-            withIdentifier: "\(ProfileInformationVC.self)")
+        if let profileInfoPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileInformationVC.reuseIdentifier)
             as? ProfileInformationVC {
             profileInfoPage.isUpdated = true
             controller?.navigationController?.pushViewController(profileInfoPage, animated: true)
@@ -44,16 +43,15 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     }
     
     @IBAction func blockUsers(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let blockUsersPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
-            as? CheckRequestVC {
+        if let blockUsersPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: CheckRequestVC.reuseIdentifier) as? CheckRequestVC {
             blockUsersPage.need = "BlockUsers"
             controller?.navigationController?.pushViewController(blockUsersPage, animated: true)
         }
     }
     
     @IBAction func goToPrivacyPolicy(_ sender: Any) {
-        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+        if let url = URL(string: DRConstant.privacyPolicyURL) {
             let safari = SFSafariViewController(url: url)
             safari.preferredControlTintColor = .drDarkGray
             safari.dismissButtonStyle = .close

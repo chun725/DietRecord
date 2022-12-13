@@ -107,9 +107,8 @@ class ProfileInformationCell: UITableViewCell {
     }
     
     @objc func goToSetupGoalVC(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.report, bundle: nil)
-        if let setupGoalPage = storyboard.instantiateViewController(withIdentifier: "\(SetupGoalVC.self)")
-            as? SetupGoalVC {
+        if let setupGoalPage = UIStoryboard.report.instantiateViewController(
+            withIdentifier: SetupGoalVC.reuseIdentifier) as? SetupGoalVC {
             if sender == inputButton {
                 setupGoalPage.isAutomatic = false
             }

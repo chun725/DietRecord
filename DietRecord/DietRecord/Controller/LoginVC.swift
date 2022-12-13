@@ -61,7 +61,7 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
     }
     
     @IBAction func goToPrivacyPolicyPage(_ sender: Any) {
-        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+        if let url = URL(string: DRConstant.privacyPolicyURL) {
             let safari = SFSafariViewController(url: url)
             safari.preferredControlTintColor = .drDarkGray
             safari.dismissButtonStyle = .close
@@ -192,16 +192,14 @@ extension LoginVC {
             guard let self = self else { return }
             if let userData = userData {
                 DRConstant.userData = userData
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                if let tabbarController = storyboard.instantiateViewController(
-                    withIdentifier: "\(TabBarController.self)")
+                if let tabbarController = UIStoryboard.main.instantiateViewController(
+                    withIdentifier: TabBarController.reuseIdentifier)
                     as? TabBarController {
                     self.navigationController?.pushViewController(tabbarController, animated: true)
                 }
             } else {
-                let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-                if let profileInfoPage = storyboard.instantiateViewController(
-                    withIdentifier: "\(ProfileInformationVC.self)")
+                if let profileInfoPage = UIStoryboard.profile.instantiateViewController(
+                    withIdentifier: ProfileInformationVC.reuseIdentifier)
                     as? ProfileInformationVC {
                     self.navigationController?.pushViewController(profileInfoPage, animated: true)
                 }

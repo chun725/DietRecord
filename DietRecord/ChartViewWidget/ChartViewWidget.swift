@@ -8,7 +8,7 @@
 import WidgetKit
 import SwiftUI
 
-struct WidgetConstant {
+enum WidgetConstant {
     static let dateFormatter = DateFormatter()
     static let decoder = JSONDecoder()
     static let userDefaults = UserDefaults(suiteName: "group.chun.DietRecord")

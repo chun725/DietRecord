@@ -45,9 +45,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func goToDietInputPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
-            as? DietInputVC {
+        if let dietInputPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: DietInputVC.reuseIdentifier) as? DietInputVC {
             if sender != createDietRecordButton {
                 dietInputPage.mealRecord = self.meals[sender.tag]
             } else {
@@ -62,9 +61,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             chooseDatePage.date = self.dateTextField.text
             chooseDatePage.closure = { [weak self] date in
                 if self?.dateTextField.text != date {

@@ -102,7 +102,7 @@ extension FirebaseManager {
         }
     }
     
-    // 改變交友邀請
+    // 更改交友邀請
     func changeRequest(isRequest: Bool, followID: String, completion: @escaping () -> Void) {
         self.fetchUserData(userID: followID) { [weak self] userData in
             guard let self = self,
@@ -118,6 +118,7 @@ extension FirebaseManager {
         }
     }
     
+    // 更改他人追蹤狀態
     func changeFollow(isFollowing: Bool, followID: String, completion: @escaping () -> Void) {
         self.fetchUserData(userID: followID) { [weak self] userData in
             guard let self = self,
@@ -135,6 +136,7 @@ extension FirebaseManager {
         }
     }
     
+    // 更改自身追蹤狀態
     private func changeSelfFollow(isFollowing: Bool, followID: String, completion: @escaping () -> Void) {
         self.fetchUserData(userID: DRConstant.userID) { [weak self] userData in
             guard let self = self,
@@ -151,6 +153,7 @@ extension FirebaseManager {
         }
     }
     
+    // 獲取多個user的資料
     func fetchUsersData(userID: String, need: String, completion: @escaping UserDatasResult) {
         self.fetchUserData(userID: userID) { [weak self] userData in
             guard let self = self,
@@ -192,6 +195,7 @@ extension FirebaseManager {
         }
     }
     
+    // 取消交友邀請
     func cancelRequest(followID: String, completion: @escaping () -> Void) {
         self.fetchUserData(userID: DRConstant.userID) { [weak self] userData in
             guard let self = self,
@@ -203,11 +207,13 @@ extension FirebaseManager {
         }
     }
     
+    // 新增用戶資料
     func createUserInfo(userData: User, completion: @escaping () -> Void) {
         self.setData(userData, at: FSDocumentEndpoint.userData(userData.userID).documentRef)
         completion()
     }
     
+    // 看user自行設定的ID是否有重複
     func fetchUserSelfID(selfID: String, completion: @escaping UserSelfIDIsUsed) {
         let collectionReference = FSCollectionEndpoint.user.collectionRef
         self.getDocuments(collectionReference.whereField("userSelfID", isEqualTo: selfID)) { (userDatas: [User]) in
@@ -215,6 +221,7 @@ extension FirebaseManager {
         }
     }
     
+    // 透過userSelfID去搜尋user資料
     func searchUser(userSelfID: String, completion: @escaping UserDataResult) {
         let collectionReference = FSCollectionEndpoint.user.collectionRef
         self.getDocuments(collectionReference.whereField("userSelfID", isEqualTo: userSelfID)) { (userDatas: [User]?) in
@@ -222,6 +229,7 @@ extension FirebaseManager {
         }
     }
     
+    // 檢舉用戶 or 貼文 or 回覆
     func reportSomething(user: User?, mealRecord: MealRecord?, response: Response?, completion: @escaping () -> Void) {
         let uuid = UUID().uuidString
         let documentReference = FSDocumentEndpoint.report(uuid).documentRef
@@ -235,6 +243,7 @@ extension FirebaseManager {
         completion()
     }
     
+    // 刪除貼文 or 回覆
     func deletePostOrResponse(mealRecord: MealRecord, response: Response?, completion: @escaping () -> Void) {
         let documentReference = FSDocumentEndpoint.dietRecord(mealRecord.userID, mealRecord.date).documentRef
         self.getDocument(documentReference) { [weak self] (dietRecord: FoodDailyInput?) in
@@ -257,6 +266,7 @@ extension FirebaseManager {
         }
     }
     
+    // 更改封鎖狀態
     func changeBlock(blockID: String, completion: @escaping () -> Void) {
         self.fetchUserData(userID: DRConstant.userID) { [weak self] userData in
             guard let self = self,
@@ -291,6 +301,7 @@ extension FirebaseManager {
         }
     }
     
+    // 刪除帳戶
     func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void) {
         let deleteGroup = DispatchGroup()
         var blocks: [DispatchWorkItem] = []
@@ -362,6 +373,7 @@ extension FirebaseManager {
         task.resume()
     }
     
+    // 移除所有追蹤
     func removeFollow(allUsers: [String], completion: @escaping () -> Void) {
         let deleteGroup = DispatchGroup()
         var blocks: [DispatchWorkItem] = []

@@ -47,9 +47,8 @@ class ProfileResponseCell: UITableViewCell {
     }
 
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
-            as? ProfileVC {
+        if let userProfilePage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
             controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }

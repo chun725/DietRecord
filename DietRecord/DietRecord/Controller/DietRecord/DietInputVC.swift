@@ -46,9 +46,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     // MARK: - Action -
     @objc func goToFoodSearchPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
-            as? FoodSearchVC {
+        if let foodSearchPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodSearchVC.reuseIdentifier) as? FoodSearchVC {
             foodSearchPage.oldfoods = foods
             foodSearchPage.closure = { [weak self] foods in
                 self?.foods = foods

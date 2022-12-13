@@ -47,9 +47,8 @@ class ReportVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             chooseDatePage.date = self.dateTextField.text
             chooseDatePage.closure = { [weak self] date in
                 if self?.dateTextField.text != date {
@@ -81,8 +80,7 @@ class ReportVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToGoalPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.report, bundle: nil)
-        if let goalPage = storyboard.instantiateViewController(withIdentifier: "\(GoalVC.self)")
+        if let goalPage = UIStoryboard.report.instantiateViewController(withIdentifier: GoalVC.reuseIdentifier)
             as? GoalVC {
             self.navigationController?.pushViewController(goalPage, animated: false)
         }

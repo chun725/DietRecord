@@ -160,9 +160,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func goToWeightInputVC(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
-        if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
-            as? WeightInputVC {
+        if let weightInputPage = UIStoryboard.weight.instantiateViewController(
+            withIdentifier: WeightInputVC.reuseIdentifier) as? WeightInputVC {
             if sender as? UIButton == changeGoalButton {
                 weightInputPage.isSetGoal = true
                 weightInputPage.closure = { [weak self] weight in
@@ -241,9 +240,8 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         
         let editAction = UIContextualAction(style: .normal, title: "編輯") { _, _, completionHandler in
             let weightData = self.weightRecord.reversed()[indexPath.row]
-            let storyboard = UIStoryboard(name: DRConstant.weight, bundle: nil)
-            if let weightInputPage = storyboard.instantiateViewController(withIdentifier: "\(WeightInputVC.self)")
-                as? WeightInputVC {
+            if let weightInputPage = UIStoryboard.weight.instantiateViewController(
+                withIdentifier: WeightInputVC.reuseIdentifier) as? WeightInputVC {
                 weightInputPage.date = DRConstant.dateFormatter.string(from: weightData.date)
                 weightInputPage.weight = weightData.value
                 weightInputPage.closure = { [weak self] _ in

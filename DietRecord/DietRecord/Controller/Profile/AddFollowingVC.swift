@@ -9,45 +9,52 @@ import UIKit
 import Lottie
 
 class AddFollowingVC: UIViewController, UITextFieldDelegate {
-    @IBOutlet weak var userInputTextField: UITextField!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var userInputTextField: UITextField! {
+        didSet {
+            userInputTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.width / 2
+        }
+    }
     @IBOutlet weak var usernameLabel: UILabel!
-    @IBOutlet weak var followButton: UIButton!
-    @IBOutlet weak var animationView: LottieAnimationView!
+    @IBOutlet weak var followButton: UIButton! {
+        didSet {
+            followButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
+            followButton.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var animationView: LottieAnimationView! {
+        didSet {
+            animationView.loopMode = .loop
+            animationView.play()
+        }
+    }
     
-    let profileProvider = ProfileProvider()
     var userSearchResult: User? {
         didSet {
             userImageView.loadImage(userSearchResult?.userImageURL)
             usernameLabel.text = userSearchResult?.username
             if userSearchResult?.followers.contains(DRConstant.userID) != false {
-                followButton.setTitle("Following", for: .normal)
+                followButton.setTitle(FollowString.following.rawValue, for: .normal)
                 followButton.backgroundColor = .drDarkGray
             } else if userSearchResult?.request.contains(DRConstant.userID) != false {
-                followButton.setTitle("Requested", for: .normal)
+                followButton.setTitle(FollowString.requested.rawValue, for: .normal)
                 followButton.backgroundColor = .drGray
             } else {
-                followButton.setTitle("Follow", for: .normal)
+                followButton.setTitle(FollowString.follow.rawValue, for: .normal)
                 followButton.backgroundColor = .drDarkGray
             }
             self.presentView(views: [usernameLabel, userImageView, followButton])
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        userInputTextField.delegate = self
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
-        followButton.addTarget(self, action: #selector(requestFollow), for: .touchUpInside)
-        followButton.layer.cornerRadius = 10
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
         self.tabBarController?.tabBar.isHidden = true
-        animationView.loopMode = .loop
-        animationView.play()
         if userSearchResult != nil {
             textFieldDidEndEditing(userInputTextField)
         }
@@ -55,75 +62,50 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let userInput = userInputTextField.text,
-            let userData = DRConstant.userData
+            let myUserData = DRConstant.userData
         else { return }
         if !userInput.isEmpty {
             DRProgressHUD.show()
-            profileProvider.searchUser(userSelfID: userInput) { [weak self] result in
+            FirebaseManager.shared.searchUser(userSelfID: userInput) { [weak self] userData in
                 guard let self = self else { return }
-                switch result {
-                case .success(let response):
-                    if response as? String == "document不存在" {
-                        DRProgressHUD.showFailure(text: "無此用戶")
-                        self.hiddenView(views: [self.usernameLabel, self.userImageView, self.followButton])
-                        self.animationView.isHidden = false
-                    } else {
-                        guard let user = response as? User else { return }
-                        if userData.blocks.contains(user.userID) {
-                            DRProgressHUD.showFailure(text: "無此用戶")
-                            self.animationView.isHidden = false
-                        } else {
-                            DRProgressHUD.dismiss()
-                            self.userSearchResult = user
-                            self.animationView.isHidden = true
-                        }
-                    }
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "無法查詢用戶")
-                    print("Error Info: \(error).")
+                if let userData = userData, !myUserData.blocks.contains(userData.userID) {
+                    DRProgressHUD.dismiss()
+                    self.userSearchResult = userData
+                    self.animationView.isHidden = true
+                } else {
+                    DRProgressHUD.showFailure(text: "無此用戶")
+                    self.hiddenView(views: [self.usernameLabel, self.userImageView, self.followButton])
+                    self.animationView.play()
+                    self.animationView.isHidden = false
                 }
             }
         }
     }
     
+    // MARK: - Action -
     @objc func requestFollow(sender: UIButton) {
         guard let userSearchResult = userSearchResult else { return }
-        if sender.title(for: .normal) == "Follow" {
-            profileProvider.changeRequest(isRequest: false, followID: userSearchResult.userID) { result in
-                switch result {
-                case .success:
-                    sender.setTitle("Requested", for: .normal)
-                    sender.backgroundColor = .drGray
-                case .failure(let error):
-                    print("Error Info: \(error).")
-                }
+        if sender.title(for: .normal) == FollowString.follow.rawValue {
+            FirebaseManager.shared.changeRequest(isRequest: false, followID: userSearchResult.userID) {
+                sender.setTitle(FollowString.requested.rawValue, for: .normal)
+                sender.backgroundColor = .drGray
             }
-        } else if sender.title(for: .normal) == "Requested" {
-            profileProvider.changeRequest(isRequest: true, followID: userSearchResult.userID) { result in
-                switch result {
-                case .success:
-                    sender.setTitle("Follow", for: .normal)
-                    sender.backgroundColor = .drDarkGray
-                case .failure(let error):
-                    print("Error Info: \(error).")
-                }
+        } else if sender.title(for: .normal) == FollowString.requested.rawValue {
+            FirebaseManager.shared.changeRequest(isRequest: true, followID: userSearchResult.userID) {
+                sender.setTitle(FollowString.follow.rawValue, for: .normal)
+                sender.backgroundColor = .drDarkGray
             }
         } else {
             let alert = UIAlertController(
-                title: "確定要取消對\(userSearchResult.username)的追蹤?",
+                title: "確定要移除對\(userSearchResult.username)的追蹤?",
                 message: nil,
                 preferredStyle: .alert)
             let action = UIAlertAction(title: "確定", style: .default) { _ in
-                self.profileProvider.changeFollow(isFollowing: true, followID: userSearchResult.userID) { result in
-                    switch result {
-                    case .success:
-                        sender.setTitle("Follow", for: .normal)
-                    case .failure(let error):
-                        print("Error Info: \(error).")
-                    }
+                FirebaseManager.shared.changeFollow(isFollowing: true, followID: userSearchResult.userID) {
+                    sender.setTitle(FollowString.follow.rawValue, for: .normal)
                 }
             }
-            let cancel = UIAlertAction(title: "返回", style: .default)
+            let cancel = UIAlertAction(title: "取消", style: .cancel)
             alert.addAction(action)
             alert.addAction(cancel)
             self.present(alert, animated: true)
@@ -131,9 +113,8 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func goToUserPage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let userProfilePage = storyboard.instantiateViewController(withIdentifier: "\(ProfileVC.self)")
-            as? ProfileVC {
+        if let userProfilePage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = self.userSearchResult?.userID
             self.navigationController?.pushViewController(userProfilePage, animated: true)
         }

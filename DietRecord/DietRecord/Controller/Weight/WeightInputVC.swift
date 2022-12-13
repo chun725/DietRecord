@@ -10,17 +10,48 @@ import HealthKit
 
 class WeightInputVC: UIViewController {
     @IBOutlet weak var blackBackgroundView: UIView!
-    @IBOutlet weak var allBackgroundView: UIView!
-    @IBOutlet weak var grayBackgroundView: UIView!
     @IBOutlet weak var weightInputTextField: UITextField!
-    @IBOutlet weak var weightInputView: UIView!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var setGoalLabel: UILabel!
-    @IBOutlet weak var dateStackView: UIStackView!
-    @IBOutlet weak var chooseDateButton: UIButton!
+    @IBOutlet weak var allBackgroundView: UIView! {
+        didSet {
+            allBackgroundView.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var grayBackgroundView: UIView! {
+        didSet {
+            grayBackgroundView.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var weightInputView: UIView! {
+        didSet {
+            weightInputView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var dateLabel: UILabel! {
+        didSet {
+            dateLabel.text = DRConstant.dateFormatter.string(from: Date())
+        }
+    }
+    @IBOutlet weak var setGoalLabel: UILabel! {
+        didSet {
+            setGoalLabel.isHidden = !isSetGoal
+        }
+    }
+    @IBOutlet weak var dateStackView: UIStackView! {
+        didSet {
+            dateStackView.isHidden = isSetGoal
+        }
+    }
+    @IBOutlet weak var chooseDateButton: UIButton! {
+        didSet {
+            chooseDateButton.isEnabled = !isSetGoal
+        }
+    }
     
-    let weightRecordProvider = WeightRecordProvider()
     let healthKitManager = HealthKitManager()
     var isSetGoal = false
     var date: String?
@@ -29,14 +60,6 @@ class WeightInputVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        grayBackgroundView.layer.cornerRadius = 20
-        saveButton.layer.cornerRadius = 20
-        allBackgroundView.layer.cornerRadius = 20
-        weightInputView.layer.cornerRadius = 10
-        dateLabel.text = DRConstant.dateFormatter.string(from: Date())
-        setGoalLabel.isHidden = !isSetGoal
-        chooseDateButton.isEnabled = !isSetGoal
-        dateStackView.isHidden = isSetGoal
         if let date = date, let weight = weight {
             dateLabel.text = date
             weightInputTextField.text = String(weight)
@@ -54,13 +77,27 @@ class WeightInputVC: UIViewController {
         }
     }
     
+    private func dismissAnimation() {
+        let animations = {
+            self.blackBackgroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+            self.dismiss(animated: false)
+        }
+    }
+    
+    // MARK: - Action -
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             if let date = date {
                 chooseDatePage.date = date
             }
+            chooseDatePage.isWeightInput = true
             chooseDatePage.closure = { [weak self] date in
                 self?.dateLabel.text = date
             }
@@ -74,47 +111,24 @@ class WeightInputVC: UIViewController {
             let date = DRConstant.dateFormatter.date(from: dateString)
         else { return }
         if isSetGoal {
-            weightRecordProvider.updateWeightGoal(weightGoal: weight.format()) { result in
-                switch result {
-                case .success:
-                    DispatchQueue.main.async {
-                        DRProgressHUD.showSuccess()
-                        DRConstant.userData?.weightGoal = weight.format()
-                        self.closure?(weight)
-                        let animations = {
-                            self.blackBackgroundView.alpha = 0
-                            self.allBackgroundView.alpha = 0
-                            for subview in self.allBackgroundView.subviews {
-                                subview.alpha = 0
-                            }
-                        }
-                        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-                            self.dismiss(animated: false)
-                        }
-                    }
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存失敗")
-                    print("Error Info: \(error).")
+            FirebaseManager.shared.updateWeightGoal(weightGoal: weight.format()) {
+                DispatchQueue.main.async {
+                    DRProgressHUD.showSuccess()
+                    DRConstant.userData?.weightGoal = weight.format()
+                    self.closure?(weight)
+                    self.dismissAnimation()
                 }
             }
         } else {
             let weightData = WeightData(date: date, value: weight, dataSource: WeightDataSource.dietRecord.rawValue)
-            weightRecordProvider.createWeightRecord(weightData: weightData) { result in
+            FirebaseManager.shared.createWeightRecord(weightData: weightData) { [weak self] result in
+                guard let self = self else { return }
                 switch result {
                 case .success:
                     DispatchQueue.main.async {
                         DRProgressHUD.showSuccess()
                         self.closure?(0.0)
-                        let animations = {
-                            self.blackBackgroundView.alpha = 0
-                            self.allBackgroundView.alpha = 0
-                            for subview in self.allBackgroundView.subviews {
-                                subview.alpha = 0
-                            }
-                        }
-                        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-                            self.dismiss(animated: false)
-                        }
+                        self.dismissAnimation()
                     }
                 case .failure(let error):
                     DRProgressHUD.showFailure(text: "儲存失敗")
@@ -125,15 +139,6 @@ class WeightInputVC: UIViewController {
     }
     
     @IBAction func goBackToWeightPage(_ sender: Any) {
-        let animations = {
-            self.blackBackgroundView.alpha = 0
-            self.allBackgroundView.alpha = 0
-            for subview in self.allBackgroundView.subviews {
-                subview.alpha = 0
-            }
-        }
-        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-            self.dismiss(animated: false)
-        }
+        self.dismissAnimation()
     }
 }

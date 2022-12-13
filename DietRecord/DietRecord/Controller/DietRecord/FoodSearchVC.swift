@@ -8,19 +8,25 @@
 import UIKit
 
 class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
-    @IBOutlet weak var foodInputTextField: UITextField!
-    @IBOutlet weak var searchResultTableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var foodInputTextField: UITextField! {
+        didSet {
+            foodInputTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var searchResultTableView: UITableView! {
+        didSet {
+            searchResultTableView.dataSource = self
+            searchResultTableView.delegate = self
+            searchResultTableView.registerCellWithNib(identifier: FoodSearchPagingCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
-    
-    private let foodListProvider = DietRecordProvider()
-    
-    var pages: Int = 0
-    var lastPageCount: Int = 0
-    var nowPage: Int = 0
-    
-    var closure: (([Food]) -> Void)?
     
     private var foodSearchResults: [FoodIngredient] = [] {
         didSet {
@@ -30,9 +36,11 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             searchResultTableView.reloadData()
         }
     }
-    
+    var pages: Int = 0
+    var lastPageCount: Int = 0
+    var nowPage: Int = 0
+    var closure: (([Food]) -> Void)?
     var oldfoods: [Food] = []
-    
     var chooseFoods: [Food] = [] {
         didSet {
             searchResultTableView.reloadData()
@@ -41,14 +49,9 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchResultTableView.dataSource = self
-        searchResultTableView.delegate = self
-        searchResultTableView.registerCellWithNib(identifier: FoodSearchPagingCell.reuseIdentifier, bundle: nil)
-        foodInputTextField.delegate = self
         if !oldfoods.isEmpty {
             chooseFoods = oldfoods
         }
-        saveButton.layer.cornerRadius = 20
     }
     
     // MARK: - Action -
@@ -58,9 +61,8 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func goToFoodNutritionPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
-            as? FoodNutritionVC {
+        if let foodNutritionPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodNutritionVC.reuseIdentifier) as? FoodNutritionVC {
             foodNutritionPage.newFood = foodSearchResults[nowPage * 10 + sender.tag]
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
@@ -70,9 +72,8 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
     }
     
     @objc func modifyQtyOfFood(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodNutritionPage = storyboard.instantiateViewController(withIdentifier: "\(FoodNutritionVC.self)")
-            as? FoodNutritionVC {
+        if let foodNutritionPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodNutritionVC.reuseIdentifier) as? FoodNutritionVC {
             foodNutritionPage.chooseFood = chooseFoods[sender.tag]
             foodNutritionPage.isModify = true
             foodNutritionPage.closure = { [weak self] (food: Food) in
@@ -93,16 +94,11 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
         foodName = substring.joined(separator: "")
         textField.text = foodName
         if !foodName.isEmpty {
-            foodListProvider.searchFoods(foodName: foodName) { result in
-                switch result {
-                case .success(let foods):
-                    if foods.isEmpty {
-                        DRProgressHUD.showFailure(text: "無此食物")
-                    } else {
-                        self.foodSearchResults = foods
-                    }
-                case .failure(let error):
-                    print("Error Info: \(error)")
+            FirebaseManager.shared.searchFoods(foodName: foodName) { foodSearchResults in
+                if foodSearchResults.isEmpty {
+                    DRProgressHUD.showFailure(text: "無此食物")
+                } else {
+                    self.foodSearchResults = foodSearchResults
                 }
             }
         }

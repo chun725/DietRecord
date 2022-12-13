@@ -10,33 +10,38 @@ import PhotosUI
 import FirebaseFirestore
 
 class DietInputVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var foodDailyTableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var foodDailyTableView: UITableView! {
+        didSet {
+            foodDailyTableView.dataSource = self
+            foodDailyTableView.registerCellWithNib(identifier: FoodDailyCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     
     private var foods: [Food] = [] {
         didSet {
             foodDailyTableView.reloadData()
         }
     }
-    private let dietRecordProvider = DietRecordProvider()
-    var isShared = true
     private var mealTextField: UITextField?
     private var mealImageView: UIImageView?
     private var dateTextField: UITextField?
     private var commentTextView: UITextView?
     private var imageURL: String?
     var closure: ((String) -> Void)?
+    var isShared = true
     var mealRecord: MealRecord?
     var date: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        foodDailyTableView.dataSource = self
-        foodDailyTableView.registerCellWithNib(identifier: FoodDailyCell.reuseIdentifier, bundle: nil)
         if let mealRecord = mealRecord {
             foods = mealRecord.foods
         }
-        saveButton.layer.cornerRadius = 20
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,9 +52,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     
     // MARK: - Action -
     @objc func goToFoodSearchPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let foodSearchPage = storyboard.instantiateViewController(withIdentifier: "\(FoodSearchVC.self)")
-            as? FoodSearchVC {
+        if let foodSearchPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: FoodSearchVC.reuseIdentifier) as? FoodSearchVC {
             foodSearchPage.oldfoods = foods
             foodSearchPage.closure = { [weak self] foods in
                 self?.foods = foods
@@ -89,7 +93,8 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     func uploadImage() {
         saveButton.isEnabled = false
         guard let image = self.mealImageView?.image else { return }
-        dietRecordProvider.uploadImage(image: image) { result in
+        FirebaseManager.shared.uploadImage(image: image) { [weak self] result in
+            guard let self = self else { return }
             switch result {
             case .success(let url):
                 self.imageURL = url.absoluteString
@@ -116,6 +121,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
         } else {
             DRProgressHUD.show()
             guard let index = Meal.allCases.map({ $0.rawValue }).firstIndex(of: meal) else { return }
+            
             let mealRecord = MealRecord(
                 userID: DRConstant.userID,
                 meal: index,
@@ -127,18 +133,11 @@ class DietInputVC: UIViewController, UITableViewDataSource {
                 createdTime: Date(),
                 peopleLiked: [],
                 response: [])
-            dietRecordProvider.createFoodDaily(
-                date: date,
-                mealRecord: mealRecord) { result in
-                switch result {
-                case .success:
-                    DRProgressHUD.showSuccess(text: "儲存成功")
-                    self.closure?(date)
-                    self.navigationController?.popViewController(animated: true)
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存失敗")
-                    print("Error Info: \(error).")
-                }
+            
+            FirebaseManager.shared.createFoodDaily(date: date, mealRecord: mealRecord) {
+                DRProgressHUD.showSuccess(text: "儲存成功")
+                self.closure?(date)
+                self.navigationController?.popViewController(animated: true)
             }
         }
     }

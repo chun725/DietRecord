@@ -10,10 +10,23 @@ import UIKit
 class FoodNutritionVC: UIViewController, UITableViewDataSource {
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var qtyTextField: UITextField!
-    @IBOutlet weak var addOrSaveButton: UIButton!
-    @IBOutlet weak var nutritionTableView: UITableView!
+    @IBOutlet weak var addOrSaveButton: UIButton! {
+        didSet {
+            addOrSaveButton.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var nutritionTableView: UITableView! {
+        didSet {
+            nutritionTableView.dataSource = self
+            nutritionTableView.registerCellWithNib(identifier: FoodNutritionCell.reuseIdentifier, bundle: nil)
+        }
+    }
     @IBOutlet weak var tableViewButtomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var qtyTextFieldBackground: UIView!
+    @IBOutlet weak var qtyTextFieldBackground: UIView! {
+        didSet {
+            qtyTextFieldBackground.layer.cornerRadius = 10
+        }
+    }
     
     var isCollectionCell = false
     var isModify = false
@@ -44,10 +57,6 @@ class FoodNutritionVC: UIViewController, UITableViewDataSource {
                 food = newFood
             }
         }
-        nutritionTableView.dataSource = self
-        nutritionTableView.registerCellWithNib(identifier: FoodNutritionCell.reuseIdentifier, bundle: nil)
-        addOrSaveButton.layer.cornerRadius = 10
-        qtyTextFieldBackground.layer.cornerRadius = 10
     }
     
     // MARK: - Action -

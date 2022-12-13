@@ -34,9 +34,14 @@
 		34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */; };
 		34270E9A290FA7D200D5AFFD /* FoodSearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E99290FA7D200D5AFFD /* FoodSearchResultCell.swift */; };
 		34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */; };
-		34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */; };
 		34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA2290FCED100D5AFFD /* String+Extension.swift */; };
 		34270EA52910B51F00D5AFFD /* UITableView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */; };
+		342DC99F29407FAB00136A31 /* FirebaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC99E29407FAB00136A31 /* FirebaseManager.swift */; };
+		342DC9A1294082B100136A31 /* FirebaseManager+Report.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */; };
+		342DC9A329409DEC00136A31 /* FirebaseManager+Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */; };
+		342DC9A52940B55500136A31 /* FirebaseManager+DietRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A42940B55500136A31 /* FirebaseManager+DietRecord.swift */; };
+		342DC9A72940C3DE00136A31 /* FirebaseManager+Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A62940C3DE00136A31 /* FirebaseManager+Weight.swift */; };
+		342DC9A92941775100136A31 /* FirebaseManager+Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342DC9A82941775100136A31 /* FirebaseManager+Profile.swift */; };
 		343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486652936FE690054ACDC /* ReportSetGoalCell.xib */; };
 		343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */; };
 		3434866B2938398F0054ACDC /* FoodSearchPagingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */; };
@@ -50,12 +55,10 @@
 		344DC7CA2926200800D245A2 /* ChartViewWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		344DC7D829266A4500D245A2 /* DietPieChartWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */; };
 		344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7E82927656400D245A2 /* 82624-foodies.json */; };
-		344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */ = {isa = PBXBuildFile; fileRef = 344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */; };
 		3460ED77291B71AC002ED662 /* SetupGoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED76291B71AC002ED662 /* SetupGoalVC.swift */; };
 		3460ED7A291B7728002ED662 /* ReportAutomaticGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */; };
 		3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7B291B9748002ED662 /* GoalVC.swift */; };
 		3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED7E291B9FAA002ED662 /* Goal.swift */; };
-		3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED80291BB255002ED662 /* ReportProvider.swift */; };
 		3460ED83291BCC66002ED662 /* ReportSetGoalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */; };
 		34642932290CF79A0070B425 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642931290CF79A0070B425 /* AppDelegate.swift */; };
 		34642934290CF79A0070B425 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34642933290CF79A0070B425 /* SceneDelegate.swift */; };
@@ -100,22 +103,18 @@
 		34C0006F2922494900670CA4 /* FoodCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34C0006D2922494900670CA4 /* FoodCollectionViewCell.swift */; };
 		34C000702922494900670CA4 /* FoodCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34C0006E2922494900670CA4 /* FoodCollectionViewCell.xib */; };
 		34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740729135742009F9264 /* TotalWaterCell.swift */; };
-		34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */; };
 		34CF740D29135D02009F9264 /* Water.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740C29135D02009F9264 /* Water.swift */; };
 		34CF7410291365DF009F9264 /* WaterInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF740F291365DF009F9264 /* WaterInputVC.swift */; };
 		34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74112913978D009F9264 /* WaterReminderCell.swift */; };
 		34CF74152914C0ED009F9264 /* Weight.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74142914C0ED009F9264 /* Weight.swift */; };
-		34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74162914C10E009F9264 /* WeightRecordProvider.swift */; };
 		34CF741A2914ECA7009F9264 /* WeightCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF74192914ECA7009F9264 /* WeightCell.swift */; };
 		34CF741D2914F2D7009F9264 /* WeightInputVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF741C2914F2D7009F9264 /* WeightInputVC.swift */; };
 		34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF741F291660AC009F9264 /* ProfileCell.swift */; };
 		34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */; };
-		34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7424291661DF009F9264 /* ProfileProvider.swift */; };
 		34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34CF7427291683D5009F9264 /* ProfileDetailVC.swift */; };
+		34D1457E29485452004BC4CC /* UIStoryboard+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D1457D29485452004BC4CC /* UIStoryboard+Extension.swift */; };
 		34E2766E292EFFC500750DAF /* 86240-water-droplet-level-1.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */; };
 		34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */; };
-		34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27671292FC2E700750DAF /* 5202-review-id.json */; };
-		34E27674292FC51900750DAF /* 98877-search.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27673292FC51900750DAF /* 98877-search.json */; };
 		34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */ = {isa = PBXBuildFile; fileRef = 34E27675292FC70C00750DAF /* 36538-find-id.json */; };
 		34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34E27677293066A200750DAF /* SwiftJWTWrapper.swift */; };
 		34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */ = {isa = PBXBuildFile; fileRef = 34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */; };
@@ -182,9 +181,14 @@
 		34270E96290FA32E00D5AFFD /* FoodSearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchVC.swift; sourceTree = "<group>"; };
 		34270E99290FA7D200D5AFFD /* FoodSearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchResultCell.swift; sourceTree = "<group>"; };
 		34270E9B290FAD7500D5AFFD /* FoodNutrtionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodNutrtionVC.swift; sourceTree = "<group>"; };
-		34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordProvider.swift; sourceTree = "<group>"; };
 		34270EA2290FCED100D5AFFD /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
 		34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+Extension.swift"; sourceTree = "<group>"; };
+		342DC99E29407FAB00136A31 /* FirebaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseManager.swift; sourceTree = "<group>"; };
+		342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Report.swift"; sourceTree = "<group>"; };
+		342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Water.swift"; sourceTree = "<group>"; };
+		342DC9A42940B55500136A31 /* FirebaseManager+DietRecord.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+DietRecord.swift"; sourceTree = "<group>"; };
+		342DC9A62940C3DE00136A31 /* FirebaseManager+Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Weight.swift"; sourceTree = "<group>"; };
+		342DC9A82941775100136A31 /* FirebaseManager+Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseManager+Profile.swift"; sourceTree = "<group>"; };
 		343486652936FE690054ACDC /* ReportSetGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportSetGoalCell.xib; sourceTree = "<group>"; };
 		343486672936FEA60054ACDC /* ReportAutomaticGoalCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReportAutomaticGoalCell.xib; sourceTree = "<group>"; };
 		3434866A2938398F0054ACDC /* FoodSearchPagingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodSearchPagingCell.xib; sourceTree = "<group>"; };
@@ -200,12 +204,10 @@
 		344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChartViewWidgetExtension.entitlements; sourceTree = "<group>"; };
 		344DC7D729266A4500D245A2 /* DietPieChartWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietPieChartWidget.swift; sourceTree = "<group>"; };
 		344DC7E82927656400D245A2 /* 82624-foodies.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "82624-foodies.json"; sourceTree = "<group>"; };
-		344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "79611-water-animation.json"; sourceTree = "<group>"; };
 		3460ED76291B71AC002ED662 /* SetupGoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupGoalVC.swift; sourceTree = "<group>"; };
 		3460ED79291B7728002ED662 /* ReportAutomaticGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportAutomaticGoalCell.swift; sourceTree = "<group>"; };
 		3460ED7B291B9748002ED662 /* GoalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalVC.swift; sourceTree = "<group>"; };
 		3460ED7E291B9FAA002ED662 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
-		3460ED80291BB255002ED662 /* ReportProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportProvider.swift; sourceTree = "<group>"; };
 		3460ED82291BCC66002ED662 /* ReportSetGoalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSetGoalCell.swift; sourceTree = "<group>"; };
 		3464292E290CF79A0070B425 /* DietRecord.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DietRecord.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		34642931290CF79A0070B425 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -259,22 +261,18 @@
 		34C0006D2922494900670CA4 /* FoodCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodCollectionViewCell.swift; sourceTree = "<group>"; };
 		34C0006E2922494900670CA4 /* FoodCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodCollectionViewCell.xib; sourceTree = "<group>"; };
 		34CF740729135742009F9264 /* TotalWaterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalWaterCell.swift; sourceTree = "<group>"; };
-		34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterRecordProvider.swift; sourceTree = "<group>"; };
 		34CF740C29135D02009F9264 /* Water.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Water.swift; sourceTree = "<group>"; };
 		34CF740F291365DF009F9264 /* WaterInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterInputVC.swift; sourceTree = "<group>"; };
 		34CF74112913978D009F9264 /* WaterReminderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterReminderCell.swift; sourceTree = "<group>"; };
 		34CF74142914C0ED009F9264 /* Weight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weight.swift; sourceTree = "<group>"; };
-		34CF74162914C10E009F9264 /* WeightRecordProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightRecordProvider.swift; sourceTree = "<group>"; };
 		34CF74192914ECA7009F9264 /* WeightCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCell.swift; sourceTree = "<group>"; };
 		34CF741C2914F2D7009F9264 /* WeightInputVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightInputVC.swift; sourceTree = "<group>"; };
 		34CF741F291660AC009F9264 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+Extension.swift"; sourceTree = "<group>"; };
-		34CF7424291661DF009F9264 /* ProfileProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileProvider.swift; sourceTree = "<group>"; };
 		34CF7427291683D5009F9264 /* ProfileDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailVC.swift; sourceTree = "<group>"; };
+		34D1457D29485452004BC4CC /* UIStoryboard+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStoryboard+Extension.swift"; sourceTree = "<group>"; };
 		34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "86240-water-droplet-level-1.json"; sourceTree = "<group>"; };
 		34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "37303-swipe-for-a-toggle-button.json"; sourceTree = "<group>"; };
-		34E27671292FC2E700750DAF /* 5202-review-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "5202-review-id.json"; sourceTree = "<group>"; };
-		34E27673292FC51900750DAF /* 98877-search.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "98877-search.json"; sourceTree = "<group>"; };
 		34E27675292FC70C00750DAF /* 36538-find-id.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "36538-find-id.json"; sourceTree = "<group>"; };
 		34E27677293066A200750DAF /* SwiftJWTWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftJWTWrapper.swift; sourceTree = "<group>"; };
 		34E276792930689C00750DAF /* AuthKey_N2UB2RNM86.p8 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AuthKey_N2UB2RNM86.p8; sourceTree = "<group>"; };
@@ -394,9 +392,22 @@
 			isa = PBXGroup;
 			children = (
 				34270E86290ED41000D5AFFD /* Food.swift */,
-				34270EA0290FC55900D5AFFD /* DietRecordProvider.swift */,
 			);
 			path = DietRecord;
+			sourceTree = "<group>";
+		};
+		342DC99D29407F8D00136A31 /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				342DC99E29407FAB00136A31 /* FirebaseManager.swift */,
+				342DC9A0294082B100136A31 /* FirebaseManager+Report.swift */,
+				342DC9A229409DEC00136A31 /* FirebaseManager+Water.swift */,
+				342DC9A42940B55500136A31 /* FirebaseManager+DietRecord.swift */,
+				342DC9A62940C3DE00136A31 /* FirebaseManager+Weight.swift */,
+				342DC9A82941775100136A31 /* FirebaseManager+Profile.swift */,
+				34270E77290D578800D5AFFD /* HealthKitManager.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 		343486642936FE280054ACDC /* ReportSetGoalCell */ = {
@@ -446,12 +457,9 @@
 			children = (
 				34E27689293228C700750DAF /* 52028-book-review.json */,
 				34E27675292FC70C00750DAF /* 36538-find-id.json */,
-				34E27673292FC51900750DAF /* 98877-search.json */,
-				34E27671292FC2E700750DAF /* 5202-review-id.json */,
 				34E2766F292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json */,
 				34E2766D292EFFC500750DAF /* 86240-water-droplet-level-1.json */,
 				344DC7E82927656400D245A2 /* 82624-foodies.json */,
-				344DC7EC292A1EDE00D245A2 /* 79611-water-animation.json */,
 			);
 			path = Lottie;
 			sourceTree = "<group>";
@@ -479,7 +487,6 @@
 			isa = PBXGroup;
 			children = (
 				3460ED7E291B9FAA002ED662 /* Goal.swift */,
-				3460ED80291BB255002ED662 /* ReportProvider.swift */,
 			);
 			path = Report;
 			sourceTree = "<group>";
@@ -516,6 +523,7 @@
 				343CD69229111C500048046E /* Third Party Wrapper */,
 				34642951290D23030070B425 /* Resource */,
 				3464294E290D1E8E0070B425 /* Extension */,
+				342DC99D29407F8D00136A31 /* Manager */,
 				34270E76290D576B00D5AFFD /* Model */,
 				34642953290D28500070B425 /* Controller */,
 				34642952290D28340070B425 /* View */,
@@ -539,6 +547,7 @@
 			isa = PBXGroup;
 			children = (
 				3464294C290D16E00070B425 /* Double+Extension.swift */,
+				34D1457D29485452004BC4CC /* UIStoryboard+Extension.swift */,
 				34C00060291CA43600670CA4 /* UITextField+Extension.swift */,
 				34270EA42910B51F00D5AFFD /* UITableView+Extension.swift */,
 				34CF7421291660DB009F9264 /* UICollectionView+Extension.swift */,
@@ -692,7 +701,6 @@
 			isa = PBXGroup;
 			children = (
 				34CF740C29135D02009F9264 /* Water.swift */,
-				34CF740A29135BCC009F9264 /* WaterRecordProvider.swift */,
 			);
 			path = Water;
 			sourceTree = "<group>";
@@ -710,9 +718,7 @@
 		34CF74132914C0DD009F9264 /* Weight */ = {
 			isa = PBXGroup;
 			children = (
-				34270E77290D578800D5AFFD /* HealthKitManager.swift */,
 				34CF74142914C0ED009F9264 /* Weight.swift */,
-				34CF74162914C10E009F9264 /* WeightRecordProvider.swift */,
 			);
 			path = Weight;
 			sourceTree = "<group>";
@@ -751,7 +757,6 @@
 		34CF7423291661C1009F9264 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				34CF7424291661DF009F9264 /* ProfileProvider.swift */,
 				349B8D8F29193514002EB186 /* User.swift */,
 			);
 			path = Profile;
@@ -891,13 +896,11 @@
 				3434866B2938398F0054ACDC /* FoodSearchPagingCell.xib in Resources */,
 				34270E7D290E9BFC00D5AFFD /* CaloriesPieChartCell.xib in Resources */,
 				3464293E290CF79A0070B425 /* LaunchScreen.storyboard in Resources */,
-				34E27674292FC51900750DAF /* 98877-search.json in Resources */,
 				343486682936FEA60054ACDC /* ReportAutomaticGoalCell.xib in Resources */,
 				34C0005D291C901600670CA4 /* FoodNutritionCell.xib in Resources */,
 				34270E93290F810D00D5AFFD /* FoodDailyCell.xib in Resources */,
 				3422702629110680000B4A58 /* FoodIngredient.json in Resources */,
 				34C000702922494900670CA4 /* FoodCollectionViewCell.xib in Resources */,
-				34E27672292FC2E700750DAF /* 5202-review-id.json in Resources */,
 				3469169229127C430021985F /* ReportDetailCell.xib in Resources */,
 				344DC7E92927656400D245A2 /* 82624-foodies.json in Resources */,
 				34E27670292F12BF00750DAF /* 37303-swipe-for-a-toggle-button.json in Resources */,
@@ -911,7 +914,6 @@
 				34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */,
 				34E2767A2930689C00750DAF /* AuthKey_N2UB2RNM86.p8 in Resources */,
 				343486662936FE690054ACDC /* ReportSetGoalCell.xib in Resources */,
-				344DC7ED292A1EDE00D245A2 /* 79611-water-animation.json in Resources */,
 				34E27676292FC70C00750DAF /* 36538-find-id.json in Resources */,
 				34270E81290EAD1400D5AFFD /* DietRecordCell.xib in Resources */,
 				34270E72290D54B700D5AFFD /* Profile.storyboard in Resources */,
@@ -1021,28 +1023,28 @@
 				34CF7420291660AC009F9264 /* ProfileCell.swift in Sources */,
 				34930BBD292487F40037A82E /* ProfileSettingVC.swift in Sources */,
 				34C00069291FA32F00670CA4 /* ProfileHomePageVC.swift in Sources */,
+				342DC9A72940C3DE00136A31 /* FirebaseManager+Weight.swift in Sources */,
 				3464294D290D16E00070B425 /* Double+Extension.swift in Sources */,
 				34C0006F2922494900670CA4 /* FoodCollectionViewCell.swift in Sources */,
 				349B8D8C2918F696002EB186 /* ProfileResponseCell.swift in Sources */,
 				349B8D8A2918F66B002EB186 /* ProfileDetailCell.swift in Sources */,
 				34CF74122913978D009F9264 /* WaterReminderCell.swift in Sources */,
 				34642936290CF79A0070B425 /* DietRecordVC.swift in Sources */,
-				3460ED81291BB255002ED662 /* ReportProvider.swift in Sources */,
 				34C0005C291C901600670CA4 /* FoodNutritionCell.swift in Sources */,
 				3469169429127C510021985F /* ReportDetailCell.swift in Sources */,
 				343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */,
-				34CF74172914C10E009F9264 /* WeightRecordProvider.swift in Sources */,
+				342DC9A329409DEC00136A31 /* FirebaseManager+Water.swift in Sources */,
 				3460ED7C291B9748002ED662 /* GoalVC.swift in Sources */,
 				34270E6F290D533400D5AFFD /* ReportVC.swift in Sources */,
 				34A2B5AE2923898A00E01545 /* ProfileInformationCell.swift in Sources */,
 				34270E85290EB97600D5AFFD /* FoodBaseView.swift in Sources */,
+				342DC99F29407FAB00136A31 /* FirebaseManager.swift in Sources */,
 				34270EA3290FCED100D5AFFD /* String+Extension.swift in Sources */,
 				34C00063291CAB1000670CA4 /* UIViewController+Extension.swift in Sources */,
 				34CF7422291660DB009F9264 /* UICollectionView+Extension.swift in Sources */,
 				34930BB929238E6F0037A82E /* DietGoalCollectionViewCell.swift in Sources */,
 				34CF7428291683D5009F9264 /* ProfileDetailVC.swift in Sources */,
 				34270E87290ED41000D5AFFD /* Food.swift in Sources */,
-				34CF740B29135BCC009F9264 /* WaterRecordProvider.swift in Sources */,
 				34642949290D07B80070B425 /* PieChart.swift in Sources */,
 				3469168E291277A40021985F /* ChartXAxis.swift in Sources */,
 				34CF740D29135D02009F9264 /* Water.swift in Sources */,
@@ -1061,15 +1063,15 @@
 				34CF74152914C0ED009F9264 /* Weight.swift in Sources */,
 				34C00065291CE31B00670CA4 /* ChooseDateVC.swift in Sources */,
 				349B8D9029193514002EB186 /* User.swift in Sources */,
+				342DC9A52940B55500136A31 /* FirebaseManager+DietRecord.swift in Sources */,
 				34270E9C290FAD7500D5AFFD /* FoodNutrtionVC.swift in Sources */,
 				34930BC02924932A0037A82E /* ProfileSettingCell.swift in Sources */,
 				34930BBB292470510037A82E /* InitialVC.swift in Sources */,
-				34CF7425291661DF009F9264 /* ProfileProvider.swift in Sources */,
 				34270E7F290EAD0600D5AFFD /* DietRecordCell.swift in Sources */,
-				34270EA1290FC55900D5AFFD /* DietRecordProvider.swift in Sources */,
 				34E2767E29308C1D00750DAF /* TokenResponse.swift in Sources */,
 				349B8D8E29192E7E002EB186 /* AddFollowingVC.swift in Sources */,
 				34E27678293066A200750DAF /* SwiftJWTWrapper.swift in Sources */,
+				34D1457E29485452004BC4CC /* UIStoryboard+Extension.swift in Sources */,
 				34A2B5AB292371AB00E01545 /* ProfileInformationVC.swift in Sources */,
 				34642950290D1EA20070B425 /* UIColor+Extension.swift in Sources */,
 				34642955290D2A290070B425 /* LineChart.swift in Sources */,
@@ -1079,6 +1081,7 @@
 				34270E95290F965800D5AFFD /* UIView+Extension.swift in Sources */,
 				34270E97290FA32E00D5AFFD /* FoodSearchVC.swift in Sources */,
 				34270E91290F810100D5AFFD /* FoodDailyCell.swift in Sources */,
+				342DC9A92941775100136A31 /* FirebaseManager+Profile.swift in Sources */,
 				34642957290D2B2D0070B425 /* DRConstant.swift in Sources */,
 				34C00067291E1FD600670CA4 /* WaterHistoryVC.swift in Sources */,
 				3460ED7F291B9FAA002ED662 /* Goal.swift in Sources */,
@@ -1088,6 +1091,7 @@
 				34C00061291CA43600670CA4 /* UITextField+Extension.swift in Sources */,
 				34C0005F291C958800670CA4 /* CommonNameCell.swift in Sources */,
 				34C00058291C8EAC00670CA4 /* JGProgressHUDWrapper.swift in Sources */,
+				342DC9A1294082B100136A31 /* FirebaseManager+Report.swift in Sources */,
 				34CF740829135742009F9264 /* TotalWaterCell.swift in Sources */,
 				34270E78290D578800D5AFFD /* HealthKitManager.swift in Sources */,
 				343CD698291223850048046E /* BarChart.swift in Sources */,

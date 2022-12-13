@@ -8,23 +8,26 @@
 import UIKit
 
 class ProfileInformationVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var profileInfoTableView: UITableView!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var profileInfoTableView: UITableView! {
+        didSet {
+            profileInfoTableView.dataSource = self
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.addTarget(self, action: #selector(createUserInfo), for: .touchUpInside)
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     
     var isUpdated = false
     var user: User?
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        profileInfoTableView.dataSource = self
-        saveButton.addTarget(self, action: #selector(createUserInfo), for: .touchUpInside)
-        saveButton.layer.cornerRadius = 20
         if isUpdated {
             self.user = DRConstant.userData
-            print("=====是更新")
         } else {
-            print("=====不是更新")
             self.navigationItem.leftBarButtonItem = nil
             self.navigationItem.hidesBackButton = true
         }
@@ -42,24 +45,20 @@ class ProfileInformationVC: UIViewController, UITableViewDataSource {
             self.presentInputAlert(title: "請輸入完整資料")
         } else {
             DRProgressHUD.show()
-            profileProvider.createUserInfo(userData: user) { result in
-                switch result {
-                case .success:
-                    DRConstant.userData = user
-                    DRProgressHUD.showSuccess()
-                    if !self.isUpdated {
-                        self.navigationController?.popToRootViewController(animated: true)
-                    } else {
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存資料失敗")
-                    print("Error Info: \(error).")
+            FirebaseManager.shared.createUserInfo(userData: user) { [weak self] in
+                guard let self = self else { return }
+                DRConstant.userData = user
+                DRProgressHUD.showSuccess()
+                if !self.isUpdated {
+                    self.navigationController?.popToRootViewController(animated: true)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }

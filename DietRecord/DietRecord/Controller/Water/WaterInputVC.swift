@@ -9,15 +9,32 @@ import UIKit
 
 class WaterInputVC: UIViewController {
     @IBOutlet weak var blackBackgroundView: UIView!
-    @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var waterInputBackgroundView: UIView!
-    @IBOutlet weak var inputGrayBackgroundView: UIView!
     @IBOutlet weak var inputTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var grayBackgroundView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var waterInputView: UIView!
+    @IBOutlet weak var timeBackgroundView: UIView!
+    @IBOutlet weak var allBackgroundView: UIView! {
+        didSet {
+            allBackgroundView.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var inputGrayBackgroundView: UIView! {
+        didSet {
+            inputGrayBackgroundView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var grayBackgroundView: UIView! {
+        didSet {
+            grayBackgroundView.layer.cornerRadius = 20
+        }
+    }
     @IBOutlet weak var hourPickerView: UIPickerView! {
         didSet {
             hourPickerView.dataSource = self
@@ -30,7 +47,6 @@ class WaterInputVC: UIViewController {
             minutePickerView.delegate = self
         }
     }
-    @IBOutlet weak var timeBackgroundView: UIView!
     @IBOutlet weak var plusButton: UIButton! {
         didSet {
             plusButton.isHidden = isGoalInput
@@ -52,14 +68,9 @@ class WaterInputVC: UIViewController {
     var closure: ((Double) -> Void)?
     var isWaterInput = true
     var isGoalInput = false
-    let waterRecordProvider = WaterRecordProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allBackgroundView.layer.cornerRadius = 20
-        inputGrayBackgroundView.layer.cornerRadius = 10
-        saveButton.layer.cornerRadius = 20
-        grayBackgroundView.layer.cornerRadius = 20
         if isWaterInput {
             if isGoalInput {
                 titleLabel.text = "輸入飲水量目標"
@@ -97,54 +108,36 @@ class WaterInputVC: UIViewController {
         }
     }
     
+    private func dismissAnimation() {
+        let animations = {
+            self.blackBackgroundView.alpha = 0
+            self.allBackgroundView.alpha = 0
+            for subview in self.allBackgroundView.subviews {
+                subview.alpha = 0
+            }
+        }
+        UIView.animate(withDuration: 0.5, animations: animations) { _ in
+            self.dismiss(animated: false)
+        }
+    }
+    
+    // MARK: - Action -
     @objc func saveWaterGoal() {
         guard let waterGoal = inputTextField.text else { return }
-        waterRecordProvider.updateWaterGoal(waterGoal: waterGoal) { result in
-            switch result {
-            case .success:
-                DRProgressHUD.showSuccess()
-                DRConstant.userData?.waterGoal = waterGoal
-                self.closure?(waterGoal.transformToDouble())
-                let animations = {
-                    self.blackBackgroundView.alpha = 0
-                    self.allBackgroundView.alpha = 0
-                    for subview in self.allBackgroundView.subviews {
-                        subview.alpha = 0
-                    }
-                }
-                UIView.animate(withDuration: 0.5, animations: animations) { _ in
-                    self.dismiss(animated: false)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "儲存失敗")
-                print("Error Info: \(error).")
-            }
+        FirebaseManager.shared.updateWaterGoal(waterGoal: waterGoal) {
+            DRProgressHUD.showSuccess()
+            DRConstant.userData?.waterGoal = waterGoal
+            self.closure?(waterGoal.transformToDouble())
+            self.dismissAnimation()
         }
     }
     
     @objc func saveWaterRecord() {
-        guard let totalWater = inputTextField.text?.transformToDouble()
-        else { return }
-        waterRecordProvider.updateWaterRecord(totalWater: totalWater.formatNoPoint()) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success:
-                DRProgressHUD.showSuccess()
-                self.closure?(totalWater)
-                let animations = {
-                    self.blackBackgroundView.alpha = 0
-                    self.allBackgroundView.alpha = 0
-                    for subview in self.allBackgroundView.subviews {
-                        subview.alpha = 0
-                    }
-                }
-                UIView.animate(withDuration: 0.5, animations: animations) { _ in
-                    self.dismiss(animated: false)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "儲存失敗")
-                print("Error Info: \(error).")
-            }
+        guard let totalWater = inputTextField.text?.transformToDouble() else { return }
+        FirebaseManager.shared.updateWaterRecord(totalWater: totalWater.formatNoPoint()) {
+            DRProgressHUD.showSuccess()
+            self.closure?(totalWater)
+            self.dismissAnimation()
         }
     }
     
@@ -188,16 +181,7 @@ class WaterInputVC: UIViewController {
         UNUserNotificationCenter.current().add(request)
         DRProgressHUD.showSuccess()
         self.closure?(0.0)
-        let animations = {
-            self.blackBackgroundView.alpha = 0
-            self.allBackgroundView.alpha = 0
-            for subview in self.allBackgroundView.subviews {
-                subview.alpha = 0
-            }
-        }
-        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-            self.dismiss(animated: false)
-        }
+        self.dismissAnimation()
     }
     
     @objc func changeWaterCurrent(sender: UIButton) {
@@ -213,16 +197,7 @@ class WaterInputVC: UIViewController {
     }
     
     @IBAction func goBackToWaterPage(_ sender: Any) {
-        let animations = {
-            self.blackBackgroundView.alpha = 0
-            self.allBackgroundView.alpha = 0
-            for subview in self.allBackgroundView.subviews {
-                subview.alpha = 0
-            }
-        }
-        UIView.animate(withDuration: 0.5, animations: animations) { _ in
-            self.dismiss(animated: false)
-        }
+        self.dismissAnimation()
     }
 }
 

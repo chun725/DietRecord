@@ -11,8 +11,8 @@ import CoreMedia
 class HealthKitManager {
     let healthKitStore = HKHealthStore()
     
-    func authorizeHealthKit(completion: ((_ success: Bool, _ error: NSError?) -> Void)?) { // 能不能取得HealthKit權限
-        
+    // 能不能取得HealthKit權限
+    func authorizeHealthKit(completion: ((_ success: Bool, _ error: NSError?) -> Void)?) {
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         else { return }
         
@@ -34,6 +34,7 @@ class HealthKitManager {
         }
     }
     
+    // 是否已經向用戶詢問健康App的權限
     func haveGetPermission(completion: @escaping (Result<Int, Error>) -> Void) {
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         else { return }
@@ -54,6 +55,7 @@ class HealthKitManager {
         }
     }
     
+    // 是否有權限可以寫入資料至健康App中
     func havePermissionOfWrite(completion: @escaping (Bool) -> Void) {
         guard let quantityType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         else { return }
@@ -65,6 +67,7 @@ class HealthKitManager {
         }
     }
     
+    // 得到健康App中的體重記錄
     func getWeight(sampleType: HKSampleType, completion: (([HKSample]?, NSError?) -> Void)?) {
         // Predicate for the weight query
         let distantPastWeight = NSDate.distantPast as NSDate
@@ -96,6 +99,7 @@ class HealthKitManager {
         self.healthKitStore.execute(weightQuery)
     }
     
+    // 新增體重記錄至健康App中
     func saveWeight(weightData: WeightData, completion: @escaping ((Result<Void, NSError>) -> Void)) {
         guard let bodyMassType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         else { return }
@@ -115,6 +119,7 @@ class HealthKitManager {
         }
     }
     
+    // 刪除健康App中的體重記錄
     func deleteWeight(weightData: WeightData, completion: @escaping ((Result<Void, Error>) -> Void)) {
         guard let bodyMassType = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         else { return }

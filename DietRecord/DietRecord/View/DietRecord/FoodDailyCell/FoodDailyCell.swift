@@ -8,28 +8,41 @@
 import UIKit
 
 class FoodDailyCell: UITableViewCell {
-    @IBOutlet weak var mealImageView: UIImageView!
+    @IBOutlet weak var mealImageView: UIImageView! {
+        didSet {
+            mealImageView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var commentTextView: UITextView! {
+        didSet {
+            commentTextView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var foodsView: UIView! {
+        didSet {
+            foodsView.setShadowAndRadius(radius: 10)
+        }
+    }
+    @IBOutlet weak var switchButton: UISwitch! {
+        didSet {
+            switchButton.tintColor = .drGray
+            switchButton.onTintColor = .drYellow
+            switchButton.addTarget(self, action: #selector(changeShared), for: .valueChanged)
+        }
+    }
     @IBOutlet weak var mealTextField: UITextField!
     @IBOutlet weak var dateTextField: UITextField!
-    @IBOutlet weak var commentTextView: UITextView!
     @IBOutlet weak var foodStackView: UIStackView!
     @IBOutlet weak var editFoodButton: UIButton!
     @IBOutlet weak var mealChooseButton: UIButton!
     @IBOutlet weak var changePhotoButton: UIButton!
     @IBOutlet weak var photoTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var foodsView: UIView!
-    @IBOutlet weak var switchButton: UISwitch!
     @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
     
     weak var controller: DietInputVC?
     var mealRecord: MealRecord?
     
     func layoutCell(foods: [Food]) {
-        commentTextView.layer.cornerRadius = 10
-        mealImageView.layer.cornerRadius = 10
-        switchButton.tintColor = .drGray
-        switchButton.onTintColor = .drYellow
-        switchButton.addTarget(self, action: #selector(changeShared), for: .valueChanged)
         if let mealRecord = mealRecord {
             dateTextField.text = mealRecord.date
             mealTextField.text = Meal.allCases[mealRecord.meal].rawValue
@@ -60,13 +73,11 @@ class FoodDailyCell: UITableViewCell {
                 qty: food.qty,
                 calories: food.foodIngredient.nutrientContent.calories)
         }
-        foodsView.setShadowAndRadius(radius: 10)
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             chooseDatePage.closure = { [weak self] date in
                 self?.dateTextField.text = date
             }

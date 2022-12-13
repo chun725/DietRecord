@@ -12,8 +12,16 @@ import CryptoKit
 import AuthenticationServices
 
 class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
-    @IBOutlet weak var infoBackgroundView: UIView!
-    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var infoBackgroundView: UIView! {
+        didSet {
+            infoBackgroundView.setShadowAndRadius(radius: 15)
+        }
+    }
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = DRConstant.fullScreenSize.width / 414 * 100 / 2
+        }
+    }
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var waterGoalLabel: UILabel!
     @IBOutlet weak var weightGoalLabel: UILabel!
@@ -21,7 +29,6 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     
     private var currentNonce: String?
     weak var controller: ProfileSettingVC?
-    let profileProvider = ProfileProvider()
     
     func layoutCell() {
         guard let userData = DRConstant.userData else { return }
@@ -30,14 +37,12 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         weightGoalLabel.text = userData.weightGoal.transform(unit: Units.kgUnit.rawValue)
         dietGoalLabel.text = userData.goal[0].transform(unit: Units.kcalUnit.rawValue)
         userImageView.loadImage(userData.userImageURL)
-        userImageView.layer.cornerRadius = DRConstant.fullScreenSize.width / 414 * 100 / 2
-        infoBackgroundView.setShadowAndRadius(radius: 15)
     }
     
+    // MARK: - Action -
     @IBAction func editInfo(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let profileInfoPage = storyboard.instantiateViewController(
-            withIdentifier: "\(ProfileInformationVC.self)")
+        if let profileInfoPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: ProfileInformationVC.reuseIdentifier)
             as? ProfileInformationVC {
             profileInfoPage.isUpdated = true
             controller?.navigationController?.pushViewController(profileInfoPage, animated: true)
@@ -45,16 +50,15 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
     }
     
     @IBAction func blockUsers(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-        if let blockUsersPage = storyboard.instantiateViewController(withIdentifier: "\(CheckRequestVC.self)")
-            as? CheckRequestVC {
-            blockUsersPage.need = "BlockUsers"
+        if let blockUsersPage = UIStoryboard.profile.instantiateViewController(
+            withIdentifier: CheckRequestVC.reuseIdentifier) as? CheckRequestVC {
+            blockUsersPage.need = FollowString.blockUsers.rawValue
             controller?.navigationController?.pushViewController(blockUsersPage, animated: true)
         }
     }
     
     @IBAction func goToPrivacyPolicy(_ sender: Any) {
-        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+        if let url = URL(string: DRConstant.privacyPolicyURL) {
             let safari = SFSafariViewController(url: url)
             safari.preferredControlTintColor = .drDarkGray
             safari.dismissButtonStyle = .close
@@ -103,30 +107,25 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
         for user in users where !allUsers.contains(user) {
             allUsers.append(user)
         }
-        profileProvider.removeFollow(allUsers: allUsers) { [weak self] result in
-            switch result {
-            case .success:
-                self?.profileProvider.deleteAccount { result in
-                    switch result {
-                    case .success:
-                        firebaseAuth.currentUser?.delete()
-                        DRConstant.userID = ""
-                        DRConstant.userData = nil
-                        DRProgressHUD.showSuccess(text: "刪除帳號完成")
-                        sleep(2)
-                        self?.controller?
-                            .tabBarController?
-                            .navigationController?
-                            .popToRootViewController(animated: true)
-                        print("刪除帳號")
-                    case .failure(let error):
-                        DRProgressHUD.showFailure(text: "刪除帳號失敗")
-                        print("Error Info: \(error) in deleting account.")
-                    }
+        FirebaseManager.shared.removeFollow(allUsers: allUsers) { [weak self] in
+            guard let self = self else { return }
+            FirebaseManager.shared.deleteAccount { result in
+                switch result {
+                case .success:
+                    firebaseAuth.currentUser?.delete()
+                    DRConstant.userID = ""
+                    DRConstant.userData = nil
+                    DRProgressHUD.showSuccess(text: "刪除帳號完成")
+                    sleep(2)
+                    self.controller?
+                        .tabBarController?
+                        .navigationController?
+                        .popToRootViewController(animated: true)
+                    print("刪除帳號")
+                case .failure(let error):
+                    DRProgressHUD.showFailure(text: "刪除帳號失敗")
+                    print("Error Info: \(error) in deleting account.")
                 }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "刪除帳號失敗")
-                print("Error Info: \(error) in deleting account.")
             }
         }
     }

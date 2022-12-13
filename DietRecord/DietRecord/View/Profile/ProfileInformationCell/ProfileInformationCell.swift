@@ -9,14 +9,49 @@ import UIKit
 import PhotosUI
 
 class ProfileInformationCell: UITableViewCell {
-    @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var changeImageButton: UIButton!
-    @IBOutlet weak var userSelfIDTextfield: UITextField!
-    @IBOutlet weak var usernameTextField: UITextField!
-    @IBOutlet weak var waterGoalTextField: UITextField!
-    @IBOutlet weak var weightGoalTextField: UITextField!
-    @IBOutlet weak var inputButton: UIButton!
-    @IBOutlet weak var automaticButton: UIButton!
+    @IBOutlet weak var userImageView: UIImageView! {
+        didSet {
+            userImageView.layer.cornerRadius = userImageView.bounds.width / 2
+        }
+    }
+    @IBOutlet weak var changeImageButton: UIButton! {
+        didSet {
+            changeImageButton.layer.cornerRadius = changeImageButton.bounds.width / 2
+            changeImageButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var userSelfIDTextfield: UITextField! {
+        didSet {
+            userSelfIDTextfield.delegate = self
+        }
+    }
+    @IBOutlet weak var usernameTextField: UITextField! {
+        didSet {
+            usernameTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var waterGoalTextField: UITextField! {
+        didSet {
+            waterGoalTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var weightGoalTextField: UITextField! {
+        didSet {
+            weightGoalTextField.delegate = self
+        }
+    }
+    @IBOutlet weak var inputButton: UIButton! {
+        didSet {
+            inputButton.layer.cornerRadius = 10
+            inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var automaticButton: UIButton! {
+        didSet {
+            automaticButton.layer.cornerRadius = 10
+            automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
+        }
+    }
     @IBOutlet weak var dietView: UIView!
     @IBOutlet weak var weightView: UIView!
     @IBOutlet weak var waterView: UIView!
@@ -32,8 +67,6 @@ class ProfileInformationCell: UITableViewCell {
         }
     }
     
-    let profileProvider = ProfileProvider()
-    let dietRecordProvider = DietRecordProvider()
     var imageURL = DRConstant.placeholderURL {
         didSet {
             user.userImageURL = imageURL
@@ -67,21 +100,10 @@ class ProfileInformationCell: UITableViewCell {
     weak var controller: ProfileInformationVC?
     
     func layoutCell() {
-        inputButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
-        automaticButton.addTarget(self, action: #selector(goToSetupGoalVC), for: .touchUpInside)
-        userImageView.layer.cornerRadius = userImageView.bounds.width / 2
-        changeImageButton.layer.cornerRadius = changeImageButton.bounds.width / 2
         let views = [idView, nameView, waterView, weightView, dietView]
         for view in views {
             view?.setBorder(width: 1, color: .drGray, radius: 15)
         }
-        waterGoalTextField.delegate = self
-        weightGoalTextField.delegate = self
-        usernameTextField.delegate = self
-        userSelfIDTextfield.delegate = self
-        changeImageButton.addTarget(self, action: #selector(choosePhotoSource), for: .touchUpInside)
-        inputButton.layer.cornerRadius = 10
-        automaticButton.layer.cornerRadius = 10
         if let controller = controller, controller.isUpdated {
             userImageView.loadImage(user.userImageURL)
             usernameTextField.text = user.username
@@ -93,10 +115,10 @@ class ProfileInformationCell: UITableViewCell {
         }
     }
     
-    func uploadImage() {
+    private func uploadImage() {
         controller?.saveButton.isEnabled = false
         guard let image = self.userImageView.image else { return }
-        dietRecordProvider.uploadImage(image: image) { result in
+        FirebaseManager.shared.uploadImage(image: image) { result in
             switch result {
             case .success(let url):
                 self.imageURL = url.absoluteString
@@ -108,10 +130,10 @@ class ProfileInformationCell: UITableViewCell {
         }
     }
     
+    // MARK: - Action -
     @objc func goToSetupGoalVC(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.report, bundle: nil)
-        if let setupGoalPage = storyboard.instantiateViewController(withIdentifier: "\(SetupGoalVC.self)")
-            as? SetupGoalVC {
+        if let setupGoalPage = UIStoryboard.report.instantiateViewController(
+            withIdentifier: SetupGoalVC.reuseIdentifier) as? SetupGoalVC {
             if sender == inputButton {
                 setupGoalPage.isAutomatic = false
             }
@@ -139,6 +161,7 @@ class ProfileInformationCell: UITableViewCell {
 }
 
 extension ProfileInformationCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    // MARK: - CollectionViewDataSource -
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         4
     }
@@ -157,6 +180,7 @@ extension ProfileInformationCell: UICollectionViewDataSource, UICollectionViewDe
         return cell
     }
     
+    // MARK: - CollectionFlowLayout -
     func configureLayout() -> UICollectionViewFlowLayout {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -179,7 +203,7 @@ extension ProfileInformationCell: UITextFieldDelegate {
         } else if textField == usernameTextField {
             user.username = textField.text ?? ""
         } else if textField == userSelfIDTextfield {
-            if textField.text == "" {
+            if let text = textField.text, text.isEmpty {
                 self.controller?.presentInputAlert(title: "用戶名不能為空")
                 self.infoImageView.isHidden = false
                 self.checkImageView.isHidden = true
@@ -189,22 +213,14 @@ extension ProfileInformationCell: UITextFieldDelegate {
                 self.infoImageView.isHidden = true
             } else {
                 DRProgressHUD.show()
-                profileProvider.fetchUserSelfID(selfID: textField.text ?? "") { result in
+                FirebaseManager.shared.fetchUserSelfID(selfID: textField.text ?? "") { [weak self] isNotUsed in
+                    guard let self = self else { return }
                     DRProgressHUD.dismiss()
-                    switch result {
-                    case .success(let success):
-                        if success {
-                            self.user.userSelfID = textField.text ?? ""
-                            self.infoImageView.isHidden = true
-                            self.checkImageView.isHidden = false
-                        } else {
-                            self.user.userSelfID = ""
-                            self.controller?.presentInputAlert(title: "此用戶名稱已被人使用")
-                            self.infoImageView.isHidden = false
-                            self.checkImageView.isHidden = true
-                        }
-                    case .failure(let error):
-                        print("Error Info: \(error).")
+                    self.infoImageView.isHidden = isNotUsed
+                    self.checkImageView.isHidden = !isNotUsed
+                    self.user.userSelfID = isNotUsed ? textField.text ?? "" : ""
+                    if !isNotUsed {
+                        self.controller?.presentInputAlert(title: "此用戶名稱已被人使用")
                     }
                 }
             }

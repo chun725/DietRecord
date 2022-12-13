@@ -8,11 +8,20 @@
 import UIKit
 
 class SetupGoalVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var selfInfoTableView: UITableView!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var selfInfoTableView: UITableView! {
+        didSet {
+            selfInfoTableView.dataSource = self
+            selfInfoTableView.registerCellWithNib(identifier: ReportSetGoalCell.reuseIdentifier, bundle: nil)
+            selfInfoTableView.registerCellWithNib(identifier: ReportAutomaticGoalCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
     
-    let reportProvider = ReportProvider()
     var isAutomatic = true
     var personalInfo: PersonalInfo?
     var goal: [String] = ["", "", "", ""]
@@ -20,15 +29,12 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        selfInfoTableView.dataSource = self
-        selfInfoTableView.registerCellWithNib(identifier: ReportSetGoalCell.reuseIdentifier, bundle: nil)
-        selfInfoTableView.registerCellWithNib(identifier: ReportAutomaticGoalCell.reuseIdentifier, bundle: nil)
         if !isAutomatic {
             titleLabel.text = "請輸入營養素目標"
         }
-        saveButton.layer.cornerRadius = 20
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
@@ -51,8 +57,10 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    // MARK: - Action -
     @IBAction func saveInfo(_ sender: Any) {
         DRProgressHUD.show()
+        
         if isAutomatic {
             guard let personalInfo = personalInfo,
                 !personalInfo.gender.isEmpty,
@@ -74,35 +82,25 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
             }
         }
         self.closure?(goal)
+        
         if DRConstant.userData == nil {
             DRProgressHUD.showSuccess()
             self.navigationController?.popViewController(animated: true)
         } else {
-            reportProvider.changeGoal(goal: goal) { result in
-                switch result {
-                case .success:
-                    let profileProvider = ProfileProvider()
-                    profileProvider.fetchUserData(userID: DRConstant.userID) { result in
-                        switch result {
-                        case .success(let user):
-                            let user = user as? User
-                            DRConstant.userData = user
-                            DRProgressHUD.showSuccess()
-                            self.navigationController?.popViewController(animated: true)
-                        case .failure(let error):
-                            DRProgressHUD.showFailure(text: "儲存失敗")
-                            print("Error Info: \(error).")
-                        }
-                    }
-                case .failure(let error):
-                    DRProgressHUD.showFailure(text: "儲存失敗")
-                    print("Error Info: \(error).")
+            FirebaseManager.shared.changeGoal(goal: goal) {
+                FirebaseManager.shared.fetchUserData(userID: DRConstant.userID) { [weak self] userData in
+                    guard let self = self,
+                        let userData = userData
+                    else { return }
+                    DRConstant.userData = userData
+                    DRProgressHUD.showSuccess()
+                    self.navigationController?.popViewController(animated: true)
                 }
             }
         }
     }
     
-    func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
+    private func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
         var bmr: Double = 0
         var tdee: Double = 0
         var finalTDEE: Double = 0
@@ -140,8 +138,9 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         return calculateProportion(tdee: finalTDEE, personalInfo: personalInfo)
     }
     
-    func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
+    private func calculateProportion(tdee: Double, personalInfo: PersonalInfo) -> [String] {
         var proportion: [Double] = [55, 15, 30]
+        
         switch personalInfo.dietPlan {
         case DietPlan.general.rawValue:
             proportion = [55, 15, 30]

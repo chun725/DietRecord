@@ -8,25 +8,25 @@
 import UIKit
 
 class ProfileHomePageVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var homeTableView: UITableView!
+    @IBOutlet weak var homeTableView: UITableView! {
+        didSet {
+            homeTableView.dataSource = self
+            homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
+            homeTableView.addSubview(refreshControl)
+        }
+    }
     
-    var refreshControl: UIRefreshControl?
-    var followingPosts: [MealRecord] = [] {
+    private var refreshControl = UIRefreshControl()
+    private var followingPosts: [MealRecord] = [] {
         didSet {
             homeTableView.reloadData()
         }
     }
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeTableView.dataSource = self
-        homeTableView.registerCellWithNib(identifier: ProfileDetailCell.reuseIdentifier, bundle: nil)
-        refreshControl = UIRefreshControl()
-        guard let refreshControl = refreshControl else { return }
-        homeTableView.addSubview(refreshControl)
-        refreshControl.addTarget(self, action: #selector(fetchFollowingPost), for: .valueChanged)
         fetchFollowingPost()
+        refreshControl.addTarget(self, action: #selector(fetchFollowingPost), for: .valueChanged)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,18 +40,15 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
     }
     
     @objc func fetchFollowingPost() {
-        self.refreshControl?.beginRefreshing()
-        profileProvider.fetchFollowingPost { result in
-            self.refreshControl?.endRefreshing()
-            switch result {
-            case .success(let mealRecords):
-                self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
-            case .failure(let error):
-                print("Error Info: \(error).")
-            }
+        self.refreshControl.beginRefreshing()
+        FirebaseManager.shared.fetchFollowingPost { [weak self] mealRecords in
+            guard let self = self else { return }
+            self.refreshControl.endRefreshing()
+            self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
         }
     }
     
+    // MARK: - TableViewDataSource -
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         followingPosts.count
     }

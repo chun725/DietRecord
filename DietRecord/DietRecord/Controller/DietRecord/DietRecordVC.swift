@@ -9,10 +9,29 @@ import UIKit
 import WidgetKit
 
 class DietRecordVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var dietRecordTableView: UITableView!
-    @IBOutlet weak var createDietRecordButton: UIButton!
-    @IBOutlet weak var dateTextField: UITextField!
+    @IBOutlet weak var titleLabelHeightConstraint: NSLayoutConstraint! {
+        didSet {
+            titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
+        }
+    }
+    @IBOutlet weak var dietRecordTableView: UITableView! {
+        didSet {
+            dietRecordTableView.dataSource = self
+            dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
+            dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
+        }
+    }
+    @IBOutlet weak var createDietRecordButton: UIButton! {
+        didSet {
+            createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
+        }
+    }
+    @IBOutlet weak var dateTextField: UITextField! {
+        didSet {
+            dateTextField.text = DRConstant.dateFormatter.string(from: Date())
+            changeDate()
+        }
+    }
     
     private var dietContentView: UIView?
     
@@ -21,19 +40,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     private var totalFoods: [Food] = []
     
     private var isLoading = true // 讓tableView在loading時被清掉
-    
-    private let dietRecordProvider = DietRecordProvider()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        dietRecordTableView.dataSource = self
-        dietRecordTableView.registerCellWithNib(identifier: CaloriesPieChartCell.reuseIdentifier, bundle: nil)
-        dietRecordTableView.registerCellWithNib(identifier: DietRecordCell.reuseIdentifier, bundle: nil)
-        dateTextField.text = DRConstant.dateFormatter.string(from: Date())
-        changeDate()
-        createDietRecordButton.addTarget(self, action: #selector(goToDietInputPage), for: .touchUpInside)
-        titleLabelHeightConstraint.constant = self.navigationController?.navigationBar.frame.height ?? 0.0
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -46,10 +52,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
+    // MARK: - Action -
     @objc func goToDietInputPage(sender: UIButton) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let dietInputPage = storyboard.instantiateViewController(withIdentifier: "\(DietInputVC.self)")
-            as? DietInputVC {
+        if let dietInputPage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: DietInputVC.reuseIdentifier) as? DietInputVC {
             if sender != createDietRecordButton {
                 dietInputPage.mealRecord = self.meals[sender.tag]
             } else {
@@ -64,9 +70,8 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
     }
     
     @IBAction func goToChooseDatePage(_ sender: Any) {
-        let storyboard = UIStoryboard(name: DRConstant.dietRecord, bundle: nil)
-        if let chooseDatePage = storyboard.instantiateViewController(withIdentifier: "\(ChooseDateVC.self)")
-            as? ChooseDateVC {
+        if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
+            withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {
             chooseDatePage.date = self.dateTextField.text
             chooseDatePage.closure = { [weak self] date in
                 if self?.dateTextField.text != date {
@@ -83,27 +88,23 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         self.isLoading = true
         self.meals = []
         guard let date = dateTextField.text else { return }
-        dietRecordProvider.fetchDietRecord(date: date) { result in
-            switch result {
-            case .success(let data):
-                self.isLoading = false
-                if data as? String == "Document doesn't exist." {
-                    self.meals = []
-                    self.totalFoods = []
-                } else {
-                    guard let dietRecordData = data as? FoodDailyInput else { return }
-                    self.meals = dietRecordData.mealRecord.sorted { $0.meal < $1.meal }
-                    self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
-                }
-                self.changeDietImage()
-                DRProgressHUD.dismiss()
-                if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
-                    self.goToDietInputPage(sender: self.createDietRecordButton)
-                    DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.dietRecord.rawValue)
-                }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "找不到飲食紀錄")
-                print("Error Info: \(error).")
+        FirebaseManager.shared.fetchDietRecord(date: date) { [weak self] dietRecord in
+            guard let self = self else { return }
+            self.isLoading = false
+            DRProgressHUD.dismiss()
+            
+            if let dietRecord = dietRecord {
+                self.meals = dietRecord.mealRecord.sorted { $0.meal < $1.meal }
+                self.totalFoods = self.meals.map { $0.foods }.flatMap { $0 }
+            } else {
+                self.meals = []
+                self.totalFoods = []
+            }
+            
+            self.changeDietImage()
+            if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.dietRecord.rawValue) ?? false {
+                self.goToDietInputPage(sender: self.createDietRecordButton)
+                DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.dietRecord.rawValue)
             }
         }
     }
@@ -126,7 +127,7 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    
+    // MARK: - TableViewDataSource -
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }

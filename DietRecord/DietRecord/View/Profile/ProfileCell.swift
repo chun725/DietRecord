@@ -8,10 +8,13 @@
 import UIKit
 
 class ProfileCell: UICollectionViewCell {
-    @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var photoImageView: UIImageView! {
+        didSet {
+            photoImageView.layer.cornerRadius = 10
+        }
+    }
 
     func layoutCell(imageURL: String?) {
         photoImageView.loadImage(imageURL)
-        photoImageView.layer.cornerRadius = 10
     }
 }

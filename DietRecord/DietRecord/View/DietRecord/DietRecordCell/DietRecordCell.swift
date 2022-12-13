@@ -8,16 +8,29 @@
 import UIKit
 
 class DietRecordCell: UITableViewCell {
+    @IBOutlet weak var mealLabel: UILabel! {
+        didSet {
+            mealLabel.clipsToBounds = true
+            mealLabel.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var mealImage: UIImageView! {
+        didSet {
+            mealImage.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var whiteBackgroundView: UIView! {
+        didSet {
+            whiteBackgroundView.setShadowAndRadius(radius: 10)
+        }
+    }
     @IBOutlet weak var foodStackViewHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var mealLabel: UILabel!
     @IBOutlet weak var caloriesLabel: UILabel!
-    @IBOutlet weak var mealImage: UIImageView!
     @IBOutlet weak var commentLabel: UILabel!
     @IBOutlet weak var foodStackView: UIStackView!
     @IBOutlet weak var editButton: UIButton!
     @IBOutlet weak var commentTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var commentButtomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var whiteBackgroundView: UIView!
     @IBOutlet weak var commentTitleLabel: UILabel!
     @IBOutlet weak var photoTitleLabel: UILabel!
     @IBOutlet weak var commentLabelButtomConstraint: NSLayoutConstraint!
@@ -35,10 +48,6 @@ class DietRecordCell: UITableViewCell {
     }
     
     func layoutCell(mealRecord: MealRecord?) {
-        mealImage.layer.cornerRadius = 10
-        whiteBackgroundView.setShadowAndRadius(radius: 10)
-        mealLabel.clipsToBounds = true
-        mealLabel.layer.cornerRadius = 10
         if let mealRecord = mealRecord {
             for food in mealRecord.foods {
                 let foodView = FoodBaseView(frame: .zero)

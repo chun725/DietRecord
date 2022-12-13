@@ -20,9 +20,7 @@ class ReportDetailCell: UITableViewCell {
     @IBOutlet weak var cholesterolCurrentLabel: UILabel!
     @IBOutlet weak var sodiumCurrentLabel: UILabel!
     @IBOutlet weak var potassiumCurrentLabel: UILabel!
-    
     @IBOutlet weak var grayBackgroundView: UIView!
-    
     @IBOutlet weak var caloriesGoalLabel: UILabel!
     @IBOutlet weak var carbsGoalLabel: UILabel!
     @IBOutlet weak var fiberGoalLabel: UILabel!

@@ -14,18 +14,20 @@ import SafariServices
 
 class LoginVC: UIViewController, SFSafariViewControllerDelegate {
     @IBOutlet weak var noteLabel: UILabel!
-    @IBOutlet weak var animationView: LottieAnimationView!
+    @IBOutlet weak var animationView: LottieAnimationView! {
+        didSet {
+            animationView.loopMode = .loop
+            animationView.animationSpeed = 1.25
+            animationView.play()
+        }
+    }
     @IBOutlet weak var privacyPolicyStackView: UIStackView!
     
     private var currentNonce: String?
-    let profileProvider = ProfileProvider()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setSignInWithAppleBtn()
-        animationView.loopMode = .loop
-        animationView.animationSpeed = 1.25
-        animationView.play()
         self.navigationController?.navigationBar.isHidden = true
     }
     
@@ -59,7 +61,7 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
     }
     
     @IBAction func goToPrivacyPolicyPage(_ sender: Any) {
-        if let url = URL(string: "https://www.privacypolicies.com/live/0c52d156-f8ce-45f0-a5b0-74476275c555") {
+        if let url = URL(string: DRConstant.privacyPolicyURL) {
             let safari = SFSafariViewController(url: url)
             safari.preferredControlTintColor = .drDarkGray
             safari.dismissButtonStyle = .close
@@ -186,29 +188,21 @@ extension LoginVC {
         print("------\(uid)")
         print("------\(email ?? "")")
         DRProgressHUD.show()
-        profileProvider.fetchUserData(userID: DRConstant.userID) { result in
-            switch result {
-            case .success(let result):
-                DRProgressHUD.dismiss()
-                if let result = result as? String, result == "document不存在" {
-                    let storyboard = UIStoryboard(name: DRConstant.profile, bundle: nil)
-                    if let profileInfoPage = storyboard.instantiateViewController(
-                        withIdentifier: "\(ProfileInformationVC.self)")
-                        as? ProfileInformationVC {
-                        self.navigationController?.pushViewController(profileInfoPage, animated: true)
-                    }
-                } else if let user = result as? User {
-                    DRConstant.userData = user
-                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                    if let tabbarController = storyboard.instantiateViewController(
-                        withIdentifier: "\(TabBarController.self)")
-                        as? TabBarController {
-                        self.navigationController?.pushViewController(tabbarController, animated: true)
-                    }
+        FirebaseManager.shared.fetchUserData(userID: DRConstant.userID) { [weak self] userData in
+            guard let self = self else { return }
+            if let userData = userData {
+                DRConstant.userData = userData
+                if let tabbarController = UIStoryboard.main.instantiateViewController(
+                    withIdentifier: TabBarController.reuseIdentifier)
+                    as? TabBarController {
+                    self.navigationController?.pushViewController(tabbarController, animated: true)
                 }
-            case .failure(let error):
-                DRProgressHUD.showFailure(text: "無法登入")
-                print("Error Info: \(error).")
+            } else {
+                if let profileInfoPage = UIStoryboard.profile.instantiateViewController(
+                    withIdentifier: ProfileInformationVC.reuseIdentifier)
+                    as? ProfileInformationVC {
+                    self.navigationController?.pushViewController(profileInfoPage, animated: true)
+                }
             }
         }
     }

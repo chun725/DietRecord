@@ -11,15 +11,28 @@ import HealthKit
 class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @IBOutlet weak var addWeightRecordButton: UIBarButtonItem!
     @IBOutlet weak var weightLineChart: UIView!
-    @IBOutlet weak var weightTableView: UITableView!
     @IBOutlet weak var changeGoalButton: UIButton!
     @IBOutlet weak var weightGoalLabel: UILabel!
-    @IBOutlet weak var syncSwitch: UISwitch!
-    @IBOutlet weak var healthAppImageView: UIImageView!
     @IBOutlet weak var syncLabel: UILabel!
+    @IBOutlet weak var weightTableView: UITableView! {
+        didSet {
+            weightTableView.dataSource = self
+            weightTableView.delegate = self
+        }
+    }
+    @IBOutlet weak var syncSwitch: UISwitch! {
+        didSet {
+            syncSwitch.addTarget(self, action: #selector(changeSync), for: .valueChanged)
+        }
+    }
+    @IBOutlet weak var healthAppImageView: UIImageView! {
+        didSet {
+            healthAppImageView.setBorder(width: 0.5, color: .drGray, radius: 10)
+        }
+    }
     
     var weightRecord: [WeightData] = []
-    var weightGoal: Double = 0.0 {
+    var weightGoal: Double = DRConstant.userData?.weightGoal.transformToDouble() ?? 0.0 {
         didSet {
             lineChart?.setWeightLineChart(datas: weightRecord, goal: weightGoal)
             weightGoalLabel.text = "目標體重 \(weightGoal.format()) kg"
@@ -30,27 +43,18 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         lineChart = LineChart(frame: .zero, superview: weightLineChart)
-        weightTableView.dataSource = self
-        weightTableView.delegate = self
         self.haveGetHealthKitPermission()
-        syncSwitch.addTarget(self, action: #selector(changeSync), for: .valueChanged)
-        healthAppImageView.setBorder(width: 0.5, color: .drGray, radius: 10)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.fetchWeightRecord()
-        self.weightGoal = DRConstant.userData?.weightGoal.transformToDouble() ?? 0.0
         FirebaseManager.shared.healthManager.havePermissionOfWrite { [weak self] bool in
-            if bool {
-                self?.syncSwitch.isOn = true
-            } else {
-                self?.syncSwitch.isOn = false
-            }
+            self?.syncSwitch.isOn = bool
         }
     }
     
-    func haveGetHealthKitPermission() {
+    private func haveGetHealthKitPermission() {
         FirebaseManager.shared.healthManager.haveGetPermission { result in
             switch result {
             case .success(let index):
@@ -65,7 +69,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func getHealthKitPermission() {
+    private func getHealthKitPermission() {
         FirebaseManager.shared.healthManager.authorizeHealthKit { authorized, error -> Void in
             if authorized {
                 DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
@@ -85,7 +89,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func setWeight() {
+    private func setWeight() {
         guard let weightSample = HKObjectType.quantityType(forIdentifier: HKQuantityTypeIdentifier.bodyMass)
         else { return }
 
@@ -117,11 +121,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     @objc func changeSync() {
         FirebaseManager.shared.healthManager.havePermissionOfWrite { bool in
             if bool {
-                if self.syncSwitch.isOn {
-                    DRConstant.userDefault.set(true, forKey: DRConstant.weightPermission)
-                } else {
-                    DRConstant.userDefault.set(false, forKey: DRConstant.weightPermission)
-                }
+                DRConstant.userDefault.set(self.syncSwitch.isOn, forKey: DRConstant.weightPermission)
                 self.fetchWeightRecord()
             } else {
                 if self.syncSwitch.isOn {
@@ -141,7 +141,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func fetchWeightRecord() {
+    private func fetchWeightRecord() {
         DRProgressHUD.show()
         FirebaseManager.shared.fetchWeightRecord(sync: self.syncSwitch.isOn) { [weak self] weightRecords in
             guard let self = self else { return }
@@ -159,6 +159,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    // MARK: - Action -
     @IBAction func goToWeightInputVC(_ sender: Any) {
         if let weightInputPage = UIStoryboard.weight.instantiateViewController(
             withIdentifier: WeightInputVC.reuseIdentifier) as? WeightInputVC {

@@ -9,25 +9,20 @@ import UIKit
 import WidgetKit
 
 class WaterVC: UIViewController, UITableViewDataSource {
-    @IBOutlet weak var waterTableView: UITableView!
+    @IBOutlet weak var waterTableView: UITableView! {
+        didSet {
+            waterTableView.dataSource = self
+        }
+    }
         
     var pieChartView: PieChart?
-    
+    var isLoading = true
     var waterCurrent: Double = 0.0
-    
     var waterGoal: Double = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
-    
     var reminders = DRConstant.userDefault.array(forKey: DRConstant.waterReminder) as? [String] {
         didSet {
             waterTableView.reloadData()
         }
-    }
-    
-    var isLoading = true
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        waterTableView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,10 +35,19 @@ class WaterVC: UIViewController, UITableViewDataSource {
         self.tabBarController?.tabBar.isHidden = false
     }
     
-    @IBAction func goToHistoryPage(_ sender: Any) {
-        if let waterHistoryPage = UIStoryboard.water.instantiateViewController(
-            withIdentifier: WaterHistoryVC.reuseIdentifier) as? WaterHistoryVC {
-            self.navigationController?.pushViewController(waterHistoryPage, animated: false)
+    private func fetchWaterRecord() {
+        DRProgressHUD.show()
+        FirebaseManager.shared.fetchWaterRecord { [weak self] waterRecord in
+            guard let self = self else { return }
+            DRProgressHUD.dismiss()
+            self.isLoading = false
+            self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
+            self.waterTableView.reloadData()
+            self.waterCurrent = waterRecord.water.transformToDouble()
+            if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
+                self.goToWaterInputVC(sender: nil)
+                DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.water.rawValue)
+            }
         }
     }
     
@@ -52,13 +56,21 @@ class WaterVC: UIViewController, UITableViewDataSource {
         guard let image = self.pieChartView?.takeScreenshot(),
             let imageData = try? DRConstant.encoder.encode(image.pngData())
         else { fatalError("Could not find the image of water pie chart view.") }
-            DRConstant.groupUserDefaults?.set(
+        DRConstant.groupUserDefaults?.set(
             DRConstant.dateFormatter.string(from: Date()),
             forKey: GroupUserDefault.waterDate.rawValue)
-            DRConstant.groupUserDefaults?.set(
+        DRConstant.groupUserDefaults?.set(
             imageData,
             forKey: GroupUserDefault.waterImage.rawValue)
         WidgetCenter.shared.reloadTimelines(ofKind: GroupUserDefault.firstWidgetName.rawValue)
+    }
+    
+    // MARK: - Action -
+    @IBAction func goToHistoryPage(_ sender: Any) {
+        if let waterHistoryPage = UIStoryboard.water.instantiateViewController(
+            withIdentifier: WaterHistoryVC.reuseIdentifier) as? WaterHistoryVC {
+            self.navigationController?.pushViewController(waterHistoryPage, animated: false)
+        }
     }
     
     @objc func goToWaterInputVC(sender: UIButton?) {
@@ -93,22 +105,7 @@ class WaterVC: UIViewController, UITableViewDataSource {
             withIdentifiers: [DRConstant.waterReminderNotification + time])
     }
     
-    func fetchWaterRecord() {
-        DRProgressHUD.show()
-        FirebaseManager.shared.fetchWaterRecord { [weak self] waterRecord in
-            guard let self = self else { return }
-            DRProgressHUD.dismiss()
-            self.isLoading = false
-            self.waterGoal = DRConstant.userData?.waterGoal.transformToDouble() ?? 0.0
-            self.waterTableView.reloadData()
-            self.waterCurrent = waterRecord.water.transformToDouble()
-            if DRConstant.groupUserDefaults?.bool(forKey: ShortcutItemType.water.rawValue) ?? false {
-                self.goToWaterInputVC(sender: nil)
-                DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.water.rawValue)
-            }
-        }
-    }
-    
+    // MARK: - TableViewDataSource -
     func numberOfSections(in tableView: UITableView) -> Int {
         2
     }

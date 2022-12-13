@@ -11,23 +11,22 @@ import Lottie
 class WaterHistoryVC: UIViewController {
     @IBOutlet weak var swipeLottieView: LottieAnimationView!
     @IBOutlet weak var waterHistoryBarChart: UIView!
-    @IBOutlet weak var lottieView: LottieAnimationView!
-    @IBOutlet weak var barChartBackgroundView: UIView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        fetchHistoryWaterRecord()
-        lottieView.loopMode = .loop
-        lottieView.animationSpeed = 0.8
-        lottieView.play()
+    @IBOutlet weak var lottieView: LottieAnimationView! {
+        didSet {
+            lottieView.loopMode = .loop
+            lottieView.animationSpeed = 0.8
+            lottieView.play()
+        }
     }
+    @IBOutlet weak var barChartBackgroundView: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        fetchHistoryWaterRecord()
     }
     
-    func fetchHistoryWaterRecord() {
+    private func fetchHistoryWaterRecord() {
         DRProgressHUD.show()
         FirebaseManager.shared.fetchHistoryWaterRecords { [weak self] waterRecords in
             guard let self = self else { return }
@@ -43,9 +42,5 @@ class WaterHistoryVC: UIViewController {
                 }
             }
         }
-    }
-    
-    @IBAction func goBack(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
     }
 }

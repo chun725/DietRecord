@@ -10,15 +10,47 @@ import HealthKit
 
 class WeightInputVC: UIViewController {
     @IBOutlet weak var blackBackgroundView: UIView!
-    @IBOutlet weak var allBackgroundView: UIView!
-    @IBOutlet weak var grayBackgroundView: UIView!
     @IBOutlet weak var weightInputTextField: UITextField!
-    @IBOutlet weak var weightInputView: UIView!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var dateLabel: UILabel!
-    @IBOutlet weak var setGoalLabel: UILabel!
-    @IBOutlet weak var dateStackView: UIStackView!
-    @IBOutlet weak var chooseDateButton: UIButton!
+    @IBOutlet weak var allBackgroundView: UIView! {
+        didSet {
+            allBackgroundView.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var grayBackgroundView: UIView! {
+        didSet {
+            grayBackgroundView.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var weightInputView: UIView! {
+        didSet {
+            weightInputView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var dateLabel: UILabel! {
+        didSet {
+            dateLabel.text = DRConstant.dateFormatter.string(from: Date())
+        }
+    }
+    @IBOutlet weak var setGoalLabel: UILabel! {
+        didSet {
+            setGoalLabel.isHidden = !isSetGoal
+        }
+    }
+    @IBOutlet weak var dateStackView: UIStackView! {
+        didSet {
+            dateStackView.isHidden = isSetGoal
+        }
+    }
+    @IBOutlet weak var chooseDateButton: UIButton! {
+        didSet {
+            chooseDateButton.isEnabled = !isSetGoal
+        }
+    }
     
     let healthKitManager = HealthKitManager()
     var isSetGoal = false
@@ -28,14 +60,6 @@ class WeightInputVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        grayBackgroundView.layer.cornerRadius = 20
-        saveButton.layer.cornerRadius = 20
-        allBackgroundView.layer.cornerRadius = 20
-        weightInputView.layer.cornerRadius = 10
-        dateLabel.text = DRConstant.dateFormatter.string(from: Date())
-        setGoalLabel.isHidden = !isSetGoal
-        chooseDateButton.isEnabled = !isSetGoal
-        dateStackView.isHidden = isSetGoal
         if let date = date, let weight = weight {
             dateLabel.text = date
             weightInputTextField.text = String(weight)
@@ -66,6 +90,7 @@ class WeightInputVC: UIViewController {
         }
     }
     
+    // MARK: - Action -
     @IBAction func goToChooseDatePage(_ sender: Any) {
         if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
             withIdentifier: ChooseDateVC.reuseIdentifier) as? ChooseDateVC {

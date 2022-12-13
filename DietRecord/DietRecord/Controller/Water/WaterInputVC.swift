@@ -9,15 +9,32 @@ import UIKit
 
 class WaterInputVC: UIViewController {
     @IBOutlet weak var blackBackgroundView: UIView!
-    @IBOutlet weak var allBackgroundView: UIView!
     @IBOutlet weak var waterInputBackgroundView: UIView!
-    @IBOutlet weak var inputGrayBackgroundView: UIView!
     @IBOutlet weak var inputTextField: UITextField!
-    @IBOutlet weak var saveButton: UIButton!
-    @IBOutlet weak var grayBackgroundView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var waterInputView: UIView!
+    @IBOutlet weak var timeBackgroundView: UIView!
+    @IBOutlet weak var allBackgroundView: UIView! {
+        didSet {
+            allBackgroundView.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var inputGrayBackgroundView: UIView! {
+        didSet {
+            inputGrayBackgroundView.layer.cornerRadius = 10
+        }
+    }
+    @IBOutlet weak var saveButton: UIButton! {
+        didSet {
+            saveButton.layer.cornerRadius = 20
+        }
+    }
+    @IBOutlet weak var grayBackgroundView: UIView! {
+        didSet {
+            grayBackgroundView.layer.cornerRadius = 20
+        }
+    }
     @IBOutlet weak var hourPickerView: UIPickerView! {
         didSet {
             hourPickerView.dataSource = self
@@ -30,7 +47,6 @@ class WaterInputVC: UIViewController {
             minutePickerView.delegate = self
         }
     }
-    @IBOutlet weak var timeBackgroundView: UIView!
     @IBOutlet weak var plusButton: UIButton! {
         didSet {
             plusButton.isHidden = isGoalInput
@@ -55,10 +71,6 @@ class WaterInputVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        allBackgroundView.layer.cornerRadius = 20
-        inputGrayBackgroundView.layer.cornerRadius = 10
-        saveButton.layer.cornerRadius = 20
-        grayBackgroundView.layer.cornerRadius = 20
         if isWaterInput {
             if isGoalInput {
                 titleLabel.text = "輸入飲水量目標"
@@ -109,6 +121,7 @@ class WaterInputVC: UIViewController {
         }
     }
     
+    // MARK: - Action -
     @objc func saveWaterGoal() {
         guard let waterGoal = inputTextField.text else { return }
         FirebaseManager.shared.updateWaterGoal(waterGoal: waterGoal) {

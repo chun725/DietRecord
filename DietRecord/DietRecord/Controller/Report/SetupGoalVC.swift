@@ -100,7 +100,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
         }
     }
     
-    private func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
+    func calculateTDEE(personalInfo: PersonalInfo) -> [String] {
         var bmr: Double = 0
         var tdee: Double = 0
         var finalTDEE: Double = 0

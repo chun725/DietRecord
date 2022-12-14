@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3405E76A294A0D5C00284364 /* DietRecordTestsThree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3405E769294A0D5C00284364 /* DietRecordTestsThree.swift */; };
 		342270242911063A000B4A58 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342270232911063A000B4A58 /* TabBarController.swift */; };
 		3422702629110680000B4A58 /* FoodIngredient.json in Resources */ = {isa = PBXBuildFile; fileRef = 3422702529110680000B4A58 /* FoodIngredient.json */; };
 		34270E5E290D518A00D5AFFD /* Water.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 34270E5C290D518A00D5AFFD /* Water.storyboard */; };
@@ -48,6 +49,8 @@
 		3434866D293839FF0054ACDC /* FoodSearchPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3434866C293839FF0054ACDC /* FoodSearchPageCell.swift */; };
 		343CD69429111C6E0048046E /* KingFisherWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD69329111C6E0048046E /* KingFisherWrapper.swift */; };
 		343CD698291223850048046E /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343CD697291223850048046E /* BarChart.swift */; };
+		343EB2B8294A0A5A000F2BEF /* DietRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343EB2B7294A0A5A000F2BEF /* DietRecordTests.swift */; };
+		343EB2C0294A0BB3000F2BEF /* DietRecordTestsTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343EB2BF294A0BB3000F2BEF /* DietRecordTestsTwo.swift */; };
 		344DC7BF2926200800D245A2 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344DC7BE2926200800D245A2 /* WidgetKit.framework */; };
 		344DC7C12926200800D245A2 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 344DC7C02926200800D245A2 /* SwiftUI.framework */; };
 		344DC7C42926200800D245A2 /* ChartViewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344DC7C32926200800D245A2 /* ChartViewWidget.swift */; };
@@ -127,6 +130,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		343EB2B9294A0A5A000F2BEF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 34642926290CF79A0070B425 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3464292D290CF79A0070B425;
+			remoteInfo = DietRecord;
+		};
 		344DC7C82926200800D245A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 34642926290CF79A0070B425 /* Project object */;
@@ -153,6 +163,7 @@
 /* Begin PBXFileReference section */
 		0F70E0A7FBB5357DB1F3479B /* Pods-DietRecord.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietRecord.debug.xcconfig"; path = "Target Support Files/Pods-DietRecord/Pods-DietRecord.debug.xcconfig"; sourceTree = "<group>"; };
 		1AFFCECFF9E58FBA689E2C5A /* Pods-DietRecord.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DietRecord.release.xcconfig"; path = "Target Support Files/Pods-DietRecord/Pods-DietRecord.release.xcconfig"; sourceTree = "<group>"; };
+		3405E769294A0D5C00284364 /* DietRecordTestsThree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordTestsThree.swift; sourceTree = "<group>"; };
 		342270232911063A000B4A58 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3422702529110680000B4A58 /* FoodIngredient.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FoodIngredient.json; sourceTree = "<group>"; };
 		34270E5D290D518A00D5AFFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Water.storyboard; sourceTree = "<group>"; };
@@ -195,6 +206,9 @@
 		3434866C293839FF0054ACDC /* FoodSearchPageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSearchPageCell.swift; sourceTree = "<group>"; };
 		343CD69329111C6E0048046E /* KingFisherWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KingFisherWrapper.swift; sourceTree = "<group>"; };
 		343CD697291223850048046E /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		343EB2B5294A0A5A000F2BEF /* DietRecordTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DietRecordTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		343EB2B7294A0A5A000F2BEF /* DietRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordTests.swift; sourceTree = "<group>"; };
+		343EB2BF294A0BB3000F2BEF /* DietRecordTestsTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DietRecordTestsTwo.swift; sourceTree = "<group>"; };
 		344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ChartViewWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		344DC7BE2926200800D245A2 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		344DC7C02926200800D245A2 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -285,6 +299,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		343EB2B2294A0A5A000F2BEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		344DC7BA2926200800D245A2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -439,6 +460,16 @@
 			path = "Third Party Wrapper";
 			sourceTree = "<group>";
 		};
+		343EB2B6294A0A5A000F2BEF /* DietRecordTests */ = {
+			isa = PBXGroup;
+			children = (
+				3405E769294A0D5C00284364 /* DietRecordTestsThree.swift */,
+				343EB2BF294A0BB3000F2BEF /* DietRecordTestsTwo.swift */,
+				343EB2B7294A0A5A000F2BEF /* DietRecordTests.swift */,
+			);
+			path = DietRecordTests;
+			sourceTree = "<group>";
+		};
 		344DC7C22926200800D245A2 /* ChartViewWidget */ = {
 			isa = PBXGroup;
 			children = (
@@ -497,6 +528,7 @@
 				344DC7CF2926216300D245A2 /* ChartViewWidgetExtension.entitlements */,
 				34642930290CF79A0070B425 /* DietRecord */,
 				344DC7C22926200800D245A2 /* ChartViewWidget */,
+				343EB2B6294A0A5A000F2BEF /* DietRecordTests */,
 				3464292F290CF79A0070B425 /* Products */,
 				D68BFFBBA7D721B67E087B17 /* Pods */,
 				CC8EFD0C720311DCA1A8582C /* Frameworks */,
@@ -508,6 +540,7 @@
 			children = (
 				3464292E290CF79A0070B425 /* DietRecord.app */,
 				344DC7BD2926200800D245A2 /* ChartViewWidgetExtension.appex */,
+				343EB2B5294A0A5A000F2BEF /* DietRecordTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -799,6 +832,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		343EB2B4294A0A5A000F2BEF /* DietRecordTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 343EB2BD294A0A5A000F2BEF /* Build configuration list for PBXNativeTarget "DietRecordTests" */;
+			buildPhases = (
+				343EB2B1294A0A5A000F2BEF /* Sources */,
+				343EB2B2294A0A5A000F2BEF /* Frameworks */,
+				343EB2B3294A0A5A000F2BEF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				343EB2BA294A0A5A000F2BEF /* PBXTargetDependency */,
+			);
+			name = DietRecordTests;
+			productName = DietRecordTests;
+			productReference = 343EB2B5294A0A5A000F2BEF /* DietRecordTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		344DC7BC2926200800D245A2 /* ChartViewWidgetExtension */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 344DC7CE2926200800D245A2 /* Build configuration list for PBXNativeTarget "ChartViewWidgetExtension" */;
@@ -849,6 +900,10 @@
 				LastSwiftUpdateCheck = 1340;
 				LastUpgradeCheck = 1340;
 				TargetAttributes = {
+					343EB2B4294A0A5A000F2BEF = {
+						CreatedOnToolsVersion = 13.4.1;
+						TestTargetID = 3464292D290CF79A0070B425;
+					};
 					344DC7BC2926200800D245A2 = {
 						CreatedOnToolsVersion = 13.4.1;
 					};
@@ -873,11 +928,19 @@
 			targets = (
 				3464292D290CF79A0070B425 /* DietRecord */,
 				344DC7BC2926200800D245A2 /* ChartViewWidgetExtension */,
+				343EB2B4294A0A5A000F2BEF /* DietRecordTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		343EB2B3294A0A5A000F2BEF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		344DC7BB2926200800D245A2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1004,6 +1067,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		343EB2B1294A0A5A000F2BEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3405E76A294A0D5C00284364 /* DietRecordTestsThree.swift in Sources */,
+				343EB2B8294A0A5A000F2BEF /* DietRecordTests.swift in Sources */,
+				343EB2C0294A0BB3000F2BEF /* DietRecordTestsTwo.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		344DC7B92926200800D245A2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1103,6 +1176,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		343EB2BA294A0A5A000F2BEF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3464292D290CF79A0070B425 /* DietRecord */;
+			targetProxy = 343EB2B9294A0A5A000F2BEF /* PBXContainerItemProxy */;
+		};
 		344DC7C92926200800D245A2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 344DC7BC2926200800D245A2 /* ChartViewWidgetExtension */;
@@ -1177,6 +1255,42 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		343EB2BB294A0A5A000F2BEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecordTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietRecord.app/DietRecord";
+			};
+			name = Debug;
+		};
+		343EB2BC294A0A5A000F2BEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3JB8UHPNGJ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chun.DietRecordTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DietRecord.app/DietRecord";
+			};
+			name = Release;
+		};
 		344DC7CC2926200800D245A2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1437,6 +1551,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		343EB2BD294A0A5A000F2BEF /* Build configuration list for PBXNativeTarget "DietRecordTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				343EB2BB294A0A5A000F2BEF /* Debug */,
+				343EB2BC294A0A5A000F2BEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		344DC7CE2926200800D245A2 /* Build configuration list for PBXNativeTarget "ChartViewWidgetExtension" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

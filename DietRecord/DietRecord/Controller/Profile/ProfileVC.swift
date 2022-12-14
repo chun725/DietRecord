@@ -123,23 +123,26 @@ class ProfileVC: UIViewController {
             } else {
                 self.otherUserData = userData
             }
-            
-            if userData.userID == DRConstant.userID {
-                self.photoCollectionView.isHidden = false
-                self.editButton.setTitle("查看個人資料", for: .normal)
-            } else if userData.followers.contains(DRConstant.userID) {
-                self.photoCollectionView.isHidden = false
-                self.editButton.setTitle(FollowString.following.rawValue, for: .normal)
-            } else if userData.request.contains(DRConstant.userID) {
-                self.editButton.setTitle(FollowString.requested.rawValue, for: .normal)
-                self.editButton.backgroundColor = .drGray
-                self.followersButton.isEnabled = false
-                self.followingButton.isEnabled = false
-            } else {
-                self.editButton.setTitle(FollowString.follow.rawValue, for: .normal)
-                self.followersButton.isEnabled = false
-                self.followingButton.isEnabled = false
-            }
+            self.configureUI(userData: userData)
+        }
+    }
+    
+    func configureUI(userData: User) {
+        if userData.userID == DRConstant.userID {
+            self.photoCollectionView.isHidden = false
+            self.editButton.setTitle("查看個人資料", for: .normal)
+        } else if userData.followers.contains(DRConstant.userID) {
+            self.photoCollectionView.isHidden = false
+            self.editButton.setTitle(FollowString.following.rawValue, for: .normal)
+        } else if userData.request.contains(DRConstant.userID) {
+            self.editButton.setTitle(FollowString.requested.rawValue, for: .normal)
+            self.editButton.backgroundColor = .drGray
+            self.followersButton.isEnabled = false
+            self.followingButton.isEnabled = false
+        } else {
+            self.editButton.setTitle(FollowString.follow.rawValue, for: .normal)
+            self.followersButton.isEnabled = false
+            self.followingButton.isEnabled = false
         }
     }
     

@@ -32,7 +32,7 @@ This App helps users record diet and automatically calculate nutrient intake, al
     * Input the diet information of date, meal, foods, image and comment
     * Allow users record their diet and automatically calculate nutrient intake
     
-    <img height="480" src="https://github.com/chun725/chun725/blob/main/DietRecord.png"/>
+    <img height="400" src="https://github.com/chun725/chun725/blob/main/DietRecord.png"/>
 
 * **Profile Page**
     * Browse diet records
@@ -40,31 +40,31 @@ This App helps users record diet and automatically calculate nutrient intake, al
     * Communicate with other users via liking and responsing
     * Edit personal information
     
-    <img height="480" src="https://github.com/chun725/chun725/blob/main/Profile.png"/>
+    <img height="400" src="https://github.com/chun725/chun725/blob/main/Profile.png"/>
     
 * **Water Page**
     * Input the water intake
     * Create water drinking reminders allowing the app send notifications to remind you
     * Browse the history records of water intake
     
-    <img height="480" src="https://github.com/chun725/chun725/blob/main/WaterRecord.png"/>
+    <img height="400" src="https://github.com/chun725/chun725/blob/main/WaterRecord.png"/>
 
 * **Report Page**
     * Apply the histogram to display the difference in calories intake over 7 days
     * Gain the intake of various nutrients over 7 days
     * Set dietary goals by entering them directly or entering personal informations allowing the app calculate it for you
     
-    <img height="480" src="https://github.com/chun725/chun725/blob/main/ReportPage.png"/>
+    <img height="400" src="https://github.com/chun725/chun725/blob/main/ReportPage.png"/>
     
 * **Weight Page**                                                                          
     * Visualize the weight changes with a line chart
     
-    <img height="480" src="https://github.com/chun725/chun725/blob/main/WeightRecord.png"/> 
+    <img height="400" src="https://github.com/chun725/chun725/blob/main/WeightRecord.png"/> 
 
 * **Widget**
     * Establish the widgets allowing users to place on the home screen for quick browsing
     
-    <img height="480" src="https://github.com/chun725/chun725/blob/main/Widget.png"/>
+    <img height="400" src="https://github.com/chun725/chun725/blob/main/Widget.png"/>
 
 ## Requirements 
 

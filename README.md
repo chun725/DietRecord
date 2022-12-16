@@ -9,8 +9,8 @@
 This App helps users record diet and automatically calculate nutrient intake, allowing them to keep track of their meals and make better food choices. In addition, users can share their diet records with their followers via the social community in the App.
 
 # Table of Contents
-1. [Techniques](#Techniques)
 1. [Features](#Features)
+1. [Techniques](#Techniques)
 1. [Requirements](#Requirements)
 1. [Limitations](#Limitations)
 1. [Release Notes](#Release-Notes)
@@ -18,14 +18,6 @@ This App helps users record diet and automatically calculate nutrient intake, al
 1. [Contact](#Contact)
 1. [License](#License)
 
-## Techniques
-* Synchronized the weight records with Apple Health by [`HealthKit`](https://developer.apple.com/documentation/healthkit)
-* Visualized users' water intake, nutrient intake and weight records via the third party library `Charts`
-* Implemented local notifications reminding users to drink water
-* Created a [`Widget`](https://developer.apple.com/documentation/swiftui/widget) extension with the water intake chart and the diet intake chart, which allowed users to place on the home screen for quick browsing
-* Used `Firebase Firestore` to store users' weight, water and diet records
-* Applied `Firebase Authentication` and Sign in with Apple for login flow
-* Provided valuable dietary information based on the food nutrition database of Taiwan Food and Drug Administration
 
 ## Features
 * **Diet Record**
@@ -65,6 +57,15 @@ This App helps users record diet and automatically calculate nutrient intake, al
     * Establish the widgets allowing users to place on the home screen for quick browsing
     
     <img height="400" src="https://github.com/chun725/chun725/blob/main/Widget.png"/>
+
+## Techniques
+* Synchronized the weight records with Apple Health by [`HealthKit`](https://developer.apple.com/documentation/healthkit)
+* Visualized users' water intake, nutrient intake and weight records via the third party library `Charts`
+* Implemented local notifications reminding users to drink water
+* Created a [`Widget`](https://developer.apple.com/documentation/swiftui/widget) extension with the water intake chart and the diet intake chart, which allowed users to place on the home screen for quick browsing
+* Used `Firebase Firestore` to store users' weight, water and diet records
+* Applied `Firebase Authentication` and Sign in with Apple for login flow
+* Provided valuable dietary information based on the food nutrition database of Taiwan Food and Drug Administration
 
 ## Requirements 
 

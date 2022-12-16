@@ -1,9 +1,9 @@
 # 食話實說
-<img src="https://github.com/chun725/chun725/blob/main/AppIcon.png"/>
+<img src="https://user-images.githubusercontent.com/80617086/208041216-6ab5108b-aa89-4dde-9e0f-9a50c7222167.png"/>
 
 ![image](https://img.shields.io/badge/platform-iOS-lightgrey) ![image](https://img.shields.io/badge/release-v1.2.1-green) ![image](https://img.shields.io/badge/license-MIT-yellow)
 
-[<img height="100" src="https://github.com/chun725/chun725/blob/main/app-store-logo.png"/>](https://reurl.cc/MX2qp4)
+[<img height="100" src="https://user-images.githubusercontent.com/80617086/208040529-9c0dfc86-314f-4b82-ac27-6ad3b53d4a1f.png"/>](https://reurl.cc/MX2qp4)
 
 # About
 This App helps users record diet and automatically calculate nutrient intake, allowing them to keep track of their meals and make better food choices. In addition, users can share their diet records with their followers via the social community in the App.
@@ -23,40 +23,40 @@ This App helps users record diet and automatically calculate nutrient intake, al
 * **Diet Record**
     * Input the diet information of date, meal, foods, image and comment
     * Allow users record their diet and automatically calculate nutrient intake
-    
-    <img src="https://github.com/chun725/chun725/blob/main/DietRecord.png"/>
+
+    <img src="https://user-images.githubusercontent.com/80617086/208040655-bfca5b9c-bbfc-4eaf-9d9c-fc7b6ed19437.png"/>
 
 * **Profile Page**
     * Browse diet records
     * Follow other users to browse their diet records
     * Communicate with other users via liking and responsing
     * Edit personal information
-    
-    <img height="400" src="https://github.com/chun725/chun725/blob/main/Profile.png"/>
+
+    <img height="400" src="https://user-images.githubusercontent.com/80617086/208040761-06ca37df-f5e1-4dac-85b5-aee15d99d5ef.png"/>
     
 * **Water Page**
     * Input the water intake
     * Create water drinking reminders allowing the app send notifications to remind user
     * Browse the history records of water intake
-    
-    <img height="400" src="https://github.com/chun725/chun725/blob/main/WaterRecord.png"/>
+
+    <img height="400" src="https://user-images.githubusercontent.com/80617086/208040810-5ec6b4fb-2bc1-4e3a-b24f-dc8063ad55a3.png"/>
 
 * **Report Page**
     * Apply the histogram to display the difference in calories intake over 7 days
     * Gain the intake of various nutrients over 7 days
-    * Set dietary goals by entering them directly or entering personal informations allowing the app calculate it for user
-    
-    <img height="400" src="https://github.com/chun725/chun725/blob/main/ReportPage.png"/>
+    * Set dietary goals by entering them directly or entering personal informations allowing the app calculate it for use
+
+    <img height="400" src="https://user-images.githubusercontent.com/80617086/208040871-3ed1fddc-8b0d-44cc-9742-aae8e1d70bcd.png"/>
     
 * **Weight Page**                                                                          
     * Visualize the weight changes with a line chart
     
-    <img height="400" src="https://github.com/chun725/chun725/blob/main/WeightRecord.png"/> 
+    <img height="400" src="https://user-images.githubusercontent.com/80617086/208040933-bb48f204-f127-4b50-9293-3114d1a5e462.png"/> 
 
 * **Widget**
     * Establish the widgets allowing users to place on the home screen for quick browsing
-    
-    <img height="400" src="https://github.com/chun725/chun725/blob/main/Widget.png"/>
+
+    <img height="400" src="https://user-images.githubusercontent.com/80617086/208041007-ffadc389-a792-4088-b6d3-8d07b1fd9194.png"/>
 
 ## Techniques
 * Synchronized the weight records with Apple Health by [`HealthKit`](https://developer.apple.com/documentation/healthkit)

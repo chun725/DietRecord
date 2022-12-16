@@ -32,7 +32,7 @@ This App helps users record diet and automatically calculate nutrient intake, al
     * Input the diet information of date, meal, foods, image and comment
     * Allow users record their diet and automatically calculate nutrient intake
     
-    <img height="400" src="https://github.com/chun725/chun725/blob/main/DietRecord.png"/>
+    <img src="https://github.com/chun725/chun725/blob/main/DietRecord.png"/>
 
 * **Profile Page**
     * Browse diet records

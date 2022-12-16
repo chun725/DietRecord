@@ -36,7 +36,7 @@ This App helps users record diet and automatically calculate nutrient intake, al
     
 * **Water Page**
     * Input the water intake
-    * Create water drinking reminders allowing the app send notifications to remind you
+    * Create water drinking reminders allowing the app send notifications to remind user
     * Browse the history records of water intake
     
     <img height="400" src="https://github.com/chun725/chun725/blob/main/WaterRecord.png"/>
@@ -44,7 +44,7 @@ This App helps users record diet and automatically calculate nutrient intake, al
 * **Report Page**
     * Apply the histogram to display the difference in calories intake over 7 days
     * Gain the intake of various nutrients over 7 days
-    * Set dietary goals by entering them directly or entering personal informations allowing the app calculate it for you
+    * Set dietary goals by entering them directly or entering personal informations allowing the app calculate it for user
     
     <img height="400" src="https://github.com/chun725/chun725/blob/main/ReportPage.png"/>
     

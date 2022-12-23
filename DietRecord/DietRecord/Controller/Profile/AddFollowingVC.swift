@@ -19,6 +19,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
             userImageView.layer.cornerRadius = userImageView.bounds.width / 2
         }
     }
+    @IBOutlet weak var cannotFollowSelfLabel: UILabel!
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var followButton: UIButton! {
         didSet {
@@ -47,7 +48,10 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
                 followButton.setTitle(FollowString.follow.rawValue, for: .normal)
                 followButton.backgroundColor = .drDarkGray
             }
-            self.presentView(views: [usernameLabel, userImageView, followButton])
+            
+            self.presentView(views: [usernameLabel, userImageView])
+            followButton.isHidden = userSearchResult?.userID == DRConstant.userID
+            cannotFollowSelfLabel.isHidden = userSearchResult?.userID != DRConstant.userID
         }
     }
     

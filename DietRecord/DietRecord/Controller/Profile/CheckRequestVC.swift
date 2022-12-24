@@ -35,7 +35,6 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchRequest()
-        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
     }
     
@@ -75,6 +74,7 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
             if let userProfilePage = UIStoryboard.profile.instantiateViewController(
                 withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
                 userProfilePage.otherUserID = requests[indexPath.row].userID
+                hidesBottomBarWhenPushed = true
                 self.navigationController?.pushViewController(userProfilePage, animated: true)
             }
         } else {

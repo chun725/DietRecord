@@ -75,11 +75,6 @@ class ProfileVC: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tabBarController?.tabBar.isHidden = !(otherUserID == nil)
-    }
-    
     func fetchDietRecord() {
         DRProgressHUD.show()
         var id = DRConstant.userID
@@ -161,6 +156,10 @@ class ProfileVC: UIViewController {
                 checkRequestPage.need = FollowString.followers.rawValue
                 checkRequestPage.otherUserID = id
             }
+            hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.hidesBottomBarWhenPushed = false
+            }
             self.navigationController?.pushViewController(checkRequestPage, animated: true)
         }
     }
@@ -168,6 +167,10 @@ class ProfileVC: UIViewController {
     @IBAction func goToAddFollowingPage(_ sender: Any) {
         if let addFollowingPage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: AddFollowingVC.reuseIdentifier) as? AddFollowingVC {
+            hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.hidesBottomBarWhenPushed = false
+            }
             self.navigationController?.pushViewController(addFollowingPage, animated: true)
         }
     }
@@ -213,6 +216,10 @@ class ProfileVC: UIViewController {
             if let profileSettingPage = UIStoryboard.profile.instantiateViewController(
                 withIdentifier: ProfileSettingVC.reuseIdentifier)
                 as? ProfileSettingVC {
+                hidesBottomBarWhenPushed = true
+                DispatchQueue.main.async { [weak self] in
+                    self?.hidesBottomBarWhenPushed = false
+                }
                 self.navigationController?.pushViewController(profileSettingPage, animated: true)
             }
             return }

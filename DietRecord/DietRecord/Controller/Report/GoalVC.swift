@@ -49,7 +49,6 @@ class GoalVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
     }
     
@@ -65,6 +64,7 @@ class GoalVC: UIViewController {
                 self?.proteinLabel.text = goal[2].transform(unit: Units.gUnit.rawValue)
                 self?.fatLabel.text = goal[3].transform(unit: Units.gUnit.rawValue)
             }
+            hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(setupGoalPage, animated: true)
         }
     }

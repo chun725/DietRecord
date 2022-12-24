@@ -648,16 +648,24 @@
                                     <userDefinedRuntimeAttribute type="string" keyPath="animationName" value="36538-find-id"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="無法追蹤自己唷！" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xyl-vN-kM5">
+                                <rect key="frame" x="143" y="537.5" width="128" height="22.5"/>
+                                <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="16"/>
+                                <color key="textColor" name="drDarkGray"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="PuB-lx-57N"/>
                         <color key="backgroundColor" name="drLightGray"/>
                         <constraints>
+                            <constraint firstItem="xyl-vN-kM5" firstAttribute="centerX" secondItem="0MD-iH-Hdh" secondAttribute="centerX" id="1Ca-gY-Kk8"/>
                             <constraint firstItem="GSr-y6-LS0" firstAttribute="top" secondItem="yn2-Sm-mwq" secondAttribute="bottom" constant="16" id="5Nz-Ko-RHj"/>
                             <constraint firstItem="0MD-iH-Hdh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="PuB-lx-57N" secondAttribute="leading" constant="8" id="6VM-rH-Y0E"/>
                             <constraint firstItem="ZwF-Dx-d1n" firstAttribute="leading" secondItem="PuB-lx-57N" secondAttribute="leading" id="6yP-iI-ieD"/>
                             <constraint firstItem="dsE-Cf-Q0s" firstAttribute="centerX" secondItem="UR5-eS-U3g" secondAttribute="centerX" id="95U-6y-oJy"/>
                             <constraint firstItem="BgG-0n-ZGN" firstAttribute="top" secondItem="yn2-Sm-mwq" secondAttribute="top" id="9c9-bk-vZS"/>
                             <constraint firstItem="BgG-0n-ZGN" firstAttribute="leading" secondItem="yn2-Sm-mwq" secondAttribute="leading" id="Fej-tt-oUt"/>
+                            <constraint firstItem="xyl-vN-kM5" firstAttribute="centerY" secondItem="0MD-iH-Hdh" secondAttribute="centerY" id="GLJ-gq-aXj"/>
                             <constraint firstItem="GSr-y6-LS0" firstAttribute="centerX" secondItem="UR5-eS-U3g" secondAttribute="centerX" id="OqG-Tn-vcJ"/>
                             <constraint firstItem="dsE-Cf-Q0s" firstAttribute="centerY" secondItem="UR5-eS-U3g" secondAttribute="centerY" id="Owu-U1-Q25"/>
                             <constraint firstItem="yn2-Sm-mwq" firstAttribute="centerY" secondItem="UR5-eS-U3g" secondAttribute="centerY" constant="-50" id="P2B-Et-f4o"/>
@@ -704,6 +712,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="animationView" destination="dsE-Cf-Q0s" id="UTe-3a-mbv"/>
+                        <outlet property="cannotFollowSelfLabel" destination="xyl-vN-kM5" id="CD6-H3-TsV"/>
                         <outlet property="followButton" destination="0MD-iH-Hdh" id="eib-GE-2KD"/>
                         <outlet property="userImageView" destination="yn2-Sm-mwq" id="f7k-oV-caJ"/>
                         <outlet property="userInputTextField" destination="GEp-QK-fir" id="Ezg-yz-ifZ"/>
@@ -1802,6 +1811,9 @@
             <point key="canvasLocation" x="3353.6231884057975" y="1575.6696428571429"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="dsE-Cf-Q0s"/>
+    </designables>
     <color key="tintColor" name="drDarkGray"/>
     <resources>
         <image name="Image_DietIcon" width="25" height="25"/>

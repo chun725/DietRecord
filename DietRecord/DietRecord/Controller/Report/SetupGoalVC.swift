@@ -59,8 +59,6 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
     
     // MARK: - Action -
     @IBAction func saveInfo(_ sender: Any) {
-        DRProgressHUD.show()
-        
         if isAutomatic {
             guard let personalInfo = personalInfo,
                 !personalInfo.gender.isEmpty,
@@ -81,6 +79,7 @@ class SetupGoalVC: UIViewController, UITableViewDataSource {
                 return
             }
         }
+        DRProgressHUD.show()
         self.closure?(goal)
         
         if DRConstant.userData == nil {

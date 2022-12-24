@@ -29,6 +29,8 @@ class LoginVC: UIViewController, SFSafariViewControllerDelegate {
         super.viewDidLoad()
         setSignInWithAppleBtn()
         self.navigationController?.navigationBar.isHidden = true
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.hidesBackButton = true
     }
     
     override func viewWillAppear(_ animated: Bool) {

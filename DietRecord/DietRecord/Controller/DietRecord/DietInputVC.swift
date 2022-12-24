@@ -47,7 +47,6 @@ class DietInputVC: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        self.tabBarController?.tabBar.isHidden = true
     }
     
     // MARK: - Action -
@@ -58,6 +57,7 @@ class DietInputVC: UIViewController, UITableViewDataSource {
             foodSearchPage.closure = { [weak self] foods in
                 self?.foods = foods
             }
+            hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(foodSearchPage, animated: true)
         }
     }

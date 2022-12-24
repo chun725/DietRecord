@@ -30,11 +30,6 @@ class WaterVC: UIViewController, UITableViewDataSource {
         fetchWaterRecord()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     private func fetchWaterRecord() {
         DRProgressHUD.show()
         FirebaseManager.shared.fetchWaterRecord { [weak self] waterRecord in
@@ -69,6 +64,10 @@ class WaterVC: UIViewController, UITableViewDataSource {
     @IBAction func goToHistoryPage(_ sender: Any) {
         if let waterHistoryPage = UIStoryboard.water.instantiateViewController(
             withIdentifier: WaterHistoryVC.reuseIdentifier) as? WaterHistoryVC {
+            hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.hidesBottomBarWhenPushed = false
+            }
             self.navigationController?.pushViewController(waterHistoryPage, animated: false)
         }
     }

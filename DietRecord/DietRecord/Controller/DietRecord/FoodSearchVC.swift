@@ -67,6 +67,7 @@ class FoodSearchVC: UIViewController, UITableViewDataSource, UITableViewDelegate
             foodNutritionPage.closure = { [weak self] (food: Food) in
                 self?.chooseFoods.append(food)
             }
+            hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }
     }

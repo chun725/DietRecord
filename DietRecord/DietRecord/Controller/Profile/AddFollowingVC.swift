@@ -58,7 +58,6 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
-        self.tabBarController?.tabBar.isHidden = true
         if userSearchResult != nil {
             textFieldDidEndEditing(userInputTextField)
         }
@@ -120,6 +119,7 @@ class AddFollowingVC: UIViewController, UITextFieldDelegate {
         if let userProfilePage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = self.userSearchResult?.userID
+            hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(userProfilePage, animated: true)
         }
     }

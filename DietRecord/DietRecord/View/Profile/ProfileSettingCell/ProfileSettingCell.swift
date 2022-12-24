@@ -45,6 +45,7 @@ class ProfileSettingCell: UITableViewCell, SFSafariViewControllerDelegate {
             withIdentifier: ProfileInformationVC.reuseIdentifier)
             as? ProfileInformationVC {
             profileInfoPage.isUpdated = true
+            controller?.hidesBottomBarWhenPushed = true
             controller?.navigationController?.pushViewController(profileInfoPage, animated: true)
         }
     }

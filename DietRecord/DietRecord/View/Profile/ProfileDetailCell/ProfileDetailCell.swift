@@ -213,6 +213,10 @@ class ProfileDetailCell: UITableViewCell {
         if let profileDetailPage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: ProfileDetailVC.reuseIdentifier) as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
+            controller?.hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.controller?.hidesBottomBarWhenPushed = false
+            }
             controller?.navigationController?.pushViewController(profileDetailPage, animated: true)
         }
     }
@@ -221,6 +225,10 @@ class ProfileDetailCell: UITableViewCell {
         if let userProfilePage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
+            controller?.hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.controller?.hidesBottomBarWhenPushed = false
+            }
             controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }
     }
@@ -266,6 +274,10 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
             guard let food = mealRecord?.foods[indexPath.row] else { return }
             foodNutritionPage.food = food.foodIngredient
             foodNutritionPage.isCollectionCell = true
+            controller?.hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.controller?.hidesBottomBarWhenPushed = false
+            }
             controller?.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }
     }

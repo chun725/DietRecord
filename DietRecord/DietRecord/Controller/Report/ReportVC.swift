@@ -47,11 +47,6 @@ class ReportVC: UIViewController, UITableViewDataSource {
         DRConstant.groupUserDefaults?.set(false, forKey: ShortcutItemType.report.rawValue)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     // MARK: - Action -
     @IBAction func goToChooseDatePage(_ sender: Any) {
         if let chooseDatePage = UIStoryboard.dietRecord.instantiateViewController(
@@ -89,6 +84,10 @@ class ReportVC: UIViewController, UITableViewDataSource {
     @IBAction func goToGoalPage(_ sender: Any) {
         if let goalPage = UIStoryboard.report.instantiateViewController(
             withIdentifier: GoalVC.reuseIdentifier) as? GoalVC {
+            hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.hidesBottomBarWhenPushed = false
+            }
             self.navigationController?.pushViewController(goalPage, animated: false)
         }
     }

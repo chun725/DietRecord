@@ -33,11 +33,6 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = false
     }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
     
     @objc func fetchFollowingPost() {
         self.refreshControl.beginRefreshing()

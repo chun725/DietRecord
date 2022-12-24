@@ -47,11 +47,6 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
         dietRecordTableView.reloadData()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
     // MARK: - Action -
     @objc func goToDietInputPage(sender: UIButton) {
         if let dietInputPage = UIStoryboard.dietRecord.instantiateViewController(
@@ -64,6 +59,10 @@ class DietRecordVC: UIViewController, UITableViewDataSource {
             dietInputPage.closure = { [weak self] date in
                 self?.dateTextField.text = date
                 self?.changeDate()
+            }
+            hidesBottomBarWhenPushed = true
+            DispatchQueue.main.async { [weak self] in
+                self?.hidesBottomBarWhenPushed = false
             }
             self.navigationController?.pushViewController(dietInputPage, animated: true)
         }

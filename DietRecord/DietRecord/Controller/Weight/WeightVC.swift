@@ -43,6 +43,7 @@ class WeightVC: UIViewController, UITableViewDataSource, UITableViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         lineChart = LineChart(frame: .zero, superview: weightLineChart)
+        weightGoalLabel.text = "目標體重 \(weightGoal.format()) kg"
         self.haveGetHealthKitPermission()
     }
     

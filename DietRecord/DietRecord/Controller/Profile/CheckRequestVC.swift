@@ -30,11 +30,11 @@ class CheckRequestVC: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         titleLabel.text = need
         refreshControl.addTarget(self, action: #selector(fetchRequest), for: .valueChanged)
+        fetchRequest()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchRequest()
         self.navigationController?.navigationBar.isHidden = false
     }
     

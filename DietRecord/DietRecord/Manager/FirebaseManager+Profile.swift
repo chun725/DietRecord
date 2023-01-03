@@ -4,11 +4,9 @@
 //
 //  Created by chun on 2022/12/8.
 //
-
 import Foundation
-
 typealias DietRecordHistoryResult = ([FoodDailyInput]) -> Void
-typealias MealRecordsResult = ([MealRecord]) -> Void
+typealias MealRecordsResult = ([MealRecord], [String: User]) -> Void
 typealias UserDataResult = (User?) -> Void
 typealias UserDatasResult = ([User]) -> Void
 typealias UserSelfIDIsUsed = (Bool) -> Void
@@ -26,12 +24,13 @@ extension FirebaseManager {
     // 取得追蹤中的user的飲食紀錄
     func fetchFollowingPost(completion: @escaping MealRecordsResult) {
         var mealRecords: [MealRecord] = []
+        var userDatas: [String: User] = [:]
         self.fetchUserData(userID: DRConstant.userID) { userData in
             guard let userData = userData else { return }
             var followings = userData.following
             followings.append(userData.userID)
             let downloadGroup = DispatchGroup()
-            var blocks: [DispatchWorkItem] = []
+            let userDataGroup = DispatchGroup()
             for following in followings {
                 downloadGroup.enter()
                 let block = DispatchWorkItem(flags: .inheritQoS) {
@@ -39,7 +38,6 @@ extension FirebaseManager {
                     self.getDocuments(collectionReference) { (dietRecords: [FoodDailyInput]?) in
                         guard let dietRecords = dietRecords
                         else {
-                            completion(mealRecords)
                             downloadGroup.leave()
                             return
                         }
@@ -50,11 +48,20 @@ extension FirebaseManager {
                         downloadGroup.leave()
                     }
                 }
-                blocks.append(block)
-                DispatchQueue.main.async(execute: block)
+                DispatchQueue.global().async(execute: block)
             }
             downloadGroup.notify(queue: DispatchQueue.main) {
-                completion(mealRecords)
+                mealRecords = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
+                for mealRecord in mealRecords {
+                    userDataGroup.enter()
+                    self.fetchUserData(userID: mealRecord.userID) { userData in
+                        userDatas[mealRecord.userID] = userData
+                        userDataGroup.leave()
+                    }
+                }
+                userDataGroup.notify(queue: DispatchQueue.main) {
+                    completion(mealRecords, userDatas)
+                }
             }
         }
     }
@@ -161,7 +168,6 @@ extension FirebaseManager {
             else { return }
             var users: [User] = []
             let downloadGroup = DispatchGroup()
-            var blocks: [DispatchWorkItem] = []
             var usersID: [String] = []
             switch need {
             case FollowString.followers.rawValue:
@@ -186,10 +192,10 @@ extension FirebaseManager {
                         downloadGroup.leave()
                     }
                 }
-                blocks.append(block)
-                DispatchQueue.main.async(execute: block)
+                DispatchQueue.global().async(execute: block)
             }
             downloadGroup.notify(queue: DispatchQueue.main) {
+                users = users.sorted { $0.username < $1.username }
                 completion(users)
             }
         }
@@ -304,7 +310,6 @@ extension FirebaseManager {
     // 刪除帳戶
     func deleteAccount(completion: @escaping (Result<Void, Error>) -> Void) {
         let deleteGroup = DispatchGroup()
-        var blocks: [DispatchWorkItem] = []
         let collectionReferences = [
             FSCollectionEndpoint.water.collectionRef,
             FSCollectionEndpoint.weight.collectionRef,
@@ -336,11 +341,9 @@ extension FirebaseManager {
                     self.revokeToken()
                     deleteGroup.leave()
                 }
-                blocks.append(block)
-                DispatchQueue.main.async(execute: block)
+                DispatchQueue.global().async(execute: block)
             }
-            blocks.append(block)
-            DispatchQueue.main.async(execute: block)
+            DispatchQueue.global().async(execute: block)
         }
         deleteGroup.notify(queue: DispatchQueue.main) {
             completion(.success(()))
@@ -376,7 +379,6 @@ extension FirebaseManager {
     // 移除所有追蹤
     func removeFollow(allUsers: [String], completion: @escaping () -> Void) {
         let deleteGroup = DispatchGroup()
-        var blocks: [DispatchWorkItem] = []
         for otherUserID in allUsers {
             deleteGroup.enter()
             let block = DispatchWorkItem(flags: .inheritQoS) {
@@ -389,8 +391,7 @@ extension FirebaseManager {
                     self.setData(userData, at: FSDocumentEndpoint.userData(otherUserID).documentRef)
                 }
             }
-            blocks.append(block)
-            DispatchQueue.main.async(execute: block)
+            DispatchQueue.global().async(execute: block)
         }
         deleteGroup.notify(queue: DispatchQueue.main) {
             completion()

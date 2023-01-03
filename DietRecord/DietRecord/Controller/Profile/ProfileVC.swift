@@ -157,8 +157,10 @@ class ProfileVC: UIViewController {
                 checkRequestPage.otherUserID = id
             }
             hidesBottomBarWhenPushed = true
-            DispatchQueue.main.async { [weak self] in
-                self?.hidesBottomBarWhenPushed = false
+            if otherUserID == nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.hidesBottomBarWhenPushed = false
+                }
             }
             self.navigationController?.pushViewController(checkRequestPage, animated: true)
         }
@@ -217,8 +219,10 @@ class ProfileVC: UIViewController {
                 withIdentifier: ProfileSettingVC.reuseIdentifier)
                 as? ProfileSettingVC {
                 hidesBottomBarWhenPushed = true
-                DispatchQueue.main.async { [weak self] in
-                    self?.hidesBottomBarWhenPushed = false
+                if otherUserID == nil {
+                    DispatchQueue.main.async { [weak self] in
+                        self?.hidesBottomBarWhenPushed = false
+                    }
                 }
                 self.navigationController?.pushViewController(profileSettingPage, animated: true)
             }
@@ -277,6 +281,12 @@ extension ProfileVC: UICollectionViewDataSource, UICollectionViewDelegate, UICol
                 profileDetailPage.nowUserData = otherUserData
             } else {
                 profileDetailPage.nowUserData = DRConstant.userData
+            }
+            hidesBottomBarWhenPushed = true
+            if otherUserID == nil {
+                DispatchQueue.main.async { [weak self] in
+                    self?.hidesBottomBarWhenPushed = false
+                }
             }
             self.navigationController?.pushViewController(profileDetailPage, animated: true)
         }

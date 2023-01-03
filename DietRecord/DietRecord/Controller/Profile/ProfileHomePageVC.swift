@@ -16,6 +16,7 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
         }
     }
     
+    var userDatas: [String: User] = [:]
     private var refreshControl = UIRefreshControl()
     private var followingPosts: [MealRecord] = [] {
         didSet {
@@ -36,10 +37,13 @@ class ProfileHomePageVC: UIViewController, UITableViewDataSource {
     
     @objc func fetchFollowingPost() {
         self.refreshControl.beginRefreshing()
-        FirebaseManager.shared.fetchFollowingPost { [weak self] mealRecords in
+        FirebaseManager.shared.fetchFollowingPost { [weak self] mealRecords, userDatas in
             guard let self = self else { return }
             self.refreshControl.endRefreshing()
-            self.followingPosts = mealRecords.sorted { $0.createdTime > $1.createdTime }.filter { $0.isShared }
+            self.userDatas = userDatas
+            if self.followingPosts != mealRecords {
+                self.followingPosts = mealRecords
+            }
         }
     }
     

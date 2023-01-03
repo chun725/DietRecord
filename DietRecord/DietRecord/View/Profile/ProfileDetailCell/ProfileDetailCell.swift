@@ -53,7 +53,8 @@ class ProfileDetailCell: UITableViewCell {
             foodCollectionView.reloadData()
         }
     }
-    var otherUserID: String?
+    private var otherUserData: User?
+    private var otherUserID: String?
     
     func layoutCell(mealRecord: MealRecord, nowUserData: User?) {
         self.backgroundColor = .clear
@@ -114,16 +115,13 @@ class ProfileDetailCell: UITableViewCell {
             if let controller = controller as? ProfileDetailVC {
                 controller.userSelfIDLabel.text = nowUserData.userSelfID
             }
+            otherUserData = nowUserData
         } else {
-            FirebaseManager.shared.fetchUserData(userID: mealRecord.userID) { [weak self] userData in
-                guard let self = self,
-                    let userData = userData
-                else { return }
-                self.usernameLabel.text = userData.username
-                self.userImageView.loadImage(userData.userImageURL)
-                if let controller = self.controller as? ProfileDetailVC {
-                    controller.userSelfIDLabel.text = userData.userSelfID
-                }
+            if let controller = self.controller as? ProfileHomePageVC {
+                let userData = controller.userDatas[mealRecord.userID]
+                self.usernameLabel.text = userData?.username
+                self.userImageView.loadImage(userData?.userImageURL)
+                otherUserData = userData
             }
         }
         moreButton.removeTarget(nil, action: nil, for: .touchUpInside)
@@ -213,6 +211,7 @@ class ProfileDetailCell: UITableViewCell {
         if let profileDetailPage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: ProfileDetailVC.reuseIdentifier) as? ProfileDetailVC {
             profileDetailPage.mealRecord = mealRecord
+            profileDetailPage.nowUserData = otherUserData
             controller?.hidesBottomBarWhenPushed = true
             DispatchQueue.main.async { [weak self] in
                 self?.controller?.hidesBottomBarWhenPushed = false
@@ -226,8 +225,10 @@ class ProfileDetailCell: UITableViewCell {
             withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
             controller?.hidesBottomBarWhenPushed = true
-            DispatchQueue.main.async { [weak self] in
-                self?.controller?.hidesBottomBarWhenPushed = false
+            if controller is ProfileHomePageVC {
+                DispatchQueue.main.async { [weak self] in
+                    self?.controller?.hidesBottomBarWhenPushed = false
+                }
             }
             controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }
@@ -275,8 +276,10 @@ extension ProfileDetailCell: UICollectionViewDataSource, UICollectionViewDelegat
             foodNutritionPage.food = food.foodIngredient
             foodNutritionPage.isCollectionCell = true
             controller?.hidesBottomBarWhenPushed = true
-            DispatchQueue.main.async { [weak self] in
-                self?.controller?.hidesBottomBarWhenPushed = false
+            if controller is ProfileHomePageVC {
+                DispatchQueue.main.async { [weak self] in
+                    self?.controller?.hidesBottomBarWhenPushed = false
+                }
             }
             controller?.navigationController?.pushViewController(foodNutritionPage, animated: true)
         }

@@ -53,6 +53,7 @@ class ProfileResponseCell: UITableViewCell {
         if let userProfilePage = UIStoryboard.profile.instantiateViewController(
             withIdentifier: ProfileVC.reuseIdentifier) as? ProfileVC {
             userProfilePage.otherUserID = otherUserID
+            controller?.hidesBottomBarWhenPushed = true
             controller?.navigationController?.pushViewController(userProfilePage, animated: true)
         }
     }

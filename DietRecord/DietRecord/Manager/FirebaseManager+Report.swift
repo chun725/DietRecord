@@ -35,7 +35,7 @@ extension FirebaseManager {
                 }
             }
             blocks.append(block)
-            DispatchQueue.main.async(execute: block)
+            DispatchQueue.global().async(execute: block)
         }
         
         downloadGroup.notify(queue: DispatchQueue.main) {
